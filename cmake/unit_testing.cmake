@@ -30,3 +30,4 @@ add_subdirectory( src/tools/Log/test )
 
 add_subdirectory( src/tools/ranges/IteratorView/test )
 add_subdirectory( src/tools/ranges/TransformIterator/test )
+add_subdirectory( src/tools/ranges/make_view/test )

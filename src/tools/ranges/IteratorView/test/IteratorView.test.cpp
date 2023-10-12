@@ -49,41 +49,6 @@ SCENARIO( "IteratorView" ) {
         CHECK_THROWS( chunk.at( 10 ) );
       } // THEN
     } // WHEN
-
-    WHEN( "when make functions are used" ) {
-
-      auto chunk = make_view( values );
-
-      THEN( "an IteratorView can be constructed and members can be tested" ) {
-
-        CHECK( 5 == chunk.size() );
-        CHECK( false == chunk.empty() );
-
-        CHECK( -2 == chunk[0] );
-        CHECK( -1 == chunk[1] );
-        CHECK(  0 == chunk[2] );
-        CHECK(  1 == chunk[3] );
-        CHECK(  2 == chunk[4] );
-
-        CHECK( -2 == chunk.at( 0 ) );
-        CHECK( -1 == chunk.at( 1 ) );
-        CHECK(  0 == chunk.at( 2 ) );
-        CHECK(  1 == chunk.at( 3 ) );
-        CHECK(  2 == chunk.at( 4 ) );
-
-        CHECK( -2 == chunk.front() );
-        CHECK(  2 == chunk.back() );
-      } // THEN
-
-      THEN( "an exception is thrown when using an index that is too large or "
-            "too small" ) {
-
-        CHECK_NOTHROW( chunk.at( 0 ) );
-        CHECK_NOTHROW( chunk.at( 4 ) );
-        CHECK_THROWS( chunk.at( 5 ) );
-        CHECK_THROWS( chunk.at( 10 ) );
-      } // THEN
-    } // WHEN
   } // GIVEN
 
   GIVEN( "containers and views with values" ) {
@@ -94,8 +59,8 @@ SCENARIO( "IteratorView" ) {
     std::vector< double > copy1 = container1;
     std::vector< double > copy2 = container2;
 
-    auto view1 = make_view( copy1 );
-    auto view2 = make_view( copy2 );
+    IteratorView< std::vector< double >::iterator > view1( copy1.begin(), copy1.end() );
+    IteratorView< std::vector< double >::iterator > view2( copy2.begin(), copy2.end() );
 
     WHEN( "when make comparison functions are used" ) {
 

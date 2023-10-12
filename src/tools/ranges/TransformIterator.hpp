@@ -35,7 +35,7 @@ public:
   constexpr TransformIterator() = delete;
 
   /**
-   *  @brief TransformIterator constructor
+   *  @brief Constructor
    *
    *  @param[in] iter              the iterator
    *  @param[in] transformation    the transformation to be applied
