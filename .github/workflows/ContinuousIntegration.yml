@@ -9,7 +9,7 @@ on:
   push:
     branches: '**'
   pull_request:
-    branches: 'master'
+    branches: 'main'
 
 jobs:
   build:
