@@ -30,8 +30,23 @@ SCENARIO( "IteratorView" ) {
         CHECK(  1 == chunk[3] );
         CHECK(  2 == chunk[4] );
 
+        CHECK( -2 == chunk.at( 0 ) );
+        CHECK( -1 == chunk.at( 1 ) );
+        CHECK(  0 == chunk.at( 2 ) );
+        CHECK(  1 == chunk.at( 3 ) );
+        CHECK(  2 == chunk.at( 4 ) );
+
         CHECK( -2 == chunk.front() );
         CHECK(  2 == chunk.back() );
+      } // THEN
+
+      THEN( "an exception is thrown when using an index that is too large or "
+            "too small" ) {
+
+        CHECK_NOTHROW( chunk.at( 0 ) );
+        CHECK_NOTHROW( chunk.at( 4 ) );
+        CHECK_THROWS( chunk.at( 5 ) );
+        CHECK_THROWS( chunk.at( 10 ) );
       } // THEN
     } // WHEN
 
@@ -50,8 +65,23 @@ SCENARIO( "IteratorView" ) {
         CHECK(  1 == chunk[3] );
         CHECK(  2 == chunk[4] );
 
+        CHECK( -2 == chunk.at( 0 ) );
+        CHECK( -1 == chunk.at( 1 ) );
+        CHECK(  0 == chunk.at( 2 ) );
+        CHECK(  1 == chunk.at( 3 ) );
+        CHECK(  2 == chunk.at( 4 ) );
+
         CHECK( -2 == chunk.front() );
         CHECK(  2 == chunk.back() );
+      } // THEN
+
+      THEN( "an exception is thrown when using an index that is too large or "
+            "too small" ) {
+
+        CHECK_NOTHROW( chunk.at( 0 ) );
+        CHECK_NOTHROW( chunk.at( 4 ) );
+        CHECK_THROWS( chunk.at( 5 ) );
+        CHECK_THROWS( chunk.at( 10 ) );
       } // THEN
     } // WHEN
   } // GIVEN

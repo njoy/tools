@@ -3,6 +3,7 @@
 
 // system includes
 #include <iterator>
+#include <stdexcept>
 
 // other includes
 
@@ -107,6 +108,22 @@ public:
   constexpr decltype(auto) operator[]( size_type i ) const noexcept {
 
     return *( std::next( this->begin(), i ) );
+  }
+
+  /**
+   *  @brief Return an element at a given index with range checking
+   *
+   *  @param[in] i    the index
+   */
+  constexpr decltype(auto) at( size_type i ) const {
+
+    if ( i >= this->size() ) {
+
+      throw std::out_of_range( "Index out of range: " + std::to_string( i ) +
+                               " >= size (" + std::to_string( this->size() ) +
+                               ")" );
+    }
+    return this->operator[]( i );
   }
 
   /**
