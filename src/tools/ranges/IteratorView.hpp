@@ -49,7 +49,7 @@ public:
   constexpr IteratorView() : IteratorView( Iterator{}, Iterator{} ) {}
 
   /**
-   *  @brief IteratorView constructor
+   *  @brief Constructor
    *
    *  @param[in] begin    the iterator to the beginning of the view
    *  @param[in] end      the iterator to the end of the view
@@ -148,43 +148,6 @@ public:
     return !this->operator==( other );
   }
 };
-
-/**
- *  @brief Make an IteratorView based on two iterators
- *
- *  @param[in] begin    the iterator to the beginning of the view
- *  @param[in] end      the iterator to the end of the view
- */
-template < typename Iterator >
-constexpr auto make_view( Iterator&& begin, Iterator&& end ) {
-
-  return IteratorView< Iterator >{ std::forward< Iterator >( begin ),
-                                   std::forward< Iterator >( end ) };
-}
-
-/**
- *  @brief Make an IteratorView based on a container
- *
- *  @param[in] container    the container
- */
-template < typename Container >
-constexpr auto make_view( Container& container ) {
-
-  return IteratorView< typename Container::iterator >{ container.begin(),
-                                                       container.end() };
-}
-
-/**
- *  @brief Make an IteratorView based on a container
- *
- *  @param[in] container    the container
- */
-template < typename Container >
-constexpr auto make_view( const Container& container ) {
-
-  return IteratorView< typename Container::const_iterator >{ container.cbegin(),
-                                                             container.cend() };
-}
 
 /**
  *  @brief Verify if the IteratorView is equal to another container
