@@ -119,9 +119,9 @@ public:
 
     if ( i >= this->size() ) {
 
-      throw std::out_of_range( "Index out of range: " + std::to_string( i ) +
-                               " >= size (" + std::to_string( this->size() ) +
-                               ")" );
+      throw std::out_of_range( "Index out of range in IteratorView: " +
+                               std::to_string( i ) + " >= size (" +
+                               std::to_string( this->size() ) + ")" );
     }
     return this->operator[]( i );
   }
