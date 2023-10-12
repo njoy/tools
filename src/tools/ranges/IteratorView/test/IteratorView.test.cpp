@@ -2,7 +2,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 // what we are testing
-#include "tools/view/IteratorView.hpp"
+#include "tools/ranges/IteratorView.hpp"
 
 // other includes
 
