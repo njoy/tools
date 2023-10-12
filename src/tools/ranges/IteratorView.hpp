@@ -15,7 +15,7 @@ namespace ranges {
  *
  *  @brief A simple iterator based view class
  *
- *  It has no range checking. Currently only defined for random access iterators.
+ *  Currently only defined for random access iterators.
  */
 template < class Iterator,
            std::enable_if_t<
