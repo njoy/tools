@@ -17,7 +17,7 @@ namespace ranges {
  *  @param[in] end      the iterator to the end of the view
  */
 template < typename Iterator >
-constexpr auto make_view( Iterator&& begin, Iterator&& end ) {
+constexpr auto make_view( Iterator begin, Iterator end ) {
 
   return IteratorView< Iterator >{ std::move( begin ), std::move( end ) };
 }
