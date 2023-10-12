@@ -1,5 +1,5 @@
-#ifndef NJOY_UTILITY_ITERATORVIEW
-#define NJOY_UTILITY_ITERATORVIEW
+#ifndef NJOY_TOOLS_VIEW_ITERATORVIEW
+#define NJOY_TOOLS_VIEW_ITERATORVIEW
 
 // system includes
 #include <iterator>
@@ -9,7 +9,7 @@
 
 namespace njoy {
 namespace tools {
-namespace view {
+namespace ranges {
 
 /**
  *
@@ -210,7 +210,7 @@ constexpr bool operator!=( const Container& left,
   return right != left;
 }
 
-} // view namespace
+} // ranges namespace
 } // tools namespace
 } // njoy namespace
 

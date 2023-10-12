@@ -7,7 +7,7 @@
 // other includes
 
 // convenience typedefs
-using namespace njoy::tools::view;
+using namespace njoy::tools::ranges;
 
 SCENARIO( "IteratorView" ) {
 
