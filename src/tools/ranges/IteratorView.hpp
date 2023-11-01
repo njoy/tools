@@ -18,14 +18,8 @@ namespace ranges {
  *
  *  Currently only defined for random access iterators.
  */
-template < typename Iterator,
-           std::enable_if_t<
-               std::is_same< typename std::iterator_traits< Iterator >::iterator_category,
-                             std::random_access_iterator_tag >::value, bool > = true >
+template < typename Iterator >
 class IteratorView : public ViewBase< IteratorView< Iterator > > {
-
-  /* type aliases */
-  using Parent = ViewBase< IteratorView< Iterator > >;
 
 public:
 
@@ -72,15 +66,6 @@ public:
    *  @brief Return the end iterator to the view
    */
   constexpr iterator end() const noexcept { return end_; }
-
-  using Parent::front;
-  using Parent::back;
-  using Parent::empty;
-  using Parent::size;
-  using Parent::operator[];
-  using Parent::at;
-  using Parent::operator==;
-  using Parent::operator!=;
 };
 
 /**

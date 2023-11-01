@@ -5,13 +5,42 @@
 #include "tools/ranges/IteratorView.hpp"
 
 // other includes
+#include <forward_list>
+#include <list>
+#include <vector>
 
 // convenience typedefs
 using namespace njoy::tools::ranges;
 
 SCENARIO( "IteratorView" ) {
 
-  GIVEN( "a container with values" ) {
+  GIVEN( "a container with bidirectional iterators" ) {
+
+    std::list< int > values = { -2, -1, 0, 1, 2 };
+
+    WHEN( "when iterators are used" ) {
+
+      IteratorView< std::list< int >::iterator > chunk( values.begin(), values.end() );
+
+      THEN( "an IteratorView can be constructed and members can be tested" ) {
+
+        CHECK( values.begin() == chunk.begin() );
+        CHECK( values.end() == chunk.end() );
+
+        CHECK( 5 == chunk.size() );
+        CHECK( false == chunk.empty() );
+
+        // the following should not compile: no random access iterator
+        // CHECK( -2 == chunk[0] );
+        // CHECK( -2 == chunk.at(0) );
+
+        CHECK( -2 == chunk.front() );
+        CHECK(  2 == chunk.back() );
+      } // THEN
+    } // WHEN
+  } // GIVEN
+
+  GIVEN( "a container with random access iterators" ) {
 
     std::vector< int > values = { -2, -1, 0, 1, 2 };
 
@@ -20,6 +49,9 @@ SCENARIO( "IteratorView" ) {
       IteratorView< std::vector< int >::iterator > chunk( values.begin(), values.end() );
 
       THEN( "an IteratorView can be constructed and members can be tested" ) {
+
+        CHECK( values.begin() == chunk.begin() );
+        CHECK( values.end() == chunk.end() );
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -62,7 +94,7 @@ SCENARIO( "IteratorView" ) {
     IteratorView< std::vector< double >::iterator > view1( copy1.begin(), copy1.end() );
     IteratorView< std::vector< double >::iterator > view2( copy2.begin(), copy2.end() );
 
-    WHEN( "when make comparison functions are used" ) {
+    WHEN( "when comparison functions are used" ) {
 
       THEN( "views and containers can be compared" ) {
 
