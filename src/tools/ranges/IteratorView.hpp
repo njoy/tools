@@ -3,7 +3,6 @@
 
 // system includes
 #include <iterator>
-#include <stdexcept>
 
 // other includes
 #include "tools/ranges/ViewBase.hpp"
