@@ -11,7 +11,7 @@ namespace tools {
 namespace concepts {
 
   template< bool TrueFalse, template< typename...> class Concept, typename... T >
-  using Requires = std::enable_if_t< Concept< T... >::value == TrueFalse, bool >;
+  using Requires = typename std::enable_if< Concept< T... >::value == TrueFalse, bool >::type;
 
 } // ranges namespace
 } // tools namespace
