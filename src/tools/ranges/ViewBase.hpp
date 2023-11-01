@@ -52,7 +52,7 @@ public:
    *  @brief Return the reference to the back element of the view
    */
   template < typename Range = Derived,
-             concepts::Requires< true, concepts::IsForwardIterator,
+             concepts::Requires< true, concepts::IsBidirectionalIterator,
                                  typename Range::iterator > = true >
   constexpr decltype(auto) back() const noexcept {
 

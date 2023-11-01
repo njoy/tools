@@ -14,6 +14,34 @@ using namespace njoy::tools::ranges;
 
 SCENARIO( "IteratorView" ) {
 
+  GIVEN( "a container with forward iterators" ) {
+
+    std::forward_list< int > values = { -2, -1, 0, 1, 2 };
+
+    WHEN( "when iterators are used" ) {
+
+      IteratorView< std::forward_list< int >::iterator > chunk( values.begin(), values.end() );
+
+      THEN( "an IteratorView can be constructed and members can be tested" ) {
+
+        CHECK( values.begin() == chunk.begin() );
+        CHECK( values.end() == chunk.end() );
+
+        CHECK( 5 == chunk.size() );
+        CHECK( false == chunk.empty() );
+
+        // the following should not compile: no random access iterator
+        // CHECK( -2 == chunk[0] );
+        // CHECK( -2 == chunk.at(0) );
+
+        CHECK( -2 == chunk.front() );
+
+        // the following should not compile: no bidirectional iterator
+        // CHECK(  2 == chunk.back() );
+      } // THEN
+    } // WHEN
+  } // GIVEN
+
   GIVEN( "a container with bidirectional iterators" ) {
 
     std::list< int > values = { -2, -1, 0, 1, 2 };
