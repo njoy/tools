@@ -29,6 +29,7 @@ SCENARIO( "IteratorView" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
+        CHECK( false == bool( chunk ) );
 
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
@@ -57,6 +58,7 @@ SCENARIO( "IteratorView" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
+        CHECK( false == bool( chunk ) );
 
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
@@ -83,6 +85,7 @@ SCENARIO( "IteratorView" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
+        CHECK( false == bool( chunk ) );
 
         CHECK( -2 == chunk[0] );
         CHECK( -1 == chunk[1] );

@@ -38,6 +38,39 @@ public:
   /* methods */
 
   /**
+   *  @brief Return whether or not the view is empty
+   */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsForwardIterator,
+                                 typename Range::iterator > = true >
+  constexpr bool empty() const noexcept {
+
+    return this->derived().begin() == this->derived().end();
+  }
+
+  /**
+   *  @brief Return whether or not the view is empty
+   */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsForwardIterator,
+                                 typename Range::iterator > = true >
+  constexpr explicit operator bool() const noexcept {
+
+    return this->empty();
+  }
+
+  /**
+   *  @brief Return the size of the iterator view
+   */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsForwardIterator,
+                                 typename Range::iterator > = true >
+  constexpr std::size_t size() const noexcept {
+
+    return std::distance( this->derived().begin(), this->derived().end() );
+  }
+
+  /**
    *  @brief Return the reference to the front element of the view
    */
   template < typename Range = Derived,
@@ -57,28 +90,6 @@ public:
   constexpr decltype(auto) back() const noexcept {
 
     return *( std::prev( this->derived().end() ) );
-  }
-
-  /**
-   *  @brief Return whether or not the view is empty
-   */
-  template < typename Range = Derived,
-             concepts::Requires< true, concepts::IsForwardIterator,
-                                 typename Range::iterator > = true >
-  constexpr bool empty() const noexcept {
-
-    return this->derived().begin() == this->derived().end();
-  }
-
-  /**
-   *  @brief Return the size of the iterator view
-   */
-  template < typename Range = Derived,
-             concepts::Requires< true, concepts::IsForwardIterator,
-                                 typename Range::iterator > = true >
-  constexpr std::size_t size() const noexcept {
-
-    return std::distance( this->derived().begin(), this->derived().end() );
   }
 
   /**
