@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 // other includes
+#include "tools/ranges/ViewBase.hpp"
 
 namespace njoy {
 namespace tools {
@@ -17,11 +18,14 @@ namespace ranges {
  *
  *  Currently only defined for random access iterators.
  */
-template < class Iterator,
+template < typename Iterator,
            std::enable_if_t<
                std::is_same< typename std::iterator_traits< Iterator >::iterator_category,
                              std::random_access_iterator_tag >::value, bool > = true >
-class IteratorView {
+class IteratorView : public ViewBase< IteratorView< Iterator > > {
+
+  /* type aliases */
+  using Parent = ViewBase< IteratorView< Iterator > >;
 
 public:
 
@@ -69,84 +73,14 @@ public:
    */
   constexpr iterator end() const noexcept { return end_; }
 
-  /**
-   *  @brief Return the reference to the front element of the view
-   */
-  constexpr decltype(auto) front() const noexcept {
-
-    return *( this->begin() );
-  }
-
-  /**
-   *  @brief Return the reference to the back element of the view
-   */
-  constexpr decltype(auto) back() const noexcept {
-
-    return *( std::prev( this->end() ) );
-  }
-
-  /**
-   *  @brief Return whether or not the view is empty
-   */
-  constexpr bool empty() const noexcept { return this->begin() == this->end(); }
-
-  /**
-   *  @brief Return the size of the iterator view
-   */
-  constexpr size_type size() const noexcept {
-
-    return std::distance( this->begin(), this->end() );
-  }
-
-  /**
-   *  @brief Return an element at a given index
-   *
-   *  No range checking is performed.
-   *
-   *  @param[in] i    the index
-   */
-  constexpr decltype(auto) operator[]( size_type i ) const noexcept {
-
-    return *( std::next( this->begin(), i ) );
-  }
-
-  /**
-   *  @brief Return an element at a given index with range checking
-   *
-   *  @param[in] i    the index
-   */
-  constexpr decltype(auto) at( size_type i ) const {
-
-    if ( i >= this->size() ) {
-
-      throw std::out_of_range( "Index out of range in IteratorView: " +
-                               std::to_string( i ) + " >= size (" +
-                               std::to_string( this->size() ) + ")" );
-    }
-    return this->operator[]( i );
-  }
-
-  /**
-   *  @brief Verify if the IteratorView is equal to another container
-   *
-   *  @param[in] other    the other container to compare with
-   */
-  template < typename Container >
-  constexpr bool operator==( const Container& other ) const {
-
-    return std::equal( this->begin(), this->end(), other.begin(), other.end() );
-  }
-
-  /**
-   *  @brief Verify if the IteratorView is equal to another container
-   *
-   *  @param[in] other    the other container to compare with
-   */
-  template < typename Container >
-  constexpr bool operator!=( const Container& other ) const {
-
-    return !this->operator==( other );
-  }
+  using Parent::front;
+  using Parent::back;
+  using Parent::empty;
+  using Parent::size;
+  using Parent::operator[];
+  using Parent::at;
+  using Parent::operator==;
+  using Parent::operator!=;
 };
 
 /**
