@@ -5,6 +5,9 @@
 #include <stdexcept>
 
 // other includes
+#include "tools/concepts/Requires.hpp"
+#include "tools/concepts/IsRange.hpp"
+#include "tools/concepts/IsIterator.hpp"
 
 namespace njoy {
 namespace tools {
@@ -22,13 +25,13 @@ class ViewBase {
 
   constexpr Derived& derived() noexcept {
 
-		return static_cast< Derived& >( *this );
-	}
+    return static_cast< Derived& >( *this );
+  }
 
-	constexpr const Derived& derived() const noexcept {
+  constexpr const Derived& derived() const noexcept {
 
-		return static_cast< const Derived& >( *this );
-	}
+    return static_cast< const Derived& >( *this );
+  }
 
 public:
 
@@ -37,6 +40,9 @@ public:
   /**
    *  @brief Return the reference to the front element of the view
    */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsForwardIterator,
+                                 typename Range::iterator > = true >
   constexpr decltype(auto) front() const noexcept {
 
     return *( this->derived().begin() );
@@ -45,6 +51,9 @@ public:
   /**
    *  @brief Return the reference to the back element of the view
    */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsForwardIterator,
+                                 typename Range::iterator > = true >
   constexpr decltype(auto) back() const noexcept {
 
     return *( std::prev( this->derived().end() ) );
@@ -53,6 +62,9 @@ public:
   /**
    *  @brief Return whether or not the view is empty
    */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsForwardIterator,
+                                 typename Range::iterator > = true >
   constexpr bool empty() const noexcept {
 
     return this->derived().begin() == this->derived().end();
@@ -61,6 +73,9 @@ public:
   /**
    *  @brief Return the size of the iterator view
    */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsForwardIterator,
+                                 typename Range::iterator > = true >
   constexpr std::size_t size() const noexcept {
 
     return std::distance( this->derived().begin(), this->derived().end() );
@@ -73,6 +88,9 @@ public:
    *
    *  @param[in] i    the index
    */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsRandomAccessIterator,
+                                 typename Range::iterator > = true >
   constexpr decltype(auto) operator[]( std::size_t i ) const noexcept {
 
     return *( std::next( this->derived().begin(), i ) );
@@ -83,6 +101,9 @@ public:
    *
    *  @param[in] i    the index
    */
+  template < typename Range = Derived,
+             concepts::Requires< true, concepts::IsRandomAccessIterator,
+                                 typename Range::iterator > = true >
   constexpr decltype(auto) at( std::size_t i ) const {
 
     if ( i >= this->size() ) {
