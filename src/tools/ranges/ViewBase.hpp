@@ -2,7 +2,6 @@
 #define NJOY_TOOLS_RANGES_VIEWBASE
 
 // system includes
-#include <cassert>
 #include <stdexcept>
 
 // other includes
@@ -46,7 +45,6 @@ public:
                                  typename Range::iterator > = true >
   constexpr decltype(auto) front() const noexcept {
 
-    assert( ( !this->empty(), "front(): view is empty" ) );
     return *( this->derived().begin() );
   }
 
@@ -58,7 +56,6 @@ public:
                                  typename Range::iterator > = true >
   constexpr decltype(auto) back() const noexcept {
 
-    assert( ( !this->empty(), "back(): view is empty" ) );
     return *( std::prev( this->derived().end() ) );
   }
 
