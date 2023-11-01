@@ -120,7 +120,10 @@ public:
    *
    *  @param[in] other    the other container to compare with
    */
-  template < typename Container >
+  template < typename Container,
+             typename Range = Derived,
+             concepts::Requires< true, concepts::IsInputIterator,
+                                 typename Range::iterator > = true >
   constexpr bool operator==( const Container& other ) const {
 
     return std::equal( this->derived().begin(), this->derived().end(),
@@ -132,7 +135,10 @@ public:
    *
    *  @param[in] other    the other container to compare with
    */
-  template < typename Container >
+  template < typename Container,
+             typename Range = Derived,
+             concepts::Requires< true, concepts::IsInputIterator,
+                                 typename Range::iterator > = true >
   constexpr bool operator!=( const Container& other ) const {
 
     return !this->operator==( other );
