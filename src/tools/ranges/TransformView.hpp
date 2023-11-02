@@ -27,7 +27,7 @@ class TransformView : public ViewBase< TransformView< Range, Transform > > {
   using BaseIterator = typename Range::const_iterator;
 
   /* fields */
-  IteratorView< BaseIterator > base_;
+  Range base_;
   Transform transform_;
 
 public:
@@ -55,8 +55,8 @@ public:
    *  @param[in] begin    the iterator to the beginning of the view
    *  @param[in] end      the iterator to the end of the view
    */
-  constexpr TransformView( const Range& range, Transform transform ) :
-    base_( make_view( range ) ),
+  constexpr TransformView( Range range, Transform transform ) :
+    base_( std::move( range ) ),
     transform_( std::move( transform ) ) {}
 
   /* methods */
