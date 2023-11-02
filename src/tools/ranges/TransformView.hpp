@@ -47,13 +47,13 @@ public:
   /**
    *  @brief Default constructor
    */
-  constexpr TransformView() = delete;
+  constexpr TransformView() = default;
 
   /**
    *  @brief Constructor
    *
-   *  @param[in] begin    the iterator to the beginning of the view
-   *  @param[in] end      the iterator to the end of the view
+   *  @param[in] range        the range to be transformed
+   *  @param[in] transform    the transformation to be applied to the range
    */
   constexpr TransformView( Range range, Transform transform ) :
     base_( std::move( range ) ),
