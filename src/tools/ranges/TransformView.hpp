@@ -77,6 +77,16 @@ public:
 
     return Iterator{ this->base_.end(), this->transform_ };
   }
+
+  /**
+   *  @brief Return the begin iterator to the view
+   */
+  constexpr const_iterator cbegin() const noexcept { return this->begin(); }
+
+  /**
+   *  @brief Return the end iterator to the view
+   */
+  constexpr const_iterator cend() const noexcept { return this->end(); }
 };
 
 
