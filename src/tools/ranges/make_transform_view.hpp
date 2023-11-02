@@ -4,6 +4,7 @@
 // system includes
 
 // other includes
+#include "tools/ranges/IteratorView.hpp"
 #include "tools/ranges/TransformView.hpp"
 
 namespace njoy {
@@ -20,7 +21,8 @@ template < typename Container, typename Transformation >
 constexpr auto make_transform_view( Container&& container,
                                     Transformation transformation ) {
 
-  return TransformView( container, std::move( transformation ) );
+  return TransformView( IteratorView( container.cbegin(), container.cend() ),
+                        std::move( transformation ) );
 }
 
 } // ranges namespace

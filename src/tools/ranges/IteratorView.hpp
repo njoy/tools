@@ -29,6 +29,7 @@ public:
   using reference = typename std::iterator_traits< Iterator >::reference;
   using const_reference = const reference;
   using iterator = Iterator;
+  using const_iterator = const Iterator;
 
 private:
 

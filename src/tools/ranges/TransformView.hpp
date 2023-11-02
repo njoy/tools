@@ -24,7 +24,7 @@ template < typename Range, typename Transform >
 class TransformView : public ViewBase< TransformView< Range, Transform > > {
 
   /* type aliases */
-  using BaseIterator = typename Range::const_iterator;
+  using BaseIterator = decltype( std::cbegin( std::declval< Range& >() ) );
 
   /* fields */
   Range base_;
@@ -41,6 +41,7 @@ public:
   using reference = typename std::iterator_traits< Iterator >::reference;
   using const_reference = const reference;
   using iterator = Iterator;
+  using const_iterator = const Iterator;
 
   /* constructor */
 
