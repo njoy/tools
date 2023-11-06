@@ -15,7 +15,7 @@ namespace ranges {
  *
  *  @brief A simple iterator based view class
  *
- *  Currently only defined for random access iterators.
+ *  It works on all types of iterators (input, forward, bidirectional and random).
  */
 template < typename Iterator >
 class IteratorView : public ViewBase< IteratorView< Iterator > > {

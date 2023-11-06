@@ -14,6 +14,10 @@ namespace ranges {
 /**
  *  @brief Make an TransformView based on a container and a transformation
  *
+ *  To avoid copying containers like vectors, maps, etc. into the TransportView,
+ *  an IteratorView using constant iterators into the container is created
+ *  to be moved into the TransportView.
+ *
  *  @param[in] container         the container
  *  @param[in] transformation    the transformation to be applied
  */

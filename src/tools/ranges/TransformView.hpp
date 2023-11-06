@@ -16,9 +16,7 @@ namespace ranges {
 
 /**
  *
- *  @brief A simple iterator based view class
- *
- *  Currently only defined for random access iterators.
+ *  @brief A view that applies a transformation on every element of a range
  */
 template < typename Range, typename Transform >
 class TransformView : public ViewBase< TransformView< Range, Transform > > {
