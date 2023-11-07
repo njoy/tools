@@ -76,6 +76,12 @@ SCENARIO( "TransformView" ) {
         // CHECK( begin == iter );
         // iter = 1 + begin;
         // CHECK( second == iter );
+
+        // the following should not compile: no random access iterator
+        // CHECK( second >= begin );
+        // CHECK( second > begin );
+        // CHECK( begin <= second );
+        // CHECK( begin < second );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -137,6 +143,12 @@ SCENARIO( "TransformView" ) {
         // CHECK( begin == iter );
         // iter = 1 + begin;
         // CHECK( second == iter );
+
+        // the following should not compile: no random access iterator
+        // CHECK( second >= begin );
+        // CHECK( second > begin );
+        // CHECK( begin <= second );
+        // CHECK( begin < second );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -197,6 +209,11 @@ SCENARIO( "TransformView" ) {
         CHECK( begin == iter );
         iter = 1 + begin;
         CHECK( second == iter );
+
+        CHECK( second >= begin );
+        CHECK( second > begin );
+        CHECK( begin <= second );
+        CHECK( begin < second );
       } // THEN
     } // WHEN
   } // GIVEN

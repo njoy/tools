@@ -143,11 +143,19 @@ public:
   friend constexpr bool operator<( const Iterator& left,
                                    const Iterator& right) {
 
+    static_assert(
+      concepts::IsRandomAccessIterator< Iterator >::value == true,
+      "the at() method can only be made available for random access iterators" );
+
     return left.iter_ < right.iter_;
   }
 
   friend constexpr bool operator>( const Iterator& left,
                                    const Iterator& right ) {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< Iterator >::value == true,
+      "the at() method can only be made available for random access iterators" );
 
     return right < left;
   }
@@ -155,11 +163,19 @@ public:
   friend constexpr bool operator<=( const Iterator& left,
                                     const Iterator& right ) {
 
+    static_assert(
+      concepts::IsRandomAccessIterator< Iterator >::value == true,
+      "the at() method can only be made available for random access iterators" );
+
     return !( right < left );
   }
 
   friend constexpr bool operator>=( const Iterator& left,
                                     const Iterator& right ) {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< Iterator >::value == true,
+      "the at() method can only be made available for random access iterators" );
 
     return !( left < right );
   }
