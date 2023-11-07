@@ -17,6 +17,10 @@ namespace ranges {
 /**
  *
  *  @brief A view that applies a transformation on every element of a range
+ *
+ *  To avoid copying containers like vectors, maps, etc. into the TransportView,
+ *  an IteratorView using constant iterators into the container is created
+ *  and stored inside the TransformView.
  */
 template < typename Range, typename Transform >
 class TransformView : public ViewBase< TransformView< Range, Transform > > {
