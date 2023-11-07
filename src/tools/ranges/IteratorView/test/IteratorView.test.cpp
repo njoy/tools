@@ -31,6 +31,13 @@ SCENARIO( "IteratorView" ) {
         CHECK( false == chunk.empty() );
         CHECK( false == bool( chunk ) );
 
+        unsigned int counter = 0;
+        for ( auto value : chunk ) {
+
+          ++counter;
+        }
+        CHECK( 5 == counter );
+
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
         // CHECK( -2 == chunk.at(0) );
@@ -60,6 +67,13 @@ SCENARIO( "IteratorView" ) {
         CHECK( false == chunk.empty() );
         CHECK( false == bool( chunk ) );
 
+        unsigned int counter = 0;
+        for ( auto value : chunk ) {
+
+          ++counter;
+        }
+        CHECK( 5 == counter );
+
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
         // CHECK( -2 == chunk.at(0) );
@@ -86,6 +100,13 @@ SCENARIO( "IteratorView" ) {
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
         CHECK( false == bool( chunk ) );
+
+        unsigned int counter = 0;
+        for ( auto value : chunk ) {
+
+          ++counter;
+        }
+        CHECK( 5 == counter );
 
         CHECK( -2 == chunk[0] );
         CHECK( -1 == chunk[1] );
