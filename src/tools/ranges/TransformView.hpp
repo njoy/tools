@@ -25,7 +25,7 @@ class TransformView : public ViewBase< TransformView< Range, Transform > > {
   using BaseIterator = decltype( std::cbegin( std::declval< Range& >() ) );
 
   /* fields */
-  Range base_;
+  IteratorView< BaseIterator > base_;
   Transform transform_;
 
 public:
@@ -54,8 +54,8 @@ public:
    *  @param[in] range        the range to be transformed
    *  @param[in] transform    the transformation to be applied to the range
    */
-  constexpr TransformView( Range range, Transform transform ) :
-    base_( std::move( range ) ),
+  constexpr TransformView( const Range& range, Transform transform ) :
+    base_( IteratorView( range.cbegin(), range.cend() ) ),
     transform_( std::move( transform ) ) {}
 
   /* methods */

@@ -25,8 +25,7 @@ template < typename Container, typename Transformation >
 constexpr auto make_transform_view( Container&& container,
                                     Transformation transformation ) {
 
-  return TransformView( IteratorView( container.cbegin(), container.cend() ),
-                        std::move( transformation ) );
+  return TransformView( container, std::move( transformation ) );
 }
 
 } // ranges namespace
