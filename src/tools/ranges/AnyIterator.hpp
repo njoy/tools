@@ -185,6 +185,49 @@ public:
     return static_cast< IteratorType& >( *this->ptr_ ) - static_cast< IteratorType& >( *right.ptr_ );
   }
 
+  friend constexpr AnyIterator operator+( difference_type i, const AnyIterator& iter ) {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< AnyIterator >::value == true,
+      "the operator+ method can only be made available for random access iterators" );
+
+    AnyIterator result = iter;
+    result += i;
+    return result;
+  }
+
+  friend constexpr AnyIterator operator+( AnyIterator iter, difference_type i ) {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< AnyIterator >::value == true,
+      "the operator+ method can only be made available for random access iterators" );
+
+    AnyIterator result = iter;
+    result += i;
+    return result;
+  }
+
+  friend constexpr AnyIterator operator-( AnyIterator iter, difference_type i ) {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< AnyIterator >::value == true,
+      "the operator+ method can only be made available for random access iterators" );
+
+    AnyIterator result = iter;
+    result -= i;
+    return result;
+  }
+
+  constexpr reference operator[]( difference_type i ) const {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< AnyIterator >::value == true,
+      "the operator[] method can only be made available for random access iterators" );
+
+    using IteratorType = AnyRandomAccessIteratorConcept< ValueType, ReferenceType, PointerType, DifferenceType >;
+    return static_cast< IteratorType& >( *this->ptr_ )[i];
+  }
+
   friend constexpr bool operator<( const AnyIterator& left,
                                    const AnyIterator& right) {
 
