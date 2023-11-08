@@ -60,12 +60,22 @@ public:
   /**
    *  @brief Return the begin iterator to the view
    */
-  constexpr iterator begin() const noexcept { return begin_; }
+  constexpr iterator begin() noexcept { return begin_; }
 
   /**
    *  @brief Return the end iterator to the view
    */
-  constexpr iterator end() const noexcept { return end_; }
+  constexpr iterator end() noexcept { return end_; }
+
+  /**
+   *  @brief Return the begin iterator to the view
+   */
+  constexpr const_iterator begin() const noexcept { return begin_; }
+
+  /**
+   *  @brief Return the end iterator to the view
+   */
+  constexpr const_iterator end() const noexcept { return end_; }
 
   /**
    *  @brief Return the begin iterator to the view

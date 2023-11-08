@@ -76,6 +76,18 @@ public:
   /**
    *  @brief Return the reference to the front element of the view
    */
+  constexpr decltype(auto) front() noexcept {
+
+    static_assert(
+      concepts::IsForwardIterator< typename Derived::iterator >::value == true,
+      "the front() method can only be made available for forward iterators" );
+
+    return *( this->derived().begin() );
+  }
+
+  /**
+   *  @brief Return the reference to the front element of the view
+   */
   constexpr decltype(auto) front() const noexcept {
 
     static_assert(
@@ -83,6 +95,18 @@ public:
       "the front() method can only be made available for forward iterators" );
 
     return *( this->derived().begin() );
+  }
+
+  /**
+   *  @brief Return the reference to the back element of the view
+   */
+  constexpr decltype(auto) back() noexcept {
+
+    static_assert(
+      concepts::IsBidirectionalIterator< typename Derived::iterator >::value == true,
+      "the back() method can only be made available for bidirectional iterators" );
+
+    return *( std::prev( this->derived().end() ) );
   }
 
   /**
@@ -104,6 +128,22 @@ public:
    *
    *  @param[in] i    the index
    */
+  constexpr decltype(auto) operator[]( std::size_t i ) noexcept {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< typename Derived::iterator >::value == true,
+      "the operator[] method can only be made available for random access iterators" );
+
+    return *( std::next( this->derived().begin(), i ) );
+  }
+
+  /**
+   *  @brief Return an element at a given index
+   *
+   *  No range checking is performed.
+   *
+   *  @param[in] i    the index
+   */
   constexpr decltype(auto) operator[]( std::size_t i ) const noexcept {
 
     static_assert(
@@ -111,6 +151,26 @@ public:
       "the operator[] method can only be made available for random access iterators" );
 
     return *( std::next( this->derived().begin(), i ) );
+  }
+
+  /**
+   *  @brief Return an element at a given index with range checking
+   *
+   *  @param[in] i    the index
+   */
+  constexpr decltype(auto) at( std::size_t i ) {
+
+    static_assert(
+      concepts::IsRandomAccessIterator< typename Derived::iterator >::value == true,
+      "the at() method can only be made available for random access iterators" );
+
+    if ( i >= this->size() ) {
+
+      throw std::out_of_range( "Index out of range: " +
+                               std::to_string( i ) + " >= size (" +
+                               std::to_string( this->size() ) + ")" );
+    }
+    return this->operator[]( i );
   }
 
   /**
