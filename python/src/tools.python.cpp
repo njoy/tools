@@ -20,6 +20,14 @@ PYBIND11_MODULE( tools, module ) {
 
   // wrap some basic recurring views
   // none of these are supposed to be created directly by the user
+  // these are the bindings for the following aliases:
+  //   DoubleRange = BasicRandomAccessAnyView< double >
+  //   LongRange = BasicRandomAccessAnyView< long >
+  //   IntRange = BasicRandomAccessAnyView< int >
+  //   UnsignedIntRange = BasicRandomAccessAnyView< unsigned int >
+  //   DoubleRange2D = BasicRandomAccessAnyView< DoubleRange >
+  //   DoubleRange3D = BasicRandomAccessAnyView< DoubleRange2D >
+  //   ComplexRange = BasicRandomAccessAnyView< std::complex< double > >
   wrapBasicRandomAccessAnyViewOf< double >(
       module,
       "AnyRandomAccessView< double >" );
