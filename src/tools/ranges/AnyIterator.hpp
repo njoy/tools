@@ -275,6 +275,15 @@ public:
   }
 };
 
+template < typename ValueType >
+using AnyInputIterator = AnyIterator< std::input_iterator_tag, ValueType >;
+template < typename ValueType >
+using AnyForwardIterator = AnyIterator< std::forward_iterator_tag, ValueType >;
+template < typename ValueType >
+using AnyBidirectionalIterator = AnyIterator< std::bidirectional_iterator_tag, ValueType >;
+template < typename ValueType >
+using AnyRandomAccessIterator = AnyIterator< std::random_access_iterator_tag, ValueType >;
+
 } // ranges namespace
 } // tools namespace
 } // njoy namespace

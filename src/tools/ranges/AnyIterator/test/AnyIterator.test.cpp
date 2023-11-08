@@ -20,9 +20,9 @@ SCENARIO( "AnyIterator" ) {
 
     WHEN( "an AnyIterator can be constructed and members can be tested" ) {
 
-      AnyIterator< std::forward_iterator_tag, int > begin( values.begin() );
-      AnyIterator< std::forward_iterator_tag, int > second( ++values.begin() );
-      AnyIterator< std::forward_iterator_tag, int > end( values.end() );
+      AnyInputIterator< int > begin( values.begin() );
+      AnyInputIterator< int > second( ++values.begin() );
+      AnyInputIterator< int > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal forward iterator" ) {
 
@@ -87,9 +87,9 @@ SCENARIO( "AnyIterator" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      AnyIterator< std::bidirectional_iterator_tag, int > begin( values.begin() );
-      AnyIterator< std::bidirectional_iterator_tag, int > second( ++values.begin() );
-      AnyIterator< std::bidirectional_iterator_tag, int > end( values.end() );
+      AnyBidirectionalIterator< int > begin( values.begin() );
+      AnyBidirectionalIterator< int > second( ++values.begin() );
+      AnyBidirectionalIterator< int > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal bidirectional iterator" ) {
 
@@ -151,9 +151,9 @@ SCENARIO( "AnyIterator" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      AnyIterator< std::random_access_iterator_tag, int > begin( values.begin() );
-      AnyIterator< std::random_access_iterator_tag, int > second( ++values.begin() );
-      AnyIterator< std::random_access_iterator_tag, int > end( values.end() );
+      AnyRandomAccessIterator< int > begin( values.begin() );
+      AnyRandomAccessIterator< int > second( ++values.begin() );
+      AnyRandomAccessIterator< int > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal random access "
             "iterator" ) {
