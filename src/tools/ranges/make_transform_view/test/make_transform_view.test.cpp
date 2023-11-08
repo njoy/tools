@@ -5,44 +5,22 @@
 #include "tools/ranges/make_transform_view.hpp"
 
 // other includes
+#include <forward_list>
+#include <list>
+#include <vector>
 
 // convenience typedefs
 using namespace njoy::tools::ranges;
 
 SCENARIO( "make_view" ) {
 
-  GIVEN( "a container with values and a transformation" ) {
+  auto transform = [] ( auto&& value ) { return value - 2; };
 
-    std::vector< int > values = { -2, -1, 0, 1, 2 };
-    auto transform = [] ( auto&& value ) { return 2 * value; };
+  GIVEN( "a container with forward iterators" ) {
 
-    WHEN( "when using iterators and the transformation" ) {
+    std::forward_list< int > values = { 0, 1, 2, 3, 4 };
 
-      auto chunk = make_transform_view( values.begin(), values.end(), transform );
-
-      THEN( "an IteratorView can be constructed and members can be tested" ) {
-
-        CHECK( 5 == chunk.size() );
-        CHECK( false == chunk.empty() );
-
-        CHECK( -4 == chunk[0] );
-        CHECK( -2 == chunk[1] );
-        CHECK(  0 == chunk[2] );
-        CHECK(  2 == chunk[3] );
-        CHECK(  4 == chunk[4] );
-
-        CHECK( -4 == chunk.at( 0 ) );
-        CHECK( -2 == chunk.at( 1 ) );
-        CHECK(  0 == chunk.at( 2 ) );
-        CHECK(  2 == chunk.at( 3 ) );
-        CHECK(  4 == chunk.at( 4 ) );
-
-        CHECK( -4 == chunk.front() );
-        CHECK(  4 == chunk.back() );
-      } // THEN
-    } // WHEN
-
-    WHEN( "when using the container and the transformation" ) {
+    WHEN( "when the container and the transformation are used" ) {
 
       auto chunk = make_transform_view( values, transform );
 
@@ -50,21 +28,72 @@ SCENARIO( "make_view" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
+        CHECK( false == bool( chunk ) );
 
-        CHECK( -4 == chunk[0] );
-        CHECK( -2 == chunk[1] );
+        // the following should not compile: no random access iterator
+        // CHECK( -2 == chunk[0] );
+        // CHECK( -2 == chunk.at(0) );
+
+        CHECK( -2 == chunk.front() );
+
+        // the following should not compile: no bidirectional iterator
+        // CHECK(  2 == chunk.back() );
+      } // THEN
+    } // WHEN
+  } // GIVEN
+
+  GIVEN( "a container with bidirectional iterators" ) {
+
+    std::list< int > values = { 0, 1, 2, 3, 4 };
+
+    WHEN( "when the container and the transformation are used" ) {
+
+      auto chunk = make_transform_view( values, transform );
+
+      THEN( "an IteratorView can be constructed and members can be tested" ) {
+
+        CHECK( 5 == chunk.size() );
+        CHECK( false == chunk.empty() );
+        CHECK( false == bool( chunk ) );
+
+        // the following should not compile: no random access iterator
+        // CHECK( -2 == chunk[0] );
+        // CHECK( -2 == chunk.at(0) );
+
+        CHECK( -2 == chunk.front() );
+        CHECK(  2 == chunk.back() );
+      } // THEN
+    } // WHEN
+  } // GIVEN
+
+  GIVEN( "a container with random access iterators" ) {
+
+    std::vector< int > values = { 0, 1, 2, 3, 4 };
+
+    WHEN( "when the container and the transformation are used" ) {
+
+      auto chunk = make_transform_view( values, transform );
+
+      THEN( "an IteratorView can be constructed and members can be tested" ) {
+
+        CHECK( 5 == chunk.size() );
+        CHECK( false == chunk.empty() );
+        CHECK( false == bool( chunk ) );
+
+        CHECK( -2 == chunk[0] );
+        CHECK( -1 == chunk[1] );
         CHECK(  0 == chunk[2] );
-        CHECK(  2 == chunk[3] );
-        CHECK(  4 == chunk[4] );
+        CHECK(  1 == chunk[3] );
+        CHECK(  2 == chunk[4] );
 
-        CHECK( -4 == chunk.at( 0 ) );
-        CHECK( -2 == chunk.at( 1 ) );
+        CHECK( -2 == chunk.at( 0 ) );
+        CHECK( -1 == chunk.at( 1 ) );
         CHECK(  0 == chunk.at( 2 ) );
-        CHECK(  2 == chunk.at( 3 ) );
-        CHECK(  4 == chunk.at( 4 ) );
+        CHECK(  1 == chunk.at( 3 ) );
+        CHECK(  2 == chunk.at( 4 ) );
 
-        CHECK( -4 == chunk.front() );
-        CHECK(  4 == chunk.back() );
+        CHECK( -2 == chunk.front() );
+        CHECK(  2 == chunk.back() );
       } // THEN
     } // WHEN
   } // GIVEN

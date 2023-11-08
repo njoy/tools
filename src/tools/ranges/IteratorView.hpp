@@ -3,7 +3,6 @@
 
 // system includes
 #include <iterator>
-#include <stdexcept>
 
 // other includes
 #include "tools/ranges/ViewBase.hpp"
@@ -16,7 +15,7 @@ namespace ranges {
  *
  *  @brief A simple iterator based view class
  *
- *  Currently only defined for random access iterators.
+ *  It works on all types of iterators (input, forward, bidirectional and random).
  */
 template < typename Iterator >
 class IteratorView : public ViewBase< IteratorView< Iterator > > {
@@ -30,6 +29,7 @@ public:
   using reference = typename std::iterator_traits< Iterator >::reference;
   using const_reference = const reference;
   using iterator = Iterator;
+  using const_iterator = const Iterator;
 
 private:
 
@@ -66,6 +66,16 @@ public:
    *  @brief Return the end iterator to the view
    */
   constexpr iterator end() const noexcept { return end_; }
+
+  /**
+   *  @brief Return the begin iterator to the view
+   */
+  constexpr const_iterator cbegin() const noexcept { return this->begin(); }
+
+  /**
+   *  @brief Return the end iterator to the view
+   */
+  constexpr const_iterator cend() const noexcept { return this->end(); }
 };
 
 /**
