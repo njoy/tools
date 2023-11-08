@@ -22,7 +22,7 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values, transform );
+      TransformView chunk( values.begin(), values.end(), transform );
 
       THEN( "an TransformView can be constructed and members can be tested" ) {
 
@@ -55,7 +55,7 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values, transform );
+      TransformView chunk( values.begin(), values.end(), transform );
 
       THEN( "an TransformView can be constructed and members can be tested" ) {
 
@@ -86,7 +86,7 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values, transform );
+      TransformView chunk( values.begin(), values.end(), transform );
 
       THEN( "an TransformView can be constructed and members can be tested" ) {
 
@@ -139,8 +139,8 @@ SCENARIO( "TransformView" ) {
     std::vector< double > copy1 = container1;
     std::vector< double > copy2 = container2;
 
-    TransformView view1( base1, transform );
-    TransformView view2( base2, transform );
+    TransformView view1( base1.begin(), base1.end(), transform );
+    TransformView view2( base2.begin(), base2.end(), transform );
 
     WHEN( "when comparison functions are used" ) {
 

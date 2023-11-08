@@ -22,7 +22,7 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values, transform );
+      TransformView chunk( values.begin(), values.end(), transform );
 
       THEN( "the TransformView::Iterator functions as a normal forward iterator" ) {
 
@@ -92,7 +92,7 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values, transform );
+      TransformView chunk( values.begin(), values.end(), transform );
 
       THEN( "the TransformView::Iterator functions as a normal bidirectional iterator" ) {
 
@@ -159,7 +159,7 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values, transform );
+      TransformView chunk( values.begin(), values.end(), transform );
 
       THEN( "the TransformView::Iterator functions as a normal random access "
             "iterator" ) {
