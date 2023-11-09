@@ -44,22 +44,22 @@ class AnyIterator {
 
   template < typename Iterator >
   AnyIterator( const std::input_iterator_tag&, Iterator&& iter ) :
-    ptr_( new AnyInputIteratorModel< typename std::decay< Iterator >::type,
+    ptr_( new AnyInputIteratorModel< Iterator,
                                      ValueType >( std::forward< Iterator >( iter ) ) ) {}
 
   template < typename Iterator >
   AnyIterator( const std::forward_iterator_tag&, Iterator&& iter ) :
-    ptr_( new AnyForwardIteratorModel< typename std::decay< Iterator >::type,
+    ptr_( new AnyForwardIteratorModel< Iterator,
                                        ValueType >( std::forward< Iterator >( iter ) ) ) {}
 
   template < typename Iterator >
   AnyIterator( const std::bidirectional_iterator_tag&, Iterator&& iter ) :
-    ptr_( new AnyBidirectionalIteratorModel< typename std::decay< Iterator >::type,
+    ptr_( new AnyBidirectionalIteratorModel< Iterator,
                                              ValueType >( std::forward< Iterator >( iter ) ) ) {}
 
   template < typename Iterator >
   AnyIterator( const std::random_access_iterator_tag&, Iterator&& iter ) :
-    ptr_( new AnyRandomAccessIteratorModel< typename std::decay< Iterator >::type,
+    ptr_( new AnyRandomAccessIteratorModel< Iterator,
                                             ValueType >( std::forward< Iterator >( iter ) ) ) {}
 
 public:
