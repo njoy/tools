@@ -37,12 +37,12 @@ public:
 
   reference operator*() const override {
 
-    return *this->iter_;
+    return ( reference )( *this->iter_ );
   }
 
   pointer operator->() const override {
 
-    return std::addressof( *this->iter_ );
+    return ( pointer )( std::addressof( *this->iter_ ) );
   }
 
   AnyInputIteratorModel& operator++() override {
@@ -96,12 +96,12 @@ public:
 
   reference operator*() const override {
 
-    return *this->iter_;
+    return ( reference )( *this->iter_ );
   }
 
   pointer operator->() const override {
 
-    return std::addressof( *this->iter_ );
+    return ( pointer )( std::addressof( *this->iter_ ) );
   }
 
   AnyForwardIteratorModel& operator++() override {
@@ -155,12 +155,12 @@ public:
 
   reference operator*() const override {
 
-    return *this->iter_;
+    return ( reference )( *this->iter_ );
   }
 
   pointer operator->() const override {
 
-    return std::addressof( *this->iter_ );
+    return ( pointer )( std::addressof( *this->iter_ ) );
   }
 
   AnyBidirectionalIteratorModel& operator++() override {
@@ -249,12 +249,12 @@ public:
 
   reference operator*() const override {
 
-    return *this->iter_;
+    return ( reference )( *this->iter_ );
   }
 
   pointer operator->() const override {
 
-    return std::addressof( *this->iter_ );
+    return ( pointer )( std::addressof( *this->iter_ ) );
   }
 
   AnyRandomAccessIteratorModel& operator++() override {
@@ -271,7 +271,7 @@ public:
 
   reference operator[]( difference_type i ) const override {
 
-    return this->iter_[i];
+    return ( reference )( this->iter_[i] );
   }
 
   AnyRandomAccessIteratorModel& operator+=( difference_type i ) override {
