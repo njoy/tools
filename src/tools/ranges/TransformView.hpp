@@ -22,11 +22,8 @@ namespace ranges {
  *  an IteratorView using constant iterators into the container is created
  *  and stored inside the TransformView.
  */
-template < typename Range, typename Transform >
-class TransformView : public ViewBase< TransformView< Range, Transform > > {
-
-  /* type aliases */
-  using BaseIterator = decltype( std::cbegin( std::declval< Range& >() ) );
+template < typename BaseIterator, typename Transform >
+class TransformView : public ViewBase< TransformView< BaseIterator, Transform > > {
 
   /* fields */
   IteratorView< BaseIterator > base_;
@@ -58,8 +55,8 @@ public:
    *  @param[in] range        the range to be transformed
    *  @param[in] transform    the transformation to be applied to the range
    */
-  constexpr TransformView( const Range& range, Transform transform ) :
-    base_( IteratorView( range.cbegin(), range.cend() ) ),
+  constexpr TransformView( BaseIterator begin, BaseIterator end, Transform transform ) :
+    base_( std::move( begin ), std::move( end ) ),
     transform_( std::move( transform ) ) {}
 
   /* methods */
