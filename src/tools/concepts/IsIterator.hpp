@@ -28,38 +28,37 @@ namespace concepts {
 
   // sfinae structures for input iterator objects
 
+  template< typename IteratorCategory, typename Iterator >
+  using IsCompatibleIterator =
+    typename std::is_base_of< IteratorCategory, iterator_category< Iterator > >;
+
   template< typename Iterator >
-  using IsInputIterator =
-    typename std::is_base_of< std::input_iterator_tag,
-                              iterator_category< Iterator > >;
+  using IsInputIterator
+  = IsCompatibleIterator< std::input_iterator_tag, Iterator >;
 
   // sfinae structures for output iterator objects
 
   template< typename Iterator >
-  using IsOutputIterator =
-    typename std::is_base_of< std::output_iterator_tag,
-                              iterator_category< Iterator > >;
+  using IsOutputIterator
+  = IsCompatibleIterator< std::output_iterator_tag, Iterator >;
 
   // sfinae structures for forward iterator objects
 
   template< typename Iterator >
-  using IsForwardIterator =
-    typename std::is_base_of< std::forward_iterator_tag,
-                              iterator_category< Iterator > >;
+  using IsForwardIterator
+  = IsCompatibleIterator< std::forward_iterator_tag, Iterator >;
 
   // sfinae structures for bidirectional iterator objects
 
   template< typename Iterator >
-  using IsBidirectionalIterator =
-    typename std::is_base_of< std::bidirectional_iterator_tag,
-                              iterator_category< Iterator > >;
+  using IsBidirectionalIterator
+  = IsCompatibleIterator< std::bidirectional_iterator_tag, Iterator >;
 
   // sfinae structures for random access iterator objects
 
   template< typename Iterator >
-  using IsRandomAccessIterator =
-    typename std::is_base_of< std::random_access_iterator_tag,
-                              iterator_category< Iterator > >;
+  using IsRandomAccessIterator
+  = IsCompatibleIterator< std::random_access_iterator_tag, Iterator >;
 
 } // ranges namespace
 } // tools namespace

@@ -2,7 +2,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 // what we are testing
-#include "tools/ranges/TransformView.hpp"
+#include "tools/ranges/AnyView.hpp"
 
 // other includes
 #include <forward_list>
@@ -12,19 +12,17 @@
 // convenience typedefs
 using namespace njoy::tools::ranges;
 
-SCENARIO( "TransformView" ) {
-
-  auto transform = [] ( auto&& value ) { return value - 2; };
+SCENARIO( "AnyView" ) {
 
   GIVEN( "a container with forward iterators" ) {
 
-    std::forward_list< int > values = { 0, 1, 2, 3, 4 };
+    std::forward_list< int > values = { -2, -1, 0, 1, 2 };
 
-    WHEN( "when the container and the transformation are used" ) {
+    WHEN( "when iterators are used" ) {
 
-      TransformView chunk( values.begin(), values.end(), transform );
+      AnyForwardView< int > chunk( values );
 
-      THEN( "an TransformView can be constructed and members can be tested" ) {
+      THEN( "an AnyView can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -51,13 +49,13 @@ SCENARIO( "TransformView" ) {
 
   GIVEN( "a container with bidirectional iterators" ) {
 
-    std::list< int > values = { 0, 1, 2, 3, 4 };
+    std::list< int > values = { -2, -1, 0, 1, 2 };
 
-    WHEN( "when the container and the transformation are used" ) {
+    WHEN( "when iterators are used" ) {
 
-      TransformView chunk( values.begin(), values.end(), transform );
+      AnyBidirectionalView< int > chunk( values );
 
-      THEN( "an TransformView can be constructed and members can be tested" ) {
+      THEN( "an AnyView can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -82,13 +80,13 @@ SCENARIO( "TransformView" ) {
 
   GIVEN( "a container with random access iterators" ) {
 
-    std::vector< int > values = { 0, 1, 2, 3, 4 };
+    std::vector< int > values = { -2, -1, 0, 1, 2 };
 
-    WHEN( "when the container and the transformation are used" ) {
+    WHEN( "when iterators are used" ) {
 
-      TransformView chunk( values.begin(), values.end(), transform );
+      AnyRandomAccessView< int > chunk( values );
 
-      THEN( "an TransformView can be constructed and members can be tested" ) {
+      THEN( "an AnyView can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -124,47 +122,6 @@ SCENARIO( "TransformView" ) {
         CHECK_NOTHROW( chunk.at( 4 ) );
         CHECK_THROWS( chunk.at( 5 ) );
         CHECK_THROWS( chunk.at( 10 ) );
-      } // THEN
-    } // WHEN
-  } // GIVEN
-
-  GIVEN( "containers and views with values" ) {
-
-    std::vector< double > base1 = { 1., 2., 3., 4. };
-    std::vector< double > base2 = { 1., 2., 3. };
-
-    std::vector< double > container1 = { -1., 0., 1., 2. };
-    std::vector< double > container2 = { -1., 0., 1. };
-
-    std::vector< double > copy1 = container1;
-    std::vector< double > copy2 = container2;
-
-    TransformView view1( base1.begin(), base1.end(), transform );
-    TransformView view2( base2.begin(), base2.end(), transform );
-
-    WHEN( "when comparison functions are used" ) {
-
-      THEN( "views and containers can be compared" ) {
-
-        CHECK( view1 == container1 );
-        CHECK( view1 == copy1 );
-        CHECK( container1 == view1 );
-        CHECK( copy1 == view1 );
-
-        CHECK( view1 != container2 );
-        CHECK( view1 != copy2 );
-        CHECK( container2 != view1 );
-        CHECK( copy2 != view1 );
-
-        CHECK( view2 == container2 );
-        CHECK( view2 == copy2 );
-        CHECK( container2 == view2 );
-        CHECK( copy2 == view2 );
-
-        CHECK( view2 != container1 );
-        CHECK( view2 != copy1 );
-        CHECK( container1 != view2 );
-        CHECK( copy1 != view2 );
       } // THEN
     } // WHEN
   } // GIVEN

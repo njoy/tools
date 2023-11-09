@@ -2,7 +2,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 // what we are testing
-#include "tools/ranges/TransformView.hpp"
+#include "tools/ranges/AnyIterator.hpp"
 
 // other includes
 #include <forward_list>
@@ -12,24 +12,19 @@
 // convenience typedefs
 using namespace njoy::tools::ranges;
 
-SCENARIO( "TransformView" ) {
-
-  auto transform = [] ( auto&& value ) { return value - 2; };
+SCENARIO( "AnyIterator" ) {
 
   GIVEN( "a container with forward iterators" ) {
 
     std::forward_list< int > values = { 0, 1, 2, 3, 4 };
 
-    WHEN( "when the container and the transformation are used" ) {
+    WHEN( "an AnyIterator can be constructed and members can be tested" ) {
 
-      TransformView chunk( values.begin(), values.end(), transform );
+      AnyInputIterator< int > begin( values.begin() );
+      AnyInputIterator< int > second( ++values.begin() );
+      AnyInputIterator< int > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal forward iterator" ) {
-
-        auto begin = chunk.begin();
-        auto second = ++chunk.begin();
-        auto end = chunk.end();
-        auto iter = begin;
 
         unsigned int counter = 0;
         for ( auto iter = begin; iter != end; ++iter ) {
@@ -41,8 +36,8 @@ SCENARIO( "TransformView" ) {
         CHECK( 5 == std::distance( begin, end ) );
         CHECK( begin != end );
 
-        CHECK( -2 == *begin );
-        CHECK( -1 == *second );
+        CHECK( 0 == *begin );
+        CHECK( 1 == *second );
 
         // the following should not compile: no random access iterator
         // CHECK( -2 == begin[0] );
@@ -57,12 +52,12 @@ SCENARIO( "TransformView" ) {
         // iter -= 1;
         // CHECK( begin == iter );
 
-        CHECK( second == ++begin );
+        auto start = begin;
+        CHECK( second == ++start );
         // the following should not compile: no bidirectional iterator
         // CHECK( begin == --begin );
 
-        begin = chunk.begin();
-        iter = begin;
+        auto iter = begin;
         CHECK( begin == iter++ );
         CHECK( second == iter );
         // the following should not compile: no bidirectional iterator
@@ -92,14 +87,11 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values.begin(), values.end(), transform );
+      AnyBidirectionalIterator< int > begin( values.begin() );
+      AnyBidirectionalIterator< int > second( ++values.begin() );
+      AnyBidirectionalIterator< int > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal bidirectional iterator" ) {
-
-        auto begin = chunk.begin();
-        auto second = ++chunk.begin();
-        auto end = chunk.end();
-        auto iter = begin;
 
         unsigned int counter = 0;
         for ( auto iter = begin; iter != end; ++iter ) {
@@ -111,8 +103,8 @@ SCENARIO( "TransformView" ) {
         CHECK( 5 == std::distance( begin, end ) );
         CHECK( begin != end );
 
-        CHECK( -2 == *begin );
-        CHECK( -1 == *second );
+        CHECK( 0 == *begin );
+        CHECK( 1 == *second );
 
         // the following should not compile: no random access iterator
         // CHECK( -2 == begin[0] );
@@ -130,7 +122,7 @@ SCENARIO( "TransformView" ) {
         CHECK( second == ++begin );
         CHECK( begin == --begin );
 
-        iter = begin;
+        auto iter = begin;
         CHECK( begin == iter++ );
         CHECK( second == iter );
         CHECK( second == iter-- );
@@ -159,15 +151,12 @@ SCENARIO( "TransformView" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      TransformView chunk( values.begin(), values.end(), transform );
+      AnyRandomAccessIterator< int > begin( values.begin() );
+      AnyRandomAccessIterator< int > second( ++values.begin() );
+      AnyRandomAccessIterator< int > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal random access "
             "iterator" ) {
-
-        auto begin = chunk.begin();
-        auto second = begin + 1;
-        auto end = chunk.end();
-        auto iter = begin;
 
         unsigned int counter = 0;
         for ( auto iter = begin; iter != end; ++iter ) {
@@ -177,18 +166,18 @@ SCENARIO( "TransformView" ) {
         CHECK( 5 == counter );
 
         CHECK( 5 == std::distance( begin, end ) );
-        CHECK( 5 == end - begin );
         CHECK( begin != end );
 
-        CHECK( -2 == *begin );
-        CHECK( -1 == *second );
+        CHECK( 0 == *begin );
+        CHECK( 1 == *second );
 
-        CHECK( -2 == begin[0] );
-        CHECK( -1 == begin[1] );
-        CHECK(  0 == begin[2] );
-        CHECK(  1 == begin[3] );
-        CHECK(  2 == begin[4] );
+        CHECK( 0 == begin[0] );
+        CHECK( 1 == begin[1] );
+        CHECK( 2 == begin[2] );
+        CHECK( 3 == begin[3] );
+        CHECK( 4 == begin[4] );
 
+        auto iter = begin;
         iter += 1;
         CHECK( second == iter );
         iter -= 1;

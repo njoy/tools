@@ -36,7 +36,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator[] method can only be made available for random access iterators" );
 
     return this->transform_( this->iter_[i] );
   }
@@ -45,7 +45,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator+= method can only be made available for random access iterators" );
 
     this->iter_ += i;
     return *this;
@@ -55,13 +55,13 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator-= method can only be made available for random access iterators" );
 
     this->iter_ -= i;
     return *this;
   }
 
-  constexpr Iterator& operator++( void ) {
+  constexpr Iterator& operator++() {
 
     ++this->iter_;
     return *this;
@@ -76,7 +76,7 @@ public:
 
     static_assert(
       concepts::IsBidirectionalIterator< Iterator >::value == true,
-      "the at() method can only be made available for bidirectional iterators" );
+      "the operator-- method can only be made available for bidirectional iterators" );
 
     --this->iter_;
     return *this;
@@ -86,7 +86,7 @@ public:
 
     static_assert(
       concepts::IsBidirectionalIterator< Iterator >::value == true,
-      "the at() method can only be made available for bidirectional iterators" );
+      "the operator-- method can only be made available for bidirectional iterators" );
 
     return Iterator( this->iter_--, this->transform_ );
   }
@@ -95,7 +95,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator+ method can only be made available for random access iterators" );
 
     return Iterator( iter.iter_ + i, iter.transform_ );
   }
@@ -104,7 +104,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator+ method can only be made available for random access iterators" );
 
     return Iterator( iter.iter_ + i, iter.transform_ );
   }
@@ -113,7 +113,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator- method can only be made available for random access iterators" );
 
     return Iterator( iter.iter_ - i, iter.transform_ );
   }
@@ -123,7 +123,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator- method can only be made available for random access iterators" );
 
     return left.iter_ - right.iter_;
   }
@@ -145,7 +145,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator< method can only be made available for random access iterators" );
 
     return left.iter_ < right.iter_;
   }
@@ -155,7 +155,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator> method can only be made available for random access iterators" );
 
     return right < left;
   }
@@ -167,7 +167,7 @@ public:
       concepts::IsRandomAccessIterator< Iterator >::value == true,
       "the at() method can only be made available for random access iterators" );
 
-    return !( right < left );
+    return !( left > right );
   }
 
   friend constexpr bool operator>=( const Iterator& left,
@@ -175,7 +175,7 @@ public:
 
     static_assert(
       concepts::IsRandomAccessIterator< Iterator >::value == true,
-      "the at() method can only be made available for random access iterators" );
+      "the operator>= method can only be made available for random access iterators" );
 
     return !( left < right );
   }
