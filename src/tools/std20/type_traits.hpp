@@ -10,6 +10,6 @@
 #include "tools/std20/detail/common_reference.hpp"
 
 // std::common_type is implemented in the standard library since C++11
-//#include "tools/std20/detail/common_type.hpp"
+// #include "tools/std20/detail/common_type.hpp"
 
 #endif
