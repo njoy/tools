@@ -8,6 +8,8 @@
 #define NANORANGE_TYPE_TRAITS_HPP_INCLUDED
 
 #include "tools/std20/detail/common_reference.hpp"
-#include "tools/std20/detail/common_type.hpp"
+
+// std::common_type is implemented in the standard library since C++11
+//#include "tools/std20/detail/common_type.hpp"
 
 #endif

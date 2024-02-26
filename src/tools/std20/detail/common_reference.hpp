@@ -12,8 +12,9 @@
 
 NANO_BEGIN_NAMESPACE
 
-template <typename...>
-struct common_type;
+// std::common_type is implemented in the standard library since C++11
+// template <typename...>
+// struct common_type;
 
 namespace detail {
 
@@ -192,7 +193,7 @@ template <typename T, typename U>
 inline constexpr bool has_cond_res_v = exists_v<cond_res_t, T, U>;
 
 template <typename T, typename U, typename = void>
-struct binary_common_ref : common_type<T, U> {
+struct binary_common_ref : std::common_type<T, U> {
 };
 
 template <typename T, typename U>
