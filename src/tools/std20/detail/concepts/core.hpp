@@ -82,8 +82,8 @@ namespace detail {
 struct common_with_concept {
     template <typename T, typename U>
     auto requires_() -> decltype(
-        static_cast<common_type_t<T, U>>(std::declval<T>()),
-        static_cast<common_type_t<T, U>>(std::declval<U>())
+        static_cast<std::common_type_t<T, U>>(std::declval<T>()),
+        static_cast<std::common_type_t<T, U>>(std::declval<U>())
     );
 
     template <typename, typename>
@@ -91,13 +91,13 @@ struct common_with_concept {
 
     template <typename T, typename U>
     static auto test(int) -> std::enable_if_t<
-        same_as<common_type_t<T, U>, common_type_t<U, T>> &&
+        same_as<std::common_type_t<T, U>, std::common_type_t<U, T>> &&
         detail::requires_<common_with_concept, T, U> &&
         common_reference_with<
             std::add_lvalue_reference_t<const T>,
             std::add_lvalue_reference_t<const U>> &&
         common_reference_with<
-            std::add_lvalue_reference_t<common_type_t<T, U>>,
+            std::add_lvalue_reference_t<std::common_type_t<T, U>>,
             common_reference_t<
                 std::add_lvalue_reference_t<const T>,
                 std::add_lvalue_reference_t<const U>>>,
