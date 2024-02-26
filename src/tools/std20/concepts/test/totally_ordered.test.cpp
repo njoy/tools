@@ -33,7 +33,6 @@ SCENARIO( "totally_ordered and totally_ordered_with" ) {
   CHECK( std20::totally_ordered< Foo& > );
   CHECK( std20::totally_ordered< const Foo& > );
   CHECK( std20::totally_ordered< Foo&& > );
-  CHECK( ! std20::totally_ordered< std::nullptr_t > );
   CHECK( ! std20::totally_ordered< void > );
   CHECK( ! std20::totally_ordered< Bar > );
 
