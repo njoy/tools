@@ -56,27 +56,26 @@ auto exists_helper(int) -> std::true_type;
 template <template <class...> class AliasT, typename... Args>
 inline constexpr bool exists_v = decltype(exists_helper<AliasT, Args...>(0))::value;
 
-// currently unused code
-//template <typename, typename...>
-//auto test_requires_fn(long) -> std::false_type;
-//
-//template <typename R, typename... Args,
-//          typename = decltype(&R::template requires_<Args...>)>
-//auto test_requires_fn(int) -> std::true_type;
-//
-//template <typename R, typename... Args>
-//inline constexpr bool requires_ = decltype(test_requires_fn<R, Args...>(0))::value;
-//
-//template <bool Expr>
-//using requires_expr = std::enable_if_t<Expr, int>;
-//
-//template <std::size_t I>
-//struct priority_tag : priority_tag<I - 1> {
-//};
-//
-//template <>
-//struct priority_tag<0> {
-//};
+template <typename, typename...>
+auto test_requires_fn(long) -> std::false_type;
+
+template <typename R, typename... Args,
+          typename = decltype(&R::template requires_<Args...>)>
+auto test_requires_fn(int) -> std::true_type;
+
+template <typename R, typename... Args>
+inline constexpr bool requires_ = decltype(test_requires_fn<R, Args...>(0))::value;
+
+template <bool Expr>
+using requires_expr = std::enable_if_t<Expr, int>;
+
+template <std::size_t I>
+struct priority_tag : priority_tag<I - 1> {
+};
+
+template <>
+struct priority_tag<0> {
+};
 
 } // namespace detail
 
