@@ -26,5 +26,5 @@ SCENARIO( "derived_from" ) {
   CHECK( ! std20::derived_from< int, int > );       // same primitive types
   CHECK( ! std20::derived_from< double, double > ); // same primitive types
   CHECK( ! std20::derived_from< Foo, Bar > );       // Foo is not derived from Bar
-  CHECK( ! std20::derived_from< AlsoBar, Foo > );   // private inheritance from Bar
+  CHECK( ! std20::derived_from< AlsoBar, Foo > );   // private inheritance from Foo
 } // SCENARIO
