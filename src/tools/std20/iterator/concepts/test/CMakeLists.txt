@@ -1,0 +1,5 @@
+add_cpp_test( std20.iterator.concepts.input_iterator           input_iterator.test.cpp )
+add_cpp_test( std20.iterator.concepts.output_iterator          output_iterator.test.cpp )
+add_cpp_test( std20.iterator.concepts.forward_iterator         forward_iterator.test.cpp )
+add_cpp_test( std20.iterator.concepts.bidirectional_iterator   bidirectional_iterator.test.cpp )
+add_cpp_test( std20.iterator.concepts.random_access_iterator   random_access_iterator.test.cpp )
