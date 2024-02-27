@@ -31,11 +31,14 @@ SCENARIO( "default_initializable" ) {
   CHECK( std20::default_initializable< int > );
   CHECK( ! std20::default_initializable< const int > );
   CHECK( ! std20::default_initializable< int& > );
+  CHECK( ! std20::default_initializable< const int& > );
+  CHECK( ! std20::default_initializable< int&& > );
+  CHECK( ! std20::default_initializable< const int&& > );
   CHECK( ! std20::default_initializable< int() > );
   CHECK( ! std20::default_initializable< int (&)() > );
   CHECK( std20::default_initializable< double > );
   CHECK( ! std20::default_initializable< void > );
+  CHECK( ! std20::default_initializable< void() > );
   CHECK( ! std20::default_initializable< int[] > );
-  CHECK( std20::constructible_from< int[2] > );
   CHECK( std20::default_initializable< int[2] > );
 } // SCENARIO
