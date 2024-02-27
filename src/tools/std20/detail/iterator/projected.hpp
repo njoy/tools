@@ -7,8 +7,8 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_PROJECTED_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_PROJECTED_HPP_INCLUDED
 
-#include <nanorange/detail/functional/identity.hpp>
-#include <nanorange/detail/iterator/indirect_callable_concepts.hpp>
+#include "tools/std20/detail/functional/identity.hpp"
+#include "tools/std20/detail/iterator/indirect_callable_concepts.hpp"
 
 NANO_BEGIN_NAMESPACE
 

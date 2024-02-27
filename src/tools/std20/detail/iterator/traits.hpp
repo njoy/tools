@@ -7,8 +7,8 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_TRAITS_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_TRAITS_HPP_INCLUDED
 
-#include <nanorange/detail/iterator/dereferenceable.hpp>
-#include <nanorange/detail/iterator/iter_move.hpp>
+#include "tools/std20/detail/iterator/dereferenceable.hpp"
+#include "tools/std20/detail/iterator/iter_move.hpp"
 
 #include <iterator>
 

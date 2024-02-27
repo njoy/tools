@@ -7,8 +7,8 @@
 #ifndef NANORANGE_DETAIL_FUNCTIONAL_COMPARISONS_HPP_INCLUDED
 #define NANORANGE_DETAIL_FUNCTIONAL_COMPARISONS_HPP_INCLUDED
 
-#include <nanorange/detail/concepts/comparison.hpp>
-#include <nanorange/detail/concepts/core.hpp>
+#include "tools/std20/detail/concepts/comparison.hpp"
+#include "tools/std20/detail/concepts/core.hpp"
 
 #include <functional>
 #include <utility>

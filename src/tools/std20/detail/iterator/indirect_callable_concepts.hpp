@@ -7,7 +7,7 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_INDIRECT_CALLABLE_CONCEPTS_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_INDIRECT_CALLABLE_CONCEPTS_HPP_INCLUDED
 
-#include <nanorange/detail/iterator/concepts.hpp>
+#include "tools/std20/detail/iterator/concepts.hpp"
 
 NANO_BEGIN_NAMESPACE
 

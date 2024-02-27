@@ -7,8 +7,8 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_ITER_SWAP_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_ITER_SWAP_HPP_INCLUDED
 
-#include <nanorange/detail/iterator/indirect_callable_concepts.hpp>
-#include <nanorange/detail/iterator/iter_move.hpp>
+#include "tools/std20/detail/iterator/indirect_callable_concepts.hpp"
+#include "tools/std20/detail/iterator/iter_move.hpp"
 
 NANO_BEGIN_NAMESPACE
 

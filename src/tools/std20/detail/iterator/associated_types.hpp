@@ -7,8 +7,8 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_ASSOCIATED_TYPES_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_ASSOCIATED_TYPES_HPP_INCLUDED
 
-#include <nanorange/detail/concepts/core.hpp>
-#include <nanorange/detail/type_traits.hpp>
+#include "tools/std20/detail/concepts/core.hpp"
+#include "tools/std20/detail/type_traits.hpp"
 
 NANO_BEGIN_NAMESPACE
 

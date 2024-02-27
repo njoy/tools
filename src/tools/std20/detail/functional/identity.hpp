@@ -7,7 +7,7 @@
 #ifndef NANORANGE_DETAIL_FUNCTIONAL_IDENTITY_HPP_INCLUDED
 #define NANORANGE_DETAIL_FUNCTIONAL_IDENTITY_HPP_INCLUDED
 
-#include <nanorange/detail/macros.hpp>
+#include "tools/std20/detail/macros.hpp"
 
 #include <type_traits>
 #include <utility>

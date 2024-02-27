@@ -7,7 +7,7 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_ITER_MOVE_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_ITER_MOVE_HPP_INCLUDED
 
-#include <nanorange/detail/type_traits.hpp>
+#include "tools/std20/detail/type_traits.hpp"
 
 #include <utility>
 

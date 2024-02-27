@@ -7,9 +7,9 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_CONCEPTS_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_CONCEPTS_HPP_INCLUDED
 
-#include <nanorange/detail/concepts/object.hpp>
-#include <nanorange/detail/iterator/associated_types.hpp>
-#include <nanorange/detail/iterator/traits.hpp>
+#include "tools/std20/detail/concepts/object.hpp"
+#include "tools/std20/detail/iterator/associated_types.hpp"
+#include "tools/std20/detail/iterator/traits.hpp"
 
 NANO_BEGIN_NAMESPACE
 
@@ -123,7 +123,7 @@ NANO_CONCEPT input_or_output_iterator =
 
 template <typename S, typename I>
 NANO_CONCEPT sentinel_for =
-    semiregular<S> && input_or_output_iterator<I> && 
+    semiregular<S> && input_or_output_iterator<I> &&
     detail::weakly_equality_comparable_with<S, I>;
 
 // [iterator.concept.sizedsentinel]

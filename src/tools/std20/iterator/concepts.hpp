@@ -7,8 +7,8 @@
 #ifndef NANORANGE_ITERATOR_CONCEPTS_HPP_INCLUDED
 #define NANORANGE_ITERATOR_CONCEPTS_HPP_INCLUDED
 
-#include <nanorange/detail/iterator/algorithm_requirements.hpp>
-#include <nanorange/detail/iterator/concepts.hpp>
-#include <nanorange/detail/iterator/indirect_callable_concepts.hpp>
+#include "tools/std20/detail/iterator/algorithm_requirements.hpp"
+#include "tools/std20/detail/iterator/concepts.hpp"
+#include "tools/std20/detail/iterator/indirect_callable_concepts.hpp"
 
 #endif

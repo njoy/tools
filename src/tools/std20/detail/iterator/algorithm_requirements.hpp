@@ -7,11 +7,11 @@
 #ifndef NANORANGE_DETAIL_ITERATOR_ALGORITHM_REQUIREMENTS_HPP_INCLUDED
 #define NANORANGE_DETAIL_ITERATOR_ALGORITHM_REQUIREMENTS_HPP_INCLUDED
 
-#include <nanorange/detail/functional/comparisons.hpp>
-#include <nanorange/detail/functional/identity.hpp>
-#include <nanorange/detail/iterator/indirect_callable_concepts.hpp>
-#include <nanorange/detail/iterator/iter_swap.hpp>
-#include <nanorange/detail/iterator/projected.hpp>
+#include "tools/std20/detail/functional/comparisons.hpp"
+#include "tools/std20/detail/functional/identity.hpp"
+#include "tools/std20/detail/iterator/indirect_callable_concepts.hpp"
+#include "tools/std20/detail/iterator/iter_swap.hpp"
+#include "tools/std20/detail/iterator/projected.hpp"
 
 NANO_BEGIN_NAMESPACE
 
