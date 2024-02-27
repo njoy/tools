@@ -3,3 +3,4 @@ add_cpp_test( std20.iterator.concepts.output_iterator          output_iterator.t
 add_cpp_test( std20.iterator.concepts.forward_iterator         forward_iterator.test.cpp )
 add_cpp_test( std20.iterator.concepts.bidirectional_iterator   bidirectional_iterator.test.cpp )
 add_cpp_test( std20.iterator.concepts.random_access_iterator   random_access_iterator.test.cpp )
+add_cpp_test( std20.iterator.concepts.contiguous_iterator      contiguous_iterator.test.cpp )
