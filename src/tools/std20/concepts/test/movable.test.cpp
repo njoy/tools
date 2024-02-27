@@ -65,6 +65,7 @@ SCENARIO( "movable" ) {
   CHECK( ! std20::movable< const CopyOnlyFoo&& > );
 
   CHECK( std20::movable< int > );
+  CHECK( std20::movable< int* > );
   CHECK( ! std20::movable< const int > );
   CHECK( ! std20::movable< int& > );
   CHECK( ! std20::movable< const int& > );

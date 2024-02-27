@@ -26,7 +26,12 @@ SCENARIO( "common_with" ) {
   CHECK( std20::common_with< int, double > );
   CHECK( std20::common_with< double, int > );
   CHECK( std20::common_with< void, void > );
+  CHECK( ! std20::common_with< int, void > );
+  CHECK( ! std20::common_with< int, int* > );
+  CHECK( ! std20::common_with< int, int() > );
 
+  CHECK( std20::common_with< int, int > );
+  CHECK( std20::common_with< int, const int > );
   CHECK( std20::common_with< int&, int& > );
   CHECK( std20::common_with< const int&, int& > );
   CHECK( std20::common_with< int&, const int& > );
@@ -37,6 +42,10 @@ SCENARIO( "common_with" ) {
   CHECK( std20::common_with< int&&, int&& > );
   CHECK( std20::common_with< const int&&, int&& > );
   CHECK( std20::common_with< int&&, const int&& > );
+
+  CHECK( std20::common_with< int, short > );
+  CHECK( std20::common_with< short, int > );
+  CHECK( std20::common_with< void*, const int* > );
 
   CHECK( std20::common_with< volatile int&, int& > );
   CHECK( std20::common_with< volatile int&, const int& > );

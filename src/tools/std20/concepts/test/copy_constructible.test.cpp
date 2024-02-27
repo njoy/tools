@@ -33,7 +33,7 @@ struct CopyOnlyFoo {
 	CopyOnlyFoo& operator=( CopyOnlyFoo&& ) = delete;
 };
 
-SCENARIO( "default_initializable" ) {
+SCENARIO( "copy_constructible" ) {
 
   CHECK( std20::copy_constructible< Foo > );
   CHECK( ! std20::copy_constructible< NonMovableFoo > );
@@ -47,14 +47,22 @@ SCENARIO( "default_initializable" ) {
   CHECK( ! std20::copy_constructible< const NonMovableFoo&& > );
   CHECK( ! std20::copy_constructible< const CopyOnlyFoo&& > );
 
-  CHECK( std20::copy_constructible< int > );
-  CHECK( std20::copy_constructible< const int > );
-  CHECK( std20::copy_constructible< int& > );
-  CHECK( std20::copy_constructible< const int& > );
-  CHECK( ! std20::copy_constructible< int&& > );
-  CHECK( ! std20::copy_constructible< const int&& > );
-  CHECK( std20::copy_constructible< double > );
   CHECK( ! std20::copy_constructible< void > );
-  CHECK( ! std20::copy_constructible< void() > );
+  CHECK( std20::copy_constructible< void* > );
+  CHECK( std20::copy_constructible< const void* > );
+  CHECK( std20::copy_constructible< char > );
+  CHECK( std20::copy_constructible< const float > );
+  CHECK( std20::copy_constructible< int > );
+  CHECK( std20::copy_constructible< int* > );
+  CHECK( std20::copy_constructible< int& > );
+  CHECK( ! std20::copy_constructible< int&& > );
+  CHECK( std20::copy_constructible< const int > );
+  CHECK( std20::copy_constructible< const int& > );
+  CHECK( ! std20::copy_constructible< const int&& > );
+  CHECK( ! std20::copy_constructible< int[] > );
   CHECK( ! std20::copy_constructible< int[2] > );
+  CHECK( ! std20::copy_constructible< int() > );
+  CHECK( std20::copy_constructible< int(*)() > );
+  CHECK( std20::copy_constructible< int(&)() > );
+  CHECK( std20::copy_constructible< int(&)() noexcept > );
 } // SCENARIO

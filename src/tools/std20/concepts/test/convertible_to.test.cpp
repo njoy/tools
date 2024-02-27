@@ -20,11 +20,41 @@ struct AlsoBar : private Foo {};
 SCENARIO( "convertible_to" ) {
 
   CHECK( std20::convertible_to< Foo, Foo > );
-  CHECK( std20::convertible_to< Bar, Foo > );
-  CHECK( std20::convertible_to< int, double > );
-  CHECK( std20::convertible_to< double, int > );
-  CHECK( std20::convertible_to< void, void > );
+  CHECK( std20::convertible_to< Foo, const Foo > );
+  CHECK( std20::convertible_to< Foo const, const Foo > );
+  CHECK( ! std20::convertible_to< volatile Foo, const Foo > );
+  CHECK( ! std20::convertible_to< volatile Foo, const volatile Foo& > );
+  CHECK( std20::convertible_to< volatile Foo&, const volatile Foo& > );
 
-  CHECK( ! std20::convertible_to< Foo, Bar > );       // Foo is not derived from Bar
-  CHECK( ! std20::convertible_to< AlsoBar, Foo > );   // private inheritance from Foo
+  CHECK( std20::convertible_to< Bar, Bar > );
+  CHECK( std20::convertible_to< Bar, Foo > );
+  CHECK( ! std20::convertible_to< Foo, Bar > );
+  CHECK( std20::convertible_to< Bar, Foo > );
+  CHECK( std20::convertible_to< const Bar, Foo > );
+  CHECK( std20::convertible_to< Bar, const Foo > );
+  CHECK( std20::convertible_to< Bar, const Foo& > );
+  CHECK( ! std20::convertible_to< volatile Bar, const Foo > );
+  CHECK( ! std20::convertible_to< volatile Bar, const Foo& > );
+
+  CHECK( ! std20::convertible_to< AlsoBar, Foo > );
+  CHECK( ! std20::convertible_to< Foo, AlsoBar > );
+
+  CHECK( std20::convertible_to< int, int > );
+  CHECK( std20::convertible_to< int&, int > );
+  CHECK( ! std20::convertible_to< int, int& > );
+  CHECK( std20::convertible_to< int, const int& > );
+  CHECK( ! std20::convertible_to< int&&, int& > );
+  CHECK( std20::convertible_to< int&&, const int& > );
+  CHECK( std20::convertible_to< const int, int > );
+  CHECK( ! std20::convertible_to< const int, int& > );
+  CHECK( std20::convertible_to< const int, const int > );
+  CHECK( std20::convertible_to< const int, const int& > );
+
+  CHECK( std20::convertible_to< int, float > );
+  CHECK( ! std20::convertible_to< int, float& > );
+  CHECK( ! std20::convertible_to< int, int* > );
+  CHECK( std20::convertible_to< int*, void* > );
+  CHECK( std20::convertible_to< int*, const void* > );
+  CHECK( ! std20::convertible_to< const int*, void* > );
+  CHECK( ! std20::convertible_to< int, void > );
 } // SCENARIO

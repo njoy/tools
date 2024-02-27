@@ -19,6 +19,18 @@ SCENARIO( "integral" ) {
   CHECK( std20::integral< std::ptrdiff_t > );
   CHECK( std20::integral< std::size_t > );
 
+  CHECK( ! std20::integral< void > );
+  CHECK( ! std20::integral< float > );
+  CHECK( ! std20::integral< int* > );
+  CHECK( ! std20::integral< int& > );
+  CHECK( ! std20::integral< int&& > );
+  CHECK( ! std20::integral< const int& > );
+  CHECK( ! std20::integral< int[] > );
+  CHECK( ! std20::integral< int[2] > );
+  CHECK( ! std20::integral< int() > );
+  CHECK( ! std20::integral< int(*)() > );
+  CHECK( ! std20::integral< int(&)() > );
+
   CHECK( ! std20::integral< double > );
   CHECK( ! std20::integral< decltype("") > );
   CHECK( ! std20::integral< void > );

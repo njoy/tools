@@ -71,6 +71,8 @@ SCENARIO( "move_constructible" ) {
   CHECK( std20::move_constructible< const int&& > );
   CHECK( std20::move_constructible< double > );
   CHECK( ! std20::move_constructible< void > );
+  CHECK( std20::move_constructible< void* > );
+  CHECK( std20::move_constructible< const void* > );
   CHECK( ! std20::move_constructible< void() > );
   CHECK( ! std20::move_constructible< int[2] > );
 } // SCENARIO

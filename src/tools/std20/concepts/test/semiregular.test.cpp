@@ -72,6 +72,7 @@ SCENARIO( "semiregular" ) {
   CHECK( ! std20::semiregular< const CopyOnlyFoo&& > );
 
   CHECK( std20::semiregular< int > );
+  CHECK( std20::semiregular< int* > );
   CHECK( ! std20::semiregular< const int > );
   CHECK( ! std20::semiregular< int& > );
   CHECK( ! std20::semiregular< const int& > );

@@ -41,17 +41,17 @@ SCENARIO( "destructible" ) {
   CHECK( ! std20::destructible< IndestructibleFoo > );
   CHECK( ! std20::destructible< ThrowingDestructorFoo > );
 
-  CHECK( std20::destructible< int > );
-  CHECK( std20::destructible< const int > );
-
-  CHECK( std20::destructible< int& > );
-  CHECK( std20::destructible< void (*)() > );
-  CHECK( std20::destructible< void (&)() > );
-  CHECK( std20::destructible< int[2] > );
-  CHECK( std20::destructible< int (*)[2] > );
-  CHECK( std20::destructible< int (&)[2] > );
-
-  CHECK( ! std20::destructible< void > );
-  CHECK( ! std20::destructible< void() > );
-  CHECK( ! std20::destructible< int[] > );
+  CHECK( ! std20::destructible<void> );
+  CHECK( std20::destructible<char> );
+  CHECK( std20::destructible<float> );
+  CHECK( std20::destructible<int*> );
+  CHECK( std20::destructible<int&> );
+  CHECK( std20::destructible<int&&> );
+  CHECK( std20::destructible<const int&> );
+  CHECK( ! std20::destructible<int[]> );
+  CHECK( std20::destructible<int[2]> );
+  CHECK( std20::destructible<int[2][3]> );
+  CHECK( ! std20::destructible<int()> );
+  CHECK( std20::destructible<int(*)()> );
+  CHECK( std20::destructible<int(&)()> );
 } // SCENARIO

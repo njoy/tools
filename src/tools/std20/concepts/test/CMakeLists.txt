@@ -8,7 +8,7 @@ add_cpp_test( std20.concepts.signed_integral           signed_integral.test.cpp 
 add_cpp_test( std20.concepts.unsigned_integral         unsigned_integral.test.cpp )
 add_cpp_test( std20.concepts.floating_point            floating_point.test.cpp )
 #add_cpp_test( std20.concepts.assignable_from           assignable_from.test.cpp )
-#add_cpp_test( std20.concepts.swappable                 swappable.test.cpp )
+add_cpp_test( std20.concepts.swappable                 swappable.test.cpp )
 add_cpp_test( std20.concepts.destructible              destructible.test.cpp )
 add_cpp_test( std20.concepts.constructible_from        constructible_from.test.cpp )
 add_cpp_test( std20.concepts.default_initializable     default_initializable.test.cpp )

@@ -72,6 +72,7 @@ SCENARIO( "regular" ) {
   CHECK( ! std20::regular< const CopyOnlyFoo&& > );
 
   CHECK( std20::regular< int > );
+  CHECK( std20::regular< int* > );
   CHECK( ! std20::regular< const int > );
   CHECK( ! std20::regular< int& > );
   CHECK( ! std20::regular< const int& > );

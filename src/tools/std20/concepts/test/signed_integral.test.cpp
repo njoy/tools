@@ -15,6 +15,18 @@ SCENARIO( "signed_integral" ) {
   CHECK( std20::signed_integral< int > );
   CHECK( std20::signed_integral< std::ptrdiff_t > );
 
+  CHECK( ! std20::signed_integral< void > );
+  CHECK( ! std20::signed_integral< float > );
+  CHECK( ! std20::signed_integral< int* > );
+  CHECK( ! std20::signed_integral< int& > );
+  CHECK( ! std20::signed_integral< int&& > );
+  CHECK( ! std20::signed_integral< const int& > );
+  CHECK( ! std20::signed_integral< int[] > );
+  CHECK( ! std20::signed_integral< int[2] > );
+  CHECK( ! std20::signed_integral< int() > );
+  CHECK( ! std20::signed_integral< int(*)() > );
+  CHECK( ! std20::signed_integral< int(&)() > );
+
   CHECK( ! std20::signed_integral< std::size_t > );
   CHECK( ! std20::signed_integral< bool > );
   CHECK( ! std20::signed_integral< unsigned int > );

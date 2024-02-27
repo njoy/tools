@@ -28,17 +28,22 @@ SCENARIO( "default_initializable" ) {
   CHECK( std20::default_initializable< Foo > );
   CHECK( ! std20::default_initializable< NonDefaultConstructableFoo > );
 
-  CHECK( std20::default_initializable< int > );
-  CHECK( ! std20::default_initializable< const int > );
-  CHECK( ! std20::default_initializable< int& > );
-  CHECK( ! std20::default_initializable< const int& > );
-  CHECK( ! std20::default_initializable< int&& > );
-  CHECK( ! std20::default_initializable< const int&& > );
-  CHECK( ! std20::default_initializable< int() > );
-  CHECK( ! std20::default_initializable< int (&)() > );
-  CHECK( std20::default_initializable< double > );
   CHECK( ! std20::default_initializable< void > );
+  CHECK( std20::default_initializable< void* > );
+  CHECK( std20::default_initializable< const void* > );
   CHECK( ! std20::default_initializable< void() > );
+  CHECK( std20::default_initializable< char > );
+  CHECK( std20::default_initializable< float > );
+  CHECK( ! std20::default_initializable< const int > );
+  CHECK( std20::default_initializable< int > );
+  CHECK( std20::default_initializable< int* > );
+  CHECK( ! std20::default_initializable< int& > );
+  CHECK( ! std20::default_initializable< int&& > );
+  CHECK( ! std20::default_initializable< const int& > );
+  CHECK( ! std20::default_initializable< const int&& > );
   CHECK( ! std20::default_initializable< int[] > );
   CHECK( std20::default_initializable< int[2] > );
+  CHECK( ! std20::default_initializable< int() > );
+  CHECK( std20::default_initializable< int(*)() > );
+  CHECK( ! std20::default_initializable< int(&)() > );
 } // SCENARIO

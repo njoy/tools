@@ -26,7 +26,11 @@ SCENARIO( "common_reference_with" ) {
   CHECK( std20::common_reference_with< int, double > );
   CHECK( std20::common_reference_with< double, int > );
   CHECK( std20::common_reference_with< void, void > );
+  CHECK( ! std20::common_reference_with< int, void > );
+  CHECK( ! std20::common_reference_with< int, int* > );
+  CHECK( ! std20::common_reference_with< int, int() > );
 
+  CHECK( std20::common_reference_with< int, int > );
   CHECK( std20::common_reference_with< int&, int& > );
   CHECK( std20::common_reference_with< const int&, int& > );
   CHECK( std20::common_reference_with< int&, const int& > );

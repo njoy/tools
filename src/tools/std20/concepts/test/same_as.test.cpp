@@ -13,13 +13,17 @@ namespace std20 = nano::ranges;
 // test code
 struct Foo {};
 
-struct Bar {};
+struct Bar : public Foo {};
 
 SCENARIO( "same_as" ) {
 
   CHECK( std20::same_as< int, int > );
   CHECK( std20::same_as< double, double > );
   CHECK( std20::same_as< Foo, Foo > );
+
+  CHECK( ! std20::same_as< int, const int > );
+  CHECK( ! std20::same_as< double, const double > );
+  CHECK( ! std20::same_as< Foo, const Foo > );
 
   CHECK( std20::same_as< std::common_type_t< int, int, int >, int > );
   CHECK( std20::same_as< std::common_type_t< int, float, double >, double > );

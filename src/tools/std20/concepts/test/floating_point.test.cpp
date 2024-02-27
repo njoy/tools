@@ -15,6 +15,17 @@ SCENARIO( "floating_point" ) {
   CHECK( std20::floating_point< float > );
   CHECK( std20::floating_point< double > );
 
+  CHECK( ! std20::floating_point< void > );
+  CHECK( ! std20::floating_point< float* > );
+  CHECK( ! std20::floating_point< float& > );
+  CHECK( ! std20::floating_point< float&& > );
+  CHECK( ! std20::floating_point< const float& > );
+  CHECK( ! std20::floating_point< float[] > );
+  CHECK( ! std20::floating_point< float[2] > );
+  CHECK( ! std20::floating_point< float() > );
+  CHECK( ! std20::floating_point< float(*)() > );
+  CHECK( ! std20::floating_point< float(&)() > );
+
   CHECK( ! std20::floating_point< bool > );
   CHECK( ! std20::floating_point< char > );
   CHECK( ! std20::floating_point< int > );

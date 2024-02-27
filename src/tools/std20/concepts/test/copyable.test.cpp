@@ -65,6 +65,7 @@ SCENARIO( "copyable" ) {
   CHECK( ! std20::copyable< const CopyOnlyFoo&& > );
 
   CHECK( std20::copyable< int > );
+  CHECK( std20::copyable< int* > );
   CHECK( ! std20::copyable< const int > );
   CHECK( ! std20::copyable< int& > );
   CHECK( ! std20::copyable< const int& > );

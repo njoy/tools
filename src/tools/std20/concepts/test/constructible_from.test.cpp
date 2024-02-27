@@ -39,6 +39,14 @@ SCENARIO( "constructible_from" ) {
 
   CHECK( ! std20::constructible_from< NonDefaultConstructableFoo > );
 
+  CHECK( ! std20::constructible_from< void > );
+  CHECK( ! std20::constructible_from< void, void > );
+  CHECK( std20::constructible_from< void*, int* > );
+  CHECK( ! std20::constructible_from< void*, const int* > );
+  CHECK( std20::constructible_from< const void*, const int* > );
+  CHECK( std20::constructible_from< int* > );
+  CHECK( std20::constructible_from< int*, int* > );
+
   CHECK( std20::constructible_from< int > );
   CHECK( std20::constructible_from< const int > );
   CHECK( ! std20::constructible_from< const int& > );
