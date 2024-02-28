@@ -18,6 +18,7 @@ struct Foo {
 
   int i = 42;
 
+  Foo() = default;
   constexpr int f() const { return i; }
 };
 
