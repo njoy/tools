@@ -1,3 +1,5 @@
+add_cpp_test( std20.iterator.concepts.readable                    readable.test.cpp )
+add_cpp_test( std20.iterator.concepts.writable                    writable.test.cpp )
 add_cpp_test( std20.iterator.concepts.incrementable               incrementable.test.cpp )
 add_cpp_test( std20.iterator.concepts.input_or_output_iterator    input_or_output_iterator.test.cpp )
 add_cpp_test( std20.iterator.concepts.sentinel_for                sentinel_for.test.cpp )
