@@ -5,7 +5,6 @@
 #include "tools/std20/functional.hpp"
 
 // other includes
-#include <iostream>
 
 // convenience typedefs
 //using namespace njoy::tools;
@@ -38,13 +37,6 @@ SCENARIO( "not_equal_to" ) {
   CHECK( ! f( &a, (void*)&a[0] ) );
   CHECK( f( &a, (void*)&a[1] ) );
   CHECK( ! f( &a + 1, (void*)(a + 2) ) );
-
-  std::cout << &a << std::endl;
-  std::cout << &a[0] << std::endl;
-  std::cout << &a[1] << std::endl;
-  std::cout << (&a == (void*)&a[0]) << std::endl;
-  std::cout << (&a != (void*)&a[0]) << std::endl;
-  std::cout << std::equal_to{}(&a , (void*)&a[0]) << std::endl;
 
   Foo x;
   CHECK( ! f( x, x ) );
