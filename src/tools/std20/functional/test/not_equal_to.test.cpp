@@ -14,6 +14,10 @@ namespace std20 = nano::ranges;
 struct Foo { };
 int operator==( Foo, Foo ) noexcept { return 2; }
 int operator!=( Foo, Foo ) { return 0; }
+int operator<( Foo, Foo ) noexcept { return 0; }
+int operator>( Foo, Foo ) { return 0; }
+int operator<=( Foo, Foo ) { return 3; }
+int operator>=( Foo, Foo ) { return 4; }
 
 SCENARIO( "not_equal_to" ) {
 
