@@ -49,8 +49,9 @@ SCENARIO( "contiguous_iterator" ) {
   CHECK( ! std20::contiguous_iterator< std::list< int >::iterator > );
   CHECK( ! std20::contiguous_iterator< std::list< Foo >::const_iterator > );
 
-  // @todo: std::string and std::vector should have contiguous iterator in C++20
-  // That may not be the case yet in C++17?
+  // @todo: std::string and std::vector have contiguous iterators in C++20
+  // The concept uses the contiguous iterator tag to determine this, which is not
+  // implemented in C++17
 
   // CHECK( std20::contiguous_iterator< std::string::iterator > );
   // CHECK( std20::contiguous_iterator< std::string::const_iterator > );

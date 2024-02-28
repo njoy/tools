@@ -15,10 +15,10 @@
 //#include <nanorange/detail/iterator/iter_swap.hpp>
 //#include <nanorange/detail/iterator/traits.hpp>
 //#include <nanorange/iterator/back_insert_iterator.hpp>
-//#include <nanorange/iterator/common_iterator.hpp>
+#include "tools/std20/iterator/common_iterator.hpp"
 #include "tools/std20/iterator/concepts.hpp"
 //#include <nanorange/iterator/counted_iterator.hpp>
-//#include <nanorange/iterator/default_sentinel.hpp>
+#include "tools/std20/iterator/default_sentinel.hpp"
 //#include <nanorange/iterator/front_insert_iterator.hpp>
 //#include <nanorange/iterator/insert_iterator.hpp>
 //#include <nanorange/iterator/istream_iterator.hpp>
