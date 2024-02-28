@@ -22,7 +22,7 @@ struct equal_to {
     constexpr auto operator()(T&& t, U&& u) const
         -> std::enable_if_t<equality_comparable_with<T, U>, bool>
     {
-#ifdef __INTEL_COMPILER
+#if defined(__INTEL_COMPILER)
         // this fixes an issue on intel classic compilers when comparing
         // C-style array addresses (equal_to.test.cpp and not_equal_to.test.cpp fail)
         return (std::forward<T>(t) == std::forward<U>(u));
