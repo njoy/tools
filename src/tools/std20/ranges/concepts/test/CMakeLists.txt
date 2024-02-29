@@ -8,3 +8,5 @@ add_cpp_test( std20.ranges.concepts.forward_range         forward_range.test.cpp
 add_cpp_test( std20.ranges.concepts.bidirectional_range   bidirectional_range.test.cpp )
 add_cpp_test( std20.ranges.concepts.random_access_range   random_access_range.test.cpp )
 add_cpp_test( std20.ranges.concepts.contiguous_range      contiguous_range.test.cpp )
+add_cpp_test( std20.ranges.concepts.common_range          common_range.test.cpp )
+add_cpp_test( std20.ranges.concepts.viewable_range        viewable_range.test.cpp )
