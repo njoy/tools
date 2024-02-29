@@ -69,4 +69,13 @@ SCENARIO( "common_iterator" ) {
   CHECK( j == i );
   CHECK( (j - arrayend) == -2 );
   CHECK( (j - i) == 0 );
+
+  std::vector< int > vector = { 1, 2, 3, 4 };
+  using Iterator = std20::common_iterator< std::vector< int >::iterator,
+                                           std::vector< int >::const_iterator >;
+  Iterator bvector = std::begin( vector );
+  Iterator evector = std::end( vector );
+
+  CHECK( bvector != evector );
+  CHECK( evector - bvector > 0 );
 } // SCENARIO

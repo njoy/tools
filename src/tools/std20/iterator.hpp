@@ -27,7 +27,7 @@
 //#include <nanorange/iterator/operations.hpp>
 //#include <nanorange/iterator/ostream_iterator.hpp>
 //#include <nanorange/iterator/ostreambuf_iterator.hpp>
-//#include <nanorange/iterator/reverse_iterator.hpp>
+#include "tools/std20/iterator/reverse_iterator.hpp"
 //#include <nanorange/iterator/unreachable.hpp>
 
 #endif
