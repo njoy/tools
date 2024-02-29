@@ -52,6 +52,9 @@ SCENARIO( "view" ) {
   CHECK( ! std20::ranges::view< std::list< int > > );
   CHECK( ! std20::ranges::view< std::list< Foo > > );
 
+  CHECK( ! std20::ranges::view< std::set< int > > );
+  CHECK( ! std20::ranges::view< std::set< Foo > > );
+
   CHECK( ! std20::ranges::view< std::string > );
   CHECK( ! std20::ranges::view< std::string > );
 

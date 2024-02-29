@@ -54,6 +54,9 @@ SCENARIO( "sized_range" ) {
   CHECK( std20::ranges::sized_range< std::list< int > > );
   CHECK( std20::ranges::sized_range< std::list< Foo > > );
 
+  CHECK( std20::ranges::sized_range< std::set< int > > );
+  CHECK( std20::ranges::sized_range< std::set< Foo > > );
+
   CHECK( std20::ranges::sized_range< std::string > );
   CHECK( std20::ranges::sized_range< std::string > );
 

@@ -52,6 +52,9 @@ SCENARIO( "output_range" ) {
   CHECK( std20::ranges::output_range< std::list< int >, int > );
   CHECK( std20::ranges::output_range< std::list< Foo >, Foo > );
 
+  CHECK( ! std20::ranges::output_range< std::set< int >, int > );
+  CHECK( ! std20::ranges::output_range< std::set< Foo >, Foo > );
+
   CHECK( std20::ranges::output_range< std::string, char > );
   CHECK( std20::ranges::output_range< std::string, char > );
 

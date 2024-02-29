@@ -3,4 +3,8 @@ add_cpp_test( std20.ranges.access.cbegin    cbegin.test.cpp )
 add_cpp_test( std20.ranges.access.end       end.test.cpp )
 add_cpp_test( std20.ranges.access.cend      cend.test.cpp )
 
+add_cpp_test( std20.ranges.access.data      data.test.cpp )
+add_cpp_test( std20.ranges.access.cdata     cdata.test.cpp )
 add_cpp_test( std20.ranges.access.size      size.test.cpp )
+add_cpp_test( std20.ranges.access.ssize     ssize.test.cpp )
+add_cpp_test( std20.ranges.access.empty     empty.test.cpp )
