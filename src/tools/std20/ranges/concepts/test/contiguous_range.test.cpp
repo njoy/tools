@@ -43,14 +43,14 @@ SCENARIO( "contiguous_range" ) {
   CHECK( std20::ranges::contiguous_range< std::array< int, 1 > > );
   CHECK( std20::ranges::contiguous_range< std::array< Foo, 1 > > );
 
-  CHECK( std20::ranges::contiguous_range< std::deque< int > > );
-  CHECK( std20::ranges::contiguous_range< std::deque< Foo > > );
+  CHECK( ! std20::ranges::contiguous_range< std::deque< int > > );
+  CHECK( ! std20::ranges::contiguous_range< std::deque< Foo > > );
 
-  CHECK( std20::ranges::contiguous_range< std::forward_list< int > > );
-  CHECK( std20::ranges::contiguous_range< std::forward_list< Foo > > );
+  CHECK( ! std20::ranges::contiguous_range< std::forward_list< int > > );
+  CHECK( ! std20::ranges::contiguous_range< std::forward_list< Foo > > );
 
-  CHECK( std20::ranges::contiguous_range< std::list< int > > );
-  CHECK( std20::ranges::contiguous_range< std::list< Foo > > );
+  CHECK( ! std20::ranges::contiguous_range< std::list< int > > );
+  CHECK( ! std20::ranges::contiguous_range< std::list< Foo > > );
 
   CHECK( std20::ranges::contiguous_range< std::string > );
   CHECK( std20::ranges::contiguous_range< std::string > );
