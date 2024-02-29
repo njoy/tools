@@ -11,7 +11,7 @@
 
 // convenience typedefs
 //using namespace njoy::tools;
-namespace std20 = nano::ranges;
+namespace std20 = nano;
 
 SCENARIO( "subrange" ) {
 
@@ -21,16 +21,20 @@ SCENARIO( "subrange" ) {
 
     WHEN( "when iterators are used" ) {
 
-      using Range = std20::subrange< std::forward_list< int >::iterator >;
-      Range chunk( values.begin(), values.end() );
+      using Range = std20::ranges::subrange< std::forward_list< int >::iterator,
+                                             std::forward_list< int >::iterator,
+                                             std20::ranges::subrange_kind::sized >;
+
+      auto size = std::distance( values.begin(), values.end() );
+      Range chunk( values.begin(), values.end(),size );
 
       THEN( "the subrange satisfies the required consepcts" ) {
 
-		CHECK( std20::view< Range > );
-		CHECK( ! std20::sized_range < Range > );
-		CHECK( ! std20::contiguous_range < Range > );
-		CHECK( ! std20::random_access_range < Range > );
-		CHECK( std20::common_range < Range > );
+		CHECK( std20::ranges::view< Range > );
+		CHECK( std20::ranges::sized_range < Range > );
+		CHECK( ! std20::ranges::contiguous_range < Range > );
+		CHECK( ! std20::ranges::random_access_range < Range > );
+		CHECK( std20::ranges::common_range < Range > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
@@ -39,7 +43,7 @@ SCENARIO( "subrange" ) {
         CHECK( values.end() == chunk.end() );
 
         // the following should not compile: no random access iterator
-        // CHECK( 5 == chunk.size() );
+        CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
@@ -67,16 +71,20 @@ SCENARIO( "subrange" ) {
 
     WHEN( "when iterators are used" ) {
 
-      using Range = std20::subrange< std::list< int >::iterator >;
-      Range chunk( values.begin(), values.end() );
+      using Range = std20::ranges::subrange< std::list< int >::iterator,
+                                             std::list< int >::iterator,
+                                             std20::ranges::subrange_kind::sized >;
+
+      auto size = std::distance( values.begin(), values.end() );
+      Range chunk( values.begin(), values.end(),size );
 
       THEN( "the subrange satisfies the required consepcts" ) {
 
-		CHECK( std20::view< Range > );
-		CHECK( ! std20::sized_range < Range > );
-		CHECK( ! std20::contiguous_range < Range > );
-		CHECK( ! std20::random_access_range < Range > );
-		CHECK( std20::common_range < Range > );
+		CHECK( std20::ranges::view< Range > );
+		CHECK( std20::ranges::sized_range < Range > );
+		CHECK( ! std20::ranges::contiguous_range < Range > );
+		CHECK( ! std20::ranges::random_access_range < Range > );
+		CHECK( std20::ranges::common_range < Range > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
@@ -85,7 +93,7 @@ SCENARIO( "subrange" ) {
         CHECK( values.end() == chunk.end() );
 
         // the following should not compile: no random access iterator
-        // CHECK( 5 == chunk.size() );
+        CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
@@ -111,16 +119,18 @@ SCENARIO( "subrange" ) {
 
     WHEN( "when iterators are used" ) {
 
-      using Range = std20::subrange< std::vector< int >::iterator >;
-      Range chunk( values.begin(), values.end() );
+      using Range = std20::ranges::subrange< std::vector< int >::iterator >;
+
+      auto size = std::distance( values.begin(), values.end() );
+      Range chunk( values.begin(), values.end(),size );
 
       THEN( "the subrange satisfies the required consepcts" ) {
 
-		CHECK( std20::view< Range > );
-		CHECK( std20::sized_range < Range > );
-		CHECK( ! std20::contiguous_range < Range > );
-		CHECK( std20::random_access_range < Range > );
-		CHECK( std20::common_range < Range > );
+		CHECK( std20::ranges::view< Range > );
+		CHECK( std20::ranges::sized_range < Range > );
+		CHECK( ! std20::ranges::contiguous_range < Range > );
+		CHECK( std20::ranges::random_access_range < Range > );
+		CHECK( std20::ranges::common_range < Range > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
