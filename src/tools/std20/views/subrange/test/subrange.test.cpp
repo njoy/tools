@@ -8,6 +8,7 @@
 #include <forward_list>
 #include <list>
 #include <vector>
+#include "tools/std20/algorithm.hpp"
 
 // convenience typedefs
 //using namespace njoy::tools;
@@ -30,11 +31,11 @@ SCENARIO( "subrange" ) {
 
       THEN( "the subrange satisfies the required consepcts" ) {
 
-		CHECK( std20::ranges::view< Range > );
-		CHECK( std20::ranges::sized_range < Range > );
-		CHECK( ! std20::ranges::contiguous_range < Range > );
-		CHECK( ! std20::ranges::random_access_range < Range > );
-		CHECK( std20::ranges::common_range < Range > );
+		    CHECK( std20::ranges::view< Range > );
+		    CHECK( std20::ranges::sized_range < Range > );
+		    CHECK( ! std20::ranges::contiguous_range < Range > );
+		    CHECK( ! std20::ranges::random_access_range < Range > );
+		    CHECK( std20::ranges::common_range < Range > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
@@ -42,25 +43,31 @@ SCENARIO( "subrange" ) {
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );
 
-        // the following should not compile: no random access iterator
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
-        unsigned int counter = 0;
-        for ( auto value : chunk ) {
+        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, -1, 0, 1, 2 } ) );
 
+        // the following should not compile: no random access iterator
+        // CHECK( -1 == chunk[1] );
+        CHECK( -2 == chunk.front() );
+
+        // the following should not compile: no random access iterator
+        // CHECK(  2 == chunk.back() );
+
+        unsigned int counter = 0;
+        for ( auto&& value : chunk ) {
+
+          value += counter;
           ++counter;
         }
         CHECK( 5 == counter );
 
+        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, 0, 2, 4, 6 } ) );
+
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
-
-        CHECK( -2 == chunk.front() );
-
-        // the following should not compile: no bidirectional iterator
-        // CHECK(  2 == chunk.back() );
       } // THEN
     } // WHEN
   } // GIVEN*/
@@ -80,11 +87,11 @@ SCENARIO( "subrange" ) {
 
       THEN( "the subrange satisfies the required consepcts" ) {
 
-		CHECK( std20::ranges::view< Range > );
-		CHECK( std20::ranges::sized_range < Range > );
-		CHECK( ! std20::ranges::contiguous_range < Range > );
-		CHECK( ! std20::ranges::random_access_range < Range > );
-		CHECK( std20::ranges::common_range < Range > );
+		    CHECK( std20::ranges::view< Range > );
+		    CHECK( std20::ranges::sized_range < Range > );
+		    CHECK( ! std20::ranges::contiguous_range < Range > );
+		    CHECK( ! std20::ranges::random_access_range < Range > );
+		    CHECK( std20::ranges::common_range < Range > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
@@ -92,23 +99,29 @@ SCENARIO( "subrange" ) {
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );
 
-        // the following should not compile: no random access iterator
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
-        unsigned int counter = 0;
-        for ( auto value : chunk ) {
+        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, -1, 0, 1, 2 } ) );
 
+        // the following should not compile: no random access iterator
+        // CHECK( -1 == chunk[1] );
+        CHECK( -2 == chunk.front() );
+        CHECK(  2 == chunk.back() );
+
+        unsigned int counter = 0;
+        for ( auto&& value : chunk ) {
+
+          value += counter;
           ++counter;
         }
         CHECK( 5 == counter );
 
+        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, 0, 2, 4, 6 } ) );
+
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
-
-        CHECK( -2 == chunk.front() );
-        CHECK(  2 == chunk.back() );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -126,11 +139,11 @@ SCENARIO( "subrange" ) {
 
       THEN( "the subrange satisfies the required consepcts" ) {
 
-		CHECK( std20::ranges::view< Range > );
-		CHECK( std20::ranges::sized_range < Range > );
-		CHECK( ! std20::ranges::contiguous_range < Range > );
-		CHECK( std20::ranges::random_access_range < Range > );
-		CHECK( std20::ranges::common_range < Range > );
+		    CHECK( std20::ranges::view< Range > );
+		    CHECK( std20::ranges::sized_range < Range > );
+		    CHECK( ! std20::ranges::contiguous_range < Range > );
+		    CHECK( std20::ranges::random_access_range < Range > );
+		    CHECK( std20::ranges::common_range < Range > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
@@ -142,14 +155,8 @@ SCENARIO( "subrange" ) {
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
-        unsigned int counter = 0;
-        for ( auto value : chunk ) {
+        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, -1, 0, 1, 2 } ) );
 
-          ++counter;
-        }
-        CHECK( 5 == counter );
-
-        CHECK( -2 == chunk[0] );
         CHECK( -1 == chunk[1] );
         CHECK(  0 == chunk[2] );
         CHECK(  1 == chunk[3] );
@@ -157,6 +164,22 @@ SCENARIO( "subrange" ) {
 
         CHECK( -2 == chunk.front() );
         CHECK(  2 == chunk.back() );
+
+        unsigned int counter = 0;
+        for ( auto&& value : chunk ) {
+
+          value += counter;
+          ++counter;
+        }
+        CHECK( 5 == counter );
+
+        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, 0, 2, 4, 6 } ) );
+
+        CHECK( -2 == chunk[0] );
+        CHECK(  0 == chunk[1] );
+        CHECK(  2 == chunk[2] );
+        CHECK(  4 == chunk[3] );
+        CHECK(  6 == chunk[4] );
       } // THEN
     } // WHEN
   } // GIVEN
