@@ -21,38 +21,37 @@ namespace std20 = nano;
 // test code
 struct Foo {};
 
-SCENARIO( "begin" ) {
+SCENARIO( "cend" ) {
 
   int a[2] = {};
-  CHECK( std20::same_as< decltype( std20::ranges::begin( a )), int* > );
-  CHECK( std20::same_as< decltype( std20::ranges::begin( a )), decltype( a + 0 ) > );
-  CHECK( std20::ranges::begin( a ) == ( a + 0 ) );
+  CHECK( std20::same_as< decltype( std20::ranges::cend( a )), const int* > );
+  CHECK( std20::ranges::cend( a ) == ( a + 2 ) );
 
   constexpr long b[2] = {};
-  CHECK( std20::ranges::begin( b ) == ( b + 0 ) );
+  CHECK( std20::ranges::cend( b ) == ( b + 2 ) );
 
   using Bar = Foo[];
   extern Bar& f();
-  CHECK( std20::same_as< decltype( std20::ranges::begin( f() ) ), Foo* > );
+  CHECK( std20::same_as< decltype( std20::ranges::cend( f() ) ), const Foo* > );
 
   std::array< int, 3 > array = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( array ) == array.begin() );
+  CHECK( std20::ranges::cend( array ) == array.cend() );
 
   std::deque< int > deque = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( deque ) == deque.begin() );
+  CHECK( std20::ranges::cend( deque ) == deque.cend() );
 
   std::forward_list< int > forward_list = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( forward_list ) == forward_list.begin() );
+  CHECK( std20::ranges::cend( forward_list ) == forward_list.cend() );
 
   std::list< int > list = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( list ) == list.begin() );
+  CHECK( std20::ranges::cend( list ) == list.cend() );
 
   std::set< int > set = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( set ) == set.begin() );
+  CHECK( std20::ranges::cend( set ) == set.cend() );
 
   std::string string = "Hello World!";
-  CHECK( std20::ranges::begin( string ) == string.begin() );
+  CHECK( std20::ranges::cend( string ) == string.cend() );
 
   std::vector< int > vector = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( vector ) == vector.begin() );
+  CHECK( std20::ranges::cend( vector ) == vector.cend() );
 } // SCENARIO

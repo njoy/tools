@@ -21,38 +21,38 @@ namespace std20 = nano;
 // test code
 struct Foo {};
 
-SCENARIO( "begin" ) {
+SCENARIO( "end" ) {
 
   int a[2] = {};
-  CHECK( std20::same_as< decltype( std20::ranges::begin( a )), int* > );
-  CHECK( std20::same_as< decltype( std20::ranges::begin( a )), decltype( a + 0 ) > );
-  CHECK( std20::ranges::begin( a ) == ( a + 0 ) );
+  CHECK( std20::same_as< decltype( std20::ranges::end( a )), int* > );
+  CHECK( std20::same_as< decltype( std20::ranges::end( a )), decltype( a + 0 ) > );
+  CHECK( std20::ranges::end( a ) == ( a + 2 ) );
 
   constexpr long b[2] = {};
-  CHECK( std20::ranges::begin( b ) == ( b + 0 ) );
+  CHECK( std20::ranges::end( b ) == ( b + 2 ) );
 
   using Bar = Foo[];
   extern Bar& f();
-  CHECK( std20::same_as< decltype( std20::ranges::begin( f() ) ), Foo* > );
+  CHECK( std20::same_as< decltype( std20::ranges::end( f() ) ), Foo* > );
 
   std::array< int, 3 > array = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( array ) == array.begin() );
+  CHECK( std20::ranges::end( array ) == array.end() );
 
   std::deque< int > deque = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( deque ) == deque.begin() );
+  CHECK( std20::ranges::end( deque ) == deque.end() );
 
   std::forward_list< int > forward_list = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( forward_list ) == forward_list.begin() );
+  CHECK( std20::ranges::end( forward_list ) == forward_list.end() );
 
   std::list< int > list = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( list ) == list.begin() );
+  CHECK( std20::ranges::end( list ) == list.end() );
 
   std::set< int > set = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( set ) == set.begin() );
+  CHECK( std20::ranges::end( set ) == set.end() );
 
   std::string string = "Hello World!";
-  CHECK( std20::ranges::begin( string ) == string.begin() );
+  CHECK( std20::ranges::end( string ) == string.end() );
 
   std::vector< int > vector = { 1, 2, 3 };
-  CHECK( std20::ranges::begin( vector ) == vector.begin() );
+  CHECK( std20::ranges::end( vector ) == vector.end() );
 } // SCENARIO
