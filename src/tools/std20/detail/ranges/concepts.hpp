@@ -7,11 +7,11 @@
 #ifndef NANORANGE_DETAIL_RANGES_CONCEPTS_HPP_INCLUDED
 #define NANORANGE_DETAIL_RANGES_CONCEPTS_HPP_INCLUDED
 
-#include <nanorange/detail/ranges/basic_range_types.hpp>
-#include <nanorange/detail/ranges/begin_end.hpp>
-#include <nanorange/detail/ranges/borrowed_range.hpp>
-#include <nanorange/detail/ranges/primitives.hpp>
-#include <nanorange/detail/ranges/range_concept.hpp>
+#include "tools/std20/detail/ranges/basic_range_types.hpp"
+#include "tools/std20/detail/ranges/begin_end.hpp"
+#include "tools/std20/detail/ranges/borrowed_range.hpp"
+#include "tools/std20/detail/ranges/primitives.hpp"
+#include "tools/std20/detail/ranges/range_concept.hpp"
 
 #include <initializer_list>
 

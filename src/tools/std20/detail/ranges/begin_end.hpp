@@ -7,9 +7,9 @@
 #ifndef NANORANGE_DETAIL_RANGES_BEGIN_END_HPP_INCLUDED
 #define NANORANGE_DETAIL_RANGES_BEGIN_END_HPP_INCLUDED
 
-#include <nanorange/detail/functional/decay_copy.hpp>
-#include <nanorange/detail/iterator/concepts.hpp>
-#include <nanorange/detail/ranges/borrowed_range.hpp>
+#include "tools/std20/detail/functional/decay_copy.hpp"
+#include "tools/std20/detail/iterator/concepts.hpp"
+#include "tools/std20/detail/ranges/borrowed_range.hpp"
 
 NANO_BEGIN_NAMESPACE
 

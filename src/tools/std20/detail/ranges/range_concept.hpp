@@ -7,7 +7,7 @@
 #ifndef NANORANGE_DETAIL_RANGES_RANGE_CONCEPT_HPP_INCLUDED
 #define NANORANGE_DETAIL_RANGES_RANGE_CONCEPT_HPP_INCLUDED
 
-#include <nanorange/detail/ranges/begin_end.hpp>
+#include "tools/std20/detail/ranges/begin_end.hpp"
 
 NANO_BEGIN_NAMESPACE
 

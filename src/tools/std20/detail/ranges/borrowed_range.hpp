@@ -7,7 +7,7 @@
 #ifndef NANORANGE_DETAIL_RANGES_BORROWED_RANGE_HPP_INCLUDED
 #define NANORANGE_DETAIL_RANGES_BORROWED_RANGE_HPP_INCLUDED
 
-#include <nanorange/detail/macros.hpp>
+#include "tools/std20/detail/macros.hpp"
 
 NANO_BEGIN_NAMESPACE
 
