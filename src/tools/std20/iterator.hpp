@@ -7,13 +7,13 @@
 #ifndef NANORANGE_ITERATOR_HPP_INCLUDED
 #define NANORANGE_ITERATOR_HPP_INCLUDED
 
-//#include <nanorange/detail/iterator/algorithm_requirements.hpp>
-//#include <nanorange/detail/iterator/associated_types.hpp>
-//#include <nanorange/detail/iterator/concepts.hpp>
-//#include <nanorange/detail/iterator/indirect_callable_concepts.hpp>
-//#include <nanorange/detail/iterator/iter_move.hpp>
-//#include <nanorange/detail/iterator/iter_swap.hpp>
-//#include <nanorange/detail/iterator/traits.hpp>
+#include "tools/std20/detail/iterator/algorithm_requirements.hpp"
+#include "tools/std20/detail/iterator/associated_types.hpp"
+#include "tools/std20/detail/iterator/concepts.hpp"
+#include "tools/std20/detail/iterator/indirect_callable_concepts.hpp"
+#include "tools/std20/detail/iterator/iter_move.hpp"
+#include "tools/std20/detail/iterator/iter_swap.hpp"
+#include "tools/std20/detail/iterator/traits.hpp"
 //#include <nanorange/iterator/back_insert_iterator.hpp>
 #include "tools/std20/iterator/common_iterator.hpp"
 #include "tools/std20/iterator/concepts.hpp"

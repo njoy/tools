@@ -7,17 +7,17 @@
 #ifndef NANORANGE_RANGES_HPP_INCLUDED
 #define NANORANGE_RANGES_HPP_INCLUDED
 
-//#include <nanorange/detail/iterator/algorithm_requirements.hpp>
-//#include <nanorange/detail/iterator/associated_types.hpp>
-//#include <nanorange/detail/iterator/concepts.hpp>
-//#include <nanorange/detail/iterator/indirect_callable_concepts.hpp>
-//#include <nanorange/detail/iterator/iter_move.hpp>
-//#include <nanorange/detail/iterator/iter_swap.hpp>
-//#include <nanorange/detail/iterator/traits.hpp>
-//#include <nanorange/detail/ranges/access.hpp>
+#include "tools/std20/detail/iterator/algorithm_requirements.hpp"
+#include "tools/std20/detail/iterator/associated_types.hpp"
+#include "tools/std20/detail/iterator/concepts.hpp"
+#include "tools/std20/detail/iterator/indirect_callable_concepts.hpp"
+#include "tools/std20/detail/iterator/iter_move.hpp"
+#include "tools/std20/detail/iterator/iter_swap.hpp"
+#include "tools/std20/detail/iterator/traits.hpp"
+#include "tools/std20/detail/ranges/access.hpp"
 #include "tools/std20/detail/ranges/concepts.hpp"
-//#include <nanorange/detail/ranges/primitives.hpp>
-//#include <nanorange/iterator/operations.hpp>
-//#include <nanorange/functional.hpp>
+#include "tools/std20/detail/ranges/primitives.hpp"
+#include "tools/std20/iterator/operations.hpp"
+#include "tools/std20/functional.hpp"
 
 #endif
