@@ -7,7 +7,7 @@
 #ifndef NANORANGE_VIEWS_HPP_INCLUDED
 #define NANORANGE_VIEWS_HPP_INCLUDED
 
-//#include "tools/std20/views/all.hpp"
+#include "tools/std20/views/all.hpp"
 //#include "tools/std20/views/common.hpp"
 //#include "tools/std20/views/counted.hpp"
 //#include "tools/std20/views/drop.hpp"
@@ -19,7 +19,7 @@
 //#include "tools/std20/views/iota.hpp"
 //#include "tools/std20/views/istream.hpp"
 //#include "tools/std20/views/join.hpp"
-//#include "tools/std20/views/ref.hpp"
+#include "tools/std20/views/ref.hpp"
 //#include "tools/std20/views/reverse.hpp"
 //#include "tools/std20/views/single.hpp"
 //#include "tools/std20/views/split.hpp"

@@ -1,1 +1,2 @@
+add_cpp_test( std20.views.all          all.test.cpp )
 add_cpp_test( std20.views.subrange     subrange.test.cpp )
