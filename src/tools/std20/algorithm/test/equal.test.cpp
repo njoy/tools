@@ -22,6 +22,7 @@ SCENARIO( "equal" ) {
   std::vector< int > vc = { 1, 2 };
   std::vector< int > vd = { 3, 2, 1 };
 
+  // without predicate
   CHECK( std20::ranges::equal( a, a ) );
   CHECK( std20::ranges::equal( a, b ) );
   CHECK( ! std20::ranges::equal( a, c ) );
@@ -70,4 +71,44 @@ SCENARIO( "equal" ) {
   CHECK( ! std20::ranges::equal( c, c + 2, std::begin( va ), std::end( va ) ) );
   CHECK( !std20::ranges::equal( d, d + 3, std::begin( va ), std::end( va ) ) );
 
+  // with predicate
+  CHECK( std20::ranges::equal( a, a + 3, a, a + 3, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( a, a + 3, b, b + 3, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( a, a + 3, c, c + 2, std::equal_to<int>() ) );
+  CHECK( !std20::ranges::equal( a, a + 3, d, d + 3, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( b, b + 3, a, a + 3, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( c, c + 2, a, a + 3, std::equal_to<int>() ) );
+  CHECK( !std20::ranges::equal( d, d + 3, a, a + 3, std::equal_to<int>() ) );
+
+  CHECK( std20::ranges::equal( va, va, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( va, vb, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( va, vc, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( va, vd, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( vb, va, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( vc, va, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( vd, va, std::equal_to<int>() ) );
+
+  CHECK( std20::ranges::equal( std::begin( va ), std::end( va ), std::begin( va ), std::end( va ), std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( std::begin( va ), std::end( va ), std::begin( vb ), std::end( vb ), std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( std::begin( va ), std::end( va ), std::begin( vc ), std::end( vc ), std::equal_to<int>() ) );
+  CHECK( !std20::ranges::equal( std::begin( va ), std::end( va ), std::begin( vd ), std::end( vd ), std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( std::begin( vb ), std::end( vb ), std::begin( va ), std::end( va ), std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( std::begin( vc ), std::end( vc ), std::begin( va ), std::end( va ), std::equal_to<int>() ) );
+  CHECK( !std20::ranges::equal( std::begin( vd ), std::end( vd ), std::begin( va ), std::end( va ), std::equal_to<int>() ) );
+
+  CHECK( std20::ranges::equal( va, a, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( va, b, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( va, c, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( va, d, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( b, va, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( c, va, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( d, va, std::equal_to<int>() ) );
+
+  CHECK( std20::ranges::equal( std::begin( va ), std::end( va ), a, a + 3, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( std::begin( va ), std::end( va ), b, b + 3, std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( std::begin( va ), std::end( va ), c, c + 2, std::equal_to<int>() ) );
+  CHECK( !std20::ranges::equal( std::begin( va ), std::end( va ), d, d + 3, std::equal_to<int>() ) );
+  CHECK( std20::ranges::equal( b, b + 3, std::begin( va ), std::end( va ), std::equal_to<int>() ) );
+  CHECK( ! std20::ranges::equal( c, c + 2, std::begin( va ), std::end( va ), std::equal_to<int>() ) );
+  CHECK( !std20::ranges::equal( d, d + 3, std::begin( va ), std::end( va ), std::equal_to<int>() ) );
 } // SCENARIO
