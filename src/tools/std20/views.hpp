@@ -26,6 +26,6 @@
 #include "tools/std20/views/subrange.hpp"
 //#include "tools/std20/views/take.hpp"
 //#include "tools/std20/views/take_while.hpp"
-//#include "tools/std20/views/transform.hpp"
+#include "tools/std20/views/transform.hpp"
 
 #endif
