@@ -16,6 +16,9 @@ namespace std20 = nano;
 
 SCENARIO( "subrange" ) {
 
+  const std::vector< int > equal = { -2, -1, 0, 1, 2 };
+  const std::vector< int > modified = { -2, 0, 2, 4, 6 };
+
   GIVEN( "a container with forward iterators" ) {
 
     std::forward_list< int > values = { -2, -1, 0, 1, 2 };
@@ -47,7 +50,7 @@ SCENARIO( "subrange" ) {
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
-        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, -1, 0, 1, 2 } ) );
+        CHECK( std20::ranges::equal( chunk, equal ) );
 
         // the following should not compile: no random access iterator
         // CHECK( -1 == chunk[1] );
@@ -64,7 +67,8 @@ SCENARIO( "subrange" ) {
         }
         CHECK( 5 == counter );
 
-        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, 0, 2, 4, 6 } ) );
+        CHECK( std20::ranges::equal( chunk, modified ) );
+        CHECK( std20::ranges::equal( values, modified ) );
 
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
@@ -103,7 +107,7 @@ SCENARIO( "subrange" ) {
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
-        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, -1, 0, 1, 2 } ) );
+        CHECK( std20::ranges::equal( chunk, equal ) );
 
         // the following should not compile: no random access iterator
         // CHECK( -1 == chunk[1] );
@@ -118,7 +122,8 @@ SCENARIO( "subrange" ) {
         }
         CHECK( 5 == counter );
 
-        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, 0, 2, 4, 6 } ) );
+        CHECK( std20::ranges::equal( chunk, modified ) );
+        CHECK( std20::ranges::equal( values, modified ) );
 
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
@@ -155,7 +160,7 @@ SCENARIO( "subrange" ) {
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
-        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, -1, 0, 1, 2 } ) );
+        CHECK( std20::ranges::equal( chunk, equal ) );
 
         CHECK( -1 == chunk[1] );
         CHECK(  0 == chunk[2] );
@@ -173,7 +178,8 @@ SCENARIO( "subrange" ) {
         }
         CHECK( 5 == counter );
 
-        CHECK( std20::ranges::equal( chunk, std::initializer_list< int >{ -2, 0, 2, 4, 6 } ) );
+        CHECK( std20::ranges::equal( chunk, modified ) );
+        CHECK( std20::ranges::equal( values, modified ) );
 
         CHECK( -2 == chunk[0] );
         CHECK(  0 == chunk[1] );
