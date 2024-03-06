@@ -8,7 +8,7 @@
 
 // convenience typedefs
 //using namespace njoy::tools;
-namespace std20 = nano::ranges;
+namespace std20 = nano;
 
 SCENARIO( "signed_integral" ) {
 
