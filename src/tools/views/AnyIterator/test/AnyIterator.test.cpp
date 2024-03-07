@@ -10,14 +10,7 @@
 #include <vector>
 
 // convenience typedefs
-using namespace njoy::tools;
-
-template < typename ValueType >
-using AnyForwardIterator = ranges::AnyForwardIterator< ValueType, ValueType& >;
-template < typename ValueType >
-using AnyBidirectionalIterator = ranges::AnyBidirectionalIterator< ValueType, ValueType& >;
-template < typename ValueType >
-using AnyRandomAccessIterator = ranges::AnyRandomAccessIterator< ValueType, ValueType& >;
+using namespace njoy::tools::ranges;
 
 SCENARIO( "AnyIterator" ) {
 
@@ -27,9 +20,9 @@ SCENARIO( "AnyIterator" ) {
 
     WHEN( "an AnyIterator can be constructed and members can be tested" ) {
 
-      AnyForwardIterator< int > begin( values.begin() );
-      AnyForwardIterator< int > second( ++values.begin() );
-      AnyForwardIterator< int > end( values.end() );
+      AnyForwardIterator< int& > begin( values.begin() );
+      AnyForwardIterator< int& > second( ++values.begin() );
+      AnyForwardIterator< int& > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal forward iterator" ) {
 
@@ -110,9 +103,9 @@ SCENARIO( "AnyIterator" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      AnyBidirectionalIterator< int > begin( values.begin() );
-      AnyBidirectionalIterator< int > second( ++values.begin() );
-      AnyBidirectionalIterator< int > end( values.end() );
+      AnyBidirectionalIterator< int& > begin( values.begin() );
+      AnyBidirectionalIterator< int& > second( ++values.begin() );
+      AnyBidirectionalIterator< int& > end( values.end() );
 
       THEN( "the TransformView::Iterator functions as a normal bidirectional iterator" ) {
 
@@ -190,11 +183,11 @@ SCENARIO( "AnyIterator" ) {
 
     WHEN( "when the container and the transformation are used" ) {
 
-      AnyRandomAccessIterator< int > begin( values.begin() );
-      AnyRandomAccessIterator< int > second( ++values.begin() );
-      AnyRandomAccessIterator< int > end( values.end() );
+      AnyRandomAccessIterator< int& > begin( values.begin() );
+      AnyRandomAccessIterator< int& > second( ++values.begin() );
+      AnyRandomAccessIterator< int& > end( values.end() );
 
-      const AnyRandomAccessIterator< int > begin2( values.begin() );
+      const AnyRandomAccessIterator< int& > begin2( values.begin() );
 
       THEN( "the TransformView::Iterator functions as a normal random access "
             "iterator" ) {

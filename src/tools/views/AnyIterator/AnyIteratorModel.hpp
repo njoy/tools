@@ -3,11 +3,9 @@
  *
  *  Implementation of the AnyIterator model for input iterators.
  */
-template < typename InputIterator, 
-           typename ValueType,
-           typename ReferenceType >
+template < typename InputIterator, typename ReferenceType >
 class AnyInputIteratorModel final :
-  public AnyInputIteratorConcept< ValueType, ReferenceType >
+  public AnyInputIteratorConcept< ReferenceType >
 {
 
   /* fields */
@@ -15,7 +13,7 @@ class AnyInputIteratorModel final :
 
 public:
 
-  using value_type = ValueType;
+//  using value_type = ValueType;
   using reference = ReferenceType;
   using pointer = void;
 
@@ -62,11 +60,9 @@ public:
  *
  *  Implementation of the AnyIterator model for forward iterators.
  */
-template < typename ForwardIterator, 
-           typename ValueType,
-           typename ReferenceType >
+template < typename ForwardIterator, typename ReferenceType >
 class AnyForwardIteratorModel final :
-  public AnyForwardIteratorConcept< ValueType, ReferenceType >
+  public AnyForwardIteratorConcept< ReferenceType >
 {
 
   /* fields */
@@ -74,7 +70,7 @@ class AnyForwardIteratorModel final :
 
 public:
 
-  using value_type = ValueType;
+//  using value_type = ValueType;
   using reference = ReferenceType;
   using pointer = void;
 
@@ -121,11 +117,9 @@ public:
  *
  *  Implementation of the AnyIterator model for bidirectional iterators.
  */
-template < typename BidirectionalIterator, 
-           typename ValueType,
-           typename ReferenceType >
+template < typename BidirectionalIterator, typename ReferenceType >
 class AnyBidirectionalIteratorModel final :
-  public AnyBidirectionalIteratorConcept< ValueType, ReferenceType >
+  public AnyBidirectionalIteratorConcept< ReferenceType >
 {
 
   /* fields */
@@ -133,7 +127,7 @@ class AnyBidirectionalIteratorModel final :
 
 public:
 
-  using value_type = ValueType;
+//  using value_type = ValueType;
   using reference = ReferenceType;
   using pointer = void;
 
@@ -186,22 +180,20 @@ public:
  *
  *  Implementation of the AnyIterator model for random access iterators.
  */
-template < typename RandomAccessIterator, 
-           typename ValueType,
-           typename ReferenceType >
+template < typename RandomAccessIterator, typename ReferenceType >
 class AnyRandomAccessIteratorModel final :
-  public AnyRandomAccessIteratorConcept< ValueType, ReferenceType >
+  public AnyRandomAccessIteratorConcept< ReferenceType >
 {
 
   /* type aliases */
-  using Base = AnyRandomAccessIteratorConcept< ValueType, ReferenceType >;
+  using Base = AnyRandomAccessIteratorConcept< ReferenceType >;
 
   /* fields */
   RandomAccessIterator iter_;
 
 public:
 
-  using value_type = ValueType;
+//  using value_type = ValueType;
   using reference = ReferenceType;
   using pointer = void;
   using difference_type = std::ptrdiff_t;

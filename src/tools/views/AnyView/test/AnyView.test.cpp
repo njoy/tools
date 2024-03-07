@@ -20,7 +20,7 @@ SCENARIO( "AnyView" ) {
 
     WHEN( "when iterators are used" ) {
 
-      AnyForwardView< int > chunk( values );
+      AnyForwardView< int& > chunk( values );
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
 
@@ -63,7 +63,7 @@ SCENARIO( "AnyView" ) {
 
     WHEN( "when iterators are used" ) {
 
-      AnyBidirectionalView< int > chunk( values );
+      AnyBidirectionalView< int& > chunk( values );
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
 
@@ -98,7 +98,7 @@ SCENARIO( "AnyView" ) {
 
     WHEN( "when iterators are used" ) {
 
-      AnyRandomAccessView< int > chunk( values );
+      AnyRandomAccessView< int& > chunk( values );
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
 

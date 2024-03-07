@@ -19,36 +19,49 @@ namespace ranges {
 /**
  *  @brief The AnyIterator class to type erase iterators
  */
-template < typename IteratorCategory, 
-           typename ValueType,
-           typename ReferenceType >
+template < typename IteratorCategory, typename ReferenceType >
 class AnyIterator {
 
+  /* fields */
   AnyIteratorConcept* ptr_;
 
+  /* private constructors */
   template < typename Iterator >
   AnyIterator( const std::input_iterator_tag&, Iterator&& iter ) :
     ptr_( new AnyInputIteratorModel< typename std::decay< Iterator >::type,
-                                     ValueType, ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
+                                     ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
 
   template < typename Iterator >
   AnyIterator( const std::forward_iterator_tag&, Iterator&& iter ) :
     ptr_( new AnyForwardIteratorModel< typename std::decay< Iterator >::type,
-                                       ValueType, ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
+                                       ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
 
   template < typename Iterator >
   AnyIterator( const std::bidirectional_iterator_tag&, Iterator&& iter ) :
     ptr_( new AnyBidirectionalIteratorModel< typename std::decay< Iterator >::type,
-                                             ValueType, ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
+                                             ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
 
   template < typename Iterator >
   AnyIterator( const std::random_access_iterator_tag&, Iterator&& iter ) :
     ptr_( new AnyRandomAccessIteratorModel< typename std::decay< Iterator >::type,
-                                            ValueType, ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
+                                            ReferenceType >( std::forward< Iterator >( iter ) ) ) {}
+
+  /* helper types */
+  template < typename T >
+  struct from_reference_type {
+
+    using value_type = std::decay_t< T >;
+  };
+
+  template < typename T >
+  struct from_reference_type< std::reference_wrapper< T > > {
+
+    using value_type = from_reference_type< T >;
+  };
 
 public:
 
-  using value_type = ValueType;
+  using value_type = typename from_reference_type< ReferenceType >::value_type;
   using reference = ReferenceType;
   using pointer = void;
   using difference_type = std::ptrdiff_t;
@@ -82,13 +95,13 @@ public:
 
   constexpr reference operator*() const {
 
-    using IteratorType = AnyInputIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyInputIteratorConcept< ReferenceType >;
     return *static_cast< IteratorType& >( *this->ptr_ );
   }
 
   constexpr bool operator==( const AnyIterator& right ) const {
 
-    using IteratorType = AnyInputIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyInputIteratorConcept< ReferenceType >;
     return static_cast< IteratorType& >( *this->ptr_ ) == static_cast< IteratorType& >( *right.ptr_ );
   }
 
@@ -116,7 +129,7 @@ public:
 //      nano::bidirectional_iterator< AnyIterator > == true,
 //      "the operator-- method can only be made available for bidirectional iterators" );
 
-    using IteratorType = AnyBidirectionalIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyBidirectionalIteratorConcept< ReferenceType >;
     --( static_cast< IteratorType& >( *this->ptr_ ) );
     return *this;
   }
@@ -138,7 +151,7 @@ public:
 //      nano::random_access_iterator< AnyIterator > == true,
 //      "the operator+= method can only be made available for random access iterators" );
 
-    using IteratorType = AnyRandomAccessIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     static_cast< IteratorType& >( *this->ptr_ ) += i;
     return *this;
   }
@@ -149,7 +162,7 @@ public:
 //      nano::random_access_iterator< AnyIterator > == true,
 //      "the operator-= method can only be made available for random access iterators" );
 
-    using IteratorType = AnyRandomAccessIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     static_cast< IteratorType& >( *this->ptr_ ) -= i;
     return *this;
   }
@@ -160,7 +173,7 @@ public:
 //      nano::random_access_iterator< AnyIterator > == true,
 //      "the operator- method can only be made available for random access iterators" );
 
-    using IteratorType = AnyRandomAccessIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     return static_cast< IteratorType& >( *this->ptr_ ) - static_cast< IteratorType& >( *right.ptr_ );
   }
 
@@ -203,7 +216,7 @@ public:
 //      nano::random_access_iterator< AnyIterator > == true,
 //      "the operator[] method can only be made available for random access iterators" );
 
-    using IteratorType = AnyRandomAccessIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     return static_cast< IteratorType& >( *this->ptr_ )[i];
   }
 
@@ -214,7 +227,7 @@ public:
 //      nano::random_access_iterator< AnyIterator > == true,
 //      "the operator< method can only be made available for random access iterators" );
 
-    using IteratorType = AnyRandomAccessIteratorConcept< ValueType, ReferenceType >;
+    using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     return static_cast< IteratorType& >( *left.ptr_ ) < static_cast< IteratorType& >( *right.ptr_ );
   }
 
@@ -254,26 +267,14 @@ public:
   }
 };
 
-template < typename ValueType,
-           typename ReferenceType >
-using AnyInputIterator = AnyIterator< std::input_iterator_tag,
-                                      ValueType,
-                                      ReferenceType >;
-template < typename ValueType,
-           typename ReferenceType >
-using AnyForwardIterator = AnyIterator< std::forward_iterator_tag,
-                                        ValueType,
-                                        ReferenceType >;
-template < typename ValueType,
-           typename ReferenceType >
-using AnyBidirectionalIterator = AnyIterator< std::bidirectional_iterator_tag,
-                                              ValueType,
-                                              ReferenceType >;
-template < typename ValueType,
-           typename ReferenceType >
-using AnyRandomAccessIterator = AnyIterator< std::random_access_iterator_tag,
-                                             ValueType,
-                                             ReferenceType >;
+template < typename ReferenceType >
+using AnyInputIterator = AnyIterator< std::input_iterator_tag, ReferenceType >;
+template < typename ReferenceType >
+using AnyForwardIterator = AnyIterator< std::forward_iterator_tag, ReferenceType >;
+template < typename ReferenceType >
+using AnyBidirectionalIterator = AnyIterator< std::bidirectional_iterator_tag, ReferenceType >;
+template < typename ReferenceType >
+using AnyRandomAccessIterator = AnyIterator< std::random_access_iterator_tag, ReferenceType >;
 
 } // ranges namespace
 } // tools namespace

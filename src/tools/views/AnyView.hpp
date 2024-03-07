@@ -17,18 +17,13 @@ namespace ranges {
  *
  *  It works on all types of iterators (input, forward, bidirectional and random).
  */
-template < typename IteratorCategory,
-           typename ValueType,
-           typename ReferenceType >
+template < typename IteratorCategory, typename ReferenceType >
 class AnyView :
-  public nano::view_interface< AnyView< IteratorCategory, ValueType,
-                                        ReferenceType > > {
+  public nano::view_interface< AnyView< IteratorCategory, ReferenceType > > {
 
   /* type aliases */
-  using Iterator = AnyIterator< IteratorCategory, ValueType,
-                                ReferenceType >;
-  using Sentinel = AnyIterator< IteratorCategory, ValueType,
-                                ReferenceType >;
+  using Iterator = AnyIterator< IteratorCategory, ReferenceType >;
+  using Sentinel = AnyIterator< IteratorCategory, ReferenceType >;
   using Range = nano::subrange< Iterator, Sentinel, nano::ranges::subrange_kind::sized >;
 
   Range range_;
@@ -61,26 +56,14 @@ public:
   Iterator end() { return range_.end(); }
 };
 
-template < typename ValueType,
-           typename ReferenceType = ValueType& >
-using AnyInputView = AnyView< std::input_iterator_tag,
-                              ValueType,
-                              ReferenceType >;
-template < typename ValueType,
-           typename ReferenceType = ValueType& >
-using AnyForwardView = AnyView< std::forward_iterator_tag,
-                                ValueType,
-                                ReferenceType >;
-template < typename ValueType,
-           typename ReferenceType = ValueType& >
-using AnyBidirectionalView = AnyView< std::bidirectional_iterator_tag,
-                                      ValueType,
-                                      ReferenceType >;
-template < typename ValueType,
-           typename ReferenceType = ValueType& >
-using AnyRandomAccessView = AnyView< std::random_access_iterator_tag,
-                                     ValueType,
-                                     ReferenceType >;
+template < typename ReferenceType >
+using AnyInputView = AnyView< std::input_iterator_tag, ReferenceType >;
+template < typename ReferenceType >
+using AnyForwardView = AnyView< std::forward_iterator_tag, ReferenceType >;
+template < typename ReferenceType >
+using AnyBidirectionalView = AnyView< std::bidirectional_iterator_tag, ReferenceType >;
+template < typename ReferenceType >
+using AnyRandomAccessView = AnyView< std::random_access_iterator_tag, ReferenceType >;
 
 } // ranges namespace
 } // tools namespace
