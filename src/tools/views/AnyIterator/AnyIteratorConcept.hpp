@@ -24,8 +24,7 @@ public:
  *  an AnyIterator that models an input iterator.
  */
 template < typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyInputIteratorConcept : public AnyIteratorConcept {
 
 public:
@@ -33,7 +32,6 @@ public:
     virtual bool operator==( const AnyIteratorConcept& ) const = 0;
     virtual bool operator!=( const AnyIteratorConcept& ) const = 0;
     virtual ReferenceType operator*() const = 0;
-//    virtual PointerType operator->() const = 0;
 };
 
 /**
@@ -43,10 +41,9 @@ public:
  *  an AnyIterator that models a forward iterator.
  */
 template < typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyForwardIteratorConcept :
-  public AnyInputIteratorConcept< ValueType, ReferenceType, PointerType > {};
+  public AnyInputIteratorConcept< ValueType, ReferenceType > {};
 
 /**
  *  @brief The AnyBidirectionalIteratorConcept base class
@@ -55,10 +52,9 @@ class AnyForwardIteratorConcept :
  *  an AnyIterator that models a bidirectional iterator.
  */
 template < typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyBidirectionalIteratorConcept :
-  public AnyForwardIteratorConcept< ValueType, ReferenceType, PointerType > {
+  public AnyForwardIteratorConcept< ValueType, ReferenceType > {
 
 public:
 
@@ -72,10 +68,9 @@ public:
  *  an AnyIterator that models a random access iterator.
  */
 template < typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyRandomAccessIteratorConcept :
-  public AnyBidirectionalIteratorConcept< ValueType, ReferenceType, PointerType > {
+  public AnyBidirectionalIteratorConcept< ValueType, ReferenceType > {
 
 public:
 

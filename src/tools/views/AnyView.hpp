@@ -19,17 +19,16 @@ namespace ranges {
  */
 template < typename IteratorCategory,
            typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyView :
   public nano::view_interface< AnyView< IteratorCategory, ValueType,
-                                        ReferenceType, PointerType > > {
+                                        ReferenceType > > {
 
   /* type aliases */
   using Iterator = AnyIterator< IteratorCategory, ValueType,
-                                ReferenceType, PointerType >;
+                                ReferenceType >;
   using Sentinel = AnyIterator< IteratorCategory, ValueType,
-                                ReferenceType, PointerType >;
+                                ReferenceType >;
   using Range = nano::subrange< Iterator, Sentinel, nano::ranges::subrange_kind::sized >;
 
   Range range_;
@@ -63,33 +62,25 @@ public:
 };
 
 template < typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType* >
+           typename ReferenceType = ValueType& >
 using AnyInputView = AnyView< std::input_iterator_tag,
                               ValueType,
-                              ReferenceType,
-                              PointerType >;
+                              ReferenceType >;
 template < typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType* >
+           typename ReferenceType = ValueType& >
 using AnyForwardView = AnyView< std::forward_iterator_tag,
                                 ValueType,
-                                ReferenceType,
-                                PointerType >;
+                                ReferenceType >;
 template < typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType* >
+           typename ReferenceType = ValueType& >
 using AnyBidirectionalView = AnyView< std::bidirectional_iterator_tag,
                                       ValueType,
-                                      ReferenceType,
-                                      PointerType >;
+                                      ReferenceType >;
 template < typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType* >
+           typename ReferenceType = ValueType& >
 using AnyRandomAccessView = AnyView< std::random_access_iterator_tag,
                                      ValueType,
-                                     ReferenceType,
-                                     PointerType >;
+                                     ReferenceType >;
 
 } // ranges namespace
 } // tools namespace

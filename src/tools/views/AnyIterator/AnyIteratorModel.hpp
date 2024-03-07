@@ -5,10 +5,9 @@
  */
 template < typename InputIterator, 
            typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyInputIteratorModel final :
-  public AnyInputIteratorConcept< ValueType, ReferenceType, PointerType >
+  public AnyInputIteratorConcept< ValueType, ReferenceType >
 {
 
   /* fields */
@@ -18,7 +17,7 @@ public:
 
   using value_type = ValueType;
   using reference = ReferenceType;
-  using pointer = PointerType;
+  using pointer = void;
 
   /* constructors */
   AnyInputIteratorModel( InputIterator iter ) noexcept : iter_( iter ) {}
@@ -65,10 +64,9 @@ public:
  */
 template < typename ForwardIterator, 
            typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyForwardIteratorModel final :
-  public AnyForwardIteratorConcept< ValueType, ReferenceType, PointerType >
+  public AnyForwardIteratorConcept< ValueType, ReferenceType >
 {
 
   /* fields */
@@ -78,7 +76,7 @@ public:
 
   using value_type = ValueType;
   using reference = ReferenceType;
-  using pointer = PointerType;
+  using pointer = void;
 
   /* constructors */
   AnyForwardIteratorModel( ForwardIterator iter ) noexcept : iter_( iter ) {}
@@ -125,10 +123,9 @@ public:
  */
 template < typename BidirectionalIterator, 
            typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyBidirectionalIteratorModel final :
-  public AnyBidirectionalIteratorConcept< ValueType, ReferenceType, PointerType >
+  public AnyBidirectionalIteratorConcept< ValueType, ReferenceType >
 {
 
   /* fields */
@@ -138,7 +135,7 @@ public:
 
   using value_type = ValueType;
   using reference = ReferenceType;
-  using pointer = PointerType;
+  using pointer = void;
 
   /* constructors */
   AnyBidirectionalIteratorModel( BidirectionalIterator iter ) noexcept : iter_( iter ) {}
@@ -191,14 +188,13 @@ public:
  */
 template < typename RandomAccessIterator, 
            typename ValueType,
-           typename ReferenceType,
-           typename PointerType >
+           typename ReferenceType >
 class AnyRandomAccessIteratorModel final :
-  public AnyRandomAccessIteratorConcept< ValueType, ReferenceType, PointerType >
+  public AnyRandomAccessIteratorConcept< ValueType, ReferenceType >
 {
 
   /* type aliases */
-  using Base = AnyRandomAccessIteratorConcept< ValueType, ReferenceType, PointerType >;
+  using Base = AnyRandomAccessIteratorConcept< ValueType, ReferenceType >;
 
   /* fields */
   RandomAccessIterator iter_;
@@ -207,7 +203,7 @@ public:
 
   using value_type = ValueType;
   using reference = ReferenceType;
-  using pointer = PointerType;
+  using pointer = void;
   using difference_type = std::ptrdiff_t;
 
   /* constructors */
