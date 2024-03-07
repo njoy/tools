@@ -87,7 +87,7 @@ SCENARIO( "subrange" ) {
                                              std20::ranges::subrange_kind::sized >;
 
       auto size = std::distance( values.begin(), values.end() );
-      Range chunk( values.begin(), values.end(),size );
+      Range chunk( values.begin(), values.end(), size );
 
       THEN( "the subrange satisfies the required consepcts" ) {
 
