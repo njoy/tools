@@ -10,7 +10,14 @@
 #include <vector>
 
 // convenience typedefs
-using namespace njoy::tools::ranges;
+using namespace njoy::tools;
+
+template < typename ValueType >
+using AnyForwardIterator = ranges::AnyForwardIterator< ValueType, ValueType&, ValueType* >;
+template < typename ValueType >
+using AnyBidirectionalIterator = ranges::AnyBidirectionalIterator< ValueType, ValueType&, ValueType* >;
+template < typename ValueType >
+using AnyRandomAccessIterator = ranges::AnyRandomAccessIterator< ValueType, ValueType&, ValueType* >;
 
 SCENARIO( "AnyIterator" ) {
 

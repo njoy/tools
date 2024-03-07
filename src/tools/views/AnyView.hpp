@@ -17,12 +17,19 @@ namespace ranges {
  *
  *  It works on all types of iterators (input, forward, bidirectional and random).
  */
-template < typename IteratorCategory, typename ValueType >
-class AnyView : public nano::view_interface< AnyView< IteratorCategory, ValueType > > {
+template < typename IteratorCategory,
+           typename ValueType,
+           typename ReferenceType,
+           typename PointerType >
+class AnyView :
+  public nano::view_interface< AnyView< IteratorCategory, ValueType,
+                                        ReferenceType, PointerType > > {
 
   /* type aliases */
-  using Iterator = AnyIterator< IteratorCategory, ValueType >;
-  using Sentinel = AnyIterator< IteratorCategory, ValueType >;
+  using Iterator = AnyIterator< IteratorCategory, ValueType,
+                                ReferenceType, PointerType >;
+  using Sentinel = AnyIterator< IteratorCategory, ValueType,
+                                ReferenceType, PointerType >;
   using Range = nano::subrange< Iterator, Sentinel, nano::ranges::subrange_kind::sized >;
 
   Range range_;
@@ -55,14 +62,34 @@ public:
   Iterator end() { return range_.end(); }
 };
 
-template < typename ValueType >
-using AnyInputView = AnyView< std::input_iterator_tag, ValueType >;
-template < typename ValueType >
-using AnyForwardView = AnyView< std::forward_iterator_tag, ValueType >;
-template < typename ValueType >
-using AnyBidirectionalView = AnyView< std::bidirectional_iterator_tag, ValueType >;
-template < typename ValueType >
-using AnyRandomAccessView = AnyView< std::random_access_iterator_tag, ValueType >;
+template < typename ValueType,
+           typename ReferenceType = ValueType&,
+           typename PointerType = ValueType* >
+using AnyInputView = AnyView< std::input_iterator_tag,
+                              ValueType,
+                              ReferenceType,
+                              PointerType >;
+template < typename ValueType,
+           typename ReferenceType = ValueType&,
+           typename PointerType = ValueType* >
+using AnyForwardView = AnyView< std::forward_iterator_tag,
+                                ValueType,
+                                ReferenceType,
+                                PointerType >;
+template < typename ValueType,
+           typename ReferenceType = ValueType&,
+           typename PointerType = ValueType* >
+using AnyBidirectionalView = AnyView< std::bidirectional_iterator_tag,
+                                      ValueType,
+                                      ReferenceType,
+                                      PointerType >;
+template < typename ValueType,
+           typename ReferenceType = ValueType&,
+           typename PointerType = ValueType* >
+using AnyRandomAccessView = AnyView< std::random_access_iterator_tag,
+                                     ValueType,
+                                     ReferenceType,
+                                     PointerType >;
 
 } // ranges namespace
 } // tools namespace

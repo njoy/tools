@@ -24,15 +24,15 @@ public:
  *  an AnyIterator that models an input iterator.
  */
 template < typename ValueType,
-           typename ReferenceType = ValueType,
-           typename PointerType = ValueType* >
+           typename ReferenceType,
+           typename PointerType >
 class AnyInputIteratorConcept : public AnyIteratorConcept {
 
 public:
 
     virtual bool operator==( const AnyIteratorConcept& ) const = 0;
     virtual bool operator!=( const AnyIteratorConcept& ) const = 0;
-    virtual ValueType operator*() const = 0;
+    virtual ReferenceType operator*() const = 0;
 //    virtual PointerType operator->() const = 0;
 };
 
@@ -43,8 +43,8 @@ public:
  *  an AnyIterator that models a forward iterator.
  */
 template < typename ValueType,
-           typename ReferenceType = ValueType,
-           typename PointerType = ValueType* >
+           typename ReferenceType,
+           typename PointerType >
 class AnyForwardIteratorConcept :
   public AnyInputIteratorConcept< ValueType, ReferenceType, PointerType > {};
 
@@ -55,8 +55,8 @@ class AnyForwardIteratorConcept :
  *  an AnyIterator that models a bidirectional iterator.
  */
 template < typename ValueType,
-           typename ReferenceType = ValueType,
-           typename PointerType = ValueType* >
+           typename ReferenceType,
+           typename PointerType >
 class AnyBidirectionalIteratorConcept :
   public AnyForwardIteratorConcept< ValueType, ReferenceType, PointerType > {
 
@@ -72,17 +72,16 @@ public:
  *  an AnyIterator that models a random access iterator.
  */
 template < typename ValueType,
-           typename ReferenceType = ValueType,
-           typename PointerType = ValueType*,
-           typename DifferenceType = std::ptrdiff_t >
+           typename ReferenceType,
+           typename PointerType >
 class AnyRandomAccessIteratorConcept :
   public AnyBidirectionalIteratorConcept< ValueType, ReferenceType, PointerType > {
 
 public:
 
-  virtual ValueType operator[]( DifferenceType ) const = 0;
+  virtual ReferenceType operator[]( std::ptrdiff_t ) const = 0;
 
-  virtual DifferenceType operator-( const AnyRandomAccessIteratorConcept& ) const = 0;
+  virtual std::ptrdiff_t operator-( const AnyRandomAccessIteratorConcept& ) const = 0;
 
   virtual bool operator<(const AnyRandomAccessIteratorConcept& ) const = 0;
   virtual bool operator>(const AnyRandomAccessIteratorConcept& ) const = 0;
@@ -90,6 +89,6 @@ public:
   virtual bool operator<=(const AnyRandomAccessIteratorConcept& ) const = 0;
   virtual bool operator>=(const AnyRandomAccessIteratorConcept& ) const = 0;
 
-  virtual AnyRandomAccessIteratorConcept& operator+=( DifferenceType ) = 0;
-  virtual AnyRandomAccessIteratorConcept& operator-=( DifferenceType ) = 0;
+  virtual AnyRandomAccessIteratorConcept& operator+=( std::ptrdiff_t ) = 0;
+  virtual AnyRandomAccessIteratorConcept& operator-=( std::ptrdiff_t ) = 0;
 };

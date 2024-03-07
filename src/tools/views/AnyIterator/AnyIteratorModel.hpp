@@ -3,9 +3,10 @@
  *
  *  Implementation of the AnyIterator model for input iterators.
  */
-template < typename InputIterator, typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType* >
+template < typename InputIterator, 
+           typename ValueType,
+           typename ReferenceType,
+           typename PointerType >
 class AnyInputIteratorModel final :
   public AnyInputIteratorConcept< ValueType, ReferenceType, PointerType >
 {
@@ -35,7 +36,7 @@ public:
     return !( this->operator==( right ) );
   }
 
-  value_type operator*() const override {
+  reference operator*() const override {
 
     return *this->iter_;
   }
@@ -62,9 +63,10 @@ public:
  *
  *  Implementation of the AnyIterator model for forward iterators.
  */
-template < typename ForwardIterator, typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType* >
+template < typename ForwardIterator, 
+           typename ValueType,
+           typename ReferenceType,
+           typename PointerType >
 class AnyForwardIteratorModel final :
   public AnyForwardIteratorConcept< ValueType, ReferenceType, PointerType >
 {
@@ -94,7 +96,7 @@ public:
     return !( this->operator==( right ) );
   }
 
-  value_type operator*() const override {
+  reference operator*() const override {
 
     return *this->iter_;
   }
@@ -121,9 +123,10 @@ public:
  *
  *  Implementation of the AnyIterator model for bidirectional iterators.
  */
-template < typename BidirectionalIterator, typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType* >
+template < typename BidirectionalIterator, 
+           typename ValueType,
+           typename ReferenceType,
+           typename PointerType >
 class AnyBidirectionalIteratorModel final :
   public AnyBidirectionalIteratorConcept< ValueType, ReferenceType, PointerType >
 {
@@ -153,7 +156,7 @@ public:
     return !( this->operator==( right ) );
   }
 
-  value_type operator*() const override {
+  reference operator*() const override {
 
     return *this->iter_;
   }
@@ -186,16 +189,16 @@ public:
  *
  *  Implementation of the AnyIterator model for random access iterators.
  */
-template < typename RandomAccessIterator, typename ValueType,
-           typename ReferenceType = ValueType&,
-           typename PointerType = ValueType*,
-           typename DifferenceType = std::ptrdiff_t >
+template < typename RandomAccessIterator, 
+           typename ValueType,
+           typename ReferenceType,
+           typename PointerType >
 class AnyRandomAccessIteratorModel final :
-  public AnyRandomAccessIteratorConcept< ValueType, ReferenceType, PointerType, DifferenceType >
+  public AnyRandomAccessIteratorConcept< ValueType, ReferenceType, PointerType >
 {
 
   /* type aliases */
-  using Base = AnyRandomAccessIteratorConcept< ValueType, ReferenceType, PointerType, DifferenceType >;
+  using Base = AnyRandomAccessIteratorConcept< ValueType, ReferenceType, PointerType >;
 
   /* fields */
   RandomAccessIterator iter_;
@@ -205,7 +208,7 @@ public:
   using value_type = ValueType;
   using reference = ReferenceType;
   using pointer = PointerType;
-  using difference_type = DifferenceType;
+  using difference_type = std::ptrdiff_t;
 
   /* constructors */
   AnyRandomAccessIteratorModel( RandomAccessIterator iter ) noexcept : iter_( iter ) {}
@@ -247,7 +250,7 @@ public:
     return this->iter_ >= p_right->iter_;
   }
 
-  value_type operator*() const override {
+  reference operator*() const override {
 
     return *this->iter_;
   }
@@ -269,7 +272,7 @@ public:
     return *this;
   }
 
-  value_type operator[]( difference_type i ) const override {
+  reference operator[]( difference_type i ) const override {
 
     return this->iter_[i];
   }

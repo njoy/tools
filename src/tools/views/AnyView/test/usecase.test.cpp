@@ -45,7 +45,7 @@ SCENARIO( "use case" ) {
 
     WHEN( "retrieving the view and converting it to an AnyView" ) {
 
-      AnyRandomAccessView< double > chunk = object.view();
+      AnyRandomAccessView< double, const double& > chunk = object.view();
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
 
@@ -70,7 +70,7 @@ SCENARIO( "use case" ) {
 
     WHEN( "retrieving the transformview and converting it to an AnyView" ) {
 
-      AnyRandomAccessView< double > chunk = object.transformview();
+      AnyRandomAccessView< double, double > chunk = object.transformview();
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
 
