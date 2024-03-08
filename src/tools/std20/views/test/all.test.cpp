@@ -27,8 +27,9 @@ SCENARIO( "subrange" ) {
 
       auto chunk = values | std20::views::all;
       using Range = decltype(chunk);
+      using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required consepcts" ) {
+      THEN( "the all_view satisfies the required consepcts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range < Range > );
@@ -37,7 +38,18 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "a subrange can be constructed and members can be tested" ) {
+      THEN( "the all_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
+      THEN( "an all_view can be constructed and members can be tested" ) {
 
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );
@@ -82,8 +94,9 @@ SCENARIO( "subrange" ) {
 
       auto chunk = values | std20::views::all;
       using Range = decltype(chunk);
+      using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required consepcts" ) {
+      THEN( "the all_view satisfies the required consepcts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
@@ -92,7 +105,18 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "a subrange can be constructed and members can be tested" ) {
+      THEN( "the all_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
+      THEN( "an all_view can be constructed and members can be tested" ) {
 
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );
@@ -133,8 +157,9 @@ SCENARIO( "subrange" ) {
 
       auto chunk = values | std20::views::all;
       using Range = decltype(chunk);
+      using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required consepcts" ) {
+      THEN( "the all_view satisfies the required consepcts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
@@ -143,7 +168,18 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "a subrange can be constructed and members can be tested" ) {
+      THEN( "the all_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
+      THEN( "an all_view can be constructed and members can be tested" ) {
 
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );

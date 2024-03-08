@@ -14,7 +14,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "subrange" ) {
+SCENARIO( "transform_view" ) {
 
   const std::vector< int > equal = { -2, -1, 0, 1, 2 };
 
@@ -27,9 +27,10 @@ SCENARIO( "subrange" ) {
     WHEN( "when the container and the transformation are used" ) {
 
       auto chunk = values | std20::views::transform( transform );
-      using Range = decltype(chunk);
+      using Range = decltype( chunk );
+      using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required consepcts" ) {
+      THEN( "the transform_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range < Range > );
@@ -38,7 +39,18 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "an TransformView can be constructed and members can be tested" ) {
+      THEN( "the transform_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
+      THEN( "an transform_view can be constructed and members can be tested" ) {
 
         // the following should not compile: no random access iterator
         // CHECK( 5 == chunk.size() );
@@ -65,9 +77,10 @@ SCENARIO( "subrange" ) {
     WHEN( "when the container and the transformation are used" ) {
 
       auto chunk = values | std20::views::transform( transform );
-      using Range = decltype(chunk);
+      using Range = decltype( chunk );
+      using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required consepcts" ) {
+      THEN( "the transform_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
@@ -76,7 +89,18 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "an TransformView can be constructed and members can be tested" ) {
+      THEN( "the transform_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
+      THEN( "a transform_view can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -85,7 +109,7 @@ SCENARIO( "subrange" ) {
         CHECK( std20::ranges::equal( chunk, equal ) );
 
         // the following should not compile: no random access iterator
-        //CHECK( -1 == chunk[1] );
+        // CHECK( -1 == chunk[1] );
         CHECK( -2 == chunk.front() );
         CHECK(  2 == chunk.back() );
       } // THEN
@@ -99,9 +123,10 @@ SCENARIO( "subrange" ) {
     WHEN( "when the container and the transformation are used" ) {
 
       auto chunk = values | std20::views::transform( transform );
-      using Range = decltype(chunk);
+      using Range = decltype( chunk );
+      using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required consepcts" ) {
+      THEN( "the transform_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
@@ -110,7 +135,18 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "an TransformView can be constructed and members can be tested" ) {
+      THEN( "the transform_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
+      THEN( "a transform_view can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
