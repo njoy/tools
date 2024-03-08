@@ -29,7 +29,7 @@ SCENARIO( "subrange" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required consepcts" ) {
+      THEN( "the all_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range < Range > );
@@ -96,7 +96,7 @@ SCENARIO( "subrange" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required consepcts" ) {
+      THEN( "the all_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
@@ -159,7 +159,7 @@ SCENARIO( "subrange" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required consepcts" ) {
+      THEN( "the all_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
