@@ -34,8 +34,10 @@ SCENARIO( "transform_view" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range < Range > );
-		    CHECK( ! std20::ranges::contiguous_range < Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( ! std20::ranges::bidirectional_range< Range > );
 		    CHECK( ! std20::ranges::random_access_range < Range > );
+		    CHECK( ! std20::ranges::contiguous_range < Range > );
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
@@ -61,7 +63,8 @@ SCENARIO( "transform_view" ) {
         CHECK( std20::ranges::equal( chunk, equal ) );
 
         // the following should not compile: no random access iterator
-        // CHECK( -1 == chunk[1] );
+        // CHECK( -2 == chunk[0] );
+
         CHECK( -2 == chunk.front() );
 
         // the following should not compile: no random access iterator
@@ -84,8 +87,10 @@ SCENARIO( "transform_view" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
-		    CHECK( ! std20::ranges::contiguous_range < Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( std20::ranges::bidirectional_range< Range > );
 		    CHECK( ! std20::ranges::random_access_range < Range > );
+		    CHECK( ! std20::ranges::contiguous_range < Range > );
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
@@ -109,7 +114,8 @@ SCENARIO( "transform_view" ) {
         CHECK( std20::ranges::equal( chunk, equal ) );
 
         // the following should not compile: no random access iterator
-        // CHECK( -1 == chunk[1] );
+        // CHECK( -2 == chunk[0] );
+
         CHECK( -2 == chunk.front() );
         CHECK(  2 == chunk.back() );
       } // THEN
@@ -130,8 +136,10 @@ SCENARIO( "transform_view" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
-		    CHECK( ! std20::ranges::contiguous_range < Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( std20::ranges::bidirectional_range< Range > );
 		    CHECK( std20::ranges::random_access_range < Range > );
+		    CHECK( ! std20::ranges::contiguous_range < Range > );
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
