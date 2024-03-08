@@ -79,6 +79,8 @@ target_link_libraries( tools
     spdlog::spdlog
 )
 
+target_compile_definitions( tools INTERFACE -DNANORANGE_NO_STD_FORWARD_DECLARATIONS )
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # tools : python bindings
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
