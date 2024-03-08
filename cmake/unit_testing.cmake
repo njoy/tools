@@ -29,4 +29,7 @@ endfunction()
 add_subdirectory( src/tools/Log/test )
 
 add_subdirectory( src/tools/std20/concepts/test )
+add_subdirectory( src/tools/std20/functional/test )
+add_subdirectory( src/tools/std20/iterator/concepts/test )
+add_subdirectory( src/tools/std20/iterator/common_iterator/test )
 add_subdirectory( src/tools/std20/type_traits/test )
