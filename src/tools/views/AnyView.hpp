@@ -10,7 +10,7 @@
 
 namespace njoy {
 namespace tools {
-namespace ranges {
+namespace views {
 
 /**
  *  @brief A type erased view class
@@ -41,7 +41,8 @@ public:
    *  @param[in] end      the iterator to the end of the view
    */
   constexpr AnyView( Iterator begin, Iterator end ) :
-    range_( std::move( begin ), std::move( end ) ) {}
+    range_( std::move( begin ), std::move( end ),
+            std::distance( begin, end ) ) {}
 
   /**
    *  @brief Constructor
@@ -52,7 +53,14 @@ public:
   constexpr AnyView( Container&& container ) :
     AnyView( Iterator( container.begin() ), Iterator( container.end() ) ) {}
 
+  /**
+   *  @brief Return an iterator to the beginning of the view
+   */
   Iterator begin() { return range_.begin(); }
+
+  /**
+   *  @brief Return an iterator to the beginning of the view
+   */
   Iterator end() { return range_.end(); }
 };
 
@@ -65,7 +73,7 @@ using AnyBidirectionalView = AnyView< std::bidirectional_iterator_tag, Reference
 template < typename ReferenceType >
 using AnyRandomAccessView = AnyView< std::random_access_iterator_tag, ReferenceType >;
 
-} // ranges namespace
+} // views namespace
 } // tools namespace
 } // njoy namespace
 

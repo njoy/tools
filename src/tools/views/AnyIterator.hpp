@@ -8,7 +8,7 @@
 
 namespace njoy {
 namespace tools {
-namespace ranges {
+namespace views {
 
 // AnyIterator concepts for different iterator categories (base classes)
 #include "tools/views/AnyIterator/AnyIteratorConcept.hpp"
@@ -123,140 +123,114 @@ public:
     return iter;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::bidirectional_iterator_tag> > >
   constexpr AnyIterator& operator--( void ) {
-
-//    static_assert(
-//      nano::bidirectional_iterator< AnyIterator > == true,
-//      "the operator-- method can only be made available for bidirectional iterators" );
 
     using IteratorType = AnyBidirectionalIteratorConcept< ReferenceType >;
     --( static_cast< IteratorType& >( *this->ptr_ ) );
     return *this;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::bidirectional_iterator_tag> > >
   constexpr AnyIterator operator--( int ) {
-
-//    static_assert(
-//      nano::bidirectional_iterator< AnyIterator > == true,
-//      "the operator-- method can only be made available for bidirectional iterators" );
 
     AnyIterator iter = *this;
     --( *this );
     return iter;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   constexpr AnyIterator& operator+=( difference_type i ) {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator+= method can only be made available for random access iterators" );
 
     using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     static_cast< IteratorType& >( *this->ptr_ ) += i;
     return *this;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   constexpr AnyIterator& operator-=( difference_type i ) {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator-= method can only be made available for random access iterators" );
 
     using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     static_cast< IteratorType& >( *this->ptr_ ) -= i;
     return *this;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   constexpr difference_type operator-( const AnyIterator& right ) const {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator- method can only be made available for random access iterators" );
 
     using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     return static_cast< IteratorType& >( *this->ptr_ ) - static_cast< IteratorType& >( *right.ptr_ );
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   friend constexpr AnyIterator operator+( difference_type i, const AnyIterator& iter ) {
 
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator+ method can only be made available for random access iterators" );
-
     AnyIterator result = iter;
     result += i;
     return result;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   friend constexpr AnyIterator operator+( AnyIterator iter, difference_type i ) {
 
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator+ method can only be made available for random access iterators" );
-
     AnyIterator result = iter;
     result += i;
     return result;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   friend constexpr AnyIterator operator-( AnyIterator iter, difference_type i ) {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator+ method can only be made available for random access iterators" );
 
     AnyIterator result = iter;
     result -= i;
     return result;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   constexpr reference operator[]( difference_type i ) const {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator[] method can only be made available for random access iterators" );
 
     using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     return static_cast< IteratorType& >( *this->ptr_ )[i];
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   friend constexpr bool operator<( const AnyIterator& left,
                                    const AnyIterator& right) {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator< method can only be made available for random access iterators" );
 
     using IteratorType = AnyRandomAccessIteratorConcept< ReferenceType >;
     return static_cast< IteratorType& >( *left.ptr_ ) < static_cast< IteratorType& >( *right.ptr_ );
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   friend constexpr bool operator>( const AnyIterator& left,
                                    const AnyIterator& right ) {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator> method can only be made available for random access iterators" );
 
     return right < left;
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   friend constexpr bool operator<=( const AnyIterator& left,
                                     const AnyIterator& right ) {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator<= method can only be made available for random access iterators" );
 
     return !( left > right );
   }
 
+  template < typename Category = IteratorCategory,
+             typename = std::enable_if_t< nano::derived_from< Category, nano::random_access_iterator_tag> > >
   friend constexpr bool operator>=( const AnyIterator& left,
                                     const AnyIterator& right ) {
-
-//    static_assert(
-//      nano::random_access_iterator< AnyIterator > == true,
-//      "the operator>= method can only be made available for random access iterators" );
 
     return !( left < right );
   }
@@ -276,7 +250,7 @@ using AnyBidirectionalIterator = AnyIterator< std::bidirectional_iterator_tag, R
 template < typename ReferenceType >
 using AnyRandomAccessIterator = AnyIterator< std::random_access_iterator_tag, ReferenceType >;
 
-} // ranges namespace
+} // views namespace
 } // tools namespace
 } // njoy namespace
 

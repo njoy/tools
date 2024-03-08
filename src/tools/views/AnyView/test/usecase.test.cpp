@@ -10,7 +10,7 @@
 #include <vector>
 
 // convenience typedefs
-using namespace njoy::tools::ranges;
+using namespace njoy::tools::views;
 
 // a class with data
 class Data {

@@ -10,7 +10,7 @@
 #include <vector>
 
 // convenience typedefs
-using namespace njoy::tools::ranges;
+using namespace njoy::tools::views;
 
 SCENARIO( "AnyView" ) {
 
@@ -28,9 +28,6 @@ SCENARIO( "AnyView" ) {
         CHECK( nano::forward_range< decltype(chunk) > );
         CHECK( ! nano::bidirectional_range< decltype(chunk) > );
         CHECK( ! nano::random_access_range< decltype(chunk) > );
-        CHECK( nano::sized_sentinel_for< decltype(chunk.end()), decltype(chunk.begin()) > );
-
-
 
         CHECK( nano::view< decltype(chunk) > );
 
