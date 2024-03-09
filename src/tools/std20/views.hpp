@@ -16,7 +16,7 @@
 //#include "tools/std20/views/empty.hpp"
 //#include "tools/std20/views/filter.hpp"
 #include "tools/std20/views/interface.hpp"
-//#include "tools/std20/views/iota.hpp"
+#include "tools/std20/views/iota.hpp"
 //#include "tools/std20/views/istream.hpp"
 //#include "tools/std20/views/join.hpp"
 #include "tools/std20/views/ref.hpp"
