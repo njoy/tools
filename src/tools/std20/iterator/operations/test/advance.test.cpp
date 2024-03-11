@@ -46,7 +46,7 @@ SCENARIO( "advance" ) {
     } // THEN
   } // WHEN
 
-  THEN( "std::ranges::advance can be used" ) {
+  WHEN( "when using a container with random access iterators" ) {
 
     std::vector< int > values = { 1, 2, 3, 4, 5 };
 
