@@ -17,17 +17,17 @@
 //#include <nanorange/iterator/back_insert_iterator.hpp>
 #include "tools/std20/iterator/common_iterator.hpp"
 #include "tools/std20/iterator/concepts.hpp"
-//#include <nanorange/iterator/counted_iterator.hpp>
+#include "tools/std20/iterator/counted_iterator.hpp"
 #include "tools/std20/iterator/default_sentinel.hpp"
 //#include <nanorange/iterator/front_insert_iterator.hpp>
 //#include <nanorange/iterator/insert_iterator.hpp>
 //#include <nanorange/iterator/istream_iterator.hpp>
 //#include <nanorange/iterator/istreambuf_iterator.hpp>
 //#include <nanorange/iterator/move_iterator.hpp>
-//#include <nanorange/iterator/operations.hpp>
+#include "tools/std20/iterator/operations.hpp"
 //#include <nanorange/iterator/ostream_iterator.hpp>
 //#include <nanorange/iterator/ostreambuf_iterator.hpp>
 #include "tools/std20/iterator/reverse_iterator.hpp"
-//#include <nanorange/iterator/unreachable.hpp>
+#include "tools/std20/iterator/unreachable.hpp"
 
 #endif

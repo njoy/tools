@@ -39,7 +39,7 @@
 //#include <nanorange/algorithm/max.hpp>
 //#include <nanorange/algorithm/max_element.hpp>
 //#include <nanorange/algorithm/merge.hpp>
-//#include <nanorange/algorithm/min.hpp>
+#include "tools/std20/algorithm/min.hpp"
 //#include <nanorange/algorithm/min_element.hpp>
 //#include <nanorange/algorithm/minmax.hpp>
 //#include <nanorange/algorithm/minmax_element.hpp>

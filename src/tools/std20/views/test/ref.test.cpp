@@ -14,7 +14,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "all_view" ) {
+SCENARIO( "ref_view" ) {
 
   const std::vector< int > equal = { -2, -1, 0, 1, 2 };
   const std::vector< int > modified = { -2, 0, 2, 4, 6 };
@@ -25,11 +25,11 @@ SCENARIO( "all_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::all;
+      auto chunk = std20::ranges::ref_view( values );
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required concepts" ) {
+      THEN( "the ref_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range < Range > );
@@ -40,7 +40,7 @@ SCENARIO( "all_view" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "the all_view range and iterator associated types are correct" ) {
+      THEN( "the ref_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -51,7 +51,7 @@ SCENARIO( "all_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an all_view can be constructed and members can be tested" ) {
+      THEN( "a ref_view can be constructed and members can be tested" ) {
 
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );
@@ -92,11 +92,11 @@ SCENARIO( "all_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::all;
+      auto chunk = std20::ranges::ref_view( values );
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required concepts" ) {
+      THEN( "the ref_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
@@ -107,7 +107,7 @@ SCENARIO( "all_view" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "the all_view range and iterator associated types are correct" ) {
+      THEN( "the ref_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -118,7 +118,7 @@ SCENARIO( "all_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an all_view can be constructed and members can be tested" ) {
+      THEN( "a ref_view can be constructed and members can be tested" ) {
 
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );
@@ -155,11 +155,11 @@ SCENARIO( "all_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::all;
+      auto chunk = std20::ranges::ref_view( values );
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required concepts" ) {
+      THEN( "the ref_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range < Range > );
@@ -170,7 +170,7 @@ SCENARIO( "all_view" ) {
 		    CHECK( std20::ranges::common_range < Range > );
       }
 
-      THEN( "the all_view range and iterator associated types are correct" ) {
+      THEN( "the ref_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -181,7 +181,7 @@ SCENARIO( "all_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an all_view can be constructed and members can be tested" ) {
+      THEN( "a ref_view can be constructed and members can be tested" ) {
 
         CHECK( values.begin() == chunk.begin() );
         CHECK( values.end() == chunk.end() );
