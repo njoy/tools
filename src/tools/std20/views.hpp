@@ -18,7 +18,7 @@
 #include "tools/std20/views/interface.hpp"
 #include "tools/std20/views/iota.hpp"
 //#include "tools/std20/views/istream.hpp"
-//#include "tools/std20/views/join.hpp"
+#include "tools/std20/views/join.hpp"
 #include "tools/std20/views/ref.hpp"
 //#include "tools/std20/views/reverse.hpp"
 //#include "tools/std20/views/single.hpp"
