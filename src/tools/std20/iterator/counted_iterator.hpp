@@ -24,6 +24,9 @@ class counted_iterator {
     template <typename I2>
     friend class counted_iterator;
 
+    I current_{};
+    iter_difference_t<I> cnt_{0};
+
 public:
     using iterator = I;
     using difference_type = iter_difference_t<I>;
@@ -262,10 +265,6 @@ public:
     {
         ranges::iter_swap(x.current_, y.current_);
     }
-
-private:
-    I current_{};
-    iter_difference_t<I> cnt_{0};
 };
 
 }
