@@ -16,9 +16,9 @@ namespace std20 = nano;
 
 SCENARIO( "take_view" ) {
 
-  const std::vector< int > equal = { 0, 1, 2 };
+  const std::vector< int > equal = { -2, -1, 0 };
 
-  auto predicate = [] ( const auto& value ) { return value < 0; };
+  auto predicate = [] ( const auto& value ) { return value <= 0; };
 
   GIVEN( "a container with forward iterators" ) {
 
@@ -26,7 +26,7 @@ SCENARIO( "take_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::drop_while( predicate );
+      auto chunk = values | std20::views::take_while( predicate );
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
@@ -38,7 +38,7 @@ SCENARIO( "take_view" ) {
         CHECK( ! std20::ranges::bidirectional_range< Range > );
 		    CHECK( ! std20::ranges::random_access_range < Range > );
 		    CHECK( ! std20::ranges::contiguous_range < Range > );
-		    CHECK( std20::ranges::common_range < Range > );
+		    CHECK( ! std20::ranges::common_range < Range > );
       }
 
       THEN( "the take_view range and iterator associated types are correct" ) {
@@ -65,7 +65,7 @@ SCENARIO( "take_view" ) {
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
 
-        CHECK( 0 == chunk.front() );
+        CHECK( -2 == chunk.front() );
 
         // the following should not compile: no random access iterator
         // CHECK(  2 == chunk.back() );
@@ -79,7 +79,7 @@ SCENARIO( "take_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::drop_while( predicate );
+      auto chunk = values | std20::views::take_while( predicate );
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
@@ -91,7 +91,7 @@ SCENARIO( "take_view" ) {
         CHECK( std20::ranges::bidirectional_range< Range > );
 		    CHECK( ! std20::ranges::random_access_range < Range > );
 		    CHECK( ! std20::ranges::contiguous_range < Range > );
-		    CHECK( std20::ranges::common_range < Range > );
+		    CHECK( ! std20::ranges::common_range < Range > );
       }
 
       THEN( "the take_view range and iterator associated types are correct" ) {
@@ -126,19 +126,19 @@ SCENARIO( "take_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::drop_while( predicate );
+      auto chunk = values | std20::views::take_while( predicate );
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
       THEN( "the take_view satisfies the required concepts" ) {
 
-        CHECK( std20::ranges::view< Range > );
-        CHECK( std20::ranges::sized_range < Range > );
+		    CHECK( std20::ranges::view< Range > );
+		    CHECK( ! std20::ranges::sized_range < Range > );
         CHECK( std20::ranges::forward_range< Range > );
         CHECK( std20::ranges::bidirectional_range< Range > );
-        CHECK( std20::ranges::random_access_range < Range > );
-        CHECK( ! std20::ranges::contiguous_range < Range > );
-        CHECK( std20::ranges::common_range < Range > );
+		    CHECK( std20::ranges::random_access_range < Range > );
+		    CHECK( ! std20::ranges::contiguous_range < Range > );
+		    CHECK( ! std20::ranges::common_range < Range > );
       }
 
       THEN( "the take_view range and iterator associated types are correct" ) {
@@ -154,19 +154,19 @@ SCENARIO( "take_view" ) {
 
       THEN( "an take_view can be constructed and members can be tested" ) {
 
-        CHECK( 3 == chunk.size() );
+        // CHECK( 3 == chunk.size() );
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
         CHECK( std20::ranges::equal( chunk, equal ) );
 
-        CHECK( 0 == chunk[0] );
-        CHECK( 1 == chunk[1] );
-        CHECK( 2 == chunk[2] );
+        CHECK( -2 == chunk[0] );
+        CHECK( -1 == chunk[1] );
+        CHECK(  0 == chunk[2] );
 
-        CHECK( 0 == chunk.front() );
-        CHECK( 2 == chunk.back() );
+        CHECK( -2 == chunk.front() );
+        // CHECK(  0 == chunk.back() );
       } // THEN
     } // WHEN
-  } // GIVEN
+  } // GIVEN*/
 } // SCENARIO
