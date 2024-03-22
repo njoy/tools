@@ -14,7 +14,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "take_view" ) {
+SCENARIO( "take_while_view" ) {
 
   const std::vector< int > equal = { -2, -1, 0 };
 
