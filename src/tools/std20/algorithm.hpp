@@ -19,7 +19,7 @@
 //#include <nanorange/algorithm/equal_range.hpp>
 //#include <nanorange/algorithm/fill.hpp>
 //#include <nanorange/algorithm/fill_n.hpp>
-//#include <nanorange/algorithm/find.hpp>
+#include "tools/std20/algorithm/find.hpp"
 //#include <nanorange/algorithm/find_end.hpp>
 //#include <nanorange/algorithm/find_first_of.hpp>
 //#include <nanorange/algorithm/for_each.hpp>
