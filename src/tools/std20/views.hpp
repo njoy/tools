@@ -22,7 +22,7 @@
 #include "tools/std20/views/ref.hpp"
 #include "tools/std20/views/reverse.hpp"
 #include "tools/std20/views/single.hpp"
-//#include "tools/std20/views/split.hpp"
+#include "tools/std20/views/split.hpp"
 #include "tools/std20/views/subrange.hpp"
 #include "tools/std20/views/take.hpp"
 #include "tools/std20/views/take_while.hpp"
