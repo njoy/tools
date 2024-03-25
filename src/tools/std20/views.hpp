@@ -8,7 +8,7 @@
 #define NANORANGE_VIEWS_HPP_INCLUDED
 
 #include "tools/std20/views/all.hpp"
-//#include "tools/std20/views/common.hpp"
+#include "tools/std20/views/common.hpp"
 //#include "tools/std20/views/counted.hpp"
 #include "tools/std20/views/drop.hpp"
 #include "tools/std20/views/drop_while.hpp"
