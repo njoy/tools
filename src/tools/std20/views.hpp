@@ -14,7 +14,7 @@
 #include "tools/std20/views/drop_while.hpp"
 #include "tools/std20/views/elements.hpp"
 #include "tools/std20/views/empty.hpp"
-//#include "tools/std20/views/filter.hpp"
+#include "tools/std20/views/filter.hpp"
 #include "tools/std20/views/interface.hpp"
 #include "tools/std20/views/iota.hpp"
 //#include "tools/std20/views/istream.hpp"
