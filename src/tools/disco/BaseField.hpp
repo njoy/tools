@@ -38,7 +38,7 @@ protected:
   /**
    *  @brief Return whether or not a character is whitespace
    */
-  constexpr static bool isWhiteSpace( const char c ) { 
+  static bool isWhiteSpace( const char c ) { 
 
     return std::isspace( c ); 
   }
