@@ -1,3 +1,6 @@
+// disco
+#include "tools/disco.hpp"
+
 // the logging tool
 #include "tools/Log.hpp"
 
