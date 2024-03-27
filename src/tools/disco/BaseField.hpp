@@ -39,7 +39,7 @@ protected:
    *  @brief Return whether or not a character is a newline character
    */
   template < typename Iterator >
-  constexpr static bool isSpaceOrTabulation( const char c, Iterator& iter ) { 
+  constexpr static bool isNewLine( const char c, Iterator& iter ) { 
 
     if ( c == '\n' || c == '\f' ) {
 
