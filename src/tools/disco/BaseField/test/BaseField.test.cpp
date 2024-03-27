@@ -24,14 +24,17 @@ SCENARIO( "BaseField" ) {
   CHECK( false == TestBaseField::isSpace( 'a' ) );
   CHECK( false == TestBaseField::isSpace( '\t' ) );
   CHECK( false == TestBaseField::isSpace( '\n' ) );
+  CHECK( false == TestBaseField::isSpace( '\f' ) );
 
   CHECK( true == TestBaseField::isSpaceOrTabulation( ' ' ) );
   CHECK( false == TestBaseField::isSpaceOrTabulation( 'a' ) );
   CHECK( true == TestBaseField::isSpaceOrTabulation( '\t' ) );
   CHECK( false == TestBaseField::isSpaceOrTabulation( '\n' ) );
+  CHECK( false == TestBaseField::isSpaceOrTabulation( '\f' ) );
 
   CHECK( true == TestBaseField::isWhiteSpace( ' ' ) );
   CHECK( false == TestBaseField::isWhiteSpace( 'a' ) );
   CHECK( true == TestBaseField::isWhiteSpace( '\t' ) );
   CHECK( true == TestBaseField::isWhiteSpace( '\n' ) );
+  CHECK( true == TestBaseField::isWhiteSpace( '\f' ) );
 } // SCENARIO

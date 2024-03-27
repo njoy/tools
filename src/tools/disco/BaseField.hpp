@@ -36,11 +36,38 @@ protected:
   }
 
   /**
+   *  @brief Return whether or not a character is a newline character
+   */
+  template < typename Iterator >
+  constexpr static bool isSpaceOrTabulation( const char c, Iterator& iter ) { 
+
+    if ( c == '\n' || c == '\f' ) {
+
+      return true;
+    }
+    else if ( c == '\r' ) {
+
+      if ( *(++iter) == '\n' ) {
+
+        return true;
+      }
+      else {
+
+        throw std::exception( "carriage return unsupported" );
+      }
+    }
+    return c == ' ' || c == '\t'; 
+  }
+
+  /**
    *  @brief Return whether or not a character is whitespace
+   *
+   *  Not all implementations of std::isspace are constexpr so we cannot make 
+   *  this function constexpr.
    */
   static bool isWhiteSpace( const char c ) { 
 
-    return std::isspace( c ); 
+    return std::isspace( c );
   }
 };
 
