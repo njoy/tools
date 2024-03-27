@@ -43,7 +43,7 @@
 //#include <nanorange/algorithm/min_element.hpp>
 //#include <nanorange/algorithm/minmax.hpp>
 //#include <nanorange/algorithm/minmax_element.hpp>
-//#include <nanorange/algorithm/mismatch.hpp>
+#include "tools/std20/algorithm/mismatch.hpp"
 //#include <nanorange/algorithm/move.hpp>
 //#include <nanorange/algorithm/next_permutation.hpp>
 //#include <nanorange/algorithm/none_of.hpp>
