@@ -30,16 +30,20 @@ protected:
   /**
    *  @brief Return whether or not a character is a space or tab
    */
-  constexpr static bool isSpaceOrTabulation( const char c ) { 
+  constexpr static bool isSpaceOrTabulation( const char c ) {
 
-    return c == ' ' || c == '\t'; 
+    return c == ' ' || c == '\t';
   }
 
   /**
    *  @brief Return whether or not a character is a newline character
+   *
+   *  This also checks for \r\n endline characters. In this case, the
+   *  iterator is incremented by 1 to point to the \n charcter instead
+   *  of the \r character.
    */
   template < typename Iterator >
-  constexpr static bool isNewLine( const char c, Iterator& iter ) { 
+  constexpr static bool isNewLine( const char c, Iterator& iter ) {
 
     if ( c == '\n' || c == '\f' ) {
 
@@ -47,25 +51,27 @@ protected:
     }
     else if ( c == '\r' ) {
 
+      auto current = iter;
       if ( *(++iter) == '\n' ) {
 
         return true;
       }
       else {
 
-        throw std::exception( "carriage return unsupported" );
+        iter = current;
+        throw std::runtime_error( "carriage return unsupported" );
       }
     }
-    return c == ' ' || c == '\t'; 
+    return c == ' ' || c == '\t';
   }
 
   /**
    *  @brief Return whether or not a character is whitespace
    *
-   *  Not all implementations of std::isspace are constexpr so we cannot make 
+   *  Not all implementations of std::isspace are constexpr so we cannot make
    *  this function constexpr.
    */
-  static bool isWhiteSpace( const char c ) { 
+  static bool isWhiteSpace( const char c ) {
 
     return std::isspace( c );
   }
