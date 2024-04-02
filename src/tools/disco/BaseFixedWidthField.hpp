@@ -25,6 +25,8 @@ protected:
   using BaseField::isSpaceOrTabulation;
   using BaseField::isWhiteSpace;
   using BaseField::isNewLine;
+  using BaseField::skipPlusSign;
+  using BaseField::isEndOfFile;
 
   /**
    *  @brief Skip over spaces until the end of the field or until
@@ -33,9 +35,10 @@ protected:
   template < typename Iterator >
   static void skipSpaces( Iterator& iter, unsigned int& position ) {
 
-    while( ++position <= Width && isSpace( *iter ) ) {
+    while( position < Width && isSpace( iter ) ) {
 
-      ++it;
+      ++position;
+      ++iter;
     }
   }
 };
