@@ -21,11 +21,11 @@ SCENARIO( "FixedWidthReal" ) {
       auto begin = string.begin();
       auto end = string.end();
 
-//      string = "          ";
-//      begin = string.begin();
-//      end = string.end();
-//      CHECK_THAT( 0, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
-//      CHECK( begin == end );
+      string = "          ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( 0, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end );
 
       string = "      +123";
       begin = string.begin();
@@ -170,6 +170,19 @@ SCENARIO( "FixedWidthReal" ) {
       end = string.end();
       CHECK_THAT( 100, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
+
+      string = "    +123\n";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( 123, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "    +123";
+      string += char{ std::char_traits<char>::eof() };
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( 123, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
     } // THEN
   } // GIVEN
 
@@ -181,11 +194,11 @@ SCENARIO( "FixedWidthReal" ) {
       auto begin = string.begin();
       auto end = string.end();
 
-//      string = "           ";
-//      begin = string.begin();
-//      end = string.end();
-//      CHECK_THAT( 0, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
-//      CHECK( begin == end - 1 );
+      string = "           ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( 0, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
 
       string = "      +123 ";
       begin = string.begin();
@@ -329,6 +342,19 @@ SCENARIO( "FixedWidthReal" ) {
       begin = string.begin();
       end = string.end();
       CHECK_THAT( 100, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "      +123\n";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( 123, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "      +123";
+      string += char{ std::char_traits<char>::eof() };
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( 123, WithinRel( FixedWidthReal< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
     } // THEN
   } // GIVEN

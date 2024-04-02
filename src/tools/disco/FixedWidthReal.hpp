@@ -13,7 +13,8 @@ namespace tools {
 namespace disco {
 
 /**
- *  @brief A base class for reading fixed width data fields
+ *  @brief A class for reading width data fields containing floating
+ *         point values
  */
 template < unsigned int Width >
 class FixedWidthReal : public BaseFixedWidthField< Width > {
@@ -40,13 +41,8 @@ public:
     Representation value = 0.0;
 
     skipSpaces( iter, position );
-    if ( isNewLine( iter ) || isEndOfFile( iter ) ) {
+    if ( isNewLine( iter ) || isEndOfFile( iter ) || Width == position ) {
 
-      return value;
-    }
-    if ( Width == position ) {
-
-      ++iter;
       return value;
     }
 
@@ -56,6 +52,9 @@ public:
       throw std::runtime_error( "cannot parse invalid real number 1" );
     }
 
+    // we are using fast_float::from_chars instead of std::from_chars since
+    // not all standard c++ libraries implement the floating point version of
+    // std::from_chars
     auto result = fast_float::from_chars( &*iter, &*end, value );
     if ( result.ec == std::errc() ) {
 
@@ -71,7 +70,10 @@ public:
     skipSpaces( iter, position );
     if ( Width != position ) {
 
-      throw std::runtime_error( "cannot parse invalid real number 3" );
+      if ( ! isNewLine( iter ) && ! isEndOfFile( iter ) ) {
+
+        throw std::runtime_error( "cannot parse invalid real number 3" );
+      }
     }
 
     return value;
