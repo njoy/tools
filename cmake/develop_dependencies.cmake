@@ -24,10 +24,17 @@ FetchContent_Declare( pybind11
     GIT_SHALLOW     TRUE
     )
 
+FetchContent_Declare( fast_float
+    GIT_REPOSITORY  https://github.com/fastfloat/fast_float
+    GIT_TAG         v6.1.1
+    GIT_SHALLOW     TRUE
+    )
+
 #######################################################################
 # Load dependencies
 #######################################################################
 
 FetchContent_MakeAvailable(
     spdlog
+    fast_float
     )
