@@ -29,6 +29,8 @@ endfunction()
 add_subdirectory( src/tools/Log/test )
 
 add_subdirectory( src/tools/disco/BaseField/test )
+add_subdirectory( src/tools/disco/BaseFixedWidthField/test )
+add_subdirectory( src/tools/disco/FixedWidthReal/test )
 
 add_subdirectory( src/tools/std20/algorithm/test )
 add_subdirectory( src/tools/std20/concepts/test )
