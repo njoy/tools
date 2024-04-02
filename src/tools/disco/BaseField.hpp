@@ -25,13 +25,16 @@ protected:
   /**
    *  @brief Return whether or not a character is a space
    */
-  constexpr static bool isSpace( const char c ) { return c == ' '; }
+  template < typename Iterator >
+  constexpr static bool isSpace( const Iterator& iter ) { return *iter == ' '; }
 
   /**
    *  @brief Return whether or not a character is a space or tab
    */
-  constexpr static bool isSpaceOrTabulation( const char c ) {
+  template < typename Iterator >
+  constexpr static bool isSpaceOrTabulation( const Iterator& iter ) {
 
+    const char c = *iter;
     return c == ' ' || c == '\t';
   }
 
@@ -39,12 +42,13 @@ protected:
    *  @brief Return whether or not a character is a newline character
    *
    *  This also checks for \r\n endline characters. In this case, the
-   *  iterator is incremented by 1 to point to the \n charcter instead
+   *  iterator is incremented by 1 to point to the \n character instead
    *  of the \r character.
    */
   template < typename Iterator >
-  constexpr static bool isNewLine( const char c, Iterator& iter ) {
+  constexpr static bool isNewLine( Iterator& iter ) {
 
+    const char c = *iter;
     if ( c == '\n' || c == '\f' ) {
 
       return true;
@@ -62,7 +66,7 @@ protected:
         throw std::runtime_error( "carriage return unsupported" );
       }
     }
-    return c == ' ' || c == '\t';
+    return false;
   }
 
   /**
@@ -71,9 +75,32 @@ protected:
    *  Not all implementations of std::isspace are constexpr so we cannot make
    *  this function constexpr.
    */
-  static bool isWhiteSpace( const char c ) {
+  template < typename Iterator >
+  static bool isWhiteSpace( const Iterator& iter ) {
 
-    return std::isspace( c );
+    return std::isspace( *iter );
+  }
+
+  /**
+   *  @brief Return whether or not a character is the end of file character
+   */
+  template < typename Iterator >
+  static bool isEndOfFile( const Iterator& iter ) {
+
+    return std::char_traits< char >::eof() == *iter;
+  }
+
+  /**
+   *  @brief Skip the '+' character
+   */
+  template < typename Iterator >
+  static void skipPlusSign( Iterator& iter, unsigned int& position ) {
+
+    if ( *iter == '+' ) {
+
+      ++iter;
+      ++position;
+    }
   }
 };
 
