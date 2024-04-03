@@ -13,11 +13,11 @@ namespace tools {
 namespace disco {
 
 /**
- *  @brief A class for reading width data fields containing floating
+ *  @brief A class for reading fixed width data fields containing floating
  *         point values
  */
 template < unsigned int Width >
-class FixedWidthReal : public BaseFixedWidthField< Width > {
+class BaseFixedWidthReal : public BaseFixedWidthField< Width > {
 
   /* fields */
 
