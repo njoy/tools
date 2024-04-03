@@ -1,8 +1,7 @@
-#ifndef NJOY_TOOLS_DISCO_FIXEDWIDTHREAL
-#define NJOY_TOOLS_DISCO_FIXEDWIDTHREAL
+#ifndef NJOY_TOOLS_DISCO_BASEFIXEDWIDTHREAL
+#define NJOY_TOOLS_DISCO_BASEFIXEDWIDTHREAL
 
 // system includes
-#include <iostream>
 
 // other includes
 #include "fast_float/fast_float.h"
