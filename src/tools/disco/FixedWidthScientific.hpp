@@ -30,10 +30,25 @@ public:
   static void write( Representation value, Iterator& iter ) {
 
     std::ostringstream buffer;
-    buffer << std::setw( Width ) << std::scientific
-            << std::uppercase
-           << std::right << std::setprecision( Precision )
-           << value;
+    buffer << std::setw( Width ) << std::right;
+
+    if ( std::abs( value ) == std::numeric_limits< Representation >::max() ) {
+
+      if ( value < 0 ) {
+
+        buffer << "-Inf";
+      }
+      else {
+
+        buffer << "Inf";
+      }
+    }
+    else {
+
+      buffer << std::scientific << std::uppercase
+             << std::right << std::setprecision( Precision )
+             << value;
+    }
 
     for ( auto b : buffer.str() ) {
 
