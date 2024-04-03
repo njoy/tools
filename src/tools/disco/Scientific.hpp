@@ -46,7 +46,7 @@ public:
     else {
 
       buffer << std::scientific << std::uppercase
-             << std::right << std::setprecision( Precision )
+             << std::setprecision( Precision )
              << value;
     }
 
