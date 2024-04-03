@@ -4,14 +4,14 @@
 using Catch::Matchers::WithinRel;
 
 // what we are testing
-#include "tools/disco/BaseFixedWidthReal.hpp"
+#include "tools/disco/Real.hpp"
 
 // other includes
 
 // convenience typedefs
 using namespace njoy::tools::disco;
 
-SCENARIO( "BaseFixedWidthReal" ) {
+SCENARIO( "Real" ) {
 
   GIVEN( "strings of length 10" ) {
 
@@ -24,164 +24,164 @@ SCENARIO( "BaseFixedWidthReal" ) {
       string = "          ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 0, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 0, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "      +123";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "     123.0";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "   123.123";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123.123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123.123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "      -123";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( -123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "      1E99";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "    1.E+99";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "     1E-99";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e-99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e-99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "+123      ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "123.0     ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "123.123   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123.123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123.123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "-123      ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( -123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "1E99      ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "1.E+99    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "1E-99     ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e-99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e-99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "   +123   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "   123.0  ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "  123.123 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123.123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123.123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "   -123   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( -123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "   1E99   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "   1.E+99 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "   1E-99  ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e-99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e-99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "10.0000e+1";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 100, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 100, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = " 10.000e+1";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 100, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 100, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "10.000e+1 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 100, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 100, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
       string = "    +123\n";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "    +123";
       string += char{ std::char_traits<char>::eof() };
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
     } // THEN
   } // GIVEN
@@ -197,164 +197,164 @@ SCENARIO( "BaseFixedWidthReal" ) {
       string = "           ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 0, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 0, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "      +123 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "     123.0 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "   123.123 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123.123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123.123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "      -123 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( -123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "      1E99 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "    1.E+99 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "     1E-99 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e-99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e-99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "+123       ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "123.0      ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "123.123    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123.123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123.123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "-123       ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( -123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "1E99       ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "1.E+99     ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "1E-99      ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e-99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e-99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "   +123    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "   123.0   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "  123.123  ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123.123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123.123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "   -123    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( -123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "   1E99    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "   1.E+99  ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e+99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e+99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "   1E-99   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 1e-99, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 1e-99, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "10.0000e+1 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 100, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 100, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = " 10.000e+1 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 100, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 100, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "10.000e+1  ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 100, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 100, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "      +123\n";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
 
       string = "      +123";
       string += char{ std::char_traits<char>::eof() };
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( BaseFixedWidthReal< 10 >::read< double >( begin, end ) ) );
+      CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end - 1 );
     } // THEN
   } // GIVEN

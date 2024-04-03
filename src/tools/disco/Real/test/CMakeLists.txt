@@ -1,1 +1,1 @@
-add_cpp_test( disco.BaseFixedWidthReal    BaseFixedWidthReal.test.cpp )
+add_cpp_test( disco.Real Real.test.cpp )

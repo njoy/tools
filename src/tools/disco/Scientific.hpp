@@ -7,7 +7,7 @@
 
 // other includes
 #include "fast_float/fast_float.h"
-#include "tools/disco/BaseFixedWidthReal.hpp"
+#include "tools/disco/Real.hpp"
 
 namespace njoy {
 namespace tools {
@@ -18,13 +18,13 @@ namespace disco {
  *         point values
  */
 template < unsigned int Width, unsigned int Precision >
-class FixedWidthScientific : public BaseFixedWidthReal< Width > {
+class Scientific : public Real< Width > {
 
   /* fields */
 
 public:
 
-  using BaseFixedWidthReal< Width >::read;
+  using Real< Width >::read;
 
   template< typename Representation, typename Iterator >
   static void write( Representation value, Iterator& iter ) {

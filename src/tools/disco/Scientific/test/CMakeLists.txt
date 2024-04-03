@@ -1,1 +1,1 @@
-add_cpp_test( disco.FixedWidthScientific    FixedWidthScientific.test.cpp )
+add_cpp_test( disco.Scientific Scientific.test.cpp )

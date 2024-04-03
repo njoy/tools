@@ -1,5 +1,5 @@
-#ifndef NJOY_TOOLS_DISCO_BASEFIXEDWIDTHREAL
-#define NJOY_TOOLS_DISCO_BASEFIXEDWIDTHREAL
+#ifndef NJOY_TOOLS_DISCO_REAL
+#define NJOY_TOOLS_DISCO_REAL
 
 // system includes
 
@@ -16,7 +16,7 @@ namespace disco {
  *         point values
  */
 template < unsigned int Width >
-class BaseFixedWidthReal : public BaseFixedWidthField< Width > {
+class Real : public BaseFixedWidthField< Width > {
 
   /* fields */
 
