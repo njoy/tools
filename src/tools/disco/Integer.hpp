@@ -1,5 +1,5 @@
-#ifndef NJOY_TOOLS_DISCO_REAL
-#define NJOY_TOOLS_DISCO_REAL
+#ifndef NJOY_TOOLS_DISCO_INTEGER
+#define NJOY_TOOLS_DISCO_INTEGER
 
 // system includes
 #include <sstream>
@@ -23,11 +23,6 @@ class Integer : public BaseFixedWidthField< Width > {
 
 protected:
 
-  using BaseFixedWidthField< Width >::isSpace;
-  using BaseFixedWidthField< Width >::isSpaceOrTabulation;
-  using BaseFixedWidthField< Width >::isWhiteSpace;
-  using BaseFixedWidthField< Width >::isNewLine;
-  using BaseFixedWidthField< Width >::isEndOfFile;
   using BaseFixedWidthField< Width >::skipSpaces;
   using BaseFixedWidthField< Width >::skipPlusSign;
 

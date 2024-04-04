@@ -22,11 +22,6 @@ class Real : public BaseFixedWidthField< Width > {
 
 protected:
 
-  using BaseFixedWidthField< Width >::isSpace;
-  using BaseFixedWidthField< Width >::isSpaceOrTabulation;
-  using BaseFixedWidthField< Width >::isWhiteSpace;
-  using BaseFixedWidthField< Width >::isNewLine;
-  using BaseFixedWidthField< Width >::isEndOfFile;
   using BaseFixedWidthField< Width >::skipSpaces;
   using BaseFixedWidthField< Width >::skipPlusSign;
 

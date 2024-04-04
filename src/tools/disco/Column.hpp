@@ -1,5 +1,5 @@
-#ifndef NJOY_TOOLS_DISCO_FIXEDWIDTHSCIENTIFIC
-#define NJOY_TOOLS_DISCO_FIXEDWIDTHSCIENTIFIC
+#ifndef NJOY_TOOLS_DISCO_COLUMN
+#define NJOY_TOOLS_DISCO_COLUMN
 
 // system includes
 #include <sstream>
@@ -23,11 +23,6 @@ class Column : public BaseFixedWidthField< Width > {
 
 protected:
 
-  using BaseFixedWidthField< Width >::isSpace;
-  using BaseFixedWidthField< Width >::isSpaceOrTabulation;
-  using BaseFixedWidthField< Width >::isWhiteSpace;
-  using BaseFixedWidthField< Width >::isNewLine;
-  using BaseFixedWidthField< Width >::isEndOfFile;
   using BaseFixedWidthField< Width >::skipSpaces;
   using BaseFixedWidthField< Width >::skipPlusSign;
 

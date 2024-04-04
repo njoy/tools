@@ -21,12 +21,7 @@ class BaseFixedWidthField : public BaseField {
 
 protected:
 
-  using BaseField::isSpace;
-  using BaseField::isSpaceOrTabulation;
-  using BaseField::isWhiteSpace;
-  using BaseField::isNewLine;
   using BaseField::skipPlusSign;
-  using BaseField::isEndOfFile;
 
   /**
    *  @brief Skip over spaces until the end of the field or until
