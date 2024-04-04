@@ -1,3 +1,7 @@
+#include "tools/disco/functions.hpp"
 #include "tools/disco/BaseField.hpp"
 #include "tools/disco/BaseFixedWidthField.hpp"
-
+#include "tools/disco/Column.hpp"
+#include "tools/disco/Integer.hpp"
+#include "tools/disco/Real.hpp"
+#include "tools/disco/Scientific.hpp"
