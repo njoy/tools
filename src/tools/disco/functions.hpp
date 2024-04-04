@@ -34,7 +34,7 @@ constexpr bool isSpaceOrTabulation( const Iterator& iter ) {
  *  of the \r character.
  */
 template < typename Iterator >
-constexpr static bool isNewLine( Iterator& iter ) {
+constexpr bool isNewLine( Iterator& iter ) {
 
   const char c = *iter;
   if ( c == '\n' || c == '\f' ) {

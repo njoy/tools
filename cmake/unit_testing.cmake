@@ -28,12 +28,14 @@ endfunction()
 
 add_subdirectory( src/tools/Log/test )
 
+add_subdirectory( src/tools/disco/functions/test )
 add_subdirectory( src/tools/disco/BaseField/test )
 add_subdirectory( src/tools/disco/BaseFixedWidthField/test )
 add_subdirectory( src/tools/disco/Column/test )
 add_subdirectory( src/tools/disco/Integer/test )
 add_subdirectory( src/tools/disco/Real/test )
 add_subdirectory( src/tools/disco/Scientific/test )
+add_subdirectory( src/tools/disco/Record/test )
 
 add_subdirectory( src/tools/std20/algorithm/test )
 add_subdirectory( src/tools/std20/concepts/test )
