@@ -30,6 +30,7 @@ add_subdirectory( src/tools/Log/test )
 
 add_subdirectory( src/tools/disco/BaseField/test )
 add_subdirectory( src/tools/disco/BaseFixedWidthField/test )
+add_subdirectory( src/tools/disco/Column/test )
 add_subdirectory( src/tools/disco/Real/test )
 add_subdirectory( src/tools/disco/Scientific/test )
 

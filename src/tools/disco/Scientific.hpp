@@ -4,7 +4,6 @@
 // system includes
 #include <sstream>
 #include <iomanip>
-#include <iostream>
 
 // other includes
 #include "fast_float/fast_float.h"
@@ -18,7 +17,7 @@ namespace disco {
  *  @brief A class for reading and writing fixed width data fields containing floating
  *         point values
  */
-template < unsigned int Width, unsigned int Precision, unsigned int Exponent = 2 >
+template < unsigned int Width, unsigned int Precision >
 class Scientific : public Real< Width > {
 
   /* fields */
@@ -48,7 +47,7 @@ public:
     }
     else {
 
-      unsigned int precision = Width - 4 - Exponent;
+      unsigned int precision = Width - 6;
       if ( value < 0 ) {
 
         precision -= 1;
@@ -59,7 +58,7 @@ public:
         // log10( significand ) is within [0,1[ so that exponent is given by the
         // floor value
         const int exponent = static_cast< int >( std::floor( std::log10( absValue ) ) );
-        precision -= static_cast< int >( std::floor( std::log10( std::abs( exponent ) ) ) ) - Exponent + 1;
+        precision -= static_cast< int >( std::floor( std::log10( std::abs( exponent ) ) ) ) - 1;
       }
       precision = std::min( precision, Precision );
 
