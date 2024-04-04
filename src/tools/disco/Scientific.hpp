@@ -4,6 +4,7 @@
 // system includes
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 // other includes
 #include "fast_float/fast_float.h"
@@ -17,7 +18,7 @@ namespace disco {
  *  @brief A class for reading and writing fixed width data fields containing floating
  *         point values
  */
-template < unsigned int Width, unsigned int Precision >
+template < unsigned int Width, unsigned int Precision, unsigned int Exponent = 2 >
 class Scientific : public Real< Width > {
 
   /* fields */
@@ -29,10 +30,12 @@ public:
   template< typename Representation, typename Iterator >
   static void write( Representation value, Iterator& iter ) {
 
-    std::ostringstream buffer;
-    buffer << std::setw( Width ) << std::right;
+    const double absValue = std::abs( value );
 
-    if ( std::abs( value ) == std::numeric_limits< Representation >::max() ) {
+    std::ostringstream buffer;
+    buffer << std::right << std::setw( Width );
+
+    if ( absValue == std::numeric_limits< Representation >::max() ) {
 
       if ( value < 0 ) {
 
@@ -45,8 +48,24 @@ public:
     }
     else {
 
-      buffer << std::scientific << std::uppercase
-             << std::setprecision( Precision )
+      unsigned int precision = Width - 4 - Exponent;
+      if ( value < 0 ) {
+
+        precision -= 1;
+      }
+      if ( value != 0.0 ) {
+
+        // log10(significand 10^exponent) = exponent + log10( significand ) and
+        // log10( significand ) is within [0,1[ so that exponent is given by the
+        // floor value
+        const int exponent = static_cast< int >( std::floor( std::log10( absValue ) ) );
+        precision -= static_cast< int >( std::floor( std::log10( std::abs( exponent ) ) ) ) - Exponent + 1;
+      }
+      precision = std::min( precision, Precision );
+
+      buffer << std::scientific
+             << std::uppercase
+             << std::setprecision( precision )
              << value;
     }
 
