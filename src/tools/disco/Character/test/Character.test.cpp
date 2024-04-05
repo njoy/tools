@@ -18,13 +18,13 @@ SCENARIO( "Character" ) {
   string = "abcd";
   begin = string.begin();
   end = string.end();
-  CHECK( "abcd" == Character< 4 >::read( begin, end ) );
+  CHECK( "abcd" == Character< 4 >::read< std::string >( begin, end ) );
   CHECK( begin == end );
 
   string = "ab\n";
   begin = string.begin();
   end = string.end();
-  CHECK( "ab  " == Character< 4 >::read( begin, end ) );
+  CHECK( "ab  " == Character< 4 >::read< std::string >( begin, end ) );
   CHECK( begin == end - 1 );
 
 } // SCENARIO

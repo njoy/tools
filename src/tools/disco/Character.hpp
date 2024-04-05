@@ -28,10 +28,10 @@ protected:
 
 public:
 
-  template < typename Iterator >
-  static std::string read( Iterator& iter, const Iterator& ) {
+  template < typename Representation, typename Iterator >
+  static Representation read( Iterator& iter, const Iterator& ) {
 
-    std::string value;
+    Representation value;
     value.reserve( Width );
 
     unsigned int position = 0;
@@ -49,8 +49,14 @@ public:
     return value;
   }
 
-  template< typename Iterator >
-  static void write( const std::string& value, Iterator& iter ) {
+  template < typename Iterator >
+  static std::string read( Iterator& iter, const Iterator& end ) {
+
+        return read< std::string >( iter, end );
+  }
+
+  template< typename Representation, typename Iterator >
+  static void write( const Representation& value, Iterator& iter ) {
 
     unsigned int position = 0;
     const unsigned int difference = value.size() >= Width ? 0 : Width - value.size();

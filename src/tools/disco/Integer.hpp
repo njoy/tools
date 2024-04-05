@@ -74,8 +74,14 @@ public:
     return value;
   }
 
+  template < typename Iterator >
+  static int read( Iterator& iter, const Iterator& end ) {
+
+        return read< int >( iter, end );
+  }
+
   template< typename Representation, typename Iterator >
-  static void write( Representation value, Iterator& iter ) {
+  static void write( const Representation& value, Iterator& iter ) {
 
     std::ostringstream buffer;
     buffer << std::right << std::setw( Width ) << value;

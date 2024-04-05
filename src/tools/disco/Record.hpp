@@ -45,7 +45,7 @@ struct Record< RetainCarriage > {
 
 };
 
-template< uint16_t w, typename... Components >
+template< unsigned int w, typename... Components >
 struct Record< Column< w >, Components... > {
 
   template< typename Iterator, typename... Args >

@@ -27,7 +27,7 @@ public:
   using Real< Width >::read;
 
   template< typename Representation, typename Iterator >
-  static void write( Representation value, Iterator& iter ) {
+  static void write( const Representation& value, Iterator& iter ) {
 
     const double absValue = std::abs( value );
 
