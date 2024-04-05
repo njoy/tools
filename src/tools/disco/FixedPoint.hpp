@@ -1,5 +1,5 @@
-#ifndef NJOY_TOOLS_DISCO_SCIENTIFIC
-#define NJOY_TOOLS_DISCO_SCIENTIFIC
+#ifndef NJOY_TOOLS_DISCO_FIXEDPOINT
+#define NJOY_TOOLS_DISCO_FIXEDPOINT
 
 // system includes
 #include <sstream>
