@@ -35,6 +35,7 @@ add_subdirectory( src/tools/disco/Column/test )
 add_subdirectory( src/tools/disco/Character/test )
 add_subdirectory( src/tools/disco/Integer/test )
 add_subdirectory( src/tools/disco/Real/test )
+add_subdirectory( src/tools/disco/FixedPoint/test )
 add_subdirectory( src/tools/disco/Scientific/test )
 add_subdirectory( src/tools/disco/Record/test )
 
