@@ -194,6 +194,20 @@ SCENARIO( "Integer" ) {
       Integer< 12 >::write( value, iter );
       CHECK( "          10" == buffer );
       CHECK( 12 == buffer.size() );
+
+      value = std::numeric_limits< int >::max();
+      buffer = "";
+      iter = std::back_inserter( buffer );
+      Integer< 12 >::write( value, iter );
+      CHECK( "         Inf" == buffer );
+      CHECK( 12 == buffer.size() );
+
+      value = -std::numeric_limits< int >::max();
+      buffer = "";
+      iter = std::back_inserter( buffer );
+      Integer< 12 >::write( value, iter );
+      CHECK( "        -Inf" == buffer );
+      CHECK( 12 == buffer.size() );
     } // THEN
   } // GIVEN
 } // SCENARIO

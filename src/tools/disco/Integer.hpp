@@ -28,6 +28,11 @@ protected:
 
 public:
 
+  /**
+   *  @brief Read an integer from the fixed width field
+   *
+   *  @param[in,out] iter       an iterator to a character in a range
+   */
   template < typename Representation, typename Iterator >
   static Representation read( Iterator& iter, const Iterator& ) {
 
@@ -80,11 +85,33 @@ public:
         return read< int >( iter, end );
   }
 
+  /**
+   *  @brief Write an integer value to the output range
+   *
+   *  @param[in,out] iter   an iterator to a character output range
+   */
   template< typename Representation, typename Iterator >
   static void write( const Representation& value, Iterator& iter ) {
 
+    const Representation absValue = std::abs( value );
+
     std::ostringstream buffer;
-    buffer << std::right << std::setw( Width ) << value;
+    buffer << std::right << std::setw( Width );
+    if ( absValue == std::numeric_limits< Representation >::max() ) {
+
+      if ( value < 0 ) {
+
+        buffer << "-Inf";
+      }
+      else {
+
+        buffer << "Inf";
+      }
+    }
+    else {
+
+      buffer << value;
+    }
 
     for ( auto b : buffer.str() ) {
 
