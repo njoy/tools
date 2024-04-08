@@ -26,6 +26,12 @@ protected:
   using BaseFixedWidthField< Width >::skipSpaces;
   using BaseFixedWidthField< Width >::skipPlusSign;
 
+  template< typename Representation >
+  static constexpr int minimumRequiredWidth( Representation i ) {
+
+    return ( i < 10 ) ? 1 : 1 + minimumRequiredWidth( i / 10 );
+  }
+
 public:
 
   /**
@@ -82,7 +88,7 @@ public:
   template < typename Iterator >
   static int read( Iterator& iter, const Iterator& end ) {
 
-        return read< int >( iter, end );
+    return read< int >( iter, end );
   }
 
   /**
@@ -94,6 +100,8 @@ public:
   static void write( const Representation& value, Iterator& iter ) {
 
     const Representation absValue = std::abs( value );
+    const auto required = minimumRequiredWidth( absValue )
+                        + ( value < 0 ? 1 : 0 );
 
     std::ostringstream buffer;
     buffer << std::right << std::setw( Width );
@@ -110,7 +118,14 @@ public:
     }
     else {
 
-      buffer << value;
+      if ( required > Width ) {
+
+        buffer << std::setfill( '*' ) << '*';
+      }
+      else {
+
+        buffer << value;
+      }
     }
 
     for ( auto b : buffer.str() ) {

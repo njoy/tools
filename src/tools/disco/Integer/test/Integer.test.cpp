@@ -208,6 +208,34 @@ SCENARIO( "Integer" ) {
       Integer< 12 >::write( value, iter );
       CHECK( "        -Inf" == buffer );
       CHECK( 12 == buffer.size() );
+
+      value = 99999;
+      buffer = "";
+      iter = std::back_inserter( buffer );
+      Integer< 5 >::write( value, iter );
+      CHECK( "99999" == buffer );
+      CHECK( 5 == buffer.size() );
+
+      value = 100000;
+      buffer = "";
+      iter = std::back_inserter( buffer );
+      Integer< 5 >::write( value, iter );
+      CHECK( "*****" == buffer );
+      CHECK( 5 == buffer.size() );
+
+      value = -10000;
+      buffer = "";
+      iter = std::back_inserter( buffer );
+      Integer< 5 >::write( value, iter );
+      CHECK( "*****" == buffer );
+      CHECK( 5 == buffer.size() );
+
+      value = -9999;
+      buffer = "";
+      iter = std::back_inserter( buffer );
+      Integer< 5 >::write( value, iter );
+      CHECK( "-9999" == buffer );
+      CHECK( 5 == buffer.size() );
     } // THEN
   } // GIVEN
 } // SCENARIO
