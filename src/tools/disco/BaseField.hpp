@@ -25,6 +25,13 @@ protected:
 
   /**
    *  @brief Skip the '+' character
+   *
+   *  Note: when a plus sign is encountered, the position is incremented.
+   *  In the case of a fixed width field, this may put the position over
+   *  the width so this must be checked prior to calling this function.
+   *
+   *  @param[in,out] iter       an iterator to a character in a range
+   *  @param[in,out] position   the current position in the field
    */
   template < typename Iterator >
   static void skipPlusSign( Iterator& iter, unsigned int& position ) {

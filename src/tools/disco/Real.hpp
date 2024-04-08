@@ -27,6 +27,11 @@ protected:
 
 public:
 
+  /**
+   *  @brief Read a floating point value from the fixed width field
+   *
+   *  @param[in,out] iter       an iterator to a character in a range
+   */
   template < typename Representation, typename Iterator >
   static Representation read( Iterator& iter, const Iterator& ) {
 

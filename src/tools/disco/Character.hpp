@@ -13,8 +13,8 @@ namespace tools {
 namespace disco {
 
 /**
- *  @brief A class for reading and writing fixed width data fields containing floating
- *         point values
+ *  @brief A class for reading and writing fixed width data fields containing
+ *         characters.
  */
 template< unsigned int Width >
 class Character : public BaseFixedWidthField< Width > {
@@ -28,6 +28,15 @@ protected:
 
 public:
 
+  /**
+   *  @brief Read character data from the fixed width field
+   *
+   *  The resulting character data has a length equal to the width of the field.
+   *  Spaces are appended to the character data if a new line character or if the
+   *  end of file character is encountered.
+   *
+   *  @param[in,out] iter       an iterator to a character in a range
+   */
   template < typename Representation, typename Iterator >
   static Representation read( Iterator& iter, const Iterator& ) {
 

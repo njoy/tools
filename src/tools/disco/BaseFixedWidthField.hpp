@@ -26,6 +26,9 @@ protected:
   /**
    *  @brief Skip over spaces until the end of the field or until
    *         a non-space character is encountered
+   *
+   *  @param[in,out] iter       an iterator to a character in a range
+   *  @param[in,out] position   the current position in the field
    */
   template < typename Iterator >
   static void skipSpaces( Iterator& iter, unsigned int& position ) {

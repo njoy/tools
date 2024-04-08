@@ -14,8 +14,11 @@ namespace tools {
 namespace disco {
 
 /**
- *  @brief A class for reading and writing fixed width data fields containing floating
- *         point values
+ *  @brief A class for reading and writing fixed width data fields containing
+ *         floating point values
+ *
+ *  Floating point values can be read in any format but are written out
+ *  in fixed notation.
  */
 template < unsigned int Width, unsigned int Precision >
 class FixedPoint : public Real< Width > {
@@ -26,10 +29,16 @@ public:
 
   using Real< Width >::read;
 
+  /**
+   *  @brief Write a floating point value to the output range using
+   *         fixed point notation
+   *
+   *  @param[in,out] iter   an iterator to a character output range
+   */
   template< typename Representation, typename Iterator >
   static void write( const Representation& value, Iterator& iter ) {
 
-    const double absValue = std::abs( value );
+    const Representation absValue = std::abs( value );
 
     std::ostringstream buffer;
     buffer << std::right << std::setw( Width );

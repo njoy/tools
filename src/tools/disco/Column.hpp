@@ -28,6 +28,14 @@ protected:
 
 public:
 
+  /**
+   *  @brief Read over columns
+   *
+   *  This skips over the width of the field, or until a new line or
+   *  end of file character are encountered.
+   *
+   *  @param[in,out] iter   an iterator to a character in a range
+   */
   template < typename Iterator >
   static void read( Iterator& iter, const Iterator& ) {
 
@@ -39,6 +47,11 @@ public:
     }
   }
 
+  /**
+   *  @brief Write columns to the output range
+   *
+   *  @param[in,out] iter   an iterator to a character output range
+   */
   template< typename Iterator >
   static void write( Iterator& iter ) {
 
