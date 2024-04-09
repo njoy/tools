@@ -61,7 +61,7 @@ public:
   template < typename Iterator >
   static std::string read( Iterator& iter, const Iterator& end ) {
 
-        return read< std::string >( iter, end );
+    return read< std::string >( iter, end );
   }
 
   template< typename Representation, typename Iterator >

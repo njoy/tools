@@ -81,7 +81,7 @@ public:
   template < typename Iterator >
   static double read( Iterator& iter, const Iterator& end ) {
 
-        return read< double >( iter, end );
+    return read< double >( iter, end );
   }
 };
 
