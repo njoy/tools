@@ -107,5 +107,5 @@ SCENARIO( "FixedPoint" ) {
     FixedPoint< 12, 5 >::write( value, iter );
     CHECK( "        -Inf" == buffer );
     CHECK( 12 == buffer.size() );
-  }
+  } // THEN
 } // SCENARIO

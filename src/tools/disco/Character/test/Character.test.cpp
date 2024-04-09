@@ -34,7 +34,7 @@ SCENARIO( "Character" ) {
     end = string.end();
     CHECK( "ab  " == Character< 4 >::read< std::string >( begin, end ) );
     CHECK( begin == end - 1 );
-  }
+  } // THEN
 
   THEN( "strings can be written" ) {
 
@@ -65,5 +65,5 @@ SCENARIO( "Character" ) {
     iter = std::back_inserter( buffer );
     Character< 4 >::write( string, iter );
     CHECK( "    " == buffer );
-  }
+  } // THEN
 } // SCENARIO

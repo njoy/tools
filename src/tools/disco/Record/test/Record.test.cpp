@@ -52,8 +52,8 @@ SCENARIO( "Record" ) {
       CHECK(      2 == std::get<1>(tuple) );
       CHECK( "abcd" == std::get<2>(tuple) );
       CHECK( iter == end );
-    }
-  }
+    } // THEN
+  } // GIVEN
 
   GIVEN( "a line of data" ) {
 
@@ -76,9 +76,9 @@ SCENARIO( "Record" ) {
         CHECK( 1e-11 == value1 );
         CHECK( 1e-10 == value2 );
         CHECK( iter == end );
-      }
-    }
-  }
+      } // THEN
+    } // WHEN
+  } // GIVEN
 
   GIVEN( "data" ) {
 
@@ -96,7 +96,7 @@ SCENARIO( "Record" ) {
                 Integer< 4 >,
                 Character< 5 > >::write( iter, f, i, s );
         CHECK( " 2.0000E+00   4  abc\n" == buffer );
-      }
-    }
-  }
+      } // THEN
+    } // WHEN
+  } // GIVEN
 } // SCENARIO
