@@ -2,6 +2,7 @@
 #define NJOY_TOOLS_DISCO_INTEGER
 
 // system includes
+#include <cstdlib>
 #include <sstream>
 #include <iomanip>
 
@@ -99,7 +100,7 @@ public:
   template< typename Representation, typename Iterator >
   static void write( const Representation& value, Iterator& iter ) {
 
-    const Representation absValue = std::abs( value );
+    const Representation absValue = value < 0 ? -value : value;
     const auto required = minimumRequiredWidth( absValue )
                         + ( value < 0 ? 1 : 0 );
 
