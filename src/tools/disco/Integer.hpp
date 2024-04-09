@@ -100,6 +100,7 @@ public:
   template< typename Representation, typename Iterator >
   static void write( const Representation& value, Iterator& iter ) {
 
+    // std::abs does not exist for all integer types (e.g. unsigned)
     const Representation absValue = value < 0 ? -value : value;
     const auto required = minimumRequiredWidth( absValue )
                         + ( value < 0 ? 1 : 0 );
