@@ -14,7 +14,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "subrange" ) {
+SCENARIO( "reverse_view" ) {
 
   const std::vector< int > equal = { 2, 1, 0, -1, -2 };
   const std::vector< int > modified = { 2, 2, 2, 2, 2 };
