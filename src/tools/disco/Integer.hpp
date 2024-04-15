@@ -107,7 +107,7 @@ public:
 
     std::ostringstream buffer;
     buffer << std::right << std::setw( Width );
-    if ( absValue == std::numeric_limits< Representation >::max() ) {
+    if ( absValue == std::numeric_limits< Representation >::infinity() ) {
 
       if ( value < 0 ) {
 

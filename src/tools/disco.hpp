@@ -7,4 +7,5 @@
 #include "tools/disco/Real.hpp"
 #include "tools/disco/FixedPoint.hpp"
 #include "tools/disco/Scientific.hpp"
+#include "tools/disco/ENDF.hpp"
 #include "tools/disco/Record.hpp"

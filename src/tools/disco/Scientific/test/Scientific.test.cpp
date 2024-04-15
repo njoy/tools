@@ -108,14 +108,14 @@ SCENARIO( "Scientific" ) {
     CHECK( "-1.0000E+100" == buffer );
     CHECK( 12 == buffer.size() );
 
-    value = std::numeric_limits< double >::max();
+    value = std::numeric_limits< double >::infinity();
     buffer = "";
     iter = std::back_inserter( buffer );
     Scientific< 12, 5 >::write( value, iter );
     CHECK( "         Inf" == buffer );
     CHECK( 12 == buffer.size() );
 
-    value = -std::numeric_limits< double >::max();
+    value = -std::numeric_limits< double >::infinity();
     buffer = "";
     iter = std::back_inserter( buffer );
     Scientific< 12, 5 >::write( value, iter );

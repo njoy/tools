@@ -94,14 +94,14 @@ SCENARIO( "FixedPoint" ) {
     CHECK( "    -0.69315" == buffer );
     CHECK( 12 == buffer.size() );
 
-    value = std::numeric_limits< double >::max();
+    value = std::numeric_limits< double >::infinity();
     buffer = "";
     iter = std::back_inserter( buffer );
     FixedPoint< 12, 5 >::write( value, iter );
     CHECK( "         Inf" == buffer );
     CHECK( 12 == buffer.size() );
 
-    value = -std::numeric_limits< double >::max();
+    value = -std::numeric_limits< double >::infinity();
     buffer = "";
     iter = std::back_inserter( buffer );
     FixedPoint< 12, 5 >::write( value, iter );
