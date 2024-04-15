@@ -28,12 +28,5 @@ endfunction()
 
 add_subdirectory( src/tools/Log/test )
 
-add_subdirectory( src/tools/concepts/Requires/test )
-add_subdirectory( src/tools/concepts/IsRange/test )
-add_subdirectory( src/tools/concepts/IsIterator/test )
-
-add_subdirectory( src/tools/ranges/IteratorView/test )
-add_subdirectory( src/tools/ranges/TransformView/test )
-add_subdirectory( src/tools/ranges/TransformView/Iterator/test )
-add_subdirectory( src/tools/ranges/make_view/test )
-add_subdirectory( src/tools/ranges/make_transform_view/test )
+add_subdirectory( src/tools/std20/concepts/test )
+add_subdirectory( src/tools/std20/type_traits/test )
