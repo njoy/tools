@@ -107,27 +107,13 @@ public:
 
     std::ostringstream buffer;
     buffer << std::right << std::setw( Width );
-    if ( absValue == std::numeric_limits< Representation >::infinity() ) {
+    if ( required > Width ) {
 
-      if ( value < 0 ) {
-
-        buffer << "-Inf";
-      }
-      else {
-
-        buffer << "Inf";
-      }
+      buffer << std::setfill( '*' ) << '*';
     }
     else {
 
-      if ( required > Width ) {
-
-        buffer << std::setfill( '*' ) << '*';
-      }
-      else {
-
-        buffer << value;
-      }
+      buffer << value;
     }
 
     for ( auto b : buffer.str() ) {

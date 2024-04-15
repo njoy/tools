@@ -2,10 +2,11 @@
 #define NJOY_TOOLS_DISCO_ENDF
 
 // system includes
+#include <sstream>
+#include <iomanip>
 
 // other includes
-#include "fast_float/fast_float.h"
-#include "tools/disco/BaseFixedWidthField.hpp"
+#include "tools/disco/Real.hpp"
 
 namespace njoy {
 namespace tools {
@@ -15,37 +16,59 @@ namespace disco {
  *  @brief A class for reading fixed width data fields containing floating
  *         point values
  */
-template < unsigned int Width >
-class ENDF : public BaseFixedWidthField< Width > {
+class ENDF : public Real< 11 > {
 
   /* fields */
 
+  // an ENDF field is 11 wide
+  static constexpr int w = 11;
+  // below this value, you loose precision if fixed notation is used:
+  static constexpr double minFixed = 0.1;
+  // above this value, you loose precision if fixed notation is used
+  static constexpr double maxFixed = 1e+10;
+  // roundoff
+  static constexpr double roundoff = 0.5;
+  // minimal exponent width (sign, one digit)
+  static constexpr int minExpWidth = 2;
+  // characters excluded for fixed notation precision (optional sign,
+  // first digit, decimal point)
+  static constexpr int excluded = 3;
+
 public:
 
-  using Real< Width >::read;
+  using Real< 11 >::read;
 
   template< typename Representation, typename Iterator >
-  static void write( Representation real, Iterator& it ) {
+  static void write( Representation value, Iterator& it ) {
 
-    const double absReal = std::abs( real );
+    const double absValue = std::abs( value );
+    std::ostringstream buffer;
 
-    if ( absReal == std::numeric_limits<Representation>::infinity() ) {
+    if ( absValue == std::numeric_limits< Representation >::infinity() ) {
 
-      writeInfinity( it, ( real < 0 ), InfinityPrintingPolicy() );
+      buffer << std::right << std::setw( w );
+      if ( value < 0 ) {
+
+        buffer << "-Inf";
+      }
+      else {
+
+        buffer << "Inf";
+      }
     }
     else {
 
-      // decompose real
-      double significand = real;
+      // decompose value
+      double significand = value;
       double tenToExponent = 1.;
       int exponent = 0;
       int expWidth = minExpWidth;
-      if ( real != 0.0 ) {
+      if ( value != 0.0 ) {
 
         // log10(significand 10^exponent) = exponent + log10(significand) and
         // log10(significand) is within [0,1[ so that exponent is given by the
         // floor value
-        exponent = static_cast< int >( std::floor( std::log10( absReal ) ) );
+        exponent = static_cast< int >( std::floor( std::log10( absValue ) ) );
 
         if ( 0 != exponent ) {
 
@@ -65,11 +88,11 @@ public:
                                    / tenToPrecision;
 
       // only check for fixed when the value is in [minFixed,maxFixed[
-      if ( ( minFixed <= absReal ) and ( absReal < maxFixed ) ) {
+      if ( ( minFixed <= absValue ) and ( absValue < maxFixed ) ) {
 
         const double tenToFixedPrecision = std::pow( 10.0, precision + expWidth );
         const double rsreal = rssignificand * tenToExponent;
-        const double rfreal = std::round( real * tenToFixedPrecision )
+        const double rfreal = std::round( value * tenToFixedPrecision )
                               / tenToFixedPrecision;
 
         // only continue if fixed notation would not produce the same value
@@ -114,29 +137,28 @@ public:
         }
       }
 
-      std::ostringstream buffer;
       buffer << std::setw( width ) << std::fixed << std::showpoint
              << std::right << std::setprecision( precision );
       if ( fixed ) {
 
         if ( 0 == precision ) {
 
-          buffer << static_cast< int >( real );
+          buffer << static_cast< int >( value );
         }
         else {
 
-          buffer << real;
+          buffer << value;
         }
       }
       else {
 
         buffer << significand << std::showpos << exponent;
       }
+    }
 
-      for ( auto b : buffer.str() ) {
+    for ( auto b : buffer.str() ) {
 
-        *it++ = b;
-      }
+      *it++ = b;
     }
   }
 };

@@ -6,7 +6,6 @@
 #include <iomanip>
 
 // other includes
-#include "fast_float/fast_float.h"
 #include "tools/disco/Real.hpp"
 
 namespace njoy {
