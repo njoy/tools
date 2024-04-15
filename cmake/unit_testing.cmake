@@ -37,6 +37,7 @@ add_subdirectory( src/tools/disco/Integer/test )
 add_subdirectory( src/tools/disco/Real/test )
 add_subdirectory( src/tools/disco/FixedPoint/test )
 add_subdirectory( src/tools/disco/Scientific/test )
+add_subdirectory( src/tools/disco/ENDF/test )
 add_subdirectory( src/tools/disco/Record/test )
 
 add_subdirectory( src/tools/std20/algorithm/test )
