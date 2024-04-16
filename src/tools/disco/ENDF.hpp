@@ -13,8 +13,10 @@ namespace tools {
 namespace disco {
 
 /**
- *  @brief A class for reading fixed width data fields containing floating
- *         point values
+ *  @brief A class for reading and writing fixed ENDF style floating point values
+ *
+ *  This switches between scientific and fixed notation to maximise the precision
+ *  of the numbers printed.
  */
 class ENDF : public Real< 11 > {
 
