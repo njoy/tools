@@ -1,7 +1,5 @@
 // include Catch2
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/matchers/catch_matchers_floating_point.hpp>
-using Catch::Matchers::WithinRel;
 
 // what we are testing
 #include "tools/disco/Integer.hpp"
@@ -24,74 +22,74 @@ SCENARIO( "Integer" ) {
       string = "          ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 0, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 0 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "      +123";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "       123";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "      -123";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( -123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "+123      ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "123       ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "-123      ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( -123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "   +123   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "   123    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "   -123   ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( -123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
       string = "    +123\n";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "    +123";
       string += char{ std::char_traits<char>::eof() };
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
     } // THEN
   } // GIVEN
@@ -107,61 +105,61 @@ SCENARIO( "Integer" ) {
       string = "           ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 0, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 0 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "      +123 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "       123 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "      -123 ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( -123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "+123       ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "123        ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "-123       ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( -123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "   +123    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "   123     ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( 123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
 
       string = "   -123    ";
       begin = string.begin();
       end = string.end();
-      CHECK_THAT( -123, WithinRel( Integer< 10 >::read< double >( begin, end ) ) );
+      CHECK( -123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
     } // THEN
   } // GIVEN
