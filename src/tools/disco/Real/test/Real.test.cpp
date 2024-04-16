@@ -21,6 +21,48 @@ SCENARIO( "Real" ) {
       auto begin = string.begin();
       auto end = string.end();
 
+      string = "       Inf";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end );
+
+      string = "      -Inf";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( -std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end );
+
+      string = "     Inf  ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end );
+
+      string = "    -Inf  ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( -std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end );
+
+      string = "Inf       ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end );
+
+      string = "-Inf      ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( -std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end );
+
       string = "          ";
       begin = string.begin();
       end = string.end();
@@ -193,6 +235,48 @@ SCENARIO( "Real" ) {
       std::string string;
       auto begin = string.begin();
       auto end = string.end();
+
+      string = "       Inf ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "      -Inf ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( -std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "     Inf   ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "    -Inf   ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( -std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "Inf        ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
+
+      string = "-Inf       ";
+      begin = string.begin();
+      end = string.end();
+      CHECK_THAT( -std::numeric_limits< double >::infinity(),
+                  WithinRel( Real< 10 >::read< double >( begin, end ) ) );
+      CHECK( begin == end - 1 );
 
       string = "           ";
       begin = string.begin();

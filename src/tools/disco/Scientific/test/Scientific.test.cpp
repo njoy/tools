@@ -38,5 +38,6 @@ SCENARIO( "Scientific" ) {
     CHECK( "-1.0000E+100" == write( -1e+100 ) );
     CHECK( "         Inf" == write( infinity ) );
     CHECK( "        -Inf" == write( -infinity ) );
+    CHECK( "-1.0000E+100" == write( -1e+100 ) );
   } // THEN
 } // SCENARIO

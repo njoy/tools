@@ -24,6 +24,25 @@ class FixedPoint : public Real< Width > {
 
   /* fields */
 
+  /* auxiliary functions */
+
+  template< typename T, typename Integer >
+  static constexpr T pow( T real, Integer power ) {
+
+    return
+      ( power < 0 )          ? 1.0 / pow( real, -power ) :
+      ( power == 0 )         ? 1.0 :
+      ( power == 1 )         ? real :
+      ( ( power % 2 ) == 0 ) ? pow( real * real , power / 2 ) :
+                               real * pow( real, power - 1 );
+  }
+
+  /* constants */
+
+  // min and max value beyond which we cannot write in the requested precision
+  static constexpr double minFixed = -pow( 10., Width - Precision - 2 );
+  static constexpr double maxFixed = pow( 10., Width - Precision - 1 );
+
 public:
 
   using Real< Width >::read;
@@ -55,17 +74,23 @@ public:
     }
     else {
 
-      unsigned int precision = Width - 1;
-      if ( value < 0 ) {
+      if ( ( minFixed >= value ) || ( maxFixed <= value ) ) {
 
-        precision -= 1;
+        buffer << std::setfill( '*' ) << '*';
       }
-      precision = std::min( precision, Precision );
+      else {
 
-      buffer << std::fixed
-             << std::uppercase
-             << std::setprecision( precision )
-             << value;
+        unsigned int precision = Width - 1;
+        if ( value < 0 ) {
+
+          precision -= 1;
+        }
+        precision = std::min( precision, Precision );
+
+        buffer << std::fixed
+               << std::setprecision( precision )
+               << value;
+      }
     }
 
     for ( auto b : buffer.str() ) {

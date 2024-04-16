@@ -23,6 +23,7 @@ SCENARIO( "FixedPoint" ) {
       return buffer;
     };
 
+    CHECK( "     0.00000" == write( 1e-100 ) );
     CHECK( "     0.00000" == write( 0 ) );
     CHECK( "     2.00000" == write( 2 ) );
     CHECK( "    10.00000" == write( 10 ) );
@@ -34,5 +35,11 @@ SCENARIO( "FixedPoint" ) {
     CHECK( "    -0.69315" == write( -0.69314718056 ) );
     CHECK( "         Inf" == write( infinity ) );
     CHECK( "        -Inf" == write( -infinity ) );
+    CHECK( "************" == write( 1e+6 ) );
+    CHECK( "999999.00000" == write( 999999 ) );
+    CHECK( "100000.00000" == write( 1e+5 ) );
+    CHECK( "-10000.00000" == write( -1e+4 ) );
+    CHECK( "-99999.00000" == write( -99999 ) );
+    CHECK( "************" == write( -1e+5 ) );
   } // THEN
 } // SCENARIO
