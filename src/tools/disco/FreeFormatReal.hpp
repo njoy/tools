@@ -1,5 +1,5 @@
-#ifndef NJOY_TOOLS_DISCO_INTEGER
-#define NJOY_TOOLS_DISCO_INTEGER
+#ifndef NJOY_TOOLS_DISCO_FREEFORMATREAL
+#define NJOY_TOOLS_DISCO_FREEFORMATREAL
 
 // system includes
 #include <cstdlib>
