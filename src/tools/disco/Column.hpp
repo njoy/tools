@@ -62,7 +62,7 @@ public:
       *iter++ = ' ';
     }
   }
-  };
+};
 
 } // disco namespace
 } // tools namespace

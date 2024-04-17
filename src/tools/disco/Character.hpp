@@ -81,7 +81,7 @@ public:
       *iter++ = *viter++;
     }
   }
-  };
+};
 
 } // disco namespace
 } // tools namespace
