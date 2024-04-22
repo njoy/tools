@@ -19,12 +19,12 @@ SCENARIO( "single_view" ) {
   THEN( "the take_view satisfies the required concepts" ) {
 
     CHECK( std20::ranges::view< Range > );
-    CHECK( std20::ranges::sized_range < Range > );
+    CHECK( std20::ranges::sized_range< Range > );
     CHECK( std20::ranges::forward_range< Range > );
     CHECK( std20::ranges::bidirectional_range< Range > );
-    CHECK( std20::ranges::random_access_range < Range > );
-    CHECK( std20::ranges::contiguous_range < Range > );
-    CHECK( std20::ranges::common_range < Range > );
+    CHECK( std20::ranges::random_access_range< Range > );
+    CHECK( std20::ranges::contiguous_range< Range > );
+    CHECK( std20::ranges::common_range< Range > );
   }
 
   THEN( "the take_view range and iterator associated types are correct" ) {

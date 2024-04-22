@@ -14,77 +14,10 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "all_view" ) {
+SCENARIO( "subrange" ) {
 
-  const std::vector< int > equal = { -2, -1, 0, 1, 2 };
-  const std::vector< int > modified = { -2, 0, 2, 4, 6 };
-
-  GIVEN( "a container with forward iterators" ) {
-
-    std::forward_list< int > values = { -2, -1, 0, 1, 2 };
-
-    WHEN( "when iterators are used" ) {
-
-      auto chunk = values | std20::views::all;
-      using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
-
-      THEN( "the all_view satisfies the required concepts" ) {
-
-		    CHECK( std20::ranges::view< Range > );
-		    CHECK( ! std20::ranges::sized_range< Range > );
-        CHECK( std20::ranges::forward_range< Range > );
-        CHECK( ! std20::ranges::bidirectional_range< Range > );
-		    CHECK( ! std20::ranges::random_access_range< Range > );
-		    CHECK( ! std20::ranges::contiguous_range< Range > );
-		    CHECK( std20::ranges::common_range< Range > );
-      }
-
-      THEN( "the all_view range and iterator associated types are correct" ) {
-
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
-
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
-      }
-
-      THEN( "an all_view can be constructed and members can be tested" ) {
-
-        CHECK( values.begin() == chunk.begin() );
-        CHECK( values.end() == chunk.end() );
-
-        // the following should not compile: no random access iterator
-        // CHECK( 5 == chunk.size() );
-
-        CHECK( false == chunk.empty() );
-        CHECK( true == bool( chunk ) );
-
-        CHECK( std20::ranges::equal( chunk, equal ) );
-
-        // the following should not compile: no random access iterator
-        // CHECK( -2 == chunk[0] );
-
-        CHECK( -2 == chunk.front() );
-
-        // the following should not compile: no random access iterator
-        // CHECK(  2 == chunk.back() );
-
-        unsigned int counter = 0;
-        for ( auto&& value : chunk ) {
-
-          value += counter;
-          ++counter;
-        }
-        CHECK( 5 == counter );
-
-        CHECK( std20::ranges::equal( chunk, modified ) );
-        CHECK( std20::ranges::equal( values, modified ) );
-      } // THEN
-    } // WHEN
-  } // GIVEN*/
+  const std::vector< int > equal = { 2, 1, 0, -1, -2 };
+  const std::vector< int > modified = { 2, 2, 2, 2, 2 };
 
   GIVEN( "a container with bidirectional iterators" ) {
 
@@ -92,11 +25,11 @@ SCENARIO( "all_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::all;
+      auto chunk = values | std20::views::reverse;
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required concepts" ) {
+      THEN( "the subrange satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range< Range > );
@@ -107,7 +40,7 @@ SCENARIO( "all_view" ) {
 		    CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "the all_view range and iterator associated types are correct" ) {
+      THEN( "the subrange range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -118,10 +51,7 @@ SCENARIO( "all_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an all_view can be constructed and members can be tested" ) {
-
-        CHECK( values.begin() == chunk.begin() );
-        CHECK( values.end() == chunk.end() );
+      THEN( "a subrange can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -132,8 +62,8 @@ SCENARIO( "all_view" ) {
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
 
-        CHECK( -2 == chunk.front() );
-        CHECK(  2 == chunk.back() );
+        CHECK(  2 == chunk.front() );
+        CHECK( -2 == chunk.back() );
 
         unsigned int counter = 0;
         for ( auto&& value : chunk ) {
@@ -155,22 +85,22 @@ SCENARIO( "all_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std20::views::all;
+      auto chunk = values | std20::views::reverse;
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the all_view satisfies the required concepts" ) {
+      THEN( "the subrange satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range< Range > );
         CHECK( std20::ranges::forward_range< Range > );
         CHECK( std20::ranges::bidirectional_range< Range > );
 		    CHECK( std20::ranges::random_access_range< Range > );
-		    CHECK( std20::ranges::contiguous_range< Range > );
+		    CHECK( ! std20::ranges::contiguous_range< Range > );
 		    CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "the all_view range and iterator associated types are correct" ) {
+      THEN( "the subrange range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -181,10 +111,7 @@ SCENARIO( "all_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an all_view can be constructed and members can be tested" ) {
-
-        CHECK( values.begin() == chunk.begin() );
-        CHECK( values.end() == chunk.end() );
+      THEN( "a subrange can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -192,13 +119,14 @@ SCENARIO( "all_view" ) {
 
         CHECK( std20::ranges::equal( chunk, equal ) );
 
-        CHECK( -1 == chunk[1] );
+        CHECK(  2 == chunk[0] );
+        CHECK(  1 == chunk[1] );
         CHECK(  0 == chunk[2] );
-        CHECK(  1 == chunk[3] );
-        CHECK(  2 == chunk[4] );
+        CHECK( -1 == chunk[3] );
+        CHECK( -2 == chunk[4] );
 
-        CHECK( -2 == chunk.front() );
-        CHECK(  2 == chunk.back() );
+        CHECK(  2 == chunk.front() );
+        CHECK( -2 == chunk.back() );
 
         unsigned int counter = 0;
         for ( auto&& value : chunk ) {
@@ -211,11 +139,11 @@ SCENARIO( "all_view" ) {
         CHECK( std20::ranges::equal( chunk, modified ) );
         CHECK( std20::ranges::equal( values, modified ) );
 
-        CHECK( -2 == chunk[0] );
-        CHECK(  0 == chunk[1] );
+        CHECK(  2 == chunk[0] );
+        CHECK(  2 == chunk[1] );
         CHECK(  2 == chunk[2] );
-        CHECK(  4 == chunk[3] );
-        CHECK(  6 == chunk[4] );
+        CHECK(  2 == chunk[3] );
+        CHECK(  2 == chunk[4] );
       } // THEN
     } // WHEN
   } // GIVEN
