@@ -16,7 +16,7 @@ SCENARIO( "single_view" ) {
   using Range = decltype(chunk);
   using Iterator = nano::iterator_t< Range >;
 
-  THEN( "the take_view satisfies the required concepts" ) {
+  THEN( "the single_view satisfies the required concepts" ) {
 
     CHECK( std20::ranges::view< Range > );
     CHECK( std20::ranges::sized_range< Range > );
@@ -27,7 +27,7 @@ SCENARIO( "single_view" ) {
     CHECK( std20::ranges::common_range< Range > );
   }
 
-  THEN( "the take_view range and iterator associated types are correct" ) {
+  THEN( "the single_view range and iterator associated types are correct" ) {
 
     CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
     CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );

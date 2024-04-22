@@ -30,7 +30,7 @@ SCENARIO( "take_while_view" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the take_view satisfies the required concepts" ) {
+      THEN( "the take_while_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range< Range > );
@@ -41,7 +41,7 @@ SCENARIO( "take_while_view" ) {
 		    CHECK( ! std20::ranges::common_range< Range > );
       }
 
-      THEN( "the take_view range and iterator associated types are correct" ) {
+      THEN( "the take_while_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -52,7 +52,7 @@ SCENARIO( "take_while_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an take_view can be constructed and members can be tested" ) {
+      THEN( "an take_while_view can be constructed and members can be tested" ) {
 
         // the following should not compile: no random access iterator
         // CHECK( 5 == chunk.size() );
@@ -83,7 +83,7 @@ SCENARIO( "take_while_view" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the take_view satisfies the required concepts" ) {
+      THEN( "the take_while_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range< Range > );
@@ -94,7 +94,7 @@ SCENARIO( "take_while_view" ) {
 		    CHECK( ! std20::ranges::common_range< Range > );
       }
 
-      THEN( "the take_view range and iterator associated types are correct" ) {
+      THEN( "the take_while_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -105,7 +105,7 @@ SCENARIO( "take_while_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an take_view can be constructed and members can be tested" ) {
+      THEN( "an take_while_view can be constructed and members can be tested" ) {
 
         // the following should not compile: not sized
         // CHECK( 3 == chunk.size() );
@@ -130,7 +130,7 @@ SCENARIO( "take_while_view" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the take_view satisfies the required concepts" ) {
+      THEN( "the take_while_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( ! std20::ranges::sized_range< Range > );
@@ -141,7 +141,7 @@ SCENARIO( "take_while_view" ) {
 		    CHECK( ! std20::ranges::common_range< Range > );
       }
 
-      THEN( "the take_view range and iterator associated types are correct" ) {
+      THEN( "the take_while_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -152,7 +152,7 @@ SCENARIO( "take_while_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an take_view can be constructed and members can be tested" ) {
+      THEN( "an take_while_view can be constructed and members can be tested" ) {
 
         // CHECK( 3 == chunk.size() );
         CHECK( false == chunk.empty() );
