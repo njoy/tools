@@ -3,6 +3,7 @@
 #include <pybind11/stl.h>
 
 // other includes
+#include "views.hpp"
 
 // namespace aliases
 namespace python = pybind11;
@@ -17,4 +18,35 @@ namespace python = pybind11;
  */
 PYBIND11_MODULE( tools, module ) {
 
+  // create the views submodule
+  python::module viewmodule = module.def_submodule(
+
+    "sequence",
+    "sequence - tools sequences (internal use only)"
+  );
+
+  // wrap some basic recurring views
+  // none of these are supposed to be created directly by the user
+  // @todo test performance against range-v3
+  wrapBasicRandomAccessAnyViewOf< double >(
+      viewmodule,
+      "AnyRandomAccessView< double >" );
+  wrapBasicRandomAccessAnyViewOf< int >(
+      viewmodule,
+      "AnyRandomAccessView< unsigned int >" );
+  wrapBasicRandomAccessAnyViewOf< unsigned int >(
+      viewmodule,
+      "AnyRandomAccessView< unsigned int >" );
+  wrapBasicRandomAccessAnyViewOf< long >(
+      viewmodule,
+      "AnyRandomAccessView< long >" );
+  wrapBasicRandomAccessAnyViewOf< BasicRandomAccessAnyView< double > >(
+      viewmodule,
+      "any_view< any_view< double, random_access >, random_access >" );
+  wrapBasicRandomAccessAnyViewOf< BasicRandomAccessAnyView< BasicRandomAccessAnyView< double > > >(
+      viewmodule,
+      "any_view< any_view< any_view< double, random_access >, random_access >, random_access >" );
+  wrapBasicRandomAccessAnyViewOf< std::complex< double > >(
+      viewmodule,
+      "any_view< std::complex< double , random_access >" );
 }
