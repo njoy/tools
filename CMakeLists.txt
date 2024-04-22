@@ -94,8 +94,8 @@ if( tools.python )
       python/src/tools.python.cpp
       )
 
-  target_link_libraries( tools.python PRIVATE tools )
-  target_include_directories( tools.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
+  target_link_libraries( tools.python PUBLIC tools )
+  target_include_directories( tools.python PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
   target_compile_options( tools.python PRIVATE "-fvisibility=hidden" )
   set_target_properties( tools.python PROPERTIES OUTPUT_NAME tools )
   set_target_properties( tools.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
@@ -103,7 +103,7 @@ if( tools.python )
 
   message( STATUS "Building tools' python API" )
 
-  list( APPEND SCION_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
+  list( APPEND TOOLS_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
 
   include( cmake/unit_testing_python.cmake )
 
