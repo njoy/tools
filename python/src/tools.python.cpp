@@ -33,7 +33,7 @@ PYBIND11_MODULE( tools, module ) {
       "AnyRandomAccessView< double >" );
   wrapBasicRandomAccessAnyViewOf< int >(
       viewmodule,
-      "AnyRandomAccessView< unsigned int >" );
+      "AnyRandomAccessView< int >" );
   wrapBasicRandomAccessAnyViewOf< unsigned int >(
       viewmodule,
       "AnyRandomAccessView< unsigned int >" );
