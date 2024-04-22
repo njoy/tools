@@ -131,12 +131,14 @@ constexpr bool has_member_element_type_v = exists_v<member_element_type_t, T>;
 
 template <typename T>
 struct readable_traits_helper<T, std::enable_if_t<
+    !std::is_const_v<T> &&
     has_member_value_type_v<T> &&
     !has_member_element_type_v<T>>>
     : member_value_type<T> {};
 
 template <typename T>
 struct readable_traits_helper<T, std::enable_if_t<
+    !std::is_const_v<T> &&
     has_member_element_type_v<T> &&
     !has_member_value_type_v<T>>>
     : member_element_type<T> {};
@@ -146,6 +148,7 @@ struct readable_traits_helper<T, std::enable_if_t<
 // https://github.com/ericniebler/stl2/issues/562
 template <typename T>
 struct readable_traits_helper<T, std::enable_if_t<
+    !std::is_const_v<T> &&
     has_member_element_type_v<T> &&
     has_member_value_type_v<T>>>
 {};

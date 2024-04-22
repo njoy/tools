@@ -218,7 +218,8 @@ private:
 
         template <typename B = Base>
         friend constexpr auto iter_swap(const iterator& x, const iterator& y)
-            noexcept(noexcept(ranges::iter_swap(x.current_, y.current_)))
+            // this leads to a template deduction failure on intel-classic
+            // noexcept(noexcept(ranges::iter_swap(x.current_, y.current_)))
             -> std::enable_if_t<indirectly_swappable<iterator_t<B>>>
         {
             return ranges::iter_swap(x.current_, y.current_);
