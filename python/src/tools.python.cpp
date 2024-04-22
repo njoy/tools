@@ -3,7 +3,7 @@
 #include <pybind11/stl.h>
 
 // other includes
-#include "views.hpp"
+#include "tools/views/views-python.hpp"
 
 // namespace aliases
 namespace python = pybind11;
