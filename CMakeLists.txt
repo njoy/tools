@@ -33,7 +33,7 @@ cmake_dependent_option(
 cmake_dependent_option(
   tools.python
   "Build tools python bindings" ON
-  "NOT ${subproject}" OFF
+  "NOT ${subproject} OR DEFINED require.tools.python " OFF
 )
 
 ########################################################################
@@ -103,9 +103,11 @@ if( tools.python )
 
   message( STATUS "Building tools' python API" )
 
-  list( APPEND SCION_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
+  list( APPEND TOOLS_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
 
-  include( cmake/unit_testing_python.cmake )
+  if( tools.tests )
+    include( cmake/unit_testing_python.cmake )
+  endif()
 
 endif()
 
