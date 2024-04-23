@@ -16,7 +16,7 @@ struct Foo {
   int i;
 };
 
-SCENARIO( "equal" ) {
+SCENARIO( "min" ) {
 
   int a[] = { 1, 2, 3 };
   std::vector< int > v = { 1, 2, 3 };

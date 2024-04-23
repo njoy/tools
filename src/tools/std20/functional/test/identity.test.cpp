@@ -10,7 +10,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "invoke" ) {
+SCENARIO( "identity" ) {
 
   CHECK( std20::identity{}( 10 ) == 10 );
 } // SCENARIO

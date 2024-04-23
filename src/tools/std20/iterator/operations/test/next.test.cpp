@@ -18,7 +18,7 @@ SCENARIO( "next" ) {
 
     std::list< int > values = { 1, 2, 3, 4, 5 };
 
-    THEN( "advance can be used" ) {
+    THEN( "next can be used" ) {
 
       auto iter = std20::ranges::begin( values );
 
@@ -52,7 +52,7 @@ SCENARIO( "next" ) {
 
     std::vector< int > values = { 1, 2, 3, 4, 5 };
 
-    THEN( "advance can be used" ) {
+    THEN( "next can be used" ) {
 
       auto iter = std20::ranges::begin( values );
 

@@ -14,7 +14,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "take_view" ) {
+SCENARIO( "counted_view" ) {
 
   const std::vector< int > equal = { -2, -1, 0 };
   const std::vector< int > modified = { -2, 0, 2 };
@@ -31,7 +31,7 @@ SCENARIO( "take_view" ) {
 //      using Range = decltype(chunk);
 //      using Iterator = nano::iterator_t< Range >;
 //
-//      THEN( "the take_view satisfies the required concepts" ) {
+//      THEN( "the counted_view satisfies the required concepts" ) {
 //
 //		    CHECK( std20::ranges::view< Range > );
 //		    CHECK( std20::ranges::sized_range< Range > );
@@ -42,7 +42,7 @@ SCENARIO( "take_view" ) {
 //		    CHECK( ! std20::ranges::common_range< Range > );
 //      }
 //
-//      THEN( "the take_view range and iterator associated types are correct" ) {
+//      THEN( "the counted_view range and iterator associated types are correct" ) {
 //
 //        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
 //        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -53,7 +53,7 @@ SCENARIO( "take_view" ) {
 //        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
 //      }
 //
-//      THEN( "an take_view can be constructed and members can be tested" ) {
+//      THEN( "an counted_view can be constructed and members can be tested" ) {
 //
 //        CHECK( 3 == chunk.size() );
 //        CHECK( false == chunk.empty() );
@@ -93,7 +93,7 @@ SCENARIO( "take_view" ) {
 //      using Range = decltype(chunk);
 //      using Iterator = nano::iterator_t< Range >;
 //
-//      THEN( "the take_view satisfies the required concepts" ) {
+//      THEN( "the counted_view satisfies the required concepts" ) {
 //
 //		    CHECK( std20::ranges::view< Range > );
 //		    CHECK( std20::ranges::sized_range< Range > );
@@ -104,7 +104,7 @@ SCENARIO( "take_view" ) {
 //		    CHECK( ! std20::ranges::common_range< Range > );
 //      }
 //
-//      THEN( "the take_view range and iterator associated types are correct" ) {
+//      THEN( "the counted_view range and iterator associated types are correct" ) {
 //
 //        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
 //        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -115,7 +115,7 @@ SCENARIO( "take_view" ) {
 //        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
 //      }
 //
-//      THEN( "an take_view can be constructed and members can be tested" ) {
+//      THEN( "an counted_view can be constructed and members can be tested" ) {
 //
 //        CHECK( 3 == chunk.size() );
 //        CHECK( false == chunk.empty() );
@@ -150,7 +150,7 @@ SCENARIO( "take_view" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the take_view satisfies the required concepts" ) {
+      THEN( "the counted_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range< Range > );
@@ -161,7 +161,7 @@ SCENARIO( "take_view" ) {
 		    CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "the take_view range and iterator associated types are correct" ) {
+      THEN( "the counted_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -172,7 +172,7 @@ SCENARIO( "take_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "an take_view can be constructed and members can be tested" ) {
+      THEN( "an counted_view can be constructed and members can be tested" ) {
 
         CHECK( 3 == chunk.size() );
         CHECK( false == chunk.empty() );

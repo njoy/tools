@@ -21,7 +21,7 @@ namespace std20 = nano;
 // test code
 struct Foo {};
 
-SCENARIO( "ccbegin" ) {
+SCENARIO( "cbegin" ) {
 
   int a[2] = {};
   CHECK( std20::same_as< decltype( std20::ranges::cbegin( a )), const int* > );

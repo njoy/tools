@@ -14,7 +14,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "subrange" ) {
+SCENARIO( "reverse_view" ) {
 
   const std::vector< int > equal = { 2, 1, 0, -1, -2 };
   const std::vector< int > modified = { 2, 2, 2, 2, 2 };
@@ -29,7 +29,7 @@ SCENARIO( "subrange" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required concepts" ) {
+      THEN( "the reverse_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range< Range > );
@@ -40,7 +40,7 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "the subrange range and iterator associated types are correct" ) {
+      THEN( "the reverse_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -51,7 +51,7 @@ SCENARIO( "subrange" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "a subrange can be constructed and members can be tested" ) {
+      THEN( "a reverse_view can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
@@ -89,7 +89,7 @@ SCENARIO( "subrange" ) {
       using Range = decltype(chunk);
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the subrange satisfies the required concepts" ) {
+      THEN( "the reverse_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range< Range > );
@@ -100,7 +100,7 @@ SCENARIO( "subrange" ) {
 		    CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "the subrange range and iterator associated types are correct" ) {
+      THEN( "the reverse_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
@@ -111,7 +111,7 @@ SCENARIO( "subrange" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
-      THEN( "a subrange can be constructed and members can be tested" ) {
+      THEN( "a reverse_view can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );

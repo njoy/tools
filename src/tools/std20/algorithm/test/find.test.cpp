@@ -10,7 +10,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "equal" ) {
+SCENARIO( "find" ) {
 
   int a[] = { 1, 2, 3 };
 

@@ -10,7 +10,7 @@
 //using namespace njoy::tools;
 namespace std20 = nano;
 
-SCENARIO( "equal" ) {
+SCENARIO( "mismatch" ) {
 
   int a[] = { 1, 2, 3, 4, 5, 6, 7 };
   int b[] = { 1, 2, 3, 8, 9 };

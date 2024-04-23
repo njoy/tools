@@ -24,7 +24,7 @@ SCENARIO( "iota_view" ) {
       using Range = decltype( chunk );
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the transform_view satisfies the required concepts" ) {
+      THEN( "the iota_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range< Range > );
@@ -35,7 +35,7 @@ SCENARIO( "iota_view" ) {
 		    CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "the transform_view range and iterator associated types are correct" ) {
+      THEN( "the iota_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
@@ -46,7 +46,7 @@ SCENARIO( "iota_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, int > );
       }
 
-      THEN( "a transform_view can be constructed and members can be tested" ) {
+      THEN( "a iota_view can be constructed and members can be tested" ) {
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
@@ -89,7 +89,7 @@ SCENARIO( "iota_view" ) {
       using Range = decltype( chunk );
       using Iterator = nano::iterator_t< Range >;
 
-      THEN( "the transform_view satisfies the required concepts" ) {
+      THEN( "the iota_view satisfies the required concepts" ) {
 
 		    CHECK( std20::ranges::view< Range > );
 		    CHECK( std20::ranges::sized_range< Range > );
@@ -100,7 +100,7 @@ SCENARIO( "iota_view" ) {
 		    CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "the transform_view range and iterator associated types are correct" ) {
+      THEN( "the iota_view range and iterator associated types are correct" ) {
 
         CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
         CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
@@ -111,7 +111,7 @@ SCENARIO( "iota_view" ) {
         CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, int > );
       }
 
-      THEN( "a transform_view can be constructed and members can be tested" ) {
+      THEN( "a iota_view can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
