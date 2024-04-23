@@ -6,7 +6,6 @@
 #include <iomanip>
 
 // other includes
-#include "fast_float/fast_float.h"
 #include "tools/disco/Real.hpp"
 
 namespace njoy {
@@ -43,7 +42,7 @@ public:
     std::ostringstream buffer;
     buffer << std::right << std::setw( Width );
 
-    if ( absValue == std::numeric_limits< Representation >::max() ) {
+    if ( absValue == std::numeric_limits< Representation >::infinity() ) {
 
       if ( value < 0 ) {
 

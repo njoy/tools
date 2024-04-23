@@ -51,10 +51,12 @@ public:
       throw std::runtime_error( "cannot parse invalid real number 1" );
     }
 
-    // we are using fast_float::from_chars instead of std::from_chars since
-    // not all standard c++ libraries implement the floating point version of
-    // std::from_chars
-    auto result = fast_float::from_chars( &*iter, &*end, value );
+    // we are using fast_float::from_chars_advanced instead of std::from_chars
+    // since not all standard c++ libraries implement the floating point version
+    // of std::from_chars and because this allows us to read fortran formatted
+    // floats
+    fast_float::parse_options options{ fast_float::chars_format::fortran };
+    auto result = fast_float::from_chars_advanced( &*iter, &*end, value, options );
     if ( result.ec == std::errc() ) {
 
       auto advance = result.ptr - &*iter;
@@ -81,7 +83,7 @@ public:
   template < typename Iterator >
   static double read( Iterator& iter, const Iterator& end ) {
 
-        return read< double >( iter, end );
+    return read< double >( iter, end );
   }
 };
 

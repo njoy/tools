@@ -40,7 +40,7 @@ SCENARIO( "Column" ) {
     CHECK( begin == end - 2 );
     Column< 3 >::read( begin, end );
     CHECK( begin == end - 1 );
-  }
+  } // THEN
 
   THEN( "columns can be written" ) {
 
@@ -56,5 +56,5 @@ SCENARIO( "Column" ) {
     iter = std::back_inserter( buffer );
     Column< 1 >::write( iter );
     CHECK( " " == buffer );
-  }
+  } // THEN
 } // SCENARIO

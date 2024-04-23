@@ -2,6 +2,7 @@
 #define NJOY_TOOLS_DISCO_INTEGER
 
 // system includes
+#include <cstdlib>
 #include <sstream>
 #include <iomanip>
 
@@ -99,33 +100,20 @@ public:
   template< typename Representation, typename Iterator >
   static void write( const Representation& value, Iterator& iter ) {
 
-    const Representation absValue = std::abs( value );
+    // std::abs does not exist for all integer types (e.g. unsigned)
+    const Representation absValue = value < 0 ? -value : value;
     const auto required = minimumRequiredWidth( absValue )
                         + ( value < 0 ? 1 : 0 );
 
     std::ostringstream buffer;
     buffer << std::right << std::setw( Width );
-    if ( absValue == std::numeric_limits< Representation >::max() ) {
+    if ( required > Width ) {
 
-      if ( value < 0 ) {
-
-        buffer << "-Inf";
-      }
-      else {
-
-        buffer << "Inf";
-      }
+      buffer << std::setfill( '*' ) << '*';
     }
     else {
 
-      if ( required > Width ) {
-
-        buffer << std::setfill( '*' ) << '*';
-      }
-      else {
-
-        buffer << value;
-      }
+      buffer << value;
     }
 
     for ( auto b : buffer.str() ) {
