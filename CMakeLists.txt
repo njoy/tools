@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( tools
-  VERSION 0.2.0
+  VERSION 0.3.0
   LANGUAGES CXX
 )
 
@@ -33,7 +33,7 @@ cmake_dependent_option(
 cmake_dependent_option(
   tools.python
   "Build tools python bindings" ON
-  "NOT ${subproject}" OFF
+  "NOT ${subproject} OR DEFINED require.tools.python " OFF
 )
 
 ########################################################################
@@ -77,7 +77,10 @@ target_include_directories( tools
 target_link_libraries( tools
   INTERFACE
     spdlog::spdlog
+    FastFloat::fast_float
 )
+
+target_compile_definitions( tools INTERFACE -DNANORANGE_NO_STD_FORWARD_DECLARATIONS )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # tools : python bindings
@@ -100,9 +103,11 @@ if( tools.python )
 
   message( STATUS "Building tools' python API" )
 
-  list( APPEND SCION_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
+  list( APPEND TOOLS_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
 
-  include( cmake/unit_testing_python.cmake )
+  if( tools.tests )
+    include( cmake/unit_testing_python.cmake )
+  endif()
 
 endif()
 

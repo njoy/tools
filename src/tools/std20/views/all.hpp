@@ -1,0 +1,74 @@
+// nanorange/views/all.hpp
+//
+// Copyright (c) 2018 Tristan Brindle (tcbrindle at gmail dot com)
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+#ifndef NANORANGE_VIEWS_ALL_HPP_INCLUDED
+#define NANORANGE_VIEWS_ALL_HPP_INCLUDED
+
+#include "tools/std20/detail/views/range_adaptors.hpp"
+#include "tools/std20/views/ref.hpp"
+#include "tools/std20/views/subrange.hpp"
+
+NANO_BEGIN_NAMESPACE
+
+namespace detail {
+
+struct all_view_fn {
+private:
+    template <typename T>
+    static constexpr auto impl(T&& t, priority_tag<2>)
+        noexcept(noexcept(detail::decay_copy(std::forward<T>(t))))
+        -> std::enable_if_t<view<std::decay_t<T>>,
+                            decltype(detail::decay_copy(std::forward<T>(t)))>
+    {
+        return std::forward<T>(t);
+    }
+
+    template <typename T>
+    static constexpr auto impl(T&& t, priority_tag<1>) noexcept
+        -> decltype(ref_view(std::forward<T>(t)))
+    {
+        return ref_view(std::forward<T>(t));
+    }
+
+    template <typename T>
+    static constexpr auto impl(T&& t, priority_tag<0>)
+        noexcept(noexcept(ranges::subrange{std::forward<T>(t)}))
+#ifndef __INTEL_COMPILER
+        // intel-classic/2021 gets into an assertion error due to this line
+        -> decltype(ranges::subrange{std::forward<T>(t)})
+#endif
+    {
+        return ranges::subrange{std::forward<T>(t)};
+    }
+
+public:
+    template <typename T>
+    constexpr auto operator()(T&& t) const
+        noexcept(noexcept(all_view_fn::impl(std::forward<T>(t), priority_tag<2>{})))
+        -> decltype(all_view_fn::impl(std::forward<T>(t), priority_tag<2>{}))
+    {
+        return all_view_fn::impl(std::forward<T>(t), priority_tag<2>{});
+    }
+};
+
+template <>
+inline constexpr bool is_raco<all_view_fn> = true;
+
+} // namespace detail
+
+namespace views {
+
+NANO_INLINE_VAR(ranges::detail::all_view_fn, all)
+
+}
+
+template <typename R>
+using all_view = std::enable_if_t<viewable_range<R>,
+                                  decltype(views::all(std::declval<R>()))>;
+
+NANO_END_NAMESPACE
+
+#endif
