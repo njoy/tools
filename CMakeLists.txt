@@ -33,7 +33,7 @@ cmake_dependent_option(
 cmake_dependent_option(
   tools.python
   "Build tools python bindings" ON
-  "NOT ${subproject}" OFF
+  "NOT ${subproject} OR DEFINED require.tools.python " OFF
 )
 
 ########################################################################
