@@ -77,6 +77,7 @@ target_include_directories( tools
 target_link_libraries( tools
   INTERFACE
     spdlog::spdlog
+    FastFloat::fast_float
 )
 
 target_compile_definitions( tools INTERFACE -DNANORANGE_NO_STD_FORWARD_DECLARATIONS )
