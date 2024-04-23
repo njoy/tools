@@ -19,16 +19,16 @@ private:
     static constexpr iter_value_t<iterator_t<Rng>>
     impl(Rng&& rng, Comp& comp, Proj& proj)
     {
-        auto first = nano::begin(rng);
-        const auto last = nano::end(rng);
+        auto first = ranges::begin(rng);
+        const auto last = ranges::end(rng);
 
         // Empty ranges not allowed
         auto result = *first;
 
         while(++first != last) {
             auto&& val = *first;
-            if (nano::invoke(comp, nano::invoke(proj, val),
-                             nano::invoke(proj, result))) {
+            if (ranges::invoke(comp, ranges::invoke(proj, val),
+                               ranges::invoke(proj, result))) {
                 result = std::forward<decltype(val)>(val);
             }
         }
@@ -43,8 +43,8 @@ public:
         const T&>
     operator()(const T& a, const T& b, Comp comp = Comp{}, Proj proj = Proj{}) const
     {
-        return nano::invoke(comp, nano::invoke(proj, b),
-                            nano::invoke(proj, a)) ? b : a;
+        return ranges::invoke(comp, ranges::invoke(proj, b),
+                              ranges::invoke(proj, a)) ? b : a;
     }
 
     template <typename T, typename Comp = ranges::less, typename Proj = identity>

@@ -10,8 +10,7 @@
 #include "tools/std20/algorithm.hpp"
 
 // convenience typedefs
-//using namespace njoy::tools;
-namespace std20 = nano;
+using namespace njoy::tools;
 
 SCENARIO( "split" ) {
 

@@ -9,8 +9,7 @@
 #include "tools/std20/algorithm.hpp"
 
 // convenience typedefs
-//using namespace njoy::tools;
-namespace std20 = nano;
+using namespace njoy::tools;
 
 SCENARIO( "iota_view" ) {
 
@@ -22,7 +21,7 @@ SCENARIO( "iota_view" ) {
 
       auto chunk = std20::ranges::iota_view< int, int >( 1 );
       using Range = decltype( chunk );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the iota_view satisfies the required concepts" ) {
 
@@ -37,13 +36,13 @@ SCENARIO( "iota_view" ) {
 
       THEN( "the iota_view range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, int > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, int > );
       }
 
       THEN( "a iota_view can be constructed and members can be tested" ) {
@@ -87,7 +86,7 @@ SCENARIO( "iota_view" ) {
 
       auto chunk = std20::ranges::iota_view< int, int >( 1, 6 );
       using Range = decltype( chunk );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the iota_view satisfies the required concepts" ) {
 
@@ -102,13 +101,13 @@ SCENARIO( "iota_view" ) {
 
       THEN( "the iota_view range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, int > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, int > );
       }
 
       THEN( "a iota_view can be constructed and members can be tested" ) {

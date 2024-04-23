@@ -11,8 +11,7 @@
 #include "tools/std20/algorithm.hpp"
 
 // convenience typedefs
-//using namespace njoy::tools;
-namespace std20 = nano;
+using namespace njoy::tools;
 
 SCENARIO( "transform_view" ) {
 
@@ -28,7 +27,7 @@ SCENARIO( "transform_view" ) {
 
       auto chunk = values | std20::views::transform( transform );
       using Range = decltype( chunk );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the transform_view satisfies the required concepts" ) {
 
@@ -43,13 +42,13 @@ SCENARIO( "transform_view" ) {
 
       THEN( "the transform_view range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an transform_view can be constructed and members can be tested" ) {
@@ -81,7 +80,7 @@ SCENARIO( "transform_view" ) {
 
       auto chunk = values | std20::views::transform( transform );
       using Range = decltype( chunk );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the transform_view satisfies the required concepts" ) {
 
@@ -96,13 +95,13 @@ SCENARIO( "transform_view" ) {
 
       THEN( "the transform_view range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "a transform_view can be constructed and members can be tested" ) {
@@ -130,7 +129,7 @@ SCENARIO( "transform_view" ) {
 
       auto chunk = values | std20::views::transform( transform );
       using Range = decltype( chunk );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the transform_view satisfies the required concepts" ) {
 
@@ -145,13 +144,13 @@ SCENARIO( "transform_view" ) {
 
       THEN( "the transform_view range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "a transform_view can be constructed and members can be tested" ) {

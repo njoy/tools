@@ -199,7 +199,7 @@ struct take_view_fn {
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::take_view_fn, take)
+NANO_INLINE_VAR(ranges::detail::take_view_fn, take)
 
 }
 

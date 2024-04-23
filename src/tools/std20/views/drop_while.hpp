@@ -40,7 +40,7 @@ struct drop_while_view : view_interface<drop_while_view<R, Pred>> {
             cached_ = ranges::find_if(base_,
                 [&p = pred()](auto&& arg)
                 {
-                    return !nano::invoke(p, std::forward<decltype(arg)>(arg));
+                    return !ranges::invoke(p, std::forward<decltype(arg)>(arg));
                 });
         }
 
@@ -90,7 +90,7 @@ struct drop_while_view_fn {
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::drop_while_view_fn, drop_while)
+NANO_INLINE_VAR(ranges::detail::drop_while_view_fn, drop_while)
 
 }
 

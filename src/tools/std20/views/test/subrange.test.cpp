@@ -11,8 +11,7 @@
 #include "tools/std20/algorithm.hpp"
 
 // convenience typedefs
-//using namespace njoy::tools;
-namespace std20 = nano;
+using namespace njoy::tools;
 
 SCENARIO( "subrange" ) {
 
@@ -31,7 +30,7 @@ SCENARIO( "subrange" ) {
 
       auto size = std::distance( values.begin(), values.end() );
       Range chunk( values.begin(), values.end(), size );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the subrange satisfies the required concepts" ) {
 
@@ -46,13 +45,13 @@ SCENARIO( "subrange" ) {
 
       THEN( "the subrange range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
@@ -100,7 +99,7 @@ SCENARIO( "subrange" ) {
 
       auto size = std::distance( values.begin(), values.end() );
       Range chunk( values.begin(), values.end(), size );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the subrange satisfies the required concepts" ) {
 
@@ -115,13 +114,13 @@ SCENARIO( "subrange" ) {
 
       THEN( "the subrange range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {
@@ -165,7 +164,7 @@ SCENARIO( "subrange" ) {
 
       auto size = std::distance( values.begin(), values.end() );
       Range chunk( values.begin(), values.end(), size );
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the subrange satisfies the required concepts" ) {
 
@@ -180,13 +179,13 @@ SCENARIO( "subrange" ) {
 
       THEN( "the subrange range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "a subrange can be constructed and members can be tested" ) {

@@ -208,15 +208,15 @@ NANO_END_NAMESPACE
 namespace std {
 
 template <typename I, typename S>
-struct iterator_traits<::nano::common_iterator<I, S>> {
+struct iterator_traits<njoy::tools::std20::ranges::common_iterator<I, S>> {
     using difference_type =
-        ::nano::iter_difference_t<::nano::common_iterator<I, S>>;
-    using value_type = ::nano::iter_value_t<::nano::common_iterator<I, S>>;
+        njoy::tools::std20::ranges::iter_difference_t<njoy::tools::std20::ranges::common_iterator<I, S>>;
+    using value_type = njoy::tools::std20::ranges::iter_value_t<njoy::tools::std20::ranges::common_iterator<I, S>>;
     using pointer =
-        std::add_pointer_t<::nano::iter_reference_t<::nano::common_iterator<I, S>>>;
-    using reference = ::nano::iter_reference_t<::nano::common_iterator<I, S>>;
+        std::add_pointer_t<njoy::tools::std20::ranges::iter_reference_t<njoy::tools::std20::ranges::common_iterator<I, S>>>;
+    using reference = njoy::tools::std20::ranges::iter_reference_t<njoy::tools::std20::ranges::common_iterator<I, S>>;
     using iterator_category =
-        ::nano::detail::conditional_t<::nano::forward_iterator<I>,
+        njoy::tools::std20::ranges::detail::conditional_t<njoy::tools::std20::ranges::forward_iterator<I>,
                            std::forward_iterator_tag,
                            std::input_iterator_tag>;
 };

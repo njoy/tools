@@ -15,8 +15,7 @@
 #include <vector>
 
 // convenience typedefs
-//using namespace njoy::tools;
-namespace std20 = nano;
+using namespace njoy::tools;
 
 // test code
 struct Foo {};

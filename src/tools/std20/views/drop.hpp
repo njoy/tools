@@ -129,7 +129,7 @@ struct drop_view_fn {
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::drop_view_fn, drop)
+NANO_INLINE_VAR(ranges::detail::drop_view_fn, drop)
 
 }
 

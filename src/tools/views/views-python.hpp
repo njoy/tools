@@ -10,7 +10,6 @@
 #include "tools/views/AnyView.hpp"
 
 namespace python = pybind11;
-namespace std20 = nano;
 
 /**
  *  @brief Type aliases for basic any views
@@ -73,8 +72,8 @@ void wrapBasicBidirectionalAnyViewOf( python::module& module, const std::string&
         [] ( BasicBidirectionalAnyView< Element >& view )
            { return python::make_iterator<
                         python::return_value_policy::reference_internal,
-                        nano::iterator_t< BasicBidirectionalAnyView< Element > >,
-                        nano::sentinel_t< BasicBidirectionalAnyView< Element > >,
+                        njoy::tools::std20::ranges::iterator_t< BasicBidirectionalAnyView< Element > >,
+                        njoy::tools::std20::ranges::sentinel_t< BasicBidirectionalAnyView< Element > >,
                         Element >( view.begin(), view.end() ); },
         "Return an iterator for the sequence",
         python::keep_alive< 0, 1 >() )
@@ -159,8 +158,8 @@ void wrapBasicRandomAccessAnyViewOf( python::module& module, const std::string& 
         [] ( BasicRandomAccessAnyView< Element >& view )
            { return python::make_iterator<
                         python::return_value_policy::reference_internal,
-                        nano::iterator_t< BasicBidirectionalAnyView< Element > >,
-                        nano::sentinel_t< BasicBidirectionalAnyView< Element > >,
+                        njoy::tools::std20::ranges::iterator_t< BasicBidirectionalAnyView< Element > >,
+                        njoy::tools::std20::ranges::sentinel_t< BasicBidirectionalAnyView< Element > >,
                         Element >( view.begin(), view.end() ); },
         "Return an iterator for the sequence",
         python::keep_alive< 0, 1 >() )

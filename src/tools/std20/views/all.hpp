@@ -35,13 +35,13 @@ private:
 
     template <typename T>
     static constexpr auto impl(T&& t, priority_tag<0>)
-        noexcept(noexcept(nano::subrange{std::forward<T>(t)}))
+        noexcept(noexcept(ranges::subrange{std::forward<T>(t)}))
 #ifndef __INTEL_COMPILER
         // intel-classic/2021 gets into an assertion error due to this line
-        -> decltype(nano::subrange{std::forward<T>(t)})
+        -> decltype(ranges::subrange{std::forward<T>(t)})
 #endif
     {
-        return nano::subrange{std::forward<T>(t)};
+        return ranges::subrange{std::forward<T>(t)};
     }
 
 public:
@@ -61,7 +61,7 @@ inline constexpr bool is_raco<all_view_fn> = true;
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::all_view_fn, all)
+NANO_INLINE_VAR(ranges::detail::all_view_fn, all)
 
 }
 

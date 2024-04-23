@@ -45,13 +45,13 @@ struct reverse_view
     constexpr reverse_iterator<iterator_t<V>> begin()
     {
         if constexpr (common_range<V>) {
-            return nano::make_reverse_iterator(ranges::end(base_));
+            return ranges::make_reverse_iterator(ranges::end(base_));
         } else {
             auto& c = this->cached;
             if (!c.has_value()) {
                 c = ranges::next(ranges::begin(base_), ranges::end(base_));
             }
-            return nano::make_reverse_iterator(*c);
+            return ranges::make_reverse_iterator(*c);
         }
     }
 
@@ -60,19 +60,19 @@ struct reverse_view
         -> std::enable_if_t<common_range<const VV>,
                             reverse_iterator<iterator_t<const VV>>>
     {
-        return nano::make_reverse_iterator(ranges::end(base_));
+        return ranges::make_reverse_iterator(ranges::end(base_));
     }
 
     constexpr reverse_iterator<iterator_t<V>> end()
     {
-        return nano::make_reverse_iterator(ranges::begin(base_));
+        return ranges::make_reverse_iterator(ranges::begin(base_));
     }
 
     template <typename VV = V>
     constexpr auto end() const
         -> std::enable_if_t<common_range<const VV>, reverse_iterator<iterator_t<const VV>>>
     {
-        return nano::make_reverse_iterator(ranges::begin(base_));
+        return ranges::make_reverse_iterator(ranges::begin(base_));
     }
 
     template <typename VV = V, std::enable_if_t<sized_range<VV>, int> = 0>
@@ -138,7 +138,7 @@ inline constexpr bool is_raco<reverse_view_fn> = true;
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::reverse_view_fn, reverse)
+NANO_INLINE_VAR(ranges::detail::reverse_view_fn, reverse)
 
 } // namespace views
 

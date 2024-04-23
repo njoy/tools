@@ -22,8 +22,8 @@ private:
                                 Pred& pred, Proj1& proj1, Proj2& proj2)
     {
         while (first1 != last1 && first2 != last2) {
-            if (!nano::invoke(pred, nano::invoke(proj1, *first1),
-                              nano::invoke(proj2, *first2))) {
+            if (!ranges::invoke(pred, ranges::invoke(proj1, *first1),
+                                ranges::invoke(proj2, *first2))) {
                 return false;
             }
             ++first1;
@@ -39,8 +39,8 @@ private:
                                 Proj1& proj1, Proj2& proj2)
     {
         while (first1 != last1) {
-            if (!nano::invoke(pred, nano::invoke(proj1, *first1),
-                              nano::invoke(proj2, *first2))) {
+            if (!ranges::invoke(pred, ranges::invoke(proj1, *first1),
+                                ranges::invoke(proj2, *first2))) {
                 return false;
             }
             ++first1;
@@ -121,12 +121,12 @@ public:
     operator()(Rng1&& rng1, Rng2&& rng2, Pred pred = Pred{},
                Proj1 proj1 = Proj1{}, Proj2 proj2 = Proj2{}) const
     {
-        if (nano::distance(rng1) != nano::distance(rng2)) {
+        if (ranges::distance(rng1) != ranges::distance(rng2)) {
             return false;
         }
 
-        return equal_fn::impl3(nano::begin(rng1), nano::end(rng1),
-                               nano::begin(rng2), pred, proj1, proj2);
+        return equal_fn::impl3(ranges::begin(rng1), ranges::end(rng1),
+                               ranges::begin(rng2), pred, proj1, proj2);
     }
 
     // Two ranges, not both sized
@@ -141,8 +141,8 @@ public:
     operator()(Rng1&& rng1, Rng2&& rng2, Pred pred = Pred{},
                Proj1 proj1 = Proj1{}, Proj2 proj2 = Proj2{}) const
     {
-        return equal_fn::impl4(nano::begin(rng1), nano::end(rng1),
-                               nano::begin(rng2), nano::end(rng2),
+        return equal_fn::impl4(ranges::begin(rng1), ranges::end(rng1),
+                               ranges::begin(rng2), ranges::end(rng2),
                                pred, proj1, proj2);
     }
 
@@ -157,7 +157,7 @@ public:
     operator()(Rng1&& rng1, I2&& first2, Pred pred = Pred{},
                Proj1 proj1 = Proj1{}, Proj2 proj2 = Proj2{}) const
     {
-        return equal_fn::impl3(nano::begin(rng1), nano::end(rng1),
+        return equal_fn::impl3(ranges::begin(rng1), ranges::end(rng1),
                                std::forward<I2>(first2), pred, proj1, proj2);
     }
 };

@@ -32,7 +32,7 @@ constexpr auto filter_view_iter_cat_helper()
 
 constexpr inline auto as_ref = [](auto& pred) {
     return [&p = pred] (auto&& arg) {
-        return nano::invoke(p, std::forward<decltype(arg)>(arg));
+        return ranges::invoke(p, std::forward<decltype(arg)>(arg));
     };
 };
 
@@ -113,7 +113,7 @@ private:
         {
             do {
                 --current_;
-            } while (!nano::invoke(*parent_->pred_, *current_));
+            } while (!ranges::invoke(*parent_->pred_, *current_));
             return *this;
         }
 
@@ -223,7 +223,7 @@ public:
 
         assert(pred_.has_value());
         begin_cache_ = std::optional<iterator>{
-            iterator{*this, nano::find_if(base_, detail::as_ref(*pred_))}};
+            iterator{*this, ranges::find_if(base_, detail::as_ref(*pred_))}};
         return *begin_cache_;
     }
 
@@ -273,7 +273,7 @@ struct filter_view_fn {
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::filter_view_fn, filter)
+NANO_INLINE_VAR(ranges::detail::filter_view_fn, filter)
 
 }
 

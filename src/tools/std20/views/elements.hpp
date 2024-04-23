@@ -328,11 +328,11 @@ namespace views {
 inline namespace function_objects {
 
 template <std::size_t N>
-inline constexpr nano::detail::elements_view_fn<N> elements{};
+inline constexpr ranges::detail::elements_view_fn<N> elements{};
 
-inline constexpr nano::detail::elements_view_fn<0> keys{};
+inline constexpr ranges::detail::elements_view_fn<0> keys{};
 
-inline constexpr nano::detail::elements_view_fn<1> values{};
+inline constexpr ranges::detail::elements_view_fn<1> values{};
 
 }
 

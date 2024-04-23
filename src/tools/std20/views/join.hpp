@@ -368,7 +368,7 @@ inline constexpr bool is_raco<join_view_fn> = true;
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::join_view_fn, join)
+NANO_INLINE_VAR(ranges::detail::join_view_fn, join)
 
 }
 

@@ -46,7 +46,7 @@ private:
         Parent* parent_ = nullptr;
 
         static constexpr bool iter_move_noexcept_helper =
-            noexcept(nano::invoke(*parent_->fun_, *current_));
+            noexcept(ranges::invoke(*parent_->fun_, *current_));
 
     public:
         using iterator_category = detail::conditional_t<
@@ -81,7 +81,7 @@ private:
 
         constexpr decltype(auto) operator*() const
         {
-            return nano::invoke(*parent_->fun_, *current_);
+            return ranges::invoke(*parent_->fun_, *current_);
         }
 
         constexpr iterator& operator++() { ++current_; return *this; }
@@ -133,7 +133,7 @@ private:
         template <typename B = Base, typename = std::enable_if_t<random_access_range<B>>>
         constexpr decltype(auto) operator[](difference_type n) const
         {
-            return nano::invoke(*parent_->fun_, current_[n]);
+            return ranges::invoke(*parent_->fun_, current_[n]);
         }
 
         template <typename B = Base>
@@ -384,7 +384,7 @@ struct transform_view_fn {
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::transform_view_fn, transform)
+NANO_INLINE_VAR(ranges::detail::transform_view_fn, transform)
 
 }
 

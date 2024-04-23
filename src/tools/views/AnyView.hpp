@@ -19,12 +19,13 @@ namespace views {
  */
 template < typename IteratorCategory, typename ReferenceType >
 class AnyView :
-  public nano::view_interface< AnyView< IteratorCategory, ReferenceType > > {
+  public njoy::tools::std20::ranges::view_interface< AnyView< IteratorCategory, ReferenceType > > {
 
   /* type aliases */
   using Iterator = AnyIterator< IteratorCategory, ReferenceType >;
   using Sentinel = AnyIterator< IteratorCategory, ReferenceType >;
-  using Range = nano::subrange< Iterator, Sentinel, nano::ranges::subrange_kind::sized >;
+  using Range = njoy::tools::std20::ranges::subrange< Iterator, Sentinel,
+                                                      njoy::tools::std20::ranges::subrange_kind::sized >;
 
   Range range_;
 

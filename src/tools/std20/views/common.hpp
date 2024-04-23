@@ -108,7 +108,7 @@ namespace detail {
 struct common_view_fn {
 private:
     template <typename T>
-    static constexpr auto impl(T&& t, nano::detail::priority_tag<1>)
+    static constexpr auto impl(T&& t, ranges::detail::priority_tag<1>)
         noexcept(noexcept(views::all(std::forward<T>(t))))
         -> std::enable_if_t<common_range<T>,
             decltype(views::all(std::forward<T>(t)))>
@@ -117,7 +117,7 @@ private:
     }
 
     template <typename T>
-    static constexpr auto impl(T&& t, nano::detail::priority_tag<0>)
+    static constexpr auto impl(T&& t, ranges::detail::priority_tag<0>)
         -> common_view<all_view<T>>
     {
         return common_view<all_view<T>>{std::forward<T>(t)};
@@ -129,10 +129,10 @@ public:
         -> std::enable_if_t<
         viewable_range<T>,
         decltype(common_view_fn::impl(std::forward<T>(t),
-                                    nano::detail::priority_tag<1>{}))>
+                                    ranges::detail::priority_tag<1>{}))>
     {
         return common_view_fn::impl(std::forward<T>(t),
-                               nano::detail::priority_tag<1>{});
+                               ranges::detail::priority_tag<1>{});
     }
 };
 
@@ -143,7 +143,7 @@ inline constexpr bool is_raco<common_view_fn> = true;
 
 namespace views {
 
-NANO_INLINE_VAR(::nano::detail::common_view_fn, common)
+NANO_INLINE_VAR(std20::ranges::detail::common_view_fn, common)
 
 } // namespace views
 

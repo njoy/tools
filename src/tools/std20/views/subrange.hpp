@@ -328,24 +328,24 @@ NANO_END_NAMESPACE
 
 namespace std {
 
-template <typename I, typename S, ::nano::subrange_kind K>
-class tuple_size<::nano::subrange<I, S, K>>
+template <typename I, typename S, njoy::tools::std20::ranges::subrange_kind K>
+class tuple_size<njoy::tools::std20::ranges::subrange<I, S, K>>
     : public integral_constant<size_t, 2> {
 };
 
-template <typename I, typename S, ::nano::subrange_kind K>
-class tuple_element<0, ::nano::subrange<I, S, K>> {
+template <typename I, typename S, njoy::tools::std20::ranges::subrange_kind K>
+class tuple_element<0, njoy::tools::std20::ranges::subrange<I, S, K>> {
 public:
     using type = I;
 };
 
-template <typename I, typename S, ::nano::subrange_kind K>
-class tuple_element<1, ::nano::subrange<I, S, K>> {
+template <typename I, typename S, njoy::tools::std20::ranges::subrange_kind K>
+class tuple_element<1, njoy::tools::std20::ranges::subrange<I, S, K>> {
 public:
     using type = S;
 };
 
-using ::nano::ranges::get;
+using njoy::tools::std20::ranges::get;
 
 } // namespace std
 

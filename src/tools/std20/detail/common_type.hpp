@@ -36,7 +36,7 @@ struct binary_common_type {};
 template <typename T, typename U>
 struct binary_common_type<T, U,
         std::enable_if_t<!same_decayed_v<T, U>>>
-    : nano::common_type<std::decay_t<T>, std::decay_t<U>> {};
+    : ranges::common_type<std::decay_t<T>, std::decay_t<U>> {};
 
 template <typename T, typename U>
 struct binary_common_type<T, U,

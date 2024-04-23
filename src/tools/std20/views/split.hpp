@@ -449,7 +449,7 @@ struct split_view_fn {
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::split_view_fn, split)
+NANO_INLINE_VAR(ranges::detail::split_view_fn, split)
 
 }
 

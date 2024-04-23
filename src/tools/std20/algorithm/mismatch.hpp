@@ -29,8 +29,8 @@ private:
     impl3(I1 first1, S1 last1, I2 first2, Pred& pred, Proj1& proj1, Proj2& proj2)
     {
         while (first1 != last1 &&
-               nano::invoke(pred, nano::invoke(proj1, *first1),
-                            nano::invoke(proj2, *first2))) {
+               ranges::invoke(pred, ranges::invoke(proj1, *first1),
+                              ranges::invoke(proj2, *first2))) {
             ++first1;
             ++first2;
         }
@@ -45,8 +45,8 @@ private:
           Proj2& proj2)
     {
         while (first1 != last1 && first2 != last2 &&
-               nano::invoke(pred, nano::invoke(proj1, *first1),
-                            nano::invoke(proj2, *first2))) {
+               ranges::invoke(pred, ranges::invoke(proj1, *first1),
+                              ranges::invoke(proj2, *first2))) {
             ++first1;
             ++first2;
         }
@@ -84,7 +84,7 @@ public:
     operator()(Rng1&& rng1, I2&& first2, Pred pred = Pred{},
                Proj1 proj1 = Proj1{}, Proj2 proj2 = Proj2{}) const
     {
-        return mismatch_fn::impl3(nano::begin(rng1), nano::end(rng1),
+        return mismatch_fn::impl3(ranges::begin(rng1), ranges::end(rng1),
                                   std::forward<I2>(first2), pred,
                                   proj1, proj2);
     }
@@ -117,8 +117,8 @@ public:
     operator()(Rng1&& rng1, Rng2&& rng2, Pred pred = Pred{},
                Proj1 proj1 = Proj1{}, Proj2 proj2 = Proj2{}) const
     {
-        return mismatch_fn::impl4(nano::begin(rng1), nano::end(rng1),
-                                  nano::begin(rng2), nano::end(rng2),
+        return mismatch_fn::impl4(ranges::begin(rng1), ranges::end(rng1),
+                                  ranges::begin(rng2), ranges::end(rng2),
                                   pred, proj1, proj2);
     }
 };

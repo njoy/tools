@@ -128,7 +128,7 @@ public:
 } // namespace invoke_
 } // namespace detail
 
-NANO_INLINE_VAR(nano::detail::invoke_::fn, invoke)
+NANO_INLINE_VAR(ranges::detail::invoke_::fn, invoke)
 
 namespace detail {
 
@@ -138,10 +138,10 @@ struct invoke_result_helper {
 
 template <typename F, typename... Args>
 struct invoke_result_helper<
-    std::void_t<decltype(nano::invoke(std::declval<F>(), std::declval<Args>()...))>,
+    std::void_t<decltype(ranges::invoke(std::declval<F>(), std::declval<Args>()...))>,
     F, Args...> {
     using type =
-        decltype(nano::invoke(std::declval<F>(), std::declval<Args>()...));
+        decltype(ranges::invoke(std::declval<F>(), std::declval<Args>()...));
 };
 
 } // namespace detail

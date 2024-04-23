@@ -10,8 +10,8 @@
 #include <vector>
 
 // convenience typedefs
+using namespace njoy::tools;
 using namespace njoy::tools::views;
-namespace std20 = nano;
 
 SCENARIO( "AnyIterator" ) {
 
@@ -30,28 +30,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( ! nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( ! nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( ! nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( ! nano::random_access_iterator< decltype( begin ) > );
-        CHECK( ! nano::random_access_iterator< decltype( end ) > );
-        CHECK( ! nano::random_access_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal forward iterator" ) {
@@ -121,28 +121,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( ! nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( ! nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( ! nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( ! nano::random_access_iterator< decltype( begin ) > );
-        CHECK( ! nano::random_access_iterator< decltype( end ) > );
-        CHECK( ! nano::random_access_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, const int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, const int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal forward iterator" ) {
@@ -212,28 +212,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( ! nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( ! nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( ! nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( ! nano::random_access_iterator< decltype( begin ) > );
-        CHECK( ! nano::random_access_iterator< decltype( end ) > );
-        CHECK( ! nano::random_access_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal forward iterator" ) {
@@ -308,28 +308,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( ! nano::random_access_iterator< decltype( begin ) > );
-        CHECK( ! nano::random_access_iterator< decltype( end ) > );
-        CHECK( ! nano::random_access_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal bidirectional iterator" ) {
@@ -396,28 +396,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( ! nano::random_access_iterator< decltype( begin ) > );
-        CHECK( ! nano::random_access_iterator< decltype( end ) > );
-        CHECK( ! nano::random_access_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, const int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, const int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal bidirectional iterator" ) {
@@ -484,28 +484,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( ! nano::random_access_iterator< decltype( begin ) > );
-        CHECK( ! nano::random_access_iterator< decltype( end ) > );
-        CHECK( ! nano::random_access_iterator< decltype( second ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( ! std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal bidirectional iterator" ) {
@@ -577,28 +577,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( nano::random_access_iterator< decltype( begin ) > );
-        CHECK( nano::random_access_iterator< decltype( end ) > );
-        CHECK( nano::random_access_iterator< decltype( second ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal bidirectional iterator" ) {
@@ -662,28 +662,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( nano::random_access_iterator< decltype( begin ) > );
-        CHECK( nano::random_access_iterator< decltype( end ) > );
-        CHECK( nano::random_access_iterator< decltype( second ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, const int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, const int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal bidirectional iterator" ) {
@@ -747,28 +747,28 @@ SCENARIO( "AnyIterator" ) {
 
       THEN( "the AnyIterator satisfies the required concepts" ) {
 
-        CHECK( nano::input_iterator< decltype( begin ) > );
-        CHECK( nano::input_iterator< decltype( end ) > );
-        CHECK( nano::input_iterator< decltype( second ) > );
+        CHECK( std20::ranges::input_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::input_iterator< decltype( end ) > );
+        CHECK( std20::ranges::input_iterator< decltype( second ) > );
 
-        CHECK( nano::forward_iterator< decltype( begin ) > );
-        CHECK( nano::forward_iterator< decltype( end ) > );
-        CHECK( nano::forward_iterator< decltype( second ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( end ) > );
+        CHECK( std20::ranges::forward_iterator< decltype( second ) > );
 
-        CHECK( nano::bidirectional_iterator< decltype( begin ) > );
-        CHECK( nano::bidirectional_iterator< decltype( end ) > );
-        CHECK( nano::bidirectional_iterator< decltype( second ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( end ) > );
+        CHECK( std20::ranges::bidirectional_iterator< decltype( second ) > );
 
-        CHECK( nano::random_access_iterator< decltype( begin ) > );
-        CHECK( nano::random_access_iterator< decltype( end ) > );
-        CHECK( nano::random_access_iterator< decltype( second ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( begin ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( end ) > );
+        CHECK( std20::ranges::random_access_iterator< decltype( second ) > );
       }
 
       THEN( "the AnyIterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "the AnyIterator functions as a normal bidirectional iterator" ) {

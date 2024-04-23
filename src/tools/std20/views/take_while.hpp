@@ -58,7 +58,7 @@ private:
 #endif
         friend constexpr bool operator==(const iterator_t<base_t>& x, const sentinel& y)
         {
-            return y.end_ == x || !nano::invoke(*y.pred_, *x);
+            return y.end_ == x || !ranges::invoke(*y.pred_, *x);
         }
 
 #if (defined(_MSC_VER) && _MSC_VER < 1922)
@@ -152,7 +152,7 @@ struct take_while_view_fn {
 
 namespace views {
 
-NANO_INLINE_VAR(nano::detail::take_while_view_fn, take_while)
+NANO_INLINE_VAR(ranges::detail::take_while_view_fn, take_while)
 
 }
 

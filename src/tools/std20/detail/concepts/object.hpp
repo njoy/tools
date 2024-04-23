@@ -70,7 +70,7 @@ struct invocable_concept {
 #else
     template <typename F, typename... Args>
     auto requires_(F&& f, Args&&... args) -> decltype(
-        nano::invoke(std::forward<F>(f), std::forward<Args>(args)...)
+        ranges::invoke(std::forward<F>(f), std::forward<Args>(args)...)
     );
 #endif
 };

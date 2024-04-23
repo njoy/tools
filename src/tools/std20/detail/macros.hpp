@@ -30,14 +30,20 @@
 #define NANO_CONCEPT inline constexpr bool
 
 #define NANO_BEGIN_NAMESPACE                                                   \
-    \
-namespace nano                                                                 \
+                                                                               \
+namespace njoy                                                                 \
     {                                                                          \
-        \
+namespace tools                                                                \
+        {                                                                      \
+namespace std20                                                                \
+            {                                                                  \
+                                                                               \
 inline namespace ranges                                                        \
-        {
+                {
 
 #define NANO_END_NAMESPACE                                                     \
+    }                                                                          \
+    }                                                                          \
     }                                                                          \
     }
 

@@ -11,8 +11,7 @@
 #include "tools/std20/algorithm.hpp"
 
 // convenience typedefs
-//using namespace njoy::tools;
-namespace std20 = nano;
+using namespace njoy::tools;
 
 SCENARIO( "counted_view" ) {
 
@@ -29,7 +28,7 @@ SCENARIO( "counted_view" ) {
 //
 //      auto chunk = std20::views::counted( values.begin(), 3 );
 //      using Range = decltype(chunk);
-//      using Iterator = nano::iterator_t< Range >;
+//      using Iterator = std20::iterator_t< Range >;
 //
 //      THEN( "the counted_view satisfies the required concepts" ) {
 //
@@ -44,13 +43,13 @@ SCENARIO( "counted_view" ) {
 //
 //      THEN( "the counted_view range and iterator associated types are correct" ) {
 //
-//        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-//        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-//        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+//        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+//        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+//        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 //
-//        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-//        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-//        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+//        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+//        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+//        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
 //      }
 //
 //      THEN( "an counted_view can be constructed and members can be tested" ) {
@@ -91,7 +90,7 @@ SCENARIO( "counted_view" ) {
 //
 //      auto chunk = std20::views::counted( values.begin(), 3 );
 //      using Range = decltype(chunk);
-//      using Iterator = nano::iterator_t< Range >;
+//      using Iterator = std20::iterator_t< Range >;
 //
 //      THEN( "the counted_view satisfies the required concepts" ) {
 //
@@ -106,13 +105,13 @@ SCENARIO( "counted_view" ) {
 //
 //      THEN( "the counted_view range and iterator associated types are correct" ) {
 //
-//        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-//        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-//        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+//        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+//        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+//        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 //
-//        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-//        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-//        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+//        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+//        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+//        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
 //      }
 //
 //      THEN( "an counted_view can be constructed and members can be tested" ) {
@@ -148,7 +147,7 @@ SCENARIO( "counted_view" ) {
 
       auto chunk = std20::views::counted( values.begin(), 3 );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the counted_view satisfies the required concepts" ) {
 
@@ -163,13 +162,13 @@ SCENARIO( "counted_view" ) {
 
       THEN( "the counted_view range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an counted_view can be constructed and members can be tested" ) {

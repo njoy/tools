@@ -24,7 +24,7 @@ private:
     static constexpr I impl(I first, S last, Pred& pred, Proj& proj)
     {
         while (first != last) {
-            if (nano::invoke(pred, nano::invoke(proj, *first))) {
+            if (ranges::invoke(pred, ranges::invoke(proj, *first))) {
                 return first;
             }
             ++first;
@@ -50,7 +50,7 @@ public:
         borrowed_iterator_t<Rng>>
     operator()(Rng&& rng, Pred pred, Proj proj = Proj{}) const
     {
-        return find_if_fn::impl(nano::begin(rng), nano::end(rng), pred, proj);
+        return find_if_fn::impl(ranges::begin(rng), ranges::end(rng), pred, proj);
     }
 };
 } // namespace detail
@@ -80,7 +80,7 @@ struct find_fn {
     operator()(Rng&& rng, const T& value, Proj proj = Proj{}) const
     {
         const auto pred = [&value] (const auto& t) { return t == value; };
-        return find_if_fn::impl(nano::begin(rng), nano::end(rng), pred, proj);
+        return find_if_fn::impl(ranges::begin(rng), ranges::end(rng), pred, proj);
     }
 };
 } // namespace detail
@@ -98,7 +98,7 @@ private:
         template <typename T>
         constexpr bool operator()(T&& t) const
         {
-            return !nano::invoke(p, std::forward<T>(t));
+            return !ranges::invoke(p, std::forward<T>(t));
         }
     };
 
@@ -123,7 +123,7 @@ public:
     operator()(Rng&& rng, Pred pred, Proj proj = Proj{}) const
     {
         const auto find_if_pred = not_pred<Pred>{pred};
-        return find_if_fn::impl(nano::begin(rng), nano::end(rng),
+        return find_if_fn::impl(ranges::begin(rng), ranges::end(rng),
                                 find_if_pred, proj);
     }
 };

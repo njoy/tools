@@ -11,8 +11,8 @@
 #include "tools/std20/algorithm.hpp"
 
 // convenience typedefs
+using namespace njoy::tools;
 using namespace njoy::tools::views;
-namespace std20 = nano;
 
 SCENARIO( "AnyView" ) {
 
@@ -27,7 +27,7 @@ SCENARIO( "AnyView" ) {
 
       AnyForwardView< int& > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -42,13 +42,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -86,7 +86,7 @@ SCENARIO( "AnyView" ) {
 
       AnyForwardView< const int& > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -101,13 +101,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, const int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, const int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, const int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, const int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -134,7 +134,7 @@ SCENARIO( "AnyView" ) {
 
       AnyForwardView< int > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -149,13 +149,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -187,7 +187,7 @@ SCENARIO( "AnyView" ) {
 
       AnyBidirectionalView< int& > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -202,13 +202,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -244,7 +244,7 @@ SCENARIO( "AnyView" ) {
 
       AnyBidirectionalView< const int& > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -259,13 +259,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, const int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, const int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, const int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, const int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -290,7 +290,7 @@ SCENARIO( "AnyView" ) {
 
       AnyBidirectionalView< int > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -305,13 +305,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -341,7 +341,7 @@ SCENARIO( "AnyView" ) {
 
       AnyRandomAccessView< int& > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -356,13 +356,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -404,7 +404,7 @@ SCENARIO( "AnyView" ) {
 
       AnyRandomAccessView< const int& > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -419,13 +419,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, const int& > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, const int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, const int& > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, const int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
@@ -450,7 +450,7 @@ SCENARIO( "AnyView" ) {
 
       AnyRandomAccessView< int > chunk( values );
       using Range = decltype(chunk);
-      using Iterator = nano::iterator_t< Range >;
+      using Iterator = std20::ranges::iterator_t< Range >;
 
       THEN( "the AnyView satisfies the required concepts" ) {
 
@@ -465,13 +465,13 @@ SCENARIO( "AnyView" ) {
 
       THEN( "the AnyView range and iterator associated types are correct" ) {
 
-        CHECK( std20::same_as< nano::ranges::range_value_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_reference_t< Range >, int > );
-        CHECK( std20::same_as< nano::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
 
-        CHECK( std20::same_as< nano::ranges::iter_value_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_reference_t< Iterator >, int > );
-        CHECK( std20::same_as< nano::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "an AnyView can be constructed and members can be tested" ) {
