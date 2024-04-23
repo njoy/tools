@@ -105,7 +105,9 @@ if( tools.python )
 
   list( APPEND TOOLS_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
 
-  include( cmake/unit_testing_python.cmake )
+  if( tools.tests )
+    include( cmake/unit_testing_python.cmake )
+  endif()
 
 endif()
 
