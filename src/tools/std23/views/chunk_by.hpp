@@ -88,6 +88,16 @@ private:
       --*this;
       return temp; 
     }
+
+    constexpr bool operator==( const iterator& right ) const {
+
+      return this->current_ == right.current_;
+    }
+
+    constexpr bool operator!=( const iterator& right ) const {
+
+      return !( this->operator==( right ) );
+    }
   };
 
   constexpr std20::ranges::iterator_t< R > find_next( std20::ranges::iterator_t< R > current ) {

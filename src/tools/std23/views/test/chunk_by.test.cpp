@@ -28,18 +28,19 @@ SCENARIO( "chunk_by_view" ) {
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
 
-/*      THEN( "the chunk_by_view satisfies the required concepts" ) {
+      THEN( "the chunk_by_view satisfies the required concepts" ) {
 
+        CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
-        CHECK( std20::ranges::sized_range< Range > );
-        CHECK( std20::ranges::forward_range< Range > );
-        CHECK( std20::ranges::bidirectional_range< Range > );
-        CHECK( std20::ranges::random_access_range< Range > );
-        CHECK( std20::ranges::contiguous_range< Range > );
-        CHECK( std20::ranges::common_range< Range > );
+//        CHECK( std20::ranges::sized_range< Range > );
+//        CHECK( std20::ranges::forward_range< Range > );
+//        CHECK( std20::ranges::bidirectional_range< Range > );
+//        CHECK( std20::ranges::random_access_range< Range > );
+//        CHECK( std20::ranges::contiguous_range< Range > );
+//        CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "an chunk_by_view can be constructed and members can be tested" ) {
+/*      THEN( "an chunk_by_view can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
         CHECK( false == chunk.empty() );
