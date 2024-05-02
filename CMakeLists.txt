@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( tools
-  VERSION 0.3.0
+  VERSION 0.4.0
   LANGUAGES CXX
 )
 
