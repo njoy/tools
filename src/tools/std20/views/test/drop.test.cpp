@@ -81,7 +81,7 @@ SCENARIO( "drop_view" ) {
         CHECK( std20::ranges::equal( values, original_modified ) );
       } // THEN
     } // WHEN
-  } // GIVEN*/
+  } // GIVEN
 
   GIVEN( "a container with bidirectional iterators" ) {
 

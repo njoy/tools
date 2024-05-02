@@ -70,7 +70,7 @@ SCENARIO( "drop_while_view" ) {
         // CHECK(  2 == chunk.back() );
       } // THEN
     } // WHEN
-  } // GIVEN*/
+  } // GIVEN
 
   GIVEN( "a container with bidirectional iterators" ) {
 

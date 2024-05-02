@@ -83,7 +83,7 @@ SCENARIO( "all_view" ) {
         CHECK( std20::ranges::equal( values, modified ) );
       } // THEN
     } // WHEN
-  } // GIVEN*/
+  } // GIVEN
 
   GIVEN( "a container with bidirectional iterators" ) {
 

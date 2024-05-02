@@ -202,5 +202,5 @@ SCENARIO( "counted_view" ) {
         CHECK(  2 == chunk[2] );
       } // THEN
     } // WHEN
-  } // GIVEN*/
+  } // GIVEN
 } // SCENARIO
