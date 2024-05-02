@@ -88,6 +88,33 @@ template <typename F, typename I>
 NANO_CONCEPT indirect_unary_predicate =
         decltype(detail::indirect_unary_predicate_concept::test<F, I>(0))::value;
 
+// indirect_binary_predicate is defined in c++20 but it was not implemented in
+// nanorange so we added it here
+namespace detail {
+
+struct indirect_binary_predicate_concept {
+    template <typename, typename, typename>
+    static auto test(long) -> std::false_type;
+
+    template <typename F, typename I1, typename I2>
+    static auto test(int) -> std::enable_if_t<
+        readable<I1> && readable<I2> &&
+        copy_constructible<F> &&
+        predicate<F&, iter_value_t<I1>&, iter_value_t<I2>&> &&
+        predicate<F&, iter_value_t<I1>&, iter_reference_t<I2>&> &&
+        predicate<F&, iter_reference_t<I1>&, iter_value_t<I2>&> &&
+        predicate<F&, iter_reference_t<I1>&, iter_reference_t<I2>&> &&
+        predicate<F&, iter_common_reference_t<I1>, iter_common_reference_t<I2>>,
+        std::true_type>;
+};
+
+}
+
+template <typename F, typename I1, typename I2>
+NANO_CONCEPT indirect_binary_predicate =
+        decltype(detail::indirect_binary_predicate_concept::test<F, I1, I2>(0))::value;
+
+
 namespace detail {
 
 struct indirect_relation_concept {
