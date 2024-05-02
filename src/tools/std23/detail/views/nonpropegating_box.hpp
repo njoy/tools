@@ -19,7 +19,7 @@ namespace detail {
  *    
  */
 template < typename T >
-struct nonpropegating_box : std::optional<T> {
+struct nonpropegating_box : std::optional<T> { 
 
   static_assert( std::is_object_v< T > );
 

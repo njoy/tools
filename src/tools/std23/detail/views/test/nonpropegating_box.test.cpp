@@ -2,7 +2,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 // what we are testing
-#include "tools/std23/details/views/nonpropegating_box.hpp"
+#include "tools/std23/detail/views/nonpropegating_box.hpp"
 
 // other includes
 #include <vector>
