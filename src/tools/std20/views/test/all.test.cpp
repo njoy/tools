@@ -191,6 +191,7 @@ SCENARIO( "all_view" ) {
 
         CHECK( std20::ranges::equal( chunk, equal ) );
 
+        CHECK( -2 == chunk[0] );
         CHECK( -1 == chunk[1] );
         CHECK(  0 == chunk[2] );
         CHECK(  1 == chunk[3] );
