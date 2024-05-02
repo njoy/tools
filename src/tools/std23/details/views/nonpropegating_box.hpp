@@ -25,23 +25,6 @@ struct nonpropegating_box : std::optional<T> {
 
 private:
 
-  struct from_tag {};
-  struct forward_tag {};
-
-/*  struct wrapper {
-
-    T t_;
-
-    template < typename... Args >
-    constexpr explicit wrapper( forward_tag, Args&&... args ) : 
-        t_( std::forward< Args >( args )... ) {}
-
-    template < typename F >
-    constexpr explicit wrapper( from_tag, const F& f ) : 
-        t_( f() ) {}
-  };*/
-
-//  std::optional< wrapper > value_ = std::nullopt;
   std::optional< T > value_ = std::nullopt;
 
 public:
