@@ -8,7 +8,7 @@
 #define NANORANGE_ALGORITHM_HPP_INCLUDED
 
 // Algorithms reimplemented in Nanorange
-//#include <nanorange/algorithm/adjacent_find.hpp>
+#include "tools/std20/algorithm/adjacent_find.hpp"
 //#include <nanorange/algorithm/all_of.hpp>
 //#include <nanorange/algorithm/any_of.hpp>
 //#include <nanorange/algorithm/binary_search.hpp>
