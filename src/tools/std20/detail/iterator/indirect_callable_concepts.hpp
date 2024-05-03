@@ -90,6 +90,7 @@ NANO_CONCEPT indirect_unary_predicate =
 
 // indirect_binary_predicate is defined in c++20 but it was not implemented in
 // nanorange so we added it here
+// see https://en.cppreference.com/w/cpp/iterator/indirect_binary_predicate
 namespace detail {
 
 struct indirect_binary_predicate_concept {
