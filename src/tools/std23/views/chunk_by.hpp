@@ -16,6 +16,12 @@ namespace tools {
 namespace std23 {
 inline namespace ranges {
 
+/**
+ *  @brief A range adaptor that takes a view and produces a view of subranges
+ *         based on a predicate
+ *
+ *  See https://en.cppreference.com/w/cpp/ranges/chunk_by_view
+ */
 template < typename R, typename Pred >
 struct chunk_by_view : std20::ranges::view_interface< chunk_by_view< R, Pred > > {
 
@@ -133,6 +139,7 @@ private:
     auto begin = std20::ranges::begin( this->base_ );
     std20::ranges::reverse_view reverse( std20::ranges::subrange( begin, current ) );
     return std20::ranges::prev(
+               // reverse.end() is an iterator pointing to the element before begin
                std20::ranges::adjacent_find( reverse.begin(), --reverse.end(), not_pred ).base(),
                1, std::move( begin ) );
   }
