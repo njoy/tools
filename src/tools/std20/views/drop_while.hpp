@@ -10,6 +10,7 @@
 #include "tools/std20/algorithm/find.hpp"
 #include "tools/std20/detail/views/range_adaptors.hpp"
 #include "tools/std20/detail/views/semiregular_box.hpp"
+#include "tools/std23/detail/views/nonpropagating_box.hpp"
 #include "tools/std20/views/all.hpp"
 #include "tools/std20/views/interface.hpp"
 
@@ -37,11 +38,8 @@ struct drop_while_view : view_interface<drop_while_view<R, Pred>> {
     constexpr auto begin()
     {
         if (!cached_.has_value()) {
-            cached_ = ranges::find_if(base_,
-                [&p = pred()](auto&& arg)
-                {
-                    return !ranges::invoke(p, std::forward<decltype(arg)>(arg));
-                });
+
+            cached_.emplace( ranges::find_if_not( base_, pred() ) );
         }
 
         return *cached_;
@@ -55,7 +53,7 @@ struct drop_while_view : view_interface<drop_while_view<R, Pred>> {
 private:
     R base_;
     detail::semiregular_box<Pred> pred_;
-    std::optional<iterator_t<R>> cached_;
+    std23::ranges::detail::nonpropagating_box<iterator_t<R>> cached_;
 };
 
 template <typename R, typename Pred>

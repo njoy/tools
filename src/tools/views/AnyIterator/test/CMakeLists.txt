@@ -1,1 +1,1 @@
-add_cpp_test( ranges.AnyIterator AnyIterator.test.cpp )
+add_cpp_test( views.AnyIterator AnyIterator.test.cpp )

@@ -54,5 +54,8 @@ add_subdirectory( src/tools/std20/ranges/concepts/test )
 add_subdirectory( src/tools/std20/type_traits/test )
 add_subdirectory( src/tools/std20/views/test )
 
+add_subdirectory( src/tools/std23/detail/views/test )
+add_subdirectory( src/tools/std23/views/test )
+
 add_subdirectory( src/tools/views/AnyIterator/test )
 add_subdirectory( src/tools/views/AnyView/test )
