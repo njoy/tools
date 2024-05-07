@@ -66,11 +66,11 @@ private:
   public:
 
     using value_type        = decltype( std20::views::take( std20::ranges::subrange( current_, end_ ), n_ ) );
-    using difference_type   = std20::ranges::range_difference_t< R >;
+    using difference_type   = std20::ranges::range_difference_t< Base >;
     using iterator_category = std::conditional_t<
-                                  std20::ranges::random_access_range< R >,
+                                  std20::ranges::random_access_range< Base >,
                                   std20::random_access_iterator_tag,
-                                  std::conditional_t< std20::ranges::bidirectional_range< R >,
+                                  std::conditional_t< std20::ranges::bidirectional_range< Base >,
                                                   std20::bidirectional_iterator_tag,
                                                   std20::forward_iterator_tag > >;
 
