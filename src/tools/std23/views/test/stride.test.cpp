@@ -29,6 +29,8 @@ SCENARIO( "stride_view" ) {
 
       THEN( "the stride_view satisfies the required concepts" ) {
 
+        CHECK( std20::ranges::viewable_range< Range > );
+
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
         CHECK( ! std20::ranges::sized_range< Range > );
@@ -62,6 +64,8 @@ SCENARIO( "stride_view" ) {
       using Iterator = std20::iterator_t< Range >;
 
       THEN( "the stride_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -99,6 +103,8 @@ SCENARIO( "stride_view" ) {
       using Iterator = std20::iterator_t< Range >;
 
       THEN( "the stride_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );

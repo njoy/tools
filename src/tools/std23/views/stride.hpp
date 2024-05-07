@@ -245,6 +245,20 @@ private:
 
       return -( right - left );
     }
+
+    friend constexpr std20::ranges::range_rvalue_reference_t< Base >
+    iter_move( const iterator& iter ) noexcept(noexcept( std20::ranges::iter_move( iter.current_ ) ) ) {
+
+      return std20::ranges::iter_move( iter.current_ );
+    }
+
+    template < typename B = Base >
+    friend constexpr auto iter_swap( const iterator& left, const iterator& right )
+        noexcept(noexcept(std20::ranges::iter_swap( left.current_, right.current_ )))
+    -> std::enable_if_t<std20::ranges::indirectly_swappable< B > > {
+
+        std20::ranges::iter_swap( left.current_, right.current_ );
+    }
   };
 
 public:

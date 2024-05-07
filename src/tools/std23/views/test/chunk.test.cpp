@@ -30,6 +30,8 @@ SCENARIO( "chunk_view" ) {
 
       THEN( "the chunk_view satisfies the required concepts" ) {
 
+        CHECK( std20::ranges::viewable_range< Range > );
+
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
         CHECK( ! std20::ranges::sized_range< Range > );
@@ -69,6 +71,8 @@ SCENARIO( "chunk_view" ) {
       using Subrange = decltype(chunk.front());
 
       THEN( "the chunk_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -121,6 +125,8 @@ SCENARIO( "chunk_view" ) {
       using Subrange = decltype(chunk.front());
 
       THEN( "the chunk_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
