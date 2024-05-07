@@ -70,9 +70,10 @@ private:
     using iterator_category = std::conditional_t<
                                   std20::ranges::random_access_range< Base >,
                                   std20::random_access_iterator_tag,
-                                  std::conditional_t< std20::ranges::bidirectional_range< Base >,
-                                                  std20::bidirectional_iterator_tag,
-                                                  std20::forward_iterator_tag > >;
+                                  std::conditional_t<
+                                      std20::ranges::bidirectional_range< Base >,
+                                      std20::bidirectional_iterator_tag,
+                                      std20::forward_iterator_tag > >;
 
     iterator() = default;
 
