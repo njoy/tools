@@ -9,7 +9,6 @@
 #include <list>
 #include <vector>
 #include "tools/std20/algorithm.hpp"
-#include <iostream>
 
 // convenience typedefs
 using namespace njoy::tools;
