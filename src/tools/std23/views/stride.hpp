@@ -334,14 +334,14 @@ struct stride_view_fn {
     }
 
     template < typename C >
-    constexpr auto operator()( C&& c ) const
+    constexpr auto operator()( C c ) const
     {
-        return std20::ranges::detail::rao_proxy{ [p = std::forward< C >( c ) ] ( auto&& r ) mutable
+        return std20::ranges::detail::rao_proxy{ [c = std::move(c)] ( auto&& r ) mutable
 #ifndef NANO_MSVC_LAMBDA_PIPE_WORKAROUND
-            -> decltype( stride_view{ std::forward< decltype(r) >( r ), std::declval< C&& >() } )
+            -> decltype( stride_view{ std::forward< decltype( r ) >( r ), std::declval< C&& >() } )
 #endif
         {
-            return stride_view{ std::forward< decltype(r) >( r ), std::move( p ) };
+            return stride_view{ std::forward< decltype( r ) >( r ), std::move( c ) };
         }};
     }
 

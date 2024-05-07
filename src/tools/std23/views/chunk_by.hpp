@@ -196,10 +196,10 @@ struct chunk_by_view_fn {
     {
         return std20::ranges::detail::rao_proxy{ [p = std::forward< Pred >( pred ) ] ( auto&& r ) mutable
 #ifndef NANO_MSVC_LAMBDA_PIPE_WORKAROUND
-            -> decltype( chunk_by_view{ std::forward< decltype(r) >( r ), std::declval< Pred&& >() } )
+            -> decltype( chunk_by_view{ std::forward< decltype( r ) >( r ), std::declval< Pred&& >() } )
 #endif
         {
-            return chunk_by_view{ std::forward< decltype(r) >( r ), std::move( p ) };
+            return chunk_by_view{ std::forward< decltype( r ) >( r ), std::move( p ) };
         }};
     }
 
