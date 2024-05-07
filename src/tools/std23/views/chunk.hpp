@@ -149,9 +149,17 @@ private:
       return *this += -n;
     }
 
-    template < typename B = Base >
-    constexpr auto operator[]( difference_type n ) const
-    -> std::enable_if_t< std20::ranges::random_access_range< B >, value_type > {
+    // this version of operator[] does not work on gcc
+    // template < typename B = Base >
+    // constexpr auto operator[]( difference_type n ) const
+    // -> std::enable_if_t< std20::ranges::random_access_range< B >, value_type > {
+    //
+    //   return *( *this + n );
+    // }
+
+    template < typename B = Base,
+               typename = std::enable_if_t< std20::ranges::random_access_range< B > > >
+    constexpr decltype(auto) operator[]( difference_type n ) const {
 
       return *( *this + n );
     }
