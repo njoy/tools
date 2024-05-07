@@ -177,27 +177,77 @@ private:
       return left.current_ < right.current_;
     }
 
-    template <typename B = Base>
+    template < typename B = Base>
     friend constexpr auto operator>( const iterator& left, const iterator& right )
     -> std::enable_if_t< std20::ranges::random_access_range< B >, bool > {
 
       return right < left;
     }
 
-    template <typename B = Base>
+    template < typename B = Base >
     friend constexpr auto operator<=( const iterator& left, const iterator& right )
     -> std::enable_if_t< std20::ranges::random_access_range< B >, bool > {
 
       return ! ( right < left );
     }
 
-    template <typename B = Base>
+    template < typename B = Base >
     friend constexpr auto operator>=( const iterator& left, const iterator& right )
     -> std::enable_if_t< std20::ranges::random_access_range< B >, bool > {
 
         return ! ( left < right );
     }
 
+    template < typename B = Base >
+    friend constexpr auto operator+( const iterator& left, const difference_type n )
+    -> std::enable_if_t< std20::ranges::random_access_range< B >, iterator > {
+
+      return iterator{ left } += n;
+    }
+
+    template < typename B = Base >
+    friend constexpr auto operator+( const difference_type n, const iterator& right )
+    -> std::enable_if_t< std20::ranges::random_access_range< B >, iterator > {
+
+      return right + n;
+    }
+
+    template < typename B = Base >
+    friend constexpr auto operator-( const iterator& left, const difference_type n )
+    -> std::enable_if_t< std20::ranges::random_access_range< B >, iterator > {
+
+      return iterator{ left } -= n;
+    }
+
+    template < typename B = Base >
+    friend constexpr auto operator-( const iterator& left, const iterator& right )
+    -> std::enable_if_t<
+        std20::ranges::sized_sentinel_for< std20::ranges::iterator_t< B >,
+                                           std20::ranges::iterator_t< B > >,
+        difference_type > {
+
+      return ( left.current_ - right.current_ + left.missing_ - right.missing_ ) / left.n_;
+    }
+
+    template < typename B = Base >
+    friend constexpr auto operator-( const std20::ranges::default_sentinel_t, const iterator& right )
+    -> std::enable_if_t<
+        std20::ranges::sized_sentinel_for< std20::ranges::sentinel_t< B >,
+                                           std20::ranges::iterator_t< B > >,
+        difference_type > {
+
+      return div_ceil( right.end_ - right.current_, right.n_ );
+    }
+
+    template < typename B = Base >
+    friend constexpr auto operator-( const iterator& left, const std20::ranges::default_sentinel_t right )
+    -> std::enable_if_t<
+        std20::ranges::sized_sentinel_for< std20::ranges::sentinel_t< B >,
+                                           std20::ranges::iterator_t< B > >,
+        difference_type > {
+
+      return -( right - left );
+    }
   };
 
 public:
