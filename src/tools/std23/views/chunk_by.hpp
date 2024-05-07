@@ -3,7 +3,7 @@
 
 #include "tools/std20/detail/views/range_adaptors.hpp"
 #include "tools/std20/detail/views/semiregular_box.hpp"
-#include "tools/std23/detail/views/nonpropegating_box.hpp"
+#include "tools/std23/detail/views/nonpropagating_box.hpp"
 #include "tools/std20/algorithm/adjacent_find.hpp"
 #include "tools/std20/functional.hpp"
 #include "tools/std20/views/interface.hpp"
@@ -36,7 +36,7 @@ private:
 
   R base_;
   std20::ranges::detail::semiregular_box< Pred > pred_;
-  std23::ranges::detail::nonpropegating_box< std20::ranges::iterator_t< R > > begin_;
+  std23::ranges::detail::nonpropagating_box< std20::ranges::iterator_t< R > > begin_;
 
   struct iterator {
 

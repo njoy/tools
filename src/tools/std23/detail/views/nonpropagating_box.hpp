@@ -13,12 +13,12 @@ namespace detail {
 /**
  *  @brief A helper type containing a value that gets reset upon move or copy
  *
- *  Similar to the semiregular_box, the nonpropegating_box is a helper type for
+ *  Similar to the semiregular_box, the nonpropagating_box is a helper type for
  *  implementing views. It stores an optional containing a value that gets
  *  reset upon move or copy.
  */
 template < typename T >
-struct nonpropegating_box : std::optional<T> {
+struct nonpropagating_box : std::optional<T> {
 
   static_assert( std::is_object_v< T > );
 
@@ -28,17 +28,17 @@ private:
 
 public:
 
-  nonpropegating_box() = default;
+  nonpropagating_box() = default;
 
-  constexpr nonpropegating_box( const nonpropegating_box& ) : value_( std::nullopt ) {}
+  constexpr nonpropagating_box( const nonpropagating_box& ) : value_( std::nullopt ) {}
 
-  constexpr nonpropegating_box( nonpropegating_box&& other ) :
+  constexpr nonpropagating_box( nonpropagating_box&& other ) :
       value_( std::nullopt ) {
 
     other.value_.reset();
   }
 
-  constexpr nonpropegating_box& operator=( const nonpropegating_box& other ) {
+  constexpr nonpropagating_box& operator=( const nonpropagating_box& other ) {
 
     if ( this != std::addressof( other ) ) {
 
@@ -47,7 +47,7 @@ public:
     return *this;
   }
 
-  constexpr nonpropegating_box& operator=( nonpropegating_box&& other ) {
+  constexpr nonpropagating_box& operator=( nonpropagating_box&& other ) {
 
     this->value_.reset();
     other.value_.reset();
