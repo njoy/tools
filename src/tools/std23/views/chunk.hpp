@@ -271,16 +271,19 @@ public:
 
   constexpr R base() const { return base_; }
 
+  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0>
   constexpr iterator< false > begin() {
 
     return { this, std20::ranges::begin( this->base_ ) };
   }
 
+  template < typename RR = R, std::enable_if_t< std20::ranges::forward_range< const RR >, int > = 0 >
   constexpr iterator< true > begin() const {
 
     return { this, std20::ranges::begin( this->base_ ) };
   }
 
+  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0>
   constexpr iterator< false > end() {
 
     if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R >) {
@@ -298,6 +301,7 @@ public:
     }
   }
 
+  template < typename RR = R, std::enable_if_t< std20::ranges::forward_range< const RR >, int > = 0 >
   constexpr iterator< true > end() const {
 
     if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R >) {
