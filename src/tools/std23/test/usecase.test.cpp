@@ -164,12 +164,16 @@ SCENARIO( "use case" ) {
   CHECK( std20::sized_range< DropChunk > );
 
 //  using StrideDrop = decltype( test.stride_drop() );
+//  auto begin = std20::ranges::begin( test.stride_drop() );
+//  auto end = std20::ranges::end( test.stride_drop() );
 //  CHECK( std20::view< StrideDrop > );
 //  CHECK( std20::range< StrideDrop > );
 //  CHECK( std20::random_access_range< StrideDrop > );
 //  CHECK( std20::sized_range< StrideDrop > );
 
 //  using ChunkDrop = decltype( test.chunk_drop() );
+//  auto begin1 = std20::ranges::begin( test.chunk_drop() );
+//  auto end1 = std20::ranges::end( test.chunk_drop() );
 //  CHECK( std20::view< ChunkDrop > );
 //  CHECK( std20::range< ChunkDrop > );
 //  CHECK( std20::random_access_range< ChunkDrop > );

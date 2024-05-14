@@ -38,7 +38,7 @@ SCENARIO( "stride_view" ) {
         CHECK( ! std20::ranges::bidirectional_range< Range > );
         CHECK( ! std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
-        CHECK( std20::ranges::common_range< Range > );
+        CHECK( ! std20::ranges::common_range< Range > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
@@ -74,7 +74,7 @@ SCENARIO( "stride_view" ) {
         CHECK( std20::ranges::bidirectional_range< Range > );
         CHECK( ! std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
-        CHECK( std20::ranges::common_range< Range > );
+        CHECK( ! std20::ranges::common_range< Range > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
@@ -113,7 +113,7 @@ SCENARIO( "stride_view" ) {
         CHECK( std20::ranges::bidirectional_range< Range > );
         CHECK( std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
-        CHECK( std20::ranges::common_range< Range > );
+        CHECK( ! std20::ranges::common_range< Range > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
