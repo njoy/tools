@@ -286,7 +286,9 @@ public:
   template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0>
   constexpr iterator< false > end() {
 
-    if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R > ) {
+    if constexpr ( std20::ranges::common_range< R > && 
+                   std20::ranges::sized_range< R > && 
+                   std20::ranges::forward_range< R > ) {
 
       auto missing = ( this->stride_ - std20::ranges::distance( this->base_ ) % this->stride_ ) % this->stride_;
       return iterator< false >( this, std20::ranges::end( this->base_ ), missing );
@@ -313,7 +315,7 @@ public:
     }
     else if constexpr ( std20::ranges::common_range< R > && ! std20::ranges::bidirectional_range< R >) {
 
-      return iterator< true >( this, std20::ranges::end( this->base_ ), 0 );
+      return iterator< true >( this, std20::ranges::end( this->base_ ) );
     }
     else {
 
