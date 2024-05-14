@@ -12,7 +12,7 @@
 using namespace njoy::tools;
 
 class TestCase {
- 
+
   std::vector< double > vector_ = {  1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
                                     11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
@@ -65,21 +65,21 @@ public:
   auto drop_stride() const {
 
     using namespace njoy::tools;
-    return this->all() | std20::views::drop( 2 ) 
+    return this->all() | std20::views::drop( 2 )
                        | std23::views::stride( 2 );
   }
 
   auto drop_chunk() const {
 
     using namespace njoy::tools;
-    return this->all() | std20::views::drop( 2 ) 
+    return this->all() | std20::views::drop( 2 )
                        | std23::views::chunk( 2 );
   }
 
   auto stride_drop() const {
 
     using namespace njoy::tools;
-    return this->all() | std23::views::stride( 2 ) 
+    return this->all() | std23::views::stride( 2 )
                        | std20::views::drop( 2 );
   }
 
@@ -93,14 +93,14 @@ public:
   auto chunk_stride() const {
 
     using namespace njoy::tools;
-    return this->all() | std23::views::chunk( 2 ) 
+    return this->all() | std23::views::chunk( 2 )
                        | std23::views::stride( 2 );
   }
 
   auto stride_chunk() const {
 
     using namespace njoy::tools;
-    return this->all() | std23::views::stride( 2 ) 
+    return this->all() | std23::views::stride( 2 )
                        | std23::views::chunk( 2 );
   }
 };
