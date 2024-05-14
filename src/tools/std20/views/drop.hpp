@@ -100,6 +100,9 @@ private:
 template <typename R>
 drop_view(R&&, range_difference_t<R>) -> drop_view<all_view<R>>;
 
+template <typename R>
+inline constexpr bool enable_borrowed_range<drop_view<R>> = enable_borrowed_range<R>;
+
 namespace detail {
 
 struct drop_view_fn {

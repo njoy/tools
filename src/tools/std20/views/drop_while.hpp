@@ -59,6 +59,9 @@ private:
 template <typename R, typename Pred>
 drop_while_view(R&& r, Pred pred) -> drop_while_view<all_view<R>, Pred>;
 
+template <typename R, typename Pred>
+inline constexpr bool enable_borrowed_range<drop_while_view<R, Pred>> = enable_borrowed_range<R>;
+
 namespace detail {
 
 struct drop_while_view_fn {

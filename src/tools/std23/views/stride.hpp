@@ -285,7 +285,7 @@ public:
 
   constexpr iterator< false > end() {
 
-    if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R >) {
+    if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R > ) {
 
       auto missing = ( this->stride_ - std20::ranges::distance( this->base_ ) % this->stride_ ) % this->stride_;
       return iterator< false >( this, std20::ranges::end( this->base_ ), missing );
@@ -302,7 +302,7 @@ public:
 
   constexpr iterator< true > end() const {
 
-    if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R >) {
+    if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R > ) {
 
       auto missing = ( this->stride_ - std20::ranges::distance( this->base_ ) % this->stride_ ) % this->stride_;
       return iterator< true >( this, std20::ranges::end( this->base_ ), missing );
@@ -335,6 +335,21 @@ public:
 
 template < typename R >
 stride_view( R&&, std20::ranges::range_difference_t< R > ) -> stride_view< std20::ranges::all_view< R > >;
+
+} // namespace ranges
+} // namespace std23
+
+namespace std20 {
+inline namespace ranges {
+
+template <typename R>
+inline constexpr bool enable_borrowed_range<std23::ranges::stride_view<R>> = enable_borrowed_range<R>;
+
+} // namespace ranges
+} // namespace std23
+
+namespace std23 {
+inline namespace ranges {
 
 namespace detail {
 

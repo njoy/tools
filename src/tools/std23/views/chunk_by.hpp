@@ -82,7 +82,6 @@ private:
     constexpr auto operator--()
     -> std::enable_if_t< std20::ranges::bidirectional_range< B >, iterator& > {
 
-
       this->next_ = this->current_;
       this->current_ = this->parent_->find_prev( this->next_ );
       return *this;
@@ -102,6 +101,11 @@ private:
     -> std::enable_if_t< std20::equality_comparable< std20::ranges::iterator_t< B > >, bool > {
 
       return left.current_ == right.current_;
+    }
+
+    friend constexpr bool operator==( const iterator& left, std20::ranges::default_sentinel_t ) {
+
+      return left.current_ == left.next_;
     }
 
     template < typename B = R >
@@ -172,7 +176,14 @@ public:
 
   constexpr iterator end() {
 
-    return { *this, std20::ranges::end( this->base_ ), std20::ranges::end( this->base_ ) };
+    if constexpr ( std20::ranges::common_range< R > ) {
+
+      return { *this, std20::ranges::end( this->base_ ), std20::ranges::end( this->base_ ) };
+    }
+    else {
+
+      return std20::ranges::default_sentinel;
+    }
   }
 
 };
