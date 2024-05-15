@@ -319,16 +319,16 @@ public:
     }
   }
 
-  template < typename B = R >
+  template < typename RR = R >
   constexpr auto size()
-  -> std::enable_if_t< std20::ranges::sized_range< B >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< RR >, std::size_t > {
 
     return div_ceil( std20::ranges::distance( this->base_ ), this->n_ );
   }
 
-  template < typename B = R >
+  template < typename RR = R >
   constexpr auto size() const
-  -> std::enable_if_t< std20::ranges::sized_range< B >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< const RR >, std::size_t > {
 
     return div_ceil( std20::ranges::distance( this->base_ ), this->n_ );
   }

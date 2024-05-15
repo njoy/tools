@@ -273,7 +273,7 @@ public:
 
   constexpr R base() const { return base_; }
 
-  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0>
+  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int >  = 0 >
   constexpr iterator< false > begin() {
 
     return { this, std20::ranges::begin( this->base_ ) };
@@ -285,11 +285,11 @@ public:
     return { this, std20::ranges::begin( this->base_ ) };
   }
 
-  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0>
+  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0 >
   constexpr iterator< false > end() {
 
-    if constexpr ( std20::ranges::common_range< R > && 
-                   std20::ranges::sized_range< R > && 
+    if constexpr ( std20::ranges::common_range< R > &&
+                   std20::ranges::sized_range< R > &&
                    std20::ranges::forward_range< R > ) {
 
       auto missing = ( this->stride_ - std20::ranges::distance( this->base_ ) % this->stride_ ) % this->stride_;
@@ -308,8 +308,8 @@ public:
   template < typename RR = R, std::enable_if_t< std20::ranges::forward_range< const RR >, int > = 0 >
   constexpr iterator< true > end() const {
 
-    if constexpr ( std20::ranges::common_range< R > && 
-                   std20::ranges::sized_range< R > && 
+    if constexpr ( std20::ranges::common_range< R > &&
+                   std20::ranges::sized_range< R > &&
                    std20::ranges::forward_range< R > ) {
 
       auto missing = ( this->stride_ - std20::ranges::distance( this->base_ ) % this->stride_ ) % this->stride_;
@@ -325,16 +325,16 @@ public:
     }
   }
 
-  template < typename B = R >
+  template < typename RR = R >
   constexpr auto size()
-  -> std::enable_if_t< std20::ranges::sized_range< B >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< RR >, std::size_t > {
 
     return div_ceil( std20::ranges::distance( this->base_ ), this->stride_ );
   }
 
-  template < typename B = R >
+  template < typename RR = R >
   constexpr auto size() const
-  -> std::enable_if_t< std20::ranges::sized_range< B >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< const RR >, std::size_t > {
 
     return div_ceil( std20::ranges::distance( this->base_ ), this->stride_ );
   }
