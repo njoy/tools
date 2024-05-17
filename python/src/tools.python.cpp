@@ -48,5 +48,8 @@ PYBIND11_MODULE( tools, module ) {
       "any_view< any_view< any_view< double, random_access >, random_access >, random_access >" );
   wrapBasicRandomAccessAnyViewOf< std::complex< double > >(
       viewmodule,
-      "any_view< std::complex< double , random_access >" );
+      "any_view< std::complex< double >, random_access >" );
+  wrapBasicRandomAccessAnyViewOf< std::string >(
+      viewmodule,
+      "any_view< std::string, random_access >" );
 }

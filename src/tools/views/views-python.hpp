@@ -2,6 +2,7 @@
 #define NJOY_TOOLS_PYTHON_VIEWS
 
 // system includes
+#include <string>
 #include <complex>
 
 // other includes
@@ -53,6 +54,7 @@ using UnsignedIntRange = BasicRandomAccessAnyView< unsigned int >;
 using DoubleRange2D = BasicRandomAccessAnyView< DoubleRange >;
 using DoubleRange3D = BasicRandomAccessAnyView< DoubleRange2D >;
 using ComplexRange = BasicRandomAccessAnyView< std::complex< double > >;
+using StringRange = BasicRandomAccessAnyView< std::string >;
 
 /**
  *  @brief Wrap a BasicBidirectionalAnyView templated on the Element type
