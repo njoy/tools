@@ -10,8 +10,7 @@
 #include "tools/std20/detail/views/range_adaptors.hpp"
 #include "tools/std20/views/all.hpp"
 #include "tools/std20/views/interface.hpp"
-
-#include <optional>
+#include "tools/std23/detail/views/nonpropagating_box.hpp"
 
 NANO_BEGIN_NAMESPACE
 
@@ -22,7 +21,7 @@ struct drop_view_cache {};
 
 template <typename I>
 struct drop_view_cache<false, I> {
-    std::optional<I> cached{};
+        std23::ranges::detail::nonpropagating_box<I> cached{};
 };
 
 }
@@ -52,7 +51,7 @@ struct drop_view
         } else {
             auto& c = this->cached;
             if (!c.has_value()) {
-                c = ranges::next(ranges::begin(base_), count_, ranges::end(base_));
+                c.emplace( ranges::next(ranges::begin(base_), count_, ranges::end(base_)) );
             }
             return *c;
         }
