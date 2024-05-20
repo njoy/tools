@@ -78,32 +78,37 @@ private:
       return temp;
     }
 
-    template < typename RR = R,
-               typename = std::enable_if_t< std20::ranges::bidirectional_range< RR > > >
-    constexpr iterator& operator--() {
+    template < typename B = R >
+    constexpr auto operator--()
+    -> std::enable_if_t< std20::ranges::bidirectional_range< B >, iterator& > {
+
 
       this->next_ = this->current_;
       this->current_ = this->parent_->find_prev( this->next_ );
       return *this;
     }
 
-    template < typename RR = R,
-               typename = std::enable_if_t< std20::ranges::bidirectional_range< RR > > >
-    constexpr iterator operator--(int) {
+    template < typename B = R >
+    constexpr auto operator--(int)
+    -> std::enable_if_t< std20::ranges::bidirectional_range< B >, iterator > {
 
       auto temp = *this;
       --*this;
       return temp;
     }
 
-    constexpr bool operator==( const iterator& right ) const {
+    template < typename B = R >
+    friend constexpr auto operator==( const iterator& left, const iterator& right )
+    -> std::enable_if_t< std20::equality_comparable< std20::ranges::iterator_t< B > >, bool > {
 
-      return this->current_ == right.current_;
+      return left.current_ == right.current_;
     }
 
-    constexpr bool operator!=( const iterator& right ) const {
+    template < typename B = R >
+    friend constexpr auto operator!=( const iterator& left, const iterator& right )
+    -> std::enable_if_t< std20::equality_comparable< std20::ranges::iterator_t< B > >, bool > {
 
-      return !( this->operator==( right ) );
+      return ! ( left == right );
     }
   };
 

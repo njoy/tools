@@ -15,17 +15,18 @@ using namespace njoy::tools;
 
 SCENARIO( "chunk_by_view" ) {
 
-  const std::vector< std::vector< int > > equal = { { 1, 2, 3 }, { 1, 2, 3 }, { 3 }, { 3 }, { 1, 2, 3 } };
+  const std::vector< std::vector< int > > equal = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
 
   GIVEN( "a container with forward iterators" ) {
 
-    std::forward_list< int > values = { 1, 2, 3, 1, 2, 3, 3, 3, 1, 2, 3 };
+    std::forward_list< int > values = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::chunk_by( std::less{} );
+      auto chunk = values | std23::views::chunk( 3 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
+      using Subrange = decltype(chunk.front());
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
 
@@ -41,9 +42,6 @@ SCENARIO( "chunk_by_view" ) {
 
       THEN( "a chunk_by_view can be constructed and members can be tested" ) {
 
-        // should not compile: not sized
-        // CHECK( 5 == chunk.size() );
-
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
@@ -53,10 +51,6 @@ SCENARIO( "chunk_by_view" ) {
         CHECK( std20::ranges::equal( equal[1], *iter ) );
         ++iter;
         CHECK( std20::ranges::equal( equal[2], *iter ) );
-        ++iter;
-        CHECK( std20::ranges::equal( equal[3], *iter ) );
-        ++iter;
-        CHECK( std20::ranges::equal( equal[4], *iter ) );
 
         CHECK( std20::ranges::equal( equal[0], chunk.front() ) );
       } // THEN
@@ -65,19 +59,20 @@ SCENARIO( "chunk_by_view" ) {
 
   GIVEN( "a container with bidirectional iterators" ) {
 
-    std::list< int > values = { 1, 2, 3, 1, 2, 3, 3, 3, 1, 2, 3 };
+    std::list< int > values = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::chunk_by( std::less{} );
+      auto chunk = values | std23::views::chunk( 3 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
+      using Subrange = decltype(chunk.front());
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
-        CHECK( ! std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::sized_range< Range > );
         CHECK( std20::ranges::forward_range< Range > );
         CHECK( std20::ranges::bidirectional_range< Range > );
         CHECK( ! std20::ranges::random_access_range< Range > );
@@ -87,8 +82,7 @@ SCENARIO( "chunk_by_view" ) {
 
       THEN( "a chunk_by_view can be constructed and members can be tested" ) {
 
-        // should not compile: not sized
-        // CHECK( 5 == chunk.size() );
+        CHECK( 3 == chunk.size() );
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
@@ -99,58 +93,48 @@ SCENARIO( "chunk_by_view" ) {
         CHECK( std20::ranges::equal( equal[1], *iter ) );
         ++iter;
         CHECK( std20::ranges::equal( equal[2], *iter ) );
-        ++iter;
-        CHECK( std20::ranges::equal( equal[3], *iter ) );
-        ++iter;
-        CHECK( std20::ranges::equal( equal[4], *iter ) );
 
         iter = chunk.end();
-        --iter;
-        CHECK( std20::ranges::equal( equal[4], *iter ) );
-        --iter;
-        CHECK( std20::ranges::equal( equal[3], *iter ) );
         --iter;
         CHECK( std20::ranges::equal( equal[2], *iter ) );
         --iter;
         CHECK( std20::ranges::equal( equal[1], *iter ) );
         --iter;
         CHECK( std20::ranges::equal( equal[0], *iter ) );
-        CHECK( (*iter).begin() == values.begin() );
         CHECK( chunk.begin() == iter );
 
         CHECK( std20::ranges::equal( equal[0], chunk.front() ) );
-        CHECK( std20::ranges::equal( equal[4], chunk.back() ) );
+        CHECK( std20::ranges::equal( equal[2], chunk.back() ) );
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "a container with random access iterators" ) {
 
-    std::vector< int > values = { 1, 2, 3, 1, 2, 3, 3, 3, 1, 2, 3 };
+    std::vector< int > values = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::chunk_by( std::less{} );
+      auto chunk = values | std23::views::chunk( 3 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
-      using Subrange = std20::ranges::subrange< Iterator >;
+      using Subrange = decltype(chunk.front());
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
-        CHECK( ! std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::sized_range< Range > );
         CHECK( std20::ranges::forward_range< Range > );
         CHECK( std20::ranges::bidirectional_range< Range > );
-        CHECK( ! std20::ranges::random_access_range< Range > );
+        CHECK( std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
         CHECK( std20::ranges::common_range< Range > );
       }
 
       THEN( "a chunk_by_view can be constructed and members can be tested" ) {
 
-        // should not compile: not sized
-        // CHECK( 5 == chunk.size() );
+        CHECK( 3 == chunk.size() );
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
@@ -162,38 +146,26 @@ SCENARIO( "chunk_by_view" ) {
         CHECK( 3 == (*iter)[2] );
         ++iter;
         CHECK( std20::ranges::equal( equal[1], *iter ) );
-        CHECK( 1 == (*iter)[0] );
-        CHECK( 2 == (*iter)[1] );
-        CHECK( 3 == (*iter)[2] );
+        CHECK( 4 == (*iter)[0] );
+        CHECK( 5 == (*iter)[1] );
+        CHECK( 6 == (*iter)[2] );
         ++iter;
         CHECK( std20::ranges::equal( equal[2], *iter ) );
-        CHECK( 3 == (*iter)[0] );
-        ++iter;
-        CHECK( std20::ranges::equal( equal[3], *iter ) );
-        CHECK( 3 == (*iter)[0] );
-        ++iter;
-        CHECK( std20::ranges::equal( equal[4], *iter ) );
-        CHECK( 1 == (*iter)[0] );
-        CHECK( 2 == (*iter)[1] );
-        CHECK( 3 == (*iter)[2] );
+        CHECK( 7 == (*iter)[0] );
+        CHECK( 8 == (*iter)[1] );
+        CHECK( 9 == (*iter)[2] );
 
         iter = chunk.end();
         --iter;
-        CHECK( std20::ranges::equal( equal[4], *iter ) );
-        CHECK( 1 == (*iter)[0] );
-        CHECK( 2 == (*iter)[1] );
-        CHECK( 3 == (*iter)[2] );
-        --iter;
-        CHECK( std20::ranges::equal( equal[3], *iter ) );
-        CHECK( 3 == (*iter)[0] );
-        --iter;
         CHECK( std20::ranges::equal( equal[2], *iter ) );
-        CHECK( 3 == (*iter)[0] );
+        CHECK( 7 == (*iter)[0] );
+        CHECK( 8 == (*iter)[1] );
+        CHECK( 9 == (*iter)[2] );
         --iter;
         CHECK( std20::ranges::equal( equal[1], *iter ) );
-        CHECK( 1 == (*iter)[0] );
-        CHECK( 2 == (*iter)[1] );
-        CHECK( 3 == (*iter)[2] );
+        CHECK( 4 == (*iter)[0] );
+        CHECK( 5 == (*iter)[1] );
+        CHECK( 6 == (*iter)[2] );
         --iter;
         CHECK( std20::ranges::equal( equal[0], *iter ) );
         CHECK( 1 == (*iter)[0] );
@@ -202,7 +174,17 @@ SCENARIO( "chunk_by_view" ) {
         CHECK( chunk.begin() == iter );
 
         CHECK( std20::ranges::equal( equal[0], chunk.front() ) );
-        CHECK( std20::ranges::equal( equal[4], chunk.back() ) );
+        CHECK( std20::ranges::equal( equal[2], chunk.back() ) );
+
+        CHECK( 1 == chunk[0][0] );
+        CHECK( 2 == chunk[0][1] );
+        CHECK( 3 == chunk[0][2] );
+        CHECK( 4 == chunk[1][0] );
+        CHECK( 5 == chunk[1][1] );
+        CHECK( 6 == chunk[1][2] );
+        CHECK( 7 == chunk[2][0] );
+        CHECK( 8 == chunk[2][1] );
+        CHECK( 9 == chunk[2][2] );
       } // THEN
     } // WHEN
   } // GIVEN
