@@ -162,6 +162,9 @@ public:
 template <typename R, std::enable_if_t<range<R>, int> = 0>
 take_view(R&&, range_difference_t<R>) -> take_view<all_view<R>>;
 
+template <typename R>
+inline constexpr bool enable_borrowed_range<take_view<R>> = enable_borrowed_range<R>;
+
 namespace detail {
 
 #ifdef NANO_MSVC_LAMBDA_PIPE_WORKAROUND

@@ -271,16 +271,19 @@ public:
 
   constexpr R base() const { return base_; }
 
+  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0>
   constexpr iterator< false > begin() {
 
     return { this, std20::ranges::begin( this->base_ ) };
   }
 
+  template < typename RR = R, std::enable_if_t< std20::ranges::forward_range< const RR >, int > = 0 >
   constexpr iterator< true > begin() const {
 
     return { this, std20::ranges::begin( this->base_ ) };
   }
 
+  template < typename RR = R, std::enable_if_t< !std20::ranges::detail::simple_view< RR >, int>  = 0>
   constexpr iterator< false > end() {
 
     if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R >) {
@@ -298,6 +301,7 @@ public:
     }
   }
 
+  template < typename RR = R, std::enable_if_t< std20::ranges::forward_range< const RR >, int > = 0 >
   constexpr iterator< true > end() const {
 
     if constexpr ( std20::ranges::common_range< R > && std20::ranges::sized_range< R >) {
@@ -315,16 +319,16 @@ public:
     }
   }
 
-  template < typename B = R >
+  template < typename RR = R >
   constexpr auto size()
-  -> std::enable_if_t< std20::ranges::sized_range< B >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< RR >, std::size_t > {
 
     return div_ceil( std20::ranges::distance( this->base_ ), this->n_ );
   }
 
-  template < typename B = R >
+  template < typename RR = R >
   constexpr auto size() const
-  -> std::enable_if_t< std20::ranges::sized_range< B >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< const RR >, std::size_t > {
 
     return div_ceil( std20::ranges::distance( this->base_ ), this->n_ );
   }
@@ -333,6 +337,21 @@ public:
 
 template < typename R >
 chunk_view( R&&, std20::ranges::range_difference_t< R > ) -> chunk_view< std20::ranges::all_view< R > >;
+
+} // namespace ranges
+} // namespace std23
+
+namespace std20 {
+inline namespace ranges {
+
+template <typename R>
+inline constexpr bool enable_borrowed_range<std23::ranges::chunk_view<R>> = forward_range<R> && enable_borrowed_range<R>;
+
+} // namespace ranges
+} // namespace std20
+
+namespace std23 {
+inline namespace ranges {
 
 namespace detail {
 
