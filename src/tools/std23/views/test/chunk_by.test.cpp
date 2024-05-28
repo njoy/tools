@@ -29,6 +29,8 @@ SCENARIO( "chunk_by_view" ) {
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
 
+        CHECK( std20::ranges::viewable_range< Range > );
+
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
         CHECK( ! std20::ranges::sized_range< Range > );
@@ -74,6 +76,8 @@ SCENARIO( "chunk_by_view" ) {
       using Iterator = std20::iterator_t< Range >;
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -136,6 +140,8 @@ SCENARIO( "chunk_by_view" ) {
       using Subrange = std20::ranges::subrange< Iterator >;
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );

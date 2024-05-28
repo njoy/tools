@@ -13,7 +13,7 @@
 // convenience typedefs
 using namespace njoy::tools;
 
-SCENARIO( "chunk_by_view" ) {
+SCENARIO( "chunk_view" ) {
 
   const std::vector< std::vector< int > > equal = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
 
@@ -28,7 +28,9 @@ SCENARIO( "chunk_by_view" ) {
       using Iterator = std20::iterator_t< Range >;
       using Subrange = decltype(chunk.front());
 
-      THEN( "the chunk_by_view satisfies the required concepts" ) {
+      THEN( "the chunk_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -40,7 +42,7 @@ SCENARIO( "chunk_by_view" ) {
         CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "a chunk_by_view can be constructed and members can be tested" ) {
+      THEN( "a chunk_view can be constructed and members can be tested" ) {
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
@@ -68,7 +70,9 @@ SCENARIO( "chunk_by_view" ) {
       using Iterator = std20::iterator_t< Range >;
       using Subrange = decltype(chunk.front());
 
-      THEN( "the chunk_by_view satisfies the required concepts" ) {
+      THEN( "the chunk_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -80,7 +84,7 @@ SCENARIO( "chunk_by_view" ) {
         CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "a chunk_by_view can be constructed and members can be tested" ) {
+      THEN( "a chunk_view can be constructed and members can be tested" ) {
 
         CHECK( 3 == chunk.size() );
 
@@ -120,7 +124,9 @@ SCENARIO( "chunk_by_view" ) {
       using Iterator = std20::iterator_t< Range >;
       using Subrange = decltype(chunk.front());
 
-      THEN( "the chunk_by_view satisfies the required concepts" ) {
+      THEN( "the chunk_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -132,7 +138,7 @@ SCENARIO( "chunk_by_view" ) {
         CHECK( std20::ranges::common_range< Range > );
       }
 
-      THEN( "a chunk_by_view can be constructed and members can be tested" ) {
+      THEN( "a chunk_view can be constructed and members can be tested" ) {
 
         CHECK( 3 == chunk.size() );
 
