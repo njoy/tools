@@ -14,7 +14,7 @@
 //#include <nanorange/algorithm/binary_search.hpp>
 //#include <nanorange/algorithm/clamp.hpp>
 //#include <nanorange/algorithm/copy.hpp>
-//#include <nanorange/algorithm/count.hpp>
+#include "tools/std20/algorithm/count.hpp"
 #include "tools/std20/algorithm/equal.hpp"
 //#include <nanorange/algorithm/equal_range.hpp>
 //#include <nanorange/algorithm/fill.hpp>

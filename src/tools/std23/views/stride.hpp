@@ -354,7 +354,7 @@ template <typename R>
 inline constexpr bool enable_borrowed_range<std23::ranges::stride_view<R>> = enable_borrowed_range<R>;
 
 } // namespace ranges
-} // namespace std23
+} // namespace std20
 
 namespace std23 {
 inline namespace ranges {

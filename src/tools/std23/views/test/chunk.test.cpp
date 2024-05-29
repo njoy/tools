@@ -15,7 +15,7 @@ using namespace njoy::tools;
 
 SCENARIO( "chunk_view" ) {
 
-  const std::vector< std::vector< int > > equal = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+  const std::vector< std::vector< int > > equal = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9 } };
 
   GIVEN( "a container with forward iterators" ) {
 
@@ -23,7 +23,7 @@ SCENARIO( "chunk_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::chunk( 3 );
+      auto chunk = values | std23::views::chunk( 4 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
       using Subrange = decltype(chunk.front());
@@ -65,7 +65,7 @@ SCENARIO( "chunk_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::chunk( 3 );
+      auto chunk = values | std23::views::chunk( 4 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
       using Subrange = decltype(chunk.front());
@@ -119,7 +119,7 @@ SCENARIO( "chunk_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::chunk( 3 );
+      auto chunk = values | std23::views::chunk( 4 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
       using Subrange = decltype(chunk.front());
@@ -150,33 +150,33 @@ SCENARIO( "chunk_view" ) {
         CHECK( 1 == (*iter)[0] );
         CHECK( 2 == (*iter)[1] );
         CHECK( 3 == (*iter)[2] );
+        CHECK( 4 == (*iter)[3] );
         ++iter;
         CHECK( std20::ranges::equal( equal[1], *iter ) );
-        CHECK( 4 == (*iter)[0] );
-        CHECK( 5 == (*iter)[1] );
-        CHECK( 6 == (*iter)[2] );
+        CHECK( 5 == (*iter)[0] );
+        CHECK( 6 == (*iter)[1] );
+        CHECK( 7 == (*iter)[2] );
+        CHECK( 8 == (*iter)[3] );
         ++iter;
         CHECK( std20::ranges::equal( equal[2], *iter ) );
-        CHECK( 7 == (*iter)[0] );
-        CHECK( 8 == (*iter)[1] );
-        CHECK( 9 == (*iter)[2] );
+        CHECK( 9 == (*iter)[0] );
 
         iter = chunk.end();
         --iter;
         CHECK( std20::ranges::equal( equal[2], *iter ) );
-        CHECK( 7 == (*iter)[0] );
-        CHECK( 8 == (*iter)[1] );
-        CHECK( 9 == (*iter)[2] );
+        CHECK( 9 == (*iter)[0] );
         --iter;
         CHECK( std20::ranges::equal( equal[1], *iter ) );
-        CHECK( 4 == (*iter)[0] );
-        CHECK( 5 == (*iter)[1] );
-        CHECK( 6 == (*iter)[2] );
+        CHECK( 5 == (*iter)[0] );
+        CHECK( 6 == (*iter)[1] );
+        CHECK( 7 == (*iter)[2] );
+        CHECK( 8 == (*iter)[3] );
         --iter;
         CHECK( std20::ranges::equal( equal[0], *iter ) );
         CHECK( 1 == (*iter)[0] );
         CHECK( 2 == (*iter)[1] );
         CHECK( 3 == (*iter)[2] );
+        CHECK( 4 == (*iter)[3] );
         CHECK( chunk.begin() == iter );
 
         CHECK( std20::ranges::equal( equal[0], chunk.front() ) );
@@ -185,12 +185,12 @@ SCENARIO( "chunk_view" ) {
         CHECK( 1 == chunk[0][0] );
         CHECK( 2 == chunk[0][1] );
         CHECK( 3 == chunk[0][2] );
-        CHECK( 4 == chunk[1][0] );
-        CHECK( 5 == chunk[1][1] );
-        CHECK( 6 == chunk[1][2] );
-        CHECK( 7 == chunk[2][0] );
-        CHECK( 8 == chunk[2][1] );
-        CHECK( 9 == chunk[2][2] );
+        CHECK( 4 == chunk[0][3] );
+        CHECK( 5 == chunk[1][0] );
+        CHECK( 6 == chunk[1][1] );
+        CHECK( 7 == chunk[1][2] );
+        CHECK( 8 == chunk[1][3] );
+        CHECK( 9 == chunk[2][0] );
       } // THEN
     } // WHEN
   } // GIVEN
