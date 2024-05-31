@@ -29,10 +29,10 @@ template < typename Function, typename Tuple >
 constexpr auto tuple_transform( Function&& f, Tuple&& tuple ) {
 
   return std::apply(
-           [&]< typename... Ts >( Ts&&... elements ) {
+           [&] ( auto&&... elements ) {
 
              return tuple_or_pair<
-                      std::invoke_result_t< Function&, Ts >... >( std::invoke( f, std::forward< Ts >( elements ) )... );
+                      std::invoke_result_t< Function&, decltype(elements) >... >( std::invoke( f, std::forward< decltype(elements) >( elements ) )... );
            },
            std::forward< Tuple >( tuple ) );
 }
@@ -41,9 +41,9 @@ template < typename Function, typename Tuple >
 constexpr void tuple_for_each( Function&& f, Tuple&& tuple ) {
 
   std::apply(
-      [&]< typename... Ts >( Ts&&... elements ) {
+      [&] ( auto&&... elements ) {
 
-        (static_cast<void>(std::invoke( f, std::forward< Ts >(elements))), ...);
+        (static_cast<void>(std::invoke( f, std::forward< decltype(elements) >(elements))), ...);
       },
       std::forward< Tuple >(tuple));
 }
