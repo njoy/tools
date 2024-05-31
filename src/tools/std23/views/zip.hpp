@@ -120,6 +120,9 @@ private:
   std::tuple< Rs... > views_;
 
   template < bool Const >
+  struct sentinel;
+
+  template < bool Const >
   struct iterator{
 
   private:
@@ -129,8 +132,8 @@ private:
 
     constexpr explicit iterator( Iterators current ) : current_( std::move( current ) ) {}
 
-//    template < bool >
-//    friend class zip_view< Rs...>::sentinel;
+    template < bool >
+    friend class zip_view< Rs...>::sentinel;
 
     friend class zip_view< Rs... >;
 
