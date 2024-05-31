@@ -25,16 +25,27 @@ auto tuple_or_pair_test() -> std::enable_if_t< ( sizeof...( T ) != 2 ), std::tup
 template < typename... T >
 using tuple_or_pair = decltype( tuple_or_pair_test< T...>() );
 
-template < typename Function, typename Tuple, typename... Ts >
+template < typename Function, typename Tuple >
 constexpr auto tuple_transform( Function&& f, Tuple&& tuple ) {
 
   return std::apply(
-           [&] ( Ts&&... elements ) {
+           [&]< typename... Ts >( Ts&&... elements ) {
 
              return tuple_or_pair<
                       std::invoke_result_t< Function&, Ts >... >( std::invoke( f, std::forward< Ts >( elements ) )... );
            },
            std::forward< Tuple >( tuple ) );
+}
+
+template < typename Function, typename Tuple >
+constexpr void tuple_for_each( Function&& f, Tuple&& tuple ) {
+
+  std::apply(
+      [&]< typename... Ts >( Ts&&... elements ) {
+
+        (static_cast<void>(std::invoke( f, std::forward< Ts >(elements))), ...);
+      },
+      std::forward< Tuple >(tuple));
 }
 
 template < typename Function, typename LeftTuple, typename RightTuple, std::size_t... Indices >
@@ -313,11 +324,11 @@ private:
 
     sentinel() = default;
 
-//    template < typename = std::enable_if_t<
-//                 Const &&
-//                 ( std20::convertible_to<
-//                       std20::ranges::sentinel_t< Rs >,
-//                       std20::ranges::sentinel_t< maybe_const< Const, Rs > > > && ... ), int > >
+    template < typename = std::enable_if_t<
+                 Const &&
+                 ( std20::convertible_to<
+                       std20::ranges::sentinel_t< Rs >,
+                       std20::ranges::sentinel_t< maybe_const< Const, Rs > > > && ... ), int > >
     constexpr sentinel( sentinel< ! Const > iter ) : end_( std::move( iter.end_ ) ) {}
 
     template < bool Other >
@@ -364,7 +375,7 @@ public:
 
   constexpr explicit zip_view( Rs... views ) : views_( std::move( views )... ) {}
 
-//  template < typename = std::enable_if_t< ! ( std20::ranges::detail::simple_view< RRs > && ... ), int > >
+//  template < typename = std::enable_if_t< ! ( std20::ranges::detail::simple_view< Rs > && ... ), int > >
   constexpr auto begin() {
 
     return iterator< false >( tuple_transform( std20::ranges::begin, this->views_ ) );

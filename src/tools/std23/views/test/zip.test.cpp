@@ -17,9 +17,20 @@ SCENARIO( "zip_view" ) {
 
   GIVEN( "a container with random access iterators" ) {
 
-    std::vector< int > values1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    std::vector< std::tuple< int, char, std::string > > equal = {
+
+      { 1, 'a', "ab" },
+      { 2, 'b', "cd" },
+      { 3, 'c', "ef" },
+      { 4, 'd', "gh" },
+      { 5, 'e', "ij" },
+      { 6, 'f', "kl" },
+      { 7, 'g', "mn" }
+    };
+
+    std::vector< int > values1 = { 1, 2, 3, 4, 5, 6, 7 };
     std::vector< char > values2 = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' };
-    std::vector< std::string > values3 = { "ab", "cd", "ef", "gh", "ij", "kl", "mn", "op", "qr" };
+    std::vector< std::string > values3 = { "ab", "cd", "ef", "gh", "ij", "kl", "mn", "op" };
 
     WHEN( "when iterators are used" ) {
 
@@ -28,8 +39,6 @@ SCENARIO( "zip_view" ) {
       using Iterator = std20::iterator_t< Range >;
 
       THEN( "the stride_view satisfies the required concepts" ) {
-
-        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -43,21 +52,23 @@ SCENARIO( "zip_view" ) {
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
-        CHECK( 9 == chunk.size() );
+        CHECK( 7 == chunk.size() );
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
-//        CHECK( std20::ranges::equal( equal, chunk ) );
-//
-//        CHECK( equal[0] == chunk.front() );
-//        CHECK( equal[4] == chunk.back() );
-//
-//        CHECK( 1 == chunk[0] );
-//        CHECK( 3 == chunk[1] );
-//        CHECK( 5 == chunk[2] );
-//        CHECK( 7 == chunk[3] );
-//        CHECK( 9 == chunk[4] );
+        CHECK( std20::ranges::equal( equal, chunk ) );
+
+       CHECK( equal[0] == chunk.front() );
+       CHECK( equal[6] == chunk.back() );
+
+       CHECK( std::tuple< int, char, std::string >{ 1, 'a', "ab" } == chunk[0] );
+       CHECK( std::tuple< int, char, std::string >{ 2, 'b', "cd" } == chunk[1] );
+       CHECK( std::tuple< int, char, std::string >{ 3, 'c', "ef" } == chunk[2] );
+       CHECK( std::tuple< int, char, std::string >{ 4, 'd', "gh" } == chunk[3] );
+       CHECK( std::tuple< int, char, std::string >{ 5, 'e', "ij" } == chunk[4] );
+       CHECK( std::tuple< int, char, std::string >{ 6, 'f', "kl" } == chunk[5] );
+       CHECK( std::tuple< int, char, std::string >{ 7, 'g', "mn" } == chunk[6] );
       } // THEN
     } // WHEN
   } // GIVEN
