@@ -98,6 +98,24 @@ constexpr bool tuple_any_equals( const LeftTuple& left, const RightTuple& right 
                      equals );
 }
 
+template < bool Const, typename... Rs >
+inline constexpr bool zip_all_simple = (
+
+  std20::ranges::detail::simple_view< maybe_const< Const, Rs > > && ...
+);
+
+template < bool Const, typename... Rs >
+inline constexpr bool zip_all_range = (
+
+  std20::ranges::range< maybe_const< Const, Rs > > && ...
+);
+
+template < bool Const, typename... Rs >
+inline constexpr bool zip_all_sized = (
+
+  std20::ranges::sized_range< maybe_const< Const, Rs > > && ...
+);
+
 // abs in cstdlib is not constexpr
 template < class T >
 constexpr T abs( T t ) { return t < 0 ? -t : t; }
@@ -154,11 +172,12 @@ private:
 
     iterator() = default;
 
-//    template < typename = std::enable_if_t<
-//                 Const &&
-//                 ( std20::convertible_to<
-//                       std20::ranges::iterator_t< Rs >,
-//                       std20::ranges::iterator_t< maybe_const< Const, Rs > > > && ... ) > >
+    template < bool C = Const,
+               typename = std::enable_if_t<
+                 C &&
+                 ( std20::convertible_to<
+                       std20::ranges::iterator_t< Rs >,
+                       std20::ranges::iterator_t< maybe_const< C, Rs > > > && ... ) > >
     constexpr iterator( iterator< ! Const > iter ) : current_( std::move( iter.current_ ) ) {}
 
     constexpr auto operator*() const {
@@ -174,31 +193,35 @@ private:
       return *this;
     }
 
+    template < bool C = Const >
     constexpr auto operator++(int)
-    -> std::enable_if_t< zip_all_forward< Const, Rs... >, iterator > {
+    -> std::enable_if_t< zip_all_forward< C, Rs... >, iterator > {
 
       auto temp = *this;
       ++*this;
       return temp;
     }
 
+    template < bool C = Const >
     constexpr auto operator--()
-    -> std::enable_if_t< zip_all_bidirectional< Const, Rs... >, iterator& > {
+    -> std::enable_if_t< zip_all_bidirectional< C, Rs... >, iterator& > {
 
       tuple_for_each( [] ( auto& iter ) { --iter; }, this->current_);
       return *this;
     }
 
+    template < bool C = Const >
     constexpr auto operator--(int)
-    -> std::enable_if_t< zip_all_bidirectional< Const, Rs... >, iterator > {
+    -> std::enable_if_t< zip_all_bidirectional< C, Rs... >, iterator > {
 
       auto temp = *this;
       --*this;
       return temp;
     }
 
+    template < bool C = Const >
     constexpr auto operator+=( difference_type n )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, iterator& > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, iterator& > {
 
       tuple_for_each( [&] ( auto& iter )
                           { iter += std20::ranges::iter_difference_t< std::decay_t< decltype( iter ) > >( n ); },
@@ -206,13 +229,14 @@ private:
       return *this;
     }
 
+    template < bool C = Const >
     constexpr auto operator-=( difference_type n )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, iterator& > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, iterator& > {
 
       return *this += -n;
     }
 
-    template < typename = std::enable_if_t< zip_all_random_access< Const, Rs... > > >
+    template < bool C = Const, typename = std::enable_if_t< zip_all_random_access< C, Rs... > > >
     constexpr decltype(auto) operator[]( difference_type n ) const {
 
       return tuple_transform( [&] ( auto& iter ) -> decltype(auto)
@@ -220,8 +244,9 @@ private:
                               this->current_ );
     }
 
+    template < bool C = Const >
     friend constexpr auto operator==( const iterator& left, const iterator& right )
-    -> std::enable_if_t< ( std20::equality_comparable< std20::ranges::iterator_t< maybe_const< Const, Rs > > > && ... ), bool > {
+    -> std::enable_if_t< ( std20::equality_comparable< std20::ranges::iterator_t< maybe_const< C, Rs > > > && ... ), bool > {
 
       if constexpr ( zip_all_bidirectional< Const, Rs... > ) {
 
@@ -233,57 +258,66 @@ private:
       }
     }
 
+    template < bool C = Const >
     friend constexpr auto operator!=( const iterator& left, const iterator& right )
-    -> std::enable_if_t< ( std20::equality_comparable< std20::ranges::iterator_t< maybe_const< Const, Rs > > > && ... ), bool > {
+    -> std::enable_if_t< ( std20::equality_comparable< std20::ranges::iterator_t< maybe_const< C, Rs > > > && ... ), bool > {
 
       return ! ( left == right );
     }
 
+    template < bool C = Const >
     friend constexpr auto operator<( const iterator& left, const iterator& right )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, bool > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, bool > {
 
       return left.current_ < right.current_;
     }
 
+    template < bool C = Const >
     friend constexpr auto operator>( const iterator& left, const iterator& right )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, bool > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, bool > {
 
       return left < right;
     }
 
+    template < bool C = Const >
     friend constexpr auto operator<=( const iterator& left, const iterator& right )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, bool > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, bool > {
 
       return ! ( right < left );
     }
 
+    template < bool C = Const >
     friend constexpr auto operator>=( const iterator& left, const iterator& right )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, bool > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, bool > {
 
       return ! ( left < right );
     }
 
+    template < bool C = Const >
     friend constexpr auto operator+( const iterator& left, const difference_type n )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, iterator > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, iterator > {
 
       return iterator{ left } += n;
     }
 
+    template < bool C = Const >
     friend constexpr auto operator+( const difference_type n, const iterator& right )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, iterator > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, iterator > {
 
       return right + n;
     }
 
+    template < bool C = Const >
     friend constexpr auto operator-( const iterator& left, const difference_type n )
-    -> std::enable_if_t< zip_all_random_access< Const, Rs... >, iterator > {
+    -> std::enable_if_t< zip_all_random_access< C, Rs... >, iterator > {
 
       return iterator{ left } -= n;
     }
 
+    template < bool C = Const >
     friend constexpr auto operator-( const iterator& left, const iterator& right )
-    -> std::enable_if_t< ( std20::ranges::sized_sentinel_for< std20::ranges::iterator_t< maybe_const< Const, Rs > >,
-                                                              std20::ranges::iterator_t< maybe_const< Const, Rs > > > && ...),
+    -> std::enable_if_t< ( std20::ranges::sized_sentinel_for< std20::ranges::iterator_t< maybe_const< C, Rs > >,
+                                                              std20::ranges::iterator_t< maybe_const< C, Rs > > > && ...),
                          difference_type > {
 
       const auto diffs = tuple_zip_transform( std::minus<>(), left.current_, right.current_ );
@@ -301,7 +335,7 @@ private:
       return tuple_transform( std20::ranges::iter_move, iter.current_);
     }
 
-    template < typename = std::enable_if_t< ( std20::indirectly_swappable< std20::ranges::iterator_t< maybe_const< Const, Rs > > > && ...) > >
+    template < bool C = Const, typename = std::enable_if_t< ( std20::indirectly_swappable< std20::ranges::iterator_t< maybe_const< C, Rs > > > && ...) > >
     friend constexpr void iter_swap( const iterator& left, const iterator& right ) {
 
       tuple_zip_for_each( std20::ranges::iter_swap, left.current_, right.current_ );
@@ -327,12 +361,13 @@ private:
 
     sentinel() = default;
 
-    template < typename = std::enable_if_t<
-                 Const &&
+    template < bool C = Const,
+               typename = std::enable_if_t<
+                 C &&
                  ( std20::convertible_to<
                        std20::ranges::sentinel_t< Rs >,
-                       std20::ranges::sentinel_t< maybe_const< Const, Rs > > > && ... ), int > >
-    constexpr sentinel( sentinel< ! Const > iter ) : end_( std::move( iter.end_ ) ) {}
+                       std20::ranges::sentinel_t< maybe_const< C, Rs > > > && ... ), int > >
+    constexpr sentinel( sentinel< ! C > iter ) : end_( std::move( iter.end_ ) ) {}
 
     template < bool Other >
     friend constexpr auto operator==( const iterator< Other >& left, const sentinel& right )
@@ -378,20 +413,23 @@ public:
 
   constexpr explicit zip_view( Rs... views ) : views_( std::move( views )... ) {}
 
-//  template < typename = std::enable_if_t< ! ( std20::ranges::detail::simple_view< Rs > && ... ), int > >
-  constexpr auto begin() {
+  template < bool Const = false >
+  constexpr auto begin()
+  -> std::enable_if_t< ! zip_all_simple< Const, Rs... >, iterator< false > > {
 
     return iterator< false >( tuple_transform( std20::ranges::begin, this->views_ ) );
   }
 
-//  template < typename = std::enable_if_t< ( std20::ranges::range< const Rs > && ... ), int > >
-  constexpr iterator< true > begin() const {
+  template < bool Const = true >
+  constexpr auto begin() const
+  -> std::enable_if_t< zip_all_range< Const, Rs... >, iterator< true > > {
 
     return iterator< true >( tuple_transform( std20::ranges::begin, this->views_ ) );
   }
 
-//  template < typename = std::enable_if_t< ! ( std20::ranges::detail::simple_view< Rs > && ... ), int > >
-  constexpr iterator< false > end() {
+  template < bool Const = false >
+  constexpr auto end()
+  -> std::enable_if_t< ! zip_all_simple< Const, Rs... >, iterator< false > >  {
 
     if constexpr ( ! zip_is_common< Rs... > ) {
 
@@ -406,8 +444,9 @@ public:
     }
   }
 
-//  template < typename = std::enable_if_t< ( std20::ranges::range< const Rs > && ... ), int > >
-  constexpr iterator< true > end() const {
+  template < bool Const = true >
+  constexpr auto end() const
+  -> std::enable_if_t< zip_all_range< Const, Rs... >, iterator< true > > {
 
     if constexpr ( ! zip_is_common< Rs... > ) {
 
@@ -415,15 +454,16 @@ public:
     }
     else if constexpr ( ( std20::ranges::random_access_range< Rs > && ... ) ) {
 
-      return this->begin() + std20::ranges::iter_difference_t< iterator< false > >( this->size() );
+      return this->begin() + std20::ranges::iter_difference_t< iterator< true > >( this->size() );
     } else {
 
       return iterator< true >( tuple_transform( std20::ranges::end, this->views_ ) );
     }
   }
 
+  template < bool Const = false >
   constexpr auto size()
-  -> std::enable_if_t< ( std20::ranges::sized_range< Rs > && ... ), std::size_t > {
+  -> std::enable_if_t< zip_all_sized< Const, Rs... >, std::size_t > {
 
     return std::apply(
                []( auto... sizes ) {
@@ -434,8 +474,9 @@ public:
                tuple_transform( std20::ranges::size, this->views_ ) );
   }
 
+  template < bool Const = true >
   constexpr auto size() const
-  -> std::enable_if_t< ( std20::ranges::sized_range< const Rs > && ...), std::size_t > {
+  -> std::enable_if_t< zip_all_sized< Const, Rs... >, std::size_t > {
 
     return std::apply(
                []( auto... sizes ) {
