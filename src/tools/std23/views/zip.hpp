@@ -499,7 +499,7 @@ namespace std20 {
 inline namespace ranges {
 
 template < typename... Rs >
-inline constexpr bool enable_borrowed_range<std23::ranges::zip_view<Rs...>> = ( enable_borrowed_range< Rs > && ... );
+inline constexpr bool enable_borrowed_range< std23::ranges::zip_view< Rs... > > = ( enable_borrowed_range< Rs > && ... );
 
 } // namespace ranges
 } // namespace std23

@@ -57,7 +57,7 @@ SCENARIO( "zip_view" ) {
 
         CHECK( std20::ranges::equal( equal, chunk ) );
 
-//        CHECK( equal[0] == chunk.front() );
+        CHECK( equal[0] == chunk.front() );
       } // THEN
     } // WHEN
   } // GIVEN
