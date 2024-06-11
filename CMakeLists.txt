@@ -41,14 +41,14 @@ option( tools.installation "Install njoy::tools" ON )
 # Dependencies
 ########################################################################
 
-set( REPOSITORIES "develop"
+set( REPOSITORIES "release"
     CACHE STRING
     "Options for where to fetch repositories: develop, release, local"
     )
 
 message( STATUS "Using ${REPOSITORIES} repositories" )
 
-if( REPOSITORIES STREQUAL "release" )
+if( REPOSITORIES STREQUAL "develop" )
     include( cmake/develop_dependencies.cmake )
 
 elseif( REPOSITORIES STREQUAL "release" )
@@ -91,8 +91,6 @@ target_compile_definitions( tools INTERFACE -DNANORANGE_NO_STD_FORWARD_DECLARATI
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if( tools.python )
-
-  shacl_FetchContent_MakeAvailable( pybind11 )
 
   pybind11_add_module( tools.python
       python/src/tools.python.cpp
