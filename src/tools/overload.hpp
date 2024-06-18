@@ -24,7 +24,6 @@ namespace tools {
 
     using Types::operator()...;
   };
-  template < class... Types > overload( Types... ) -> overload< Types... >;
 
   /**
    *  @brief Overload struct for collecting lambdas for std::visit
@@ -38,7 +37,7 @@ namespace tools {
    *                            { return "Bar"; } ),
    *        variant );
    */
-  template< class... Types >
+  template < class... Types >
   overload( Types... ) -> overload< Types... >;
 
 } // tools namespace
