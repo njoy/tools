@@ -374,8 +374,33 @@ private:
     -> std::enable_if_t< ( std20::ranges::sentinel_for<
                                std20::ranges::sentinel_t< maybe_const< Const, Rs > >,
                                std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ), bool > {
-
       return tuple_any_equals( left.current_, right.end_ );
+    }
+
+    template < bool Other >
+    friend constexpr auto operator==( const sentinel& left, const iterator< Other >& right )
+    -> std::enable_if_t< ( std20::ranges::sentinel_for<
+                               std20::ranges::sentinel_t< maybe_const< Const, Rs > >,
+                               std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ), bool > {
+      return right == left;
+    }
+
+    template < bool Other >
+    friend constexpr auto operator!=( const iterator< Other >& left, const sentinel& right )
+    -> std::enable_if_t< ( std20::ranges::sentinel_for<
+                               std20::ranges::sentinel_t< maybe_const< Const, Rs > >,
+                               std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ), bool > {
+
+      return !tuple_any_equals( left.current_, right.end_ );
+    }
+
+    template < bool Other >
+    friend constexpr auto operator!=( const sentinel& left, const iterator< Other >& right )
+    -> std::enable_if_t< ( std20::ranges::sentinel_for<
+                               std20::ranges::sentinel_t< maybe_const< Const, Rs > >,
+                               std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ), bool > {
+
+      return right != left;
     }
 
     template < bool Other >
@@ -429,13 +454,8 @@ public:
 
   template < bool Const = false >
   constexpr auto end()
-  -> std::enable_if_t< ! zip_all_simple< Const, Rs... >, iterator< false > >  {
-
-    if constexpr ( ! zip_is_common< Rs... > ) {
-
-      return sentinel< false >( tuple_transform( std20::ranges::end, this->views_ ));
-    }
-    else if constexpr ( ( std20::ranges::random_access_range< Rs > && ... ) ) {
+  -> std::enable_if_t< ! zip_all_simple< Const, Rs... > && zip_is_common< Rs... >, iterator< false > >  {
+    if constexpr ( ( std20::ranges::random_access_range< Rs > && ... ) ) {
 
       return this->begin() + std20::ranges::iter_difference_t< iterator< false > >( this->size() );
     } else {
@@ -444,22 +464,30 @@ public:
     }
   }
 
+  template < bool Const = false >
+  constexpr auto end()
+  -> std::enable_if_t< ! zip_all_simple< Const, Rs... > && ! zip_is_common< Rs... >, sentinel< false > >  {
+      return sentinel< false >( tuple_transform( std20::ranges::end, this->views_ ));
+  }
+
+
   template < bool Const = true >
   constexpr auto end() const
-  -> std::enable_if_t< zip_all_range< Const, Rs... >, iterator< true > > {
-
-    if constexpr ( ! zip_is_common< Rs... > ) {
-
-      return sentinel< true >( tuple_transform( std20::ranges::end, this->views_ ));
-    }
-    else if constexpr ( ( std20::ranges::random_access_range< Rs > && ... ) ) {
-
+  -> std::enable_if_t< zip_all_range< Const, Rs... > && zip_is_common< Rs... >, iterator< true > > {
+    if constexpr ( ( std20::ranges::random_access_range< Rs > && ... ) ) {
       return this->begin() + std20::ranges::iter_difference_t< iterator< true > >( this->size() );
     } else {
 
       return iterator< true >( tuple_transform( std20::ranges::end, this->views_ ) );
     }
   }
+
+  template < bool Const = true >
+  constexpr auto end() const
+  -> std::enable_if_t< zip_all_range< Const, Rs... > && ! zip_is_common< Rs... >, sentinel< true > > {
+      return sentinel< true >( tuple_transform( std20::ranges::end, this->views_ ));
+  }
+
 
   template < bool Const = false >
   constexpr auto size()
