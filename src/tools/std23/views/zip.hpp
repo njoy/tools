@@ -391,7 +391,7 @@ private:
                                std20::ranges::sentinel_t< maybe_const< Const, Rs > >,
                                std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ), bool > {
 
-      return !tuple_any_equals( left.current_, right.end_ );
+      return ! ( left == right );
     }
 
     template < bool Other >
@@ -400,7 +400,7 @@ private:
                                std20::ranges::sentinel_t< maybe_const< Const, Rs > >,
                                std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ), bool > {
 
-      return right != left;
+      return ! ( left == right );
     }
 
     template < bool Other >
