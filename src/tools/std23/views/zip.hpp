@@ -357,6 +357,13 @@ private:
 
     friend class zip_view< Rs... >;
 
+    // hidden friend cannot access private member of iterator because they are friends of friends
+    template < bool Other >
+    static constexpr decltype(auto) iterator_current( const iterator< Other >& iter ) {
+
+      return iter.current_;
+    }
+
   public:
 
     sentinel() = default;
@@ -374,7 +381,7 @@ private:
     -> std::enable_if_t< ( std20::ranges::sentinel_for<
                                std20::ranges::sentinel_t< maybe_const< Const, Rs > >,
                                std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ), bool > {
-      return tuple_any_equals( left.current_, right.end_ );
+      return tuple_any_equals( iterator_current( left ), right.end_ );
     }
 
     template < bool Other >
@@ -410,7 +417,7 @@ private:
                                std20::ranges::iterator_t< maybe_const< Other, Rs > > > && ... ),
                          std::common_type_t< std20::ranges::range_difference_t< maybe_const< Other, Rs > >... > > {
 
-      const auto diffs = tuple_zip_transform( std::minus<>(), left.current_, right.end_ );
+      const auto diffs = tuple_zip_transform( std::minus<>(), iterator_current( left ), right.end_ );
       return std::apply(
                  [] ( auto... differences ) {
 
