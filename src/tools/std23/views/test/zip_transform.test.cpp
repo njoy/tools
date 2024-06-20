@@ -27,30 +27,30 @@ SCENARIO( "zip_view" ) {
 
     WHEN( "when iterators are used" ) {
 
-//      auto chunk = std23::views::zip_transform( transform, values1, values2, values3 );
-//      using Range = decltype(chunk);
-//      using Iterator = std20::iterator_t< Range >;
+      auto chunk = std23::views::zip_transform( transform, values1, values2, values3 );
+      using Range = decltype(chunk);
+      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the stride_view satisfies the required concepts" ) {
 
-//        CHECK( std20::ranges::range< Range > );
-//        CHECK( std20::ranges::view< Range > );
-//        CHECK( ! std20::ranges::sized_range< Range > );
-//        CHECK( std20::ranges::forward_range< Range > );
-//        CHECK( ! std20::ranges::bidirectional_range< Range > );
-//        CHECK( ! std20::ranges::random_access_range< Range > );
-//        CHECK( ! std20::ranges::contiguous_range< Range > );
-//        CHECK( std20::ranges::common_range< Range > );
+        CHECK( std20::ranges::range< Range > );
+        CHECK( std20::ranges::view< Range > );
+        CHECK( ! std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( ! std20::ranges::bidirectional_range< Range > );
+        CHECK( ! std20::ranges::random_access_range< Range > );
+        CHECK( ! std20::ranges::contiguous_range< Range > );
+        CHECK( std20::ranges::common_range< Range > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
-//        CHECK( false == chunk.empty() );
-//        CHECK( true == bool( chunk ) );
-//
-//        CHECK( std20::ranges::equal( equal, chunk ) );
-//
-//        CHECK( equal[0] == chunk.front() );
+        CHECK( false == chunk.empty() );
+        CHECK( true == bool( chunk ) );
+
+        CHECK( std20::ranges::equal( equal, chunk ) );
+
+        CHECK( equal[0] == chunk.front() );
       } // THEN
     } // WHEN
   } // GIVEN
@@ -69,13 +69,13 @@ SCENARIO( "zip_view" ) {
 
       THEN( "the stride_view satisfies the required concepts" ) {
 
-//        CHECK( std20::ranges::range< Range > );
-//        CHECK( std20::ranges::view< Range > );
-//        CHECK( std20::ranges::sized_range< Range > );
-//        CHECK( std20::ranges::forward_range< Range > );
-//        CHECK( std20::ranges::bidirectional_range< Range > );
-//        CHECK( ! std20::ranges::random_access_range< Range > );
-//        CHECK( ! std20::ranges::contiguous_range< Range > );
+        CHECK( std20::ranges::range< Range > );
+        CHECK( std20::ranges::view< Range > );
+        CHECK( std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( std20::ranges::bidirectional_range< Range > );
+        CHECK( ! std20::ranges::random_access_range< Range > );
+        CHECK( ! std20::ranges::contiguous_range< Range > );
 //        CHECK( std20::ranges::common_range< Range > );
       }
 
@@ -83,12 +83,12 @@ SCENARIO( "zip_view" ) {
 
         CHECK( 7 == chunk.size() );
 
-//        CHECK( false == chunk.empty() );
-//        CHECK( true == bool( chunk ) );
-//
-//        CHECK( std20::ranges::equal( equal, chunk ) );
-//
-//        CHECK( equal[0] == chunk.front() );
+        CHECK( false == chunk.empty() );
+        CHECK( true == bool( chunk ) );
+
+        CHECK( std20::ranges::equal( equal, chunk ) );
+
+        CHECK( equal[0] == chunk.front() );
       } // THEN
     } // WHEN
   } // GIVEN

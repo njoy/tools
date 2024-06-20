@@ -297,44 +297,48 @@ public:
     return iterator< true >( *this, zip_.begin() );
   }
 
-//  template < bool Const = false >
+  template < typename R = zip_view< Rs... > >
   constexpr auto end()
-/*  -> std::enable_if_t< std20::ranges::common_range< InnerView >, iterator< false > > */ {
+  -> std::enable_if_t< std20::ranges::common_range< R >, iterator< false > > {
 
     return iterator< false >( *this, zip_.end() );
   }
 
-//  template < bool Const = false >
-//  constexpr auto end()
-//  -> std::enable_if_t< ! std20::ranges::common_range< InnerView >, sentinel< false > > {
-//
-//    return sentinel< false >( zip_.end() );
-//  }
+  template < typename R = zip_view< Rs... > >
+  constexpr auto end()
+  -> std::enable_if_t< ! std20::ranges::common_range< R >, sentinel< false > > {
 
-//  template < bool Const = true >
+    return sentinel< false >( zip_.end() );
+  }
+
+  template < typename R = zip_view< Rs... > >
   constexpr auto end() const
-/*  -> std::enable_if_t< std20::ranges::common_range< InnerView >, iterator< true > > */ {
+  -> std::enable_if_t< std20::ranges::common_range< const R >
+                           && std20::regular_invocable< const F&, std20::ranges::range_reference_t< const Rs >... >,
+                       iterator< true > > {
 
     return iterator< true >( *this, zip_.end() );
   }
 
-//  template < bool Const = true >
-//  constexpr auto end() const
-//  -> std::enable_if_t< ! std20::ranges::common_range< InnerView >, sentinel< true > > {
-//
-//    return sentinel< true >( zip_.end() );
-//  }
+  template < typename R = zip_view< Rs... > >
+  constexpr auto end() const
+  -> std::enable_if_t< ! std20::ranges::common_range< const R >
+                           && std20::regular_invocable< const F&, std20::ranges::range_reference_t< const Rs >... >,
+                       sentinel< true > > {
 
-  template < bool Const = false >
+    return sentinel< true >( zip_.end() );
+  }
+
+  template < typename R = zip_view< Rs... > >
   constexpr auto size()
-  -> std::enable_if_t< std20::ranges::sized_range< InnerView >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< R >, std::size_t > {
 
     return zip_.size();
   }
 
-  template < bool Const = true >
+  template < typename R = zip_view< Rs... > >
   constexpr auto size() const
-  -> std::enable_if_t< std20::ranges::sized_range< const InnerView >, std::size_t > {
+  -> std::enable_if_t< std20::ranges::sized_range< const R >, std::size_t > {
 
     return zip_.size();
   }
