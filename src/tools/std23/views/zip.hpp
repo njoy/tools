@@ -128,6 +128,7 @@ struct zip_view_iterator_access {
     return iter.current_;
   }
 };
+
 /**
  *  @brief A range adaptor that takes one or more views, and produces a view
  *         whose element is a tuple-like value consisting of the corresponding

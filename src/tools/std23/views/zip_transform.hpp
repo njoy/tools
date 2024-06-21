@@ -51,11 +51,13 @@ private :
 
     friend zip_transform_view< F, Rs... >;
 
-    Parent* parent_ = nullptr;
-    InnerIterator< Const > inner_;
+    friend zip_view_iterator_access;
 
-    constexpr iterator( Parent& parent, InnerIterator< Const > inner )
-      : parent_( std::addressof( parent ) ), inner_( std::move( inner ) ) {}
+    Parent* parent_ = nullptr;
+    InnerIterator< Const > current_;
+
+    constexpr iterator( Parent& parent, InnerIterator< Const > current )
+      : parent_( std::addressof( parent ) ), current_( std::move( current ) ) {}
 
     constexpr auto get_deref_and_invoke() const noexcept {
 
@@ -88,16 +90,16 @@ private :
                typename = std::enable_if_t<
                  C &&
                  std20::convertible_to< InnerIterator< false >, InnerIterator< C > > > >
-    constexpr iterator( iterator< ! Const > iter ) : parent_( iter.parent_ ), inner_( std::move( iter.inner_ ) ) {}
+    constexpr iterator( iterator< ! Const > iter ) : parent_( iter.parent_ ), current_( std::move( iter.current_ ) ) {}
 
     constexpr decltype(auto) operator*() const {
 
-      return std::apply( get_deref_and_invoke(), zip_view_iterator_access::get_underlying( inner_ ) );
+      return std::apply( get_deref_and_invoke(), zip_view_iterator_access::get_underlying( current_ ) );
     }
 
     constexpr iterator& operator++() {
 
-      ++inner_;
+      ++current_;
       return *this;
     }
 
@@ -114,7 +116,7 @@ private :
     constexpr auto operator--()
     -> std::enable_if_t< std20::ranges::bidirectional_range< B >, iterator& > {
 
-      --inner_;;
+      --current_;;
       return *this;
     }
 
@@ -131,7 +133,7 @@ private :
     constexpr auto operator+=( difference_type n )
     -> std::enable_if_t< std20::ranges::random_access_range< B >, iterator& > {
 
-      inner_ += n;
+      current_ += n;
       return *this;
     }
 
@@ -153,7 +155,7 @@ private :
     friend constexpr auto operator==( const iterator& left, const iterator& right )
     -> std::enable_if_t< std20::equality_comparable< std20::ranges::iterator_t< B > >, bool > {
 
-      return left.inner_ == right.inner_;
+      return left.current_ == right.current_;
     }
 
     template < typename B = Base >
@@ -167,7 +169,7 @@ private :
     friend constexpr auto operator<( const iterator& left, const iterator& right )
     -> std::enable_if_t< std20::ranges::random_access_range< B >, bool > {
 
-      return left.inner_ < right.inner_;
+      return left.current_ < right.current_;
     }
 
     template < typename B = Base>
@@ -218,11 +220,11 @@ private :
 
   private:
 
-    InnerSentinel< Const > inner_;
+    InnerSentinel< Const > current_;
 
     friend zip_transform_view< F, Rs... >;
 
-    constexpr explicit sentinel( InnerSentinel< Const > inner ) : inner_( inner ) {}
+    constexpr explicit sentinel( InnerSentinel< Const > current ) : current_( current ) {}
 
   public:
 
@@ -232,13 +234,13 @@ private :
                typename = std::enable_if_t<
                  C &&
                  std20::convertible_to< InnerSentinel< false >, InnerSentinel< C > > > >
-    constexpr sentinel( sentinel< ! Const > iter ) : inner_( std::move( iter.inner_ ) ) {}
+    constexpr sentinel( sentinel< ! Const > iter ) : current_( std::move( iter.current_ ) ) {}
 
     template < bool Other >
     friend constexpr auto operator==( const iterator< Other >& left, const sentinel& right )
     -> std::enable_if_t< std20::ranges::sentinel_for< InnerSentinel< Const >, InnerIterator< Other > >, bool > {
 
-      return left.inner_ == right.inner_;
+      return zip_view_iterator_access::get_underlying( left ) == right.current_;
     }
 
     template < bool Other >
@@ -267,7 +269,7 @@ private :
     -> std::enable_if_t< std20::ranges::sized_sentinel_for< InnerSentinel< Const >, InnerIterator< Other > >,
                          std20::ranges::range_difference_t< maybe_const< Other, InnerView > > > {
 
-      return left.inner_ - right.__inner_;
+      return left.current_ - right.__current_;
     }
 
     template < bool Other >
