@@ -13,7 +13,7 @@
 // convenience typedefs
 using namespace njoy::tools;
 
-SCENARIO( "zip_view" ) {
+SCENARIO( "zip_transform_view" ) {
 
   std::vector< int > equal = { 26, 29, 32, 35, 38, 41, 44 };
 
