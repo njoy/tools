@@ -46,6 +46,19 @@ SCENARIO( "stride_view" ) {
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
+        auto iter = chunk.begin();
+        CHECK( equal[0] == *iter );
+        ++iter;
+        CHECK( equal[1] == *iter );
+        ++iter;
+        CHECK( equal[2] == *iter );
+        ++iter;
+        CHECK( equal[3] == *iter );
+        ++iter;
+        CHECK( equal[4] == *iter );
+        ++iter;
+        CHECK( chunk.end() == iter );
+
         CHECK( std20::ranges::equal( equal, chunk ) );
 
         CHECK( equal[0] == chunk.front() );
@@ -84,6 +97,31 @@ SCENARIO( "stride_view" ) {
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
+        auto iter = chunk.begin();
+        CHECK( equal[0] == *iter );
+        ++iter;
+        CHECK( equal[1] == *iter );
+        ++iter;
+        CHECK( equal[2] == *iter );
+        ++iter;
+        CHECK( equal[3] == *iter );
+        ++iter;
+        CHECK( equal[4] == *iter );
+        ++iter;
+        CHECK( chunk.end() == iter );
+
+        --iter;
+        CHECK( equal[4] == *iter );
+        --iter;
+        CHECK( equal[3] == *iter );
+        --iter;
+        CHECK( equal[2] == *iter );
+        --iter;
+        CHECK( equal[1] == *iter );
+        --iter;
+        CHECK( equal[0] == *iter );
+        CHECK( chunk.begin() == iter );
+
         CHECK( std20::ranges::equal( equal, chunk ) );
 
         CHECK( equal[0] == chunk.front() );
@@ -119,9 +157,36 @@ SCENARIO( "stride_view" ) {
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
         CHECK( 5 == chunk.size() );
+        CHECK( 5 == chunk.end() - chunk.begin() );
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
+
+        auto iter = chunk.begin();
+        CHECK( equal[0] == *iter );
+        ++iter;
+        CHECK( equal[1] == *iter );
+        ++iter;
+        CHECK( equal[2] == *iter );
+        ++iter;
+        CHECK( equal[3] == *iter );
+        ++iter;
+        CHECK( equal[4] == *iter );
+        ++iter;
+        CHECK( chunk.end() == iter );
+
+        iter = chunk.end();
+        --iter;
+        CHECK( equal[4] == *iter );
+        --iter;
+        CHECK( equal[3] == *iter );
+        --iter;
+        CHECK( equal[2] == *iter );
+        --iter;
+        CHECK( equal[1] == *iter );
+        --iter;
+        CHECK( equal[0] == *iter );
+        CHECK( chunk.begin() == iter );
 
         CHECK( std20::ranges::equal( equal, chunk ) );
 
