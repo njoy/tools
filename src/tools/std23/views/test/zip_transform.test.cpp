@@ -76,7 +76,7 @@ SCENARIO( "zip_view" ) {
         CHECK( std20::ranges::bidirectional_range< Range > );
         CHECK( ! std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
-//        CHECK( std20::ranges::common_range< Range > );
+        CHECK( ! std20::ranges::common_range< Range > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
@@ -112,7 +112,7 @@ SCENARIO( "zip_view" ) {
         CHECK( std20::ranges::sized_range< Range > );
         CHECK( std20::ranges::forward_range< Range > );
         CHECK( std20::ranges::bidirectional_range< Range > );
-//        CHECK( std20::ranges::random_access_range< Range > );
+        CHECK( std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
         CHECK( std20::ranges::common_range< Range > );
       }
@@ -129,13 +129,13 @@ SCENARIO( "zip_view" ) {
         CHECK( equal[0] == chunk.front() );
         CHECK( equal[6] == chunk.back() );
 
-//        CHECK( 26 == chunk[0] );
-//        CHECK( 29 == chunk[1] );
-//        CHECK( 32 == chunk[2] );
-//        CHECK( 35 == chunk[3] );
-//        CHECK( 38 == chunk[4] );
-//        CHECK( 41 == chunk[5] );
-//        CHECK( 44 == chunk[6] );
+        CHECK( 26 == chunk[0] );
+        CHECK( 29 == chunk[1] );
+        CHECK( 32 == chunk[2] );
+        CHECK( 35 == chunk[3] );
+        CHECK( 38 == chunk[4] );
+        CHECK( 41 == chunk[5] );
+        CHECK( 44 == chunk[6] );
       } // THEN
     } // WHEN
   } // GIVEN

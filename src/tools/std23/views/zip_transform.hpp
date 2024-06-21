@@ -213,6 +213,16 @@ private :
 
       return iterator{ left } -= n;
     }
+
+    template < typename B = Base >
+    friend constexpr auto operator-( const iterator& left, const iterator& right )
+    -> std::enable_if_t<
+        std20::ranges::sized_sentinel_for< std20::ranges::iterator_t< B >,
+                                           std20::ranges::iterator_t< B > >,
+        difference_type > {
+
+      return left.current_ - right.current_;
+    }
   };
 
   template < bool Const >
@@ -277,7 +287,7 @@ private :
     -> std::enable_if_t< std20::ranges::sized_sentinel_for< InnerSentinel< Const >, InnerIterator< Other > >,
                          std20::ranges::range_difference_t< maybe_const< Other, InnerView > > > {
 
-      return right - left;
+      return -( right - left );
     }
   };
 
