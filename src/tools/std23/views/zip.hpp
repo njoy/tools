@@ -248,7 +248,7 @@ private:
     }
 
     template < bool C = Const, typename = std::enable_if_t< zip_all_random_access< C, Rs... > > >
-    constexpr decltype(auto) operator[]( difference_type n ) const {
+    constexpr auto operator[]( difference_type n ) const {
 
       return tuple_transform( [&] ( auto& iter ) -> decltype(auto)
                                   { return iter[ std20::ranges::iter_difference_t< std::decay_t< decltype( iter ) > >( n ) ]; },
@@ -489,9 +489,9 @@ public:
 
   template < bool Const = true >
   constexpr auto end() const
-  -> std::enable_if_t< zip_all_range< Const, Rs... > && zip_is_common< Rs... >, iterator< true > > {
+  -> std::enable_if_t< zip_all_range< Const, Rs... > && zip_is_common< const Rs... >, iterator< true > > {
 
-    if constexpr ( ( std20::ranges::random_access_range< Rs > && ... ) ) {
+    if constexpr ( ( std20::ranges::random_access_range< const Rs > && ... ) ) {
 
       return this->begin() + std20::ranges::iter_difference_t< iterator< true > >( this->size() );
     }
@@ -503,7 +503,7 @@ public:
 
   template < bool Const = true >
   constexpr auto end() const
-  -> std::enable_if_t< zip_all_range< Const, Rs... > && ! zip_is_common< Rs... >, sentinel< true > > {
+  -> std::enable_if_t< zip_all_range< Const, Rs... > && ! zip_is_common< const Rs... >, sentinel< true > > {
 
       return sentinel< true >( tuple_transform( std20::ranges::end, this->views_ ));
   }
