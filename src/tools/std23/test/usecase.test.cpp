@@ -103,6 +103,14 @@ public:
     return this->all() | std23::views::stride( 2 )
                        | std23::views::chunk( 2 );
   }
+
+  auto chunk_transform_drop() const {
+
+    using namespace njoy::tools;
+    return this->all() | std23::views::chunk( 2 )
+                       | std20::views::transform( [] ( auto&& values ) { return values.front(); } )
+                       | std20::views::drop( 2 );
+  }
 };
 
 SCENARIO( "use case" ) {
@@ -187,4 +195,9 @@ SCENARIO( "use case" ) {
   CHECK( std20::random_access_range< StrideChunk > );
   CHECK( std20::sized_range< StrideChunk > );
 
+  using ChunkTransformDrop = decltype( test.chunk_transform_drop() );
+  CHECK( std20::view< ChunkTransformDrop > );
+  CHECK( std20::range< ChunkTransformDrop > );
+  CHECK( std20::random_access_range< ChunkTransformDrop > );
+  CHECK( std20::sized_range< ChunkTransformDrop > );
 } // SCENARIO
