@@ -7,6 +7,7 @@
 
 // other includes
 #include <vector>
+#include <complex>
 
 // convenience typedefs
 using namespace njoy::tools;
@@ -15,6 +16,8 @@ class TestCase {
 
   std::vector< double > vector_ = {  1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
                                     11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+  std::vector< double > other_ = {  1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
+                                   11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
 public:
 
@@ -111,6 +114,23 @@ public:
                        | std20::views::transform( [] ( auto&& values ) { return values.front(); } )
                        | std20::views::drop( 2 );
   }
+
+  auto zip_drop_stride() const {
+
+    using namespace njoy::tools;
+    return std23::views::zip(
+               this->all(),
+               this->other_ | std20::views::all );
+  }
+
+  auto zip_transform_drop_stride() const {
+
+    using namespace njoy::tools;
+    return std23::views::zip_transform(
+               [] ( auto&& left, auto&& right ) { return std::complex( left, right ); },
+               this->all(),
+               this->other_ | std20::views::all );
+  }
 };
 
 SCENARIO( "use case" ) {
@@ -200,4 +220,16 @@ SCENARIO( "use case" ) {
   CHECK( std20::range< ChunkTransformDrop > );
   CHECK( std20::random_access_range< ChunkTransformDrop > );
   CHECK( std20::sized_range< ChunkTransformDrop > );
+
+  using ZipDropStride = decltype( test.zip_drop_stride() );
+  CHECK( std20::view< ZipDropStride > );
+  CHECK( std20::range< ZipDropStride > );
+//  CHECK( std20::random_access_range< ZipDropStride > );
+  CHECK( std20::sized_range< ZipDropStride > );
+
+  using ZipTransformDropStride = decltype( test.zip_transform_drop_stride() );
+//  CHECK( std20::view< ZipTransformDropStride > );
+//  CHECK( std20::range< ZipTransformDropStride > );
+//  CHECK( std20::random_access_range< ZipTransformDropStride > );
+//  CHECK( std20::sized_range< ZipTransformDropStride > );
 } // SCENARIO

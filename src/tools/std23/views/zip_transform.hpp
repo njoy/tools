@@ -74,13 +74,13 @@ private :
                                                    std20::ranges::range_reference_t< maybe_const< Const, Rs > >... > >;
     using difference_type = std20::ranges::range_difference_t< Base >;
     using iterator_category = std::conditional_t<
-                                  zip_all_random_access< Const, Rs... >,
+                                  std20::ranges::random_access_range< Base >,
                                   std20::random_access_iterator_tag,
                                   std::conditional_t<
-                                      zip_all_bidirectional< Const, Rs... >,
+                                      std20::ranges::bidirectional_range< Base >,
                                       std20::bidirectional_iterator_tag,
                                       std::conditional_t<
-                                          zip_all_forward< Const, Rs... >,
+                                          std20::ranges::forward_range< Base >,
                                           std20::forward_iterator_tag,
                                           std20::input_iterator_tag > > >;
 
