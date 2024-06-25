@@ -287,7 +287,7 @@ private:
     friend constexpr auto operator>( const iterator& left, const iterator& right )
     -> std::enable_if_t< zip_all_random_access< C, Rs... >, bool > {
 
-      return left < right;
+      return right < left;
     }
 
     template < bool C = Const >
