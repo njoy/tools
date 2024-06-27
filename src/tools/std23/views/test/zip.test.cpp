@@ -50,6 +50,17 @@ SCENARIO( "zip_view" ) {
         CHECK( std20::ranges::common_range< Range > );
       }
 
+      THEN( "the stride_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, std::tuple< int, char, std::string > > );
+//        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, std::tuple< int&, char&, std::string& > > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, std::tuple< int, char, std::string > > );
+//        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, std::tuple< int&, char&, std::string& > > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
         CHECK( false == chunk.empty() );
