@@ -5,6 +5,7 @@
 #include "tools/overload.hpp"
 
 // other includes
+#include <variant>
 
 // convenience typedefs
 using namespace njoy::tools;
