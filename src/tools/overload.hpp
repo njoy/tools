@@ -22,6 +22,8 @@ namespace tools {
    */
   template < class... Types > struct overload : Types... {
 
+    overload(const Types&... args) : Types(args)...{};
+
     using Types::operator()...;
   };
 
