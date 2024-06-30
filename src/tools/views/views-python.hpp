@@ -47,7 +47,7 @@ using RandomAccessAnyView = BasicRandomAccessAnyView< std::reference_wrapper< co
 /**
  *  @brief Some recurring basic views
  */
-using IntList = BasicBidirectionalAnyView< double >;
+using IntList = BasicBidirectionalAnyView< int >;
 using DoubleRange = BasicRandomAccessAnyView< double >;
 using LongRange = BasicRandomAccessAnyView< long >;
 using IntRange = BasicRandomAccessAnyView< int >;
