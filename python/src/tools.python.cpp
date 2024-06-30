@@ -28,6 +28,9 @@ PYBIND11_MODULE( tools, module ) {
   // wrap some basic recurring views
   // none of these are supposed to be created directly by the user
   // @todo test performance against range-v3
+  wrapBasicBidirectionalAnyViewOf< int >(
+      viewmodule,
+      "AnyBidirectionalView< int >" );
   wrapBasicRandomAccessAnyViewOf< double >(
       viewmodule,
       "AnyRandomAccessView< double >" );
