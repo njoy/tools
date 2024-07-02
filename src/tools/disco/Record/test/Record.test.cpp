@@ -6,6 +6,7 @@
 
 // other includes
 #include <vector>
+#include <tuple>
 #include "tools/disco/Integer.hpp"
 #include "tools/disco/Scientific.hpp"
 #include "tools/disco/Column.hpp"
