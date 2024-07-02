@@ -26,6 +26,7 @@ endfunction()
 # Unit testing directories
 #######################################################################
 
+add_subdirectory( src/tools/test )
 add_subdirectory( src/tools/Log/test )
 
 add_subdirectory( src/tools/disco/functions/test )
