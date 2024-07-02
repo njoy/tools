@@ -22,7 +22,7 @@ namespace tools {
    */
   template < class... Types > struct overload : Types... {
 
-    overload(const Types&... args) : Types(args)...{};
+    overload( Types&&... args) : Types( std::forward< Types >( args ) )...{};
 
     using Types::operator()...;
   };
