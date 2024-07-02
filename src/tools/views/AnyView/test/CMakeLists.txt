@@ -1,1 +1,1 @@
-add_cpp_test( ranges.AnyView AnyView.test.cpp )
+add_cpp_test( views.AnyView AnyView.test.cpp )

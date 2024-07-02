@@ -103,6 +103,9 @@ public:
 template <typename R>
 common_view(R&&) -> common_view<all_view<R>>;
 
+template <class R>
+inline constexpr bool enable_borrowed_range<common_view<R>> = enable_borrowed_range<R>;
+
 namespace detail {
 
 struct common_view_fn {

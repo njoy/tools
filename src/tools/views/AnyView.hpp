@@ -1,5 +1,5 @@
-#ifndef NJOY_TOOLS_RANGES_ANYVIEW
-#define NJOY_TOOLS_RANGES_ANYVIEW
+#ifndef NJOY_TOOLS_VIEWS_ANYVIEW
+#define NJOY_TOOLS_VIEWS_ANYVIEW
 
 // system includes
 #include <iterator>

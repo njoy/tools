@@ -2,6 +2,7 @@
 #define NJOY_TOOLS_PYTHON_VIEWS
 
 // system includes
+#include <string>
 #include <complex>
 
 // other includes
@@ -35,17 +36,18 @@ using BasicRandomAccessAnyView = njoy::tools::views::AnyRandomAccessView< Refere
  *  continue to use the Basic... versions of the any views.
  */
 template < typename ReferenceType >
-using InputAnyView = BasicInputAnyView< const ReferenceType& >;
+using InputAnyView = BasicInputAnyView< std::reference_wrapper< const ReferenceType > >;
 template < typename ReferenceType >
-using ForwardAnyView = BasicForwardAnyView< const ReferenceType& >;
+using ForwardAnyView = BasicForwardAnyView< std::reference_wrapper< const ReferenceType > >;
 template < typename ReferenceType >
-using BidirectionalAnyView = BasicBidirectionalAnyView< const ReferenceType& >;
+using BidirectionalAnyView = BasicBidirectionalAnyView< std::reference_wrapper< const ReferenceType > >;
 template < typename ReferenceType >
-using RandomAccessAnyView = BasicRandomAccessAnyView< const ReferenceType& >;
+using RandomAccessAnyView = BasicRandomAccessAnyView< std::reference_wrapper< const ReferenceType > >;
 
 /**
  *  @brief Some recurring basic views
  */
+using IntList = BasicBidirectionalAnyView< int >;
 using DoubleRange = BasicRandomAccessAnyView< double >;
 using LongRange = BasicRandomAccessAnyView< long >;
 using IntRange = BasicRandomAccessAnyView< int >;
@@ -53,6 +55,7 @@ using UnsignedIntRange = BasicRandomAccessAnyView< unsigned int >;
 using DoubleRange2D = BasicRandomAccessAnyView< DoubleRange >;
 using DoubleRange3D = BasicRandomAccessAnyView< DoubleRange2D >;
 using ComplexRange = BasicRandomAccessAnyView< std::complex< double > >;
+using StringRange = BasicRandomAccessAnyView< std::string >;
 
 /**
  *  @brief Wrap a BasicBidirectionalAnyView templated on the Element type
@@ -191,7 +194,7 @@ void wrapBasicRandomAccessAnyViewOf( python::module& module, const std::string& 
 template < typename Element >
 void wrapBidirectionalAnyViewOf( python::module& module, const std::string& name ) {
 
-  wrapBasicBidirectionalAnyViewOf< const Element&, Element >( module, name );
+  wrapBasicBidirectionalAnyViewOf< std::reference_wrapper< const Element >, Element >( module, name );
 }
 
 /**
@@ -203,7 +206,7 @@ void wrapBidirectionalAnyViewOf( python::module& module, const std::string& name
 template < typename Element >
 void wrapRandomAccessAnyViewOf( python::module& module, const std::string& name ) {
 
-  wrapBasicRandomAccessAnyViewOf< const Element&, Element >( module, name );
+  wrapBasicRandomAccessAnyViewOf< std::reference_wrapper< const Element >, Element >( module, name );
 }
 
 #endif

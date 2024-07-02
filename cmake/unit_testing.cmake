@@ -5,8 +5,6 @@
 message( STATUS "Adding tools unit testing" )
 enable_testing()
 
-FetchContent_MakeAvailable( Catch2 )
-
 function( add_cpp_test name source )
 
   set( test_name "tools.${name}.test" )
@@ -54,6 +52,11 @@ add_subdirectory( src/tools/std20/ranges/access/test )
 add_subdirectory( src/tools/std20/ranges/concepts/test )
 add_subdirectory( src/tools/std20/type_traits/test )
 add_subdirectory( src/tools/std20/views/test )
+
+add_subdirectory( src/tools/std23/detail/views/test )
+add_subdirectory( src/tools/std23/views/test )
+
+add_subdirectory( src/tools/std23/test )
 
 add_subdirectory( src/tools/views/AnyIterator/test )
 add_subdirectory( src/tools/views/AnyView/test )
