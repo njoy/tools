@@ -6,6 +6,7 @@
 
 // other includes
 #include <vector>
+#include <tuple>
 #include "tools/disco/Integer.hpp"
 #include "tools/disco/Scientific.hpp"
 #include "tools/disco/Column.hpp"
@@ -41,16 +42,16 @@ SCENARIO( "Record" ) {
       CHECK(  2e+7 == vector[1] );
       CHECK( iter == end );
 
-      std::tuple< double, int, std::string > tpl;
+      std::tuple< double, int, std::string > tuple;
       source = " 1.0000E-11          2abcd\n";
       iter = source.begin();
       end = source.end();
       Record< Scientific< 11, 4 >,
               Integer< 11 >,
-              Character< 4 > >::read( iter, end, std::get<0>(tpl), std::get<1>(tpl), std::get<2>(tpl) );
-      CHECK(  1e-11 == std::get<0>(tpl) );
-      CHECK(      2 == std::get<1>(tpl) );
-      CHECK( "abcd" == std::get<2>(tpl) );
+              Character< 4 > >::read( iter, end, std::get<0>(tuple), std::get<1>(tuple), std::get<2>(tuple) );
+      CHECK(  1e-11 == std::get<0>(tuple) );
+      CHECK(      2 == std::get<1>(tuple) );
+      CHECK( "abcd" == std::get<2>(tuple) );
       CHECK( iter == end );
     } // THEN
   } // GIVEN
