@@ -50,10 +50,38 @@ SCENARIO( "zip_view" ) {
         CHECK( std20::ranges::common_range< Range > );
       }
 
+      THEN( "the stride_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, std::tuple< int, char, std::string > > );
+//        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, std::tuple< int&, char&, std::string& > > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, std::tuple< int, char, std::string > > );
+//        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, std::tuple< int&, char&, std::string& > > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
+
+        auto iter = chunk.begin();
+        CHECK( equal[0] == *iter );
+        ++iter;
+        CHECK( equal[1] == *iter );
+        ++iter;
+        CHECK( equal[2] == *iter );
+        ++iter;
+        CHECK( equal[3] == *iter );
+        ++iter;
+        CHECK( equal[4] == *iter );
+        ++iter;
+        CHECK( equal[5] == *iter );
+        ++iter;
+        CHECK( equal[6] == *iter );
+        ++iter;
+        CHECK( chunk.end() == iter );
 
         CHECK( std20::ranges::equal( equal, chunk ) );
 
@@ -104,6 +132,39 @@ SCENARIO( "zip_view" ) {
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
 
+        auto iter = chunk.begin();
+        CHECK( equal[0] == *iter );
+        ++iter;
+        CHECK( equal[1] == *iter );
+        ++iter;
+        CHECK( equal[2] == *iter );
+        ++iter;
+        CHECK( equal[3] == *iter );
+        ++iter;
+        CHECK( equal[4] == *iter );
+        ++iter;
+        CHECK( equal[5] == *iter );
+        ++iter;
+        CHECK( equal[6] == *iter );
+        ++iter;
+        CHECK( chunk.end() == iter );
+
+        --iter;
+        CHECK( equal[6] == *iter );
+        --iter;
+        CHECK( equal[5] == *iter );
+        --iter;
+        CHECK( equal[4] == *iter );
+        --iter;
+        CHECK( equal[3] == *iter );
+        --iter;
+        CHECK( equal[2] == *iter );
+        --iter;
+        CHECK( equal[1] == *iter );
+        --iter;
+        CHECK( equal[0] == *iter );
+        CHECK( chunk.begin() == iter );
+
         CHECK( std20::ranges::equal( equal, chunk ) );
 
         CHECK( equal[0] == chunk.front() );
@@ -149,9 +210,43 @@ SCENARIO( "zip_view" ) {
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
         CHECK( 7 == chunk.size() );
+        CHECK( 7 == chunk.end() - chunk.begin() );
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
+
+        auto iter = chunk.begin();
+        CHECK( equal[0] == *iter );
+        ++iter;
+        CHECK( equal[1] == *iter );
+        ++iter;
+        CHECK( equal[2] == *iter );
+        ++iter;
+        CHECK( equal[3] == *iter );
+        ++iter;
+        CHECK( equal[4] == *iter );
+        ++iter;
+        CHECK( equal[5] == *iter );
+        ++iter;
+        CHECK( equal[6] == *iter );
+        ++iter;
+        CHECK( chunk.end() == iter );
+
+        --iter;
+        CHECK( equal[6] == *iter );
+        --iter;
+        CHECK( equal[5] == *iter );
+        --iter;
+        CHECK( equal[4] == *iter );
+        --iter;
+        CHECK( equal[3] == *iter );
+        --iter;
+        CHECK( equal[2] == *iter );
+        --iter;
+        CHECK( equal[1] == *iter );
+        --iter;
+        CHECK( equal[0] == *iter );
+        CHECK( chunk.begin() == iter );
 
         CHECK( std20::ranges::equal( equal, chunk ) );
 
