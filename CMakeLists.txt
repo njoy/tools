@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( tools
-  VERSION 0.3.0
+  VERSION 0.3.1
   LANGUAGES CXX
 )
 
@@ -121,7 +121,7 @@ if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
 endif()
 
 #######################################################################
-# Installation 
+# Installation
 #######################################################################
 
 if(tools.installation)
