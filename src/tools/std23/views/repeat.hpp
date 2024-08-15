@@ -44,8 +44,8 @@ struct repeat_view : public std20::ranges::view_interface< repeat_view< Type, Bo
 
     // The Bound has to be integer like of unbound
     static_assert( ( std20::detail::is_signed_integer_like< Bound > || 
-          	   ( std20::detail::is_integer_like< Bound > && std20::weakly_incrementable< Bound > ) ) ||
-                   ( std20::same_as< Bound, std20::unreachable_sentinel_t > ) );
+                 ( std20::detail::is_integer_like< Bound > && std20::weakly_incrementable< Bound > ) ) ||
+                 ( std20::same_as< Bound, std20::unreachable_sentinel_t > ) );
 
 private:
 
@@ -53,7 +53,7 @@ private:
     Bound bound_ = Bound();
 
     struct iterator{
-	friend class repeat_view;
+    friend class repeat_view;
     private:
         using IndexT = std::conditional_t<std20::same_as<Bound, std20::unreachable_sentinel_t>, ptrdiff_t, Bound>;
         const Type* ivalue_ = nullptr;
@@ -62,84 +62,84 @@ private:
     public:
           
         constexpr explicit iterator(const Type* value, IndexT bound_sentinel = IndexT())
-        	: ivalue_(value), current_(bound_sentinel) {}
+            : ivalue_(value), current_(bound_sentinel) {}
 
         using iterator_concept  = std20::random_access_iterator_tag;
-      	using iterator_category = std20::random_access_iterator_tag;
-      	using value_type        = Type;
-      	using difference_type   = repeat_view_iterator_difference_t<IndexT>;
+          using iterator_category = std20::random_access_iterator_tag;
+          using value_type        = Type;
+          using difference_type   = repeat_view_iterator_difference_t<IndexT>;
 
-      	iterator() = default;
+          iterator() = default;
 
-      	constexpr const Type& operator*() const noexcept { return *ivalue_; }
+          constexpr const Type& operator*() const noexcept { return *ivalue_; }
 
-      	constexpr iterator& operator++() {
-      	  ++current_;
-      	  return *this;
-      	}
+          constexpr iterator& operator++() {
+              ++current_;
+              return *this;
+          }
 
-      	constexpr iterator operator++(int) {
-      	  auto tmp = *this;
-      	  ++*this;
-      	  return tmp;
-      	}
+          constexpr iterator operator++(int) {
+              auto tmp = *this;
+              ++*this;
+              return tmp;
+          }
 
-      	constexpr iterator& operator--() {
-      	  --current_;
-      	  return *this;
-      	}
+          constexpr iterator& operator--() {
+              --current_;
+              return *this;
+          }
 
-      	constexpr iterator operator--(int) {
-      	  auto tmp = *this;
-      	  --*this;
-      	  return tmp;
-      	}
+          constexpr iterator operator--(int) {
+              auto tmp = *this;
+              --*this;
+              return tmp;
+          }
 
-      	constexpr iterator& operator+=(difference_type n) {
-      	  current_ += n;
-      	  return *this;
-      	}
+          constexpr iterator& operator+=(difference_type n) {
+              current_ += n;
+              return *this;
+          }
 
-      	constexpr iterator& operator-=(difference_type n) {
-      	  current_ -= n;
-      	  return *this;
-      	}
+          constexpr iterator& operator-=(difference_type n) {
+              current_ -= n;
+              return *this;
+          }
 
-      	constexpr const Type& operator[](difference_type n) const noexcept { return *(*this + n); }
+          constexpr const Type& operator[](difference_type n) const noexcept { return *(*this + n); }
 
-      	friend constexpr bool operator==(const iterator& left, const iterator& right) {
-      	  return left.current_ == right.current_;
-      	}
+          friend constexpr bool operator==(const iterator& left, const iterator& right) {
+              return left.current_ == right.current_;
+          }
 
-      	friend constexpr bool operator!=(const iterator& left, const iterator& right) {
-      	  return !(left.current_ == right.current_);
-      	}
+          friend constexpr bool operator!=(const iterator& left, const iterator& right) {
+              return !(left.current_ == right.current_);
+          }
 
-      	friend constexpr auto operator> (const iterator& left, const iterator& right) {
-      	  return left.current_ > right.current_;
-      	}
-      	friend constexpr auto operator< (const iterator& left, const iterator& right) {
-      	  return right.current_ > left.current_;
-      	}
+          friend constexpr auto operator> (const iterator& left, const iterator& right) {
+              return left.current_ > right.current_;
+          }
+          friend constexpr auto operator< (const iterator& left, const iterator& right) {
+              return right.current_ > left.current_;
+          }
 
-        friend constexpr iterator operator+(iterator i, difference_type n) {
-      	  i += n;
-      	  return i;
-      	}
+          friend constexpr iterator operator+(iterator i, difference_type n) {
+              i += n;
+              return i;
+          }
 
-      	friend constexpr iterator operator+(difference_type n, iterator i) {
-      	  i += n;
-      	  return i;
-      	}
+          friend constexpr iterator operator+(difference_type n, iterator i) {
+              i += n;
+              return i;
+          }
 
-      	friend constexpr iterator operator-(iterator i, difference_type n) {
-      	  i -= n;
-      	  return i;
-      	}
+          friend constexpr iterator operator-(iterator i, difference_type n) {
+              i -= n;
+              return i;
+          }
 
           friend constexpr difference_type operator-(const iterator& left, const iterator& right) {
-      	  return static_cast<difference_type>(left.current_) - static_cast<difference_type>(right.current_);
-      	}
+              return static_cast<difference_type>(left.current_) - static_cast<difference_type>(right.current_);
+          }
 
           
     };
@@ -154,15 +154,15 @@ public:
 
     constexpr explicit repeat_view(Type&& value, Bound bound_sentinel = Bound())
         : value_(std::in_place, std::move(value)), bound_(bound_sentinel) {
-	}
+    }
 
     template <class... _TpArgs, class... _BoundArgs, 
-	      std::enable_if_t<std20::constructible_from<Type, _TpArgs...> && std20::constructible_from<Bound, _BoundArgs...>, bool> = true>
+          std::enable_if_t<std20::constructible_from<Type, _TpArgs...> && std20::constructible_from<Bound, _BoundArgs...>, bool> = true>
     constexpr explicit repeat_view( std::piecewise_construct_t, std::tuple<_TpArgs...> __value_args, 
-				    std::tuple<_BoundArgs...> __bound_args = std::tuple<>{}) 
+                    std::tuple<_BoundArgs...> __bound_args = std::tuple<>{}) 
         : value_(std::in_place, std::make_from_tuple<Type>(std::move(__value_args))),
         bound_(std::make_from_tuple<Bound>(std::move(__bound_args))) {
-	}
+    }
 
     constexpr iterator begin() const { return iterator(std::addressof(*value_)); }
 
@@ -181,7 +181,7 @@ public:
     template<typename T=Bound, std::enable_if_t<!std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true> 
     constexpr auto size() const
     {
-      return std::__to_unsigned_like(bound_);
+        return std::__to_unsigned_like(bound_);
     }
 };
 
