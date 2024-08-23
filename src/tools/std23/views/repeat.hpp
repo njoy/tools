@@ -181,7 +181,7 @@ public:
     template<typename T=Bound, std::enable_if_t<!std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true> 
     constexpr auto size() const
     {
-        return std::__to_unsigned_like(bound_);
+	return std::make_unsigned_t<decltype(bound_)>(bound_);
     }
 };
 
