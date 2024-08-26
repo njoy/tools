@@ -103,6 +103,12 @@ public:
     return this->all() | std23::views::stride( 2 )
                        | std23::views::chunk( 2 );
   }
+
+  auto repeat() const {
+
+    using namespace njoy::tools;
+    return std23::views::repeat( 5, 2 );
+  }
 };
 
 SCENARIO( "use case" ) {
@@ -186,5 +192,11 @@ SCENARIO( "use case" ) {
   CHECK( std20::range< StrideChunk > );
   CHECK( std20::random_access_range< StrideChunk > );
   CHECK( std20::sized_range< StrideChunk > );
+
+  using Repeat = decltype( test.repeat() );
+  CHECK( std20::view< Repeat > );
+  CHECK( std20::range< Repeat > );
+  CHECK( std20::random_access_range< Repeat > );
+  CHECK( std20::sized_range< Repeat > );
 
 } // SCENARIO
