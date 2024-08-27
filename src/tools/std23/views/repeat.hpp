@@ -122,6 +122,14 @@ private:
               return right.current_ > left.current_;
           }
 
+          friend constexpr auto operator>= (const iterator& left, const iterator& right) {
+              return left.current_ >= right.current_;
+          }
+          friend constexpr auto operator<= (const iterator& left, const iterator& right) {
+              return left.current_ <= right.current_;
+          }
+
+
           friend constexpr iterator operator+(iterator i, difference_type n) {
               i += n;
               return i;
@@ -190,15 +198,6 @@ repeat_view( Type&&, std20::ranges::range_difference_t< Type > ) -> repeat_view<
 
 } // namespace ranges
 } // namespace std23
-
-namespace std20 {
-inline namespace ranges {
-
-template <typename Type>
-inline constexpr bool enable_borrowed_range<std23::ranges::repeat_view<Type>> = forward_range<Type> && enable_borrowed_range<Type>;
-
-} // namespace ranges
-} // namespace std20
 
 namespace std23 {
 inline namespace ranges {
