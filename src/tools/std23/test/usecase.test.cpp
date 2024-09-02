@@ -103,6 +103,18 @@ public:
     return this->all() | std23::views::stride( 2 )
                        | std23::views::chunk( 2 );
   }
+
+  auto repeat_bound() const {
+
+    using namespace njoy::tools;
+    return std23::views::repeat( 5, 2 );
+  }
+
+  auto repeat_unbound() const {
+
+    using namespace njoy::tools;
+    return std23::views::repeat( 4.0 );
+  }
 };
 
 SCENARIO( "use case" ) {
@@ -186,5 +198,17 @@ SCENARIO( "use case" ) {
   CHECK( std20::range< StrideChunk > );
   CHECK( std20::random_access_range< StrideChunk > );
   CHECK( std20::sized_range< StrideChunk > );
+
+  using RepeatBound = decltype( test.repeat_bound() );
+  CHECK( std20::view< RepeatBound > );
+  CHECK( std20::range< RepeatBound > );
+  CHECK( std20::random_access_range< RepeatBound > );
+  CHECK( std20::sized_range< RepeatBound > );
+
+  using RepeatUnbound = decltype( test.repeat_unbound() );
+  CHECK( std20::view< RepeatUnbound > );
+  CHECK( std20::range< RepeatUnbound > );
+  CHECK( std20::random_access_range< RepeatUnbound > );
+  CHECK( !std20::sized_range< RepeatUnbound > );
 
 } // SCENARIO
