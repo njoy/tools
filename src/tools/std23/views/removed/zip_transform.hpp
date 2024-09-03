@@ -1,3 +1,5 @@
+// this code does not work as it should and is therefore removed
+
 #ifndef NJOY_TOOLS_STD23_RANGES_VIEWS_ZIP_TRANSFORM
 #define NJOY_TOOLS_STD23_RANGES_VIEWS_ZIP_TRANSFORM
 
