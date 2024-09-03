@@ -13,23 +13,25 @@
 // convenience typedefs
 using namespace njoy::tools;
 
-SCENARIO( "stride_view" ) {
+SCENARIO( "zip_transform_view" ) {
 
-  const std::vector< int > equal = { 1, 3, 5, 7, 9 };
+  std::vector< int > equal = { 26, 29, 32, 35, 38, 41, 44 };
+
+  auto transform = [] ( int a, int b, int c ) { return a + b + c; };
 
   GIVEN( "a container with forward iterators" ) {
 
-    std::forward_list< int > values = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    std::forward_list< int > values1 = { 1, 2, 3, 4, 5, 6, 7 };
+    std::forward_list< int > values2 = { 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+    std::forward_list< int > values3 = { 17, 18, 19, 20, 21, 22, 23, 24 };
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::stride( 2 );
+      auto chunk = std23::views::zip_transform( transform, values1, values2, values3 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
 
       THEN( "the stride_view satisfies the required concepts" ) {
-
-        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -57,6 +59,10 @@ SCENARIO( "stride_view" ) {
         ++iter;
         CHECK( equal[4] == *iter );
         ++iter;
+        CHECK( equal[5] == *iter );
+        ++iter;
+        CHECK( equal[6] == *iter );
+        ++iter;
         CHECK( chunk.end() == iter );
 
         CHECK( std20::ranges::equal( equal, chunk ) );
@@ -68,17 +74,17 @@ SCENARIO( "stride_view" ) {
 
   GIVEN( "a container with bidirectional iterators" ) {
 
-    std::list< int > values = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    std::list< int > values1 = { 1, 2, 3, 4, 5, 6, 7 };
+    std::list< int > values2 = { 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+    std::list< int > values3 = { 17, 18, 19, 20, 21, 22, 23, 24 };
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::stride( 2 );
+      auto chunk = std23::views::zip_transform( transform, values1, values2, values3 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
 
       THEN( "the stride_view satisfies the required concepts" ) {
-
-        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -87,12 +93,12 @@ SCENARIO( "stride_view" ) {
         CHECK( std20::ranges::bidirectional_range< Range > );
         CHECK( ! std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
-        CHECK( std20::ranges::common_range< Range > );
+        CHECK( ! std20::ranges::common_range< Range > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
-        CHECK( 5 == chunk.size() );
+        CHECK( 7 == chunk.size() );
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
@@ -108,8 +114,16 @@ SCENARIO( "stride_view" ) {
         ++iter;
         CHECK( equal[4] == *iter );
         ++iter;
+        CHECK( equal[5] == *iter );
+        ++iter;
+        CHECK( equal[6] == *iter );
+        ++iter;
         CHECK( chunk.end() == iter );
 
+        --iter;
+        CHECK( equal[6] == *iter );
+        --iter;
+        CHECK( equal[5] == *iter );
         --iter;
         CHECK( equal[4] == *iter );
         --iter;
@@ -125,24 +139,23 @@ SCENARIO( "stride_view" ) {
         CHECK( std20::ranges::equal( equal, chunk ) );
 
         CHECK( equal[0] == chunk.front() );
-        CHECK( equal[4] == chunk.back() );
       } // THEN
     } // WHEN
   } // GIVEN
 
   GIVEN( "a container with random access iterators" ) {
 
-    std::vector< int > values = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    std::vector< int > values1 = { 1, 2, 3, 4, 5, 6, 7 };
+    std::vector< int > values2 = { 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+    std::vector< int > values3 = { 17, 18, 19, 20, 21, 22, 23, 24 };
 
     WHEN( "when iterators are used" ) {
 
-      auto chunk = values | std23::views::stride( 2 );
+      auto chunk = std23::views::zip_transform( transform, values1, values2, values3 );
       using Range = decltype(chunk);
       using Iterator = std20::iterator_t< Range >;
 
       THEN( "the stride_view satisfies the required concepts" ) {
-
-        CHECK( std20::ranges::viewable_range< Range > );
 
         CHECK( std20::ranges::range< Range > );
         CHECK( std20::ranges::view< Range > );
@@ -156,8 +169,8 @@ SCENARIO( "stride_view" ) {
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
-        CHECK( 5 == chunk.size() );
-        CHECK( 5 == chunk.end() - chunk.begin() );
+        CHECK( 7 == chunk.size() );
+        CHECK( 7 == chunk.end() - chunk.begin() );
 
         CHECK( false == chunk.empty() );
         CHECK( true == bool( chunk ) );
@@ -173,9 +186,17 @@ SCENARIO( "stride_view" ) {
         ++iter;
         CHECK( equal[4] == *iter );
         ++iter;
+        CHECK( equal[5] == *iter );
+        ++iter;
+        CHECK( equal[6] == *iter );
+        ++iter;
         CHECK( chunk.end() == iter );
 
         iter = chunk.end();
+        --iter;
+        CHECK( equal[6] == *iter );
+        --iter;
+        CHECK( equal[5] == *iter );
         --iter;
         CHECK( equal[4] == *iter );
         --iter;
@@ -191,13 +212,15 @@ SCENARIO( "stride_view" ) {
         CHECK( std20::ranges::equal( equal, chunk ) );
 
         CHECK( equal[0] == chunk.front() );
-        CHECK( equal[4] == chunk.back() );
+        CHECK( equal[6] == chunk.back() );
 
-        CHECK( 1 == chunk[0] );
-        CHECK( 3 == chunk[1] );
-        CHECK( 5 == chunk[2] );
-        CHECK( 7 == chunk[3] );
-        CHECK( 9 == chunk[4] );
+        CHECK( 26 == chunk[0] );
+        CHECK( 29 == chunk[1] );
+        CHECK( 32 == chunk[2] );
+        CHECK( 35 == chunk[3] );
+        CHECK( 38 == chunk[4] );
+        CHECK( 41 == chunk[5] );
+        CHECK( 44 == chunk[6] );
       } // THEN
     } // WHEN
   } // GIVEN

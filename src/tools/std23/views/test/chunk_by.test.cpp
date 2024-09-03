@@ -155,7 +155,7 @@ SCENARIO( "chunk_by_view" ) {
 
       THEN( "a chunk_by_view can be constructed and members can be tested" ) {
 
-        // should not compile: not sized
+        // should not compile: size() is not available
         // CHECK( 5 == chunk.size() );
 
         CHECK( false == chunk.empty() );
