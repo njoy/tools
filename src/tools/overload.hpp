@@ -22,9 +22,25 @@ namespace tools {
    */
   template < class... Types > struct overload : Types... {
 
+    overload( Types&&... args) : Types( std::forward< Types >( args ) )...{};
+
     using Types::operator()...;
   };
-  template < class... Types > overload( Types... ) -> overload< Types... >;
+
+  /**
+   *  @brief Overload struct for collecting lambdas for std::visit
+   *
+   *  For example:
+   *
+   *    auto value = std::visit(
+   *        tools::overload( [] ( const Foo& ) -> std::string
+   *                            { return "Foo"; },
+   *                         [] ( const Bar& )
+   *                            { return "Bar"; } ),
+   *        variant );
+   */
+  template < class... Types >
+  overload( Types... ) -> overload< Types... >;
 
 } // tools namespace
 } // njoy namespace

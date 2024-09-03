@@ -1,0 +1,12 @@
+include(CMakeFindDependencyMacro)
+
+if (NOT TARGET spdlog::spdlog)
+    find_dependency(spdlog)
+endif()
+
+
+if (NOT TARGET FastFloat::fast_float)
+    find_dependency(FastFloat)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/tools-targets.cmake")

@@ -107,29 +107,16 @@ public:
                        | std23::views::chunk( 2 );
   }
 
-  auto chunk_transform_drop() const {
+  auto repeat_bound() const {
 
     using namespace njoy::tools;
-    return this->all() | std23::views::chunk( 2 )
-                       | std20::views::transform( [] ( auto&& values ) { return values.front(); } )
-                       | std20::views::drop( 2 );
+    return std23::views::repeat( 5, 2 );
   }
 
-  auto zip_drop_stride() const {
+  auto repeat_unbound() const {
 
     using namespace njoy::tools;
-    return std23::views::zip(
-               this->all(),
-               this->other_ | std20::views::all );
-  }
-
-  auto zip_transform_drop_stride() const {
-
-    using namespace njoy::tools;
-    return std23::views::zip_transform(
-               [] ( auto&& left, auto&& right ) { return std::complex( left, right ); },
-               this->all(),
-               this->other_ | std20::views::all );
+    return std23::views::repeat( 4.0 );
   }
 };
 
@@ -231,23 +218,16 @@ SCENARIO( "use case" ) {
   CHECK( std20::random_access_range< StrideChunk > );
   CHECK( std20::sized_range< StrideChunk > );
 
-  using ChunkTransformDrop = decltype( test.chunk_transform_drop() );
-  CHECK( std20::view< ChunkTransformDrop > );
-  CHECK( std20::range< ChunkTransformDrop > );
-  CHECK( std20::random_access_range< ChunkTransformDrop > );
-  CHECK( std20::sized_range< ChunkTransformDrop > );
+  using RepeatBound = decltype( test.repeat_bound() );
+  CHECK( std20::view< RepeatBound > );
+  CHECK( std20::range< RepeatBound > );
+  CHECK( std20::random_access_range< RepeatBound > );
+  CHECK( std20::sized_range< RepeatBound > );
 
-  using ZipDropStride = decltype( test.zip_drop_stride() );
-  CHECK( std20::view< ZipDropStride > );
-  CHECK( std20::range< ZipDropStride > );
-//  CHECK( std20::random_access_range< ZipDropStride > );
-  CHECK( std20::sized_range< ZipDropStride > );
-  CHECK( std20::same_as< std20::ranges::range_value_t< ZipDropStride >, std::pair< double, double > > );
+  using RepeatUnbound = decltype( test.repeat_unbound() );
+  CHECK( std20::view< RepeatUnbound > );
+  CHECK( std20::range< RepeatUnbound > );
+  CHECK( std20::random_access_range< RepeatUnbound > );
+  CHECK( !std20::sized_range< RepeatUnbound > );
 
-  using ZipTransformDropStride = decltype( test.zip_transform_drop_stride() );
-//  CHECK( std20::view< ZipTransformDropStride > );
-//  CHECK( std20::range< ZipTransformDropStride > );
-//  CHECK( std20::random_access_range< ZipTransformDropStride > );
-//  CHECK( std20::sized_range< ZipTransformDropStride > );
-//  CHECK( std20::same_as< std20::ranges::range_value_t< ZipTransformDropStride >, std::complex< double > > );
 } // SCENARIO

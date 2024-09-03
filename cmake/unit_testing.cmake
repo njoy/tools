@@ -5,8 +5,6 @@
 message( STATUS "Adding tools unit testing" )
 enable_testing()
 
-FetchContent_MakeAvailable( Catch2 )
-
 function( add_cpp_test name source )
 
   set( test_name "tools.${name}.test" )
@@ -26,6 +24,7 @@ endfunction()
 # Unit testing directories
 #######################################################################
 
+add_subdirectory( src/tools/test )
 add_subdirectory( src/tools/Log/test )
 
 add_subdirectory( src/tools/disco/functions/test )
