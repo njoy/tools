@@ -15,93 +15,195 @@
 using namespace njoy::tools;
 
 SCENARIO( "repeat_view" ) {
-	// Use a single bound limit for all bound tests
-	int boundLimit = 4;
 
-	GIVEN( "Test repeat integer" ) {
-		int repeated = 9;
-		WHEN("Bound repeater"){
-			auto RepeatedInt = std23::views::repeat(repeated, boundLimit);
-			THEN("Check all ints in bound limit"){
-				CHECK(RepeatedInt.size() == boundLimit);
-				for (int i : RepeatedInt){
-					CHECK(i == repeated);
-				}
-			} //THEN
-		} //WHEN
-		WHEN("Unbound repeater"){
-			auto RepeatedInt = std23::views::repeat(repeated);
-			THEN("Check that end is unbound and int is repeated within 2x listed limit"){
-				CHECK( std20::same_as<std::remove_cv_t<decltype(std20::unreachable_sentinel)>, 
-						      decltype(RepeatedInt.end())>);
-				int UnboundLimit = 0; 
-				for (int i : RepeatedInt){
-					UnboundLimit += 1;
-					CHECK(i == repeated);
-					if (UnboundLimit > 2*boundLimit){
-						break;
-					}
-				}
-			} //THEN
+  // Use a single bound limit for all bound tests
+  int boundLimit = 4;
 
-		} //WHEN
-	} //GIVEN
-	GIVEN( "Test repeat float" ) {
-		float repeated = 9.0;
-		WHEN("Bound repeater"){
-			auto RepeatedInt = std23::views::repeat(repeated, boundLimit);
-			THEN("Check all ints in bound limit"){
-				CHECK(RepeatedInt.size() == boundLimit);
-				for (float i : RepeatedInt){
-					CHECK(i == repeated);
-				}
-			} //THEN
-		} //WHEN
-		WHEN("Unbound repeater"){
-			auto RepeatedInt = std23::views::repeat(repeated);
-			THEN("Check that end is unbound and int is repeated within 2x listed limit"){
-				CHECK( std20::same_as<std::remove_cv_t<decltype(std20::unreachable_sentinel)>, 
-						      decltype(RepeatedInt.end())>);
-				int UnboundLimit = 0; 
-				for (float i : RepeatedInt){
-					UnboundLimit += 1;
-					CHECK(i == repeated);
-					if (UnboundLimit > 2*boundLimit){
-						break;
-					}
-				}
-			} //THEN
+  GIVEN( "repeating an integer" ) {
 
-		} //WHEN
-	} //GIVEN
-	GIVEN( "Test repeat string views" ) {
-		using namespace std::literals::string_view_literals;
-		WHEN("Bound repeater"){
-			auto RepeatedInt = std23::views::repeat("testMe"sv, boundLimit);
-			THEN("Check all ints in bound limit"){
-				CHECK(RepeatedInt.size() == boundLimit);
-				for (auto i : RepeatedInt){
-					CHECK(i == "testMe");
-				}
-			} //THEN
-		} //WHEN
-		WHEN("Unbound repeater"){
-			auto RepeatedInt = std23::views::repeat("testMe"sv);
-			THEN("Check that end is unbound and int is repeated within 2x listed limit"){
-				CHECK( std20::same_as<std::remove_cv_t<decltype(std20::unreachable_sentinel)>, 
-						      decltype(RepeatedInt.end())>);
-				int UnboundLimit = 0; 
-				for (auto i : RepeatedInt){
-					UnboundLimit += 1;
-					CHECK(i == "testMe");
-					if (UnboundLimit > 2*boundLimit){
-						break;
-					}
-				}
-			} //THEN
+    int repeated = 9;
 
-		} //WHEN
-	} //GIVEN
+    WHEN( "sized repeat_view" ) {
 
+      auto chunk = std23::views::repeat( repeated, boundLimit );
+      using Range = decltype(chunk);
+      using Iterator = std20::iterator_t< Range >;
+
+      THEN( "the repeat_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
+
+        CHECK( std20::ranges::range< Range > );
+        CHECK( std20::ranges::view< Range > );
+        CHECK( std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( std20::ranges::bidirectional_range< Range > );
+        CHECK( std20::ranges::random_access_range< Range > );
+        CHECK( ! std20::ranges::contiguous_range< Range > );
+        CHECK( std20::ranges::common_range< Range > );
+      }
+
+      THEN ( "a repeat_view can be constructed and members can be tested" ) {
+
+        CHECK( boundLimit == chunk.size() );
+        for ( int i : chunk ) {
+
+          CHECK( i == repeated );
+        }
+
+        CHECK( false == chunk.empty() );
+        CHECK( true == bool( chunk ) );
+
+        CHECK( repeated == chunk.front() );
+        CHECK( repeated == chunk.back() );
+
+        CHECK( repeated == chunk[0] );
+        CHECK( repeated == chunk[1] );
+        CHECK( repeated == chunk[2] );
+        CHECK( repeated == chunk[3] );
+      } //THEN
+    } //WHEN
+
+    WHEN( "unsized repeat_view" ) {
+
+      auto chunk = std23::views::repeat( repeated );
+      using Range = decltype(chunk);
+      using Iterator = std20::iterator_t< Range >;
+
+      THEN( "the repeat_view satisfies the required concepts" ) {
+
+        CHECK( std20::same_as< std::remove_cv_t<decltype(std20::unreachable_sentinel)>,
+                               decltype(chunk.end()) >);
+
+        CHECK( std20::ranges::viewable_range< Range > );
+
+        CHECK( std20::ranges::range< Range > );
+        CHECK( std20::ranges::view< Range > );
+        CHECK( ! std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( std20::ranges::bidirectional_range< Range > );
+        CHECK( std20::ranges::random_access_range< Range > );
+        CHECK( ! std20::ranges::contiguous_range< Range > );
+        CHECK( ! std20::ranges::common_range< Range > );
+      }
+
+      THEN ( "a repeat_view can be constructed and members can be tested" ) {
+
+        int UnboundLimit = 0;
+        for ( int i : chunk ) {
+
+          ++UnboundLimit;
+          CHECK( i == repeated );
+          if ( UnboundLimit > 2 * boundLimit ) {
+
+            break;
+          }
+        }
+
+        CHECK( false == chunk.empty() );
+        CHECK( true == bool( chunk ) );
+
+        CHECK( repeated == chunk.front() );
+
+        CHECK( repeated == chunk[0] );
+        CHECK( repeated == chunk[1] );
+        CHECK( repeated == chunk[2] );
+        CHECK( repeated == chunk[3] );
+      } //THEN
+    } //WHEN
+  } //GIVEN
+
+  GIVEN( "repeating a float" ) {
+
+    float repeated = 9;
+
+    WHEN( "sized repeat_view" ) {
+
+      auto chunk = std23::views::repeat( repeated, boundLimit );
+      using Range = decltype(chunk);
+      using Iterator = std20::iterator_t< Range >;
+
+      THEN( "the repeat_view satisfies the required concepts" ) {
+
+        CHECK( std20::ranges::viewable_range< Range > );
+
+        CHECK( std20::ranges::range< Range > );
+        CHECK( std20::ranges::view< Range > );
+        CHECK( std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( std20::ranges::bidirectional_range< Range > );
+        CHECK( std20::ranges::random_access_range< Range > );
+        CHECK( ! std20::ranges::contiguous_range< Range > );
+        CHECK( std20::ranges::common_range< Range > );
+      }
+
+      THEN ( "a repeat_view can be constructed and members can be tested" ) {
+
+        CHECK( boundLimit == chunk.size() );
+        for ( int i : chunk ) {
+
+          CHECK( i == repeated );
+        }
+
+        CHECK( false == chunk.empty() );
+        CHECK( true == bool( chunk ) );
+
+        CHECK( repeated == chunk.front() );
+        CHECK( repeated == chunk.back() );
+
+        CHECK( repeated == chunk[0] );
+        CHECK( repeated == chunk[1] );
+        CHECK( repeated == chunk[2] );
+        CHECK( repeated == chunk[3] );
+      } //THEN
+    } //WHEN
+
+    WHEN( "unsized repeat_view" ) {
+
+      auto chunk = std23::views::repeat( repeated );
+      using Range = decltype(chunk);
+      using Iterator = std20::iterator_t< Range >;
+
+      THEN( "the repeat_view satisfies the required concepts" ) {
+
+        CHECK( std20::same_as< std::remove_cv_t<decltype(std20::unreachable_sentinel)>,
+                               decltype(chunk.end()) >);
+
+        CHECK( std20::ranges::viewable_range< Range > );
+
+        CHECK( std20::ranges::range< Range > );
+        CHECK( std20::ranges::view< Range > );
+        CHECK( ! std20::ranges::sized_range< Range > );
+        CHECK( std20::ranges::forward_range< Range > );
+        CHECK( std20::ranges::bidirectional_range< Range > );
+        CHECK( std20::ranges::random_access_range< Range > );
+        CHECK( ! std20::ranges::contiguous_range< Range > );
+        CHECK( ! std20::ranges::common_range< Range > );
+      }
+
+      THEN ( "a repeat_view can be constructed and members can be tested" ) {
+
+        int UnboundLimit = 0;
+        for ( int i : chunk ) {
+
+          ++UnboundLimit;
+          CHECK( i == repeated );
+          if ( UnboundLimit > 2 * boundLimit ) {
+
+            break;
+          }
+        }
+
+        CHECK( false == chunk.empty() );
+        CHECK( true == bool( chunk ) );
+
+        CHECK( repeated == chunk.front() );
+
+        CHECK( repeated == chunk[0] );
+        CHECK( repeated == chunk[1] );
+        CHECK( repeated == chunk[2] );
+        CHECK( repeated == chunk[3] );
+      } //THEN
+    } //WHEN
+  } //GIVEN
 } //SCENARIO
-
