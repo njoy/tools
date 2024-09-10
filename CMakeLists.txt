@@ -2,7 +2,7 @@
 # Preamble
 ########################################################################
 
-cmake_minimum_required( VERSION 3.27 )
+cmake_minimum_required( VERSION 3.24 )
 
 set( subproject OFF )
 if( DEFINED PROJECT_NAME )
@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( tools
-  VERSION 0.3.1
+  VERSION 0.4.0
   LANGUAGES CXX
 )
 
@@ -41,24 +41,8 @@ option( tools.installation "Install njoy::tools" ON )
 # Dependencies
 ########################################################################
 
-set( REPOSITORIES "release"
-    CACHE STRING
-    "Options for where to fetch repositories: develop, release, local"
-    )
-
-message( STATUS "Using ${REPOSITORIES} repositories" )
-
-if( REPOSITORIES STREQUAL "develop" )
-    include( cmake/develop_dependencies.cmake )
-
-elseif( REPOSITORIES STREQUAL "release" )
-    include( cmake/release_dependencies.cmake )
-
-elseif( REPOSITORIES STREQUAL "local" )
-    include( cmake/local_dependencies.cmake )
-
-endif()
-
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/.cmake)
+include( cmake/dependencies.cmake )
 
 ########################################################################
 # Project targets

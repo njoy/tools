@@ -306,6 +306,9 @@ using keys_view = elements_view<all_view<R>, 0>;
 template <typename R>
 using values_view = elements_view<all_view<R>, 1>;
 
+template <class R, size_t N>
+inline constexpr bool enable_borrowed_range<elements_view<R, N>> = enable_borrowed_range<R>;
+
 namespace detail {
 
 template <std::size_t N>
@@ -337,7 +340,6 @@ inline constexpr ranges::detail::elements_view_fn<1> values{};
 }
 
 }
-
 
 NANO_END_NAMESPACE
 
