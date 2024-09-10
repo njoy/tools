@@ -15,6 +15,8 @@ shacl_FetchContent_Declare( spdlog
     GIT_TAG         ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36 # tag: v1.11.0
     )
 set( SPDLOG_BUILD_PIC CACHE INTERNAL BOOL ON )
+# thenext line prevents spdlog from populating the .cmake/packages folder
+set( CMAKE_EXPORT_NO_PACKAGE_REGISTRY ON )
 
 if (tools.installation)
     set( SPDLOG_INSTALL CACHE INTERNAL BOOL ON )
@@ -36,7 +38,7 @@ if (tools.tests)
       GIT_REPOSITORY  ../../catchorg/Catch2
       GIT_TAG         3f0283de7a9c43200033da996ff9093be3ac84dc # tag: v3.3.2
       )
-  
+
   shacl_FetchContent_MakeAvailable(Catch2)
 endif()
 
