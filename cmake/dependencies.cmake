@@ -7,12 +7,12 @@ include( shacl_FetchContent )
 
 shacl_FetchContent_Declare( FastFloat
     GIT_REPOSITORY  ../../fastfloat/fast_float
-    GIT_TAG         f476bc713fda06fbd34dc621b466745a574b3d4c # tag: v6.1.1
+    GIT_TAG         00c8c7b0d5c722d2212568d915a39ea73b08b973 # tag: v6.1.6
     )
 
 shacl_FetchContent_Declare( spdlog
     GIT_REPOSITORY  ../../gabime/spdlog
-    GIT_TAG         ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36 # tag: v1.11.0
+    GIT_TAG         27cb4c76708608465c413f6d0e6b8d99a4d84302 # tag: v1.14.1
     )
 set( SPDLOG_BUILD_PIC CACHE INTERNAL BOOL ON )
 # thenext line prevents spdlog from populating the .cmake/packages folder
