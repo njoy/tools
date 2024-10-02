@@ -50,7 +50,8 @@ public:
    *
    *  @param[in] container    the container or range to be type erased
    */
-  template < typename Container >
+  template < typename Container,
+             typename = std::enable_if_t< njoy::tools::std20::ranges::range< Container > > >
   constexpr AnyView( Container&& container ) :
     AnyView( Iterator( container.begin() ), Iterator( container.end() ) ) {}
 
