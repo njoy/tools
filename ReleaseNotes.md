@@ -1,6 +1,8 @@
 # Release Notes&mdash;tools
 Given here are some release notes for tools.
 
+## [tools v0.5.0](https://github.com/njoy/tools/pull/xx)
+
 ## [tools v0.4.0](https://github.com/njoy/tools/pull/44)
 New features:
   - added a partial implementation of the C++23 ranges standard: chunk_view, chunk_by_view, stride_view and repeat_view (LLVM implementations for these views were used as models for our C++17 based implementations)
