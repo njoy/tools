@@ -201,6 +201,16 @@ SCENARIO( "counted_view" ) {
         CHECK(  0 == chunk[1] );
         CHECK(  2 == chunk[2] );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 } // SCENARIO
