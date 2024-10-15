@@ -75,15 +75,15 @@ SCENARIO( "stride_view" ) {
         CHECK( equal[0] == chunk.front() );
       } // THEN
 
-//      THEN( "it can be transformed into a vector using iterators" ) {
-//
-//        std::vector< int > constructed( chunk.begin(), chunk.end() );
-//        CHECK( std20::ranges::equal( constructed, chunk ) );
-//
-//        std::vector< int > inserted;
-//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
-//        CHECK( std20::ranges::equal( inserted, chunk ) );
-//      }
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 
@@ -160,15 +160,15 @@ SCENARIO( "stride_view" ) {
         CHECK( equal[4] == chunk.back() );
       } // THEN
 
-//      THEN( "it can be transformed into a vector using iterators" ) {
-//
-//        std::vector< int > constructed( chunk.begin(), chunk.end() );
-//        CHECK( std20::ranges::equal( constructed, chunk ) );
-//
-//        std::vector< int > inserted;
-//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
-//        CHECK( std20::ranges::equal( inserted, chunk ) );
-//      }
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 
@@ -253,15 +253,15 @@ SCENARIO( "stride_view" ) {
         CHECK( 9 == chunk[4] );
       } // THEN
 
-//      THEN( "it can be transformed into a vector using iterators" ) {
-//
-//        std::vector< int > constructed( chunk.begin(), chunk.end() );
-//        CHECK( std20::ranges::equal( constructed, chunk ) );
-//
-//        std::vector< int > inserted;
-//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
-//        CHECK( std20::ranges::equal( inserted, chunk ) );
-//      }
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 } // SCENARIO
