@@ -1,7 +1,10 @@
 # Release Notes&mdash;tools
 Given here are some release notes for tools.
 
-## [tools v0.5.0](https://github.com/njoy/tools/pull/xx)
+## tools v0.4.1
+Bug fixes:
+  - iterator guards were added to the disco parser to avoid valgrind errors in ENDFtk.
+  - the stride_view iterator was missing the reference type, which is required to create vectors using these stride view iterators in C++17.
 
 ## [tools v0.4.0](https://github.com/njoy/tools/pull/44)
 New features:
