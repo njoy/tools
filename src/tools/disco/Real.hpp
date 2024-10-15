@@ -33,14 +33,14 @@ public:
    *  @param[in,out] iter       an iterator to a character in a range
    */
   template < typename Representation, typename Iterator >
-  static Representation read( Iterator& iter, const Iterator& ) {
+  static Representation read( Iterator& iter, const Iterator& end ) {
 
     unsigned int position = 0;
-    const auto end = iter + Width;
+    const auto final = iter + Width;
     Representation value = 0.0;
 
     skipSpaces( iter, position );
-    if ( isNewLine( iter ) || isEndOfFile( iter ) || Width == position ) {
+    if ( isNewLine( iter ) || isEndOfFile( iter ) || Width == position || iter >= end ) {
 
       return value;
     }
@@ -56,7 +56,7 @@ public:
     // of std::from_chars and because this allows us to read fortran formatted
     // floats
     fast_float::parse_options options{ fast_float::chars_format::fortran };
-    auto result = fast_float::from_chars_advanced( &*iter, &*end, value, options );
+    auto result = fast_float::from_chars_advanced( &*iter, &*final, value, options );
     if ( result.ec == std::errc() ) {
 
       auto advance = result.ptr - &*iter;
