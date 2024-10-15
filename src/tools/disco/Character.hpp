@@ -38,9 +38,13 @@ public:
    *  @param[in,out] iter       an iterator to a character in a range
    */
   template < typename Representation, typename Iterator >
-  static Representation read( Iterator& iter, const Iterator& ) {
+  static Representation read( Iterator& iter, const Iterator& end ) {
 
     Representation value;
+    if ( iter >= end ) {
+
+      return value;
+    }
     value.reserve( Width );
 
     unsigned int position = 0;

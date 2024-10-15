@@ -37,10 +37,10 @@ public:
    *  @param[in,out] iter   an iterator to a character in a range
    */
   template < typename Iterator >
-  static void read( Iterator& iter, const Iterator& ) {
+  static void read( Iterator& iter, const Iterator& end ) {
 
     unsigned int position = 0;
-    while( position < Width && ! ( isNewLine( iter ) || isEndOfFile( iter ) ) ) {
+    while( position < Width && ! ( isNewLine( iter ) || isEndOfFile( iter ) || iter >= end ) ) {
 
       ++position;
       ++iter;
