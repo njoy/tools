@@ -75,6 +75,16 @@ SCENARIO( "reverse_view" ) {
         CHECK( std20::ranges::equal( chunk, modified ) );
         CHECK( std20::ranges::equal( values, modified ) );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 
@@ -144,6 +154,16 @@ SCENARIO( "reverse_view" ) {
         CHECK(  2 == chunk[3] );
         CHECK(  2 == chunk[4] );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 } // SCENARIO

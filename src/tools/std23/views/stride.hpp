@@ -65,6 +65,8 @@ private:
                                           std20::ranges::forward_range< Base >,
                                           std20::forward_iterator_tag,
                                           std20::input_iterator_tag > > >;
+    // Extension: legacy typedefs
+    using pointer = void;
     using reference = std20::ranges::iter_reference_t< std20::ranges::iterator_t< Base > >;
 
     iterator() = default;
