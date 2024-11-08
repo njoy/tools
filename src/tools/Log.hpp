@@ -16,9 +16,9 @@ namespace tools {
  */
 class Log {
 
-  static auto initialize_logger() {
+  static static std::shared_ptr<spdlog::logger> initialize_logger() {
 
-    auto instance = spdlog::stdout_color_st( "njoy" );
+    static std::shared_ptr<spdlog::logger> instance = spdlog::stdout_color_st( "njoy" );
     instance->set_pattern( "[%^%l%$] %v" );
     #ifndef NDEBUG
     instance->set_level( spdlog::level::debug );
@@ -26,9 +26,9 @@ class Log {
     return instance;
   }
 
-  static auto& logger() {
+  static static std::shared_ptr<spdlog::logger>& logger() {
 
-    static auto instance = initialize_logger();
+    static static std::shared_ptr<spdlog::logger> instance = initialize_logger();
     return instance;
   }
 
