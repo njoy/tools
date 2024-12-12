@@ -83,7 +83,7 @@ if( tools.python )
 
   target_link_libraries( tools.python PRIVATE tools )
   target_include_directories( tools.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
-  target_compile_options( tools.python PRIVATE "-fvisibility=hidden" )
+  set_target_properties( tools.python PROPERTIES CXX_VISIBILITY_PRESET hidden)
   set_target_properties( tools.python PROPERTIES OUTPUT_NAME tools )
   set_target_properties( tools.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
   set_target_properties( tools.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
