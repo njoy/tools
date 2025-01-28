@@ -6,6 +6,8 @@ Bug fixes:
   - iterator guards were added to the disco parser to avoid valgrind errors in ENDFtk.
   - the stride_view iterator was missing the reference type, which is required to create vectors using these stride view iterators in C++17.
 
+A few updates were made in the CMake files for Windows compilation issues. The GitHub CI was also updated: macos-14 (arm64 architecture) was added in addition to macos-13 (intel architecture).
+
 ## [tools v0.4.0](https://github.com/njoy/tools/pull/44)
 New features:
   - added a partial implementation of the C++23 ranges standard: chunk_view, chunk_by_view, stride_view and repeat_view (LLVM implementations for these views were used as models for our C++17 based implementations)
