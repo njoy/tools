@@ -220,7 +220,7 @@ SCENARIO( "Real" ) {
       CHECK( begin == end - 1 );
 
       string = "    +123";
-      string += char{ std::char_traits<char>::eof() };
+      string += std::char_traits<char>::eof();
       begin = string.begin();
       end = string.end();
       CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );

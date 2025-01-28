@@ -21,7 +21,7 @@ public:
 SCENARIO( "BaseFixedWidthField" ) {
 
   std::string string = " a\t\n\r\n\f";
-  string += char{ std::char_traits<char>::eof() };
+  string += std::char_traits<char>::eof();
   auto iter = string.begin();
   unsigned int position = 0;
 

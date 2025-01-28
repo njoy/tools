@@ -215,7 +215,7 @@ SCENARIO( "Integer" ) {
       CHECK( iter == end - 1 );
 
       string = "    +123";
-      string += char{ std::char_traits<char>::eof() };
+      string += std::char_traits<char>::eof();
       iter = string.begin();
       end = string.end();
       CHECK_THAT( 123, WithinRel( FreeFormatReal::read< double >( iter, end ) ) );
