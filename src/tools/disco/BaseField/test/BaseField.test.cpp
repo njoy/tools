@@ -17,15 +17,10 @@ public:
 };
 
 SCENARIO( "BaseField" ) {
-
-  std::string string = " a\t\n\r\n\f";
-  string += std::char_traits<char>::eof();
+  std::string string = "+abc";
   auto iter = string.begin();
   unsigned int position = 0;
 
-  string = "+abc";
-  position = 0;
-  iter = string.begin();
   TestBaseField::skipPlusSign( iter, position );
   CHECK( iter == string.begin() + 1 );
   CHECK( position == 1 );

@@ -12,7 +12,6 @@ using namespace njoy::tools::disco;
 SCENARIO( "functions" ) {
 
   std::string string = " a\t\n\r\n\f";
-  string += std::char_traits<char>::eof();
   auto iter = string.begin();
   unsigned int position = 0;
 
@@ -24,14 +23,12 @@ SCENARIO( "functions" ) {
   CHECK( false == isSpace( iter ) ); ++iter;
   CHECK( false == isSpace( iter ) ); ++iter;
   CHECK( false == isSpace( iter ) ); ++iter;
-  CHECK( false == isSpace( iter ) ); ++iter;
   CHECK( iter == string.end() );
 
   iter = string.begin();
   CHECK( true == isSpaceOrTabulation( iter ) ); ++iter;
   CHECK( false == isSpaceOrTabulation( iter ) ); ++iter;
   CHECK( true == isSpaceOrTabulation( iter ) ); ++iter;
-  CHECK( false == isSpaceOrTabulation( iter ) ); ++iter;
   CHECK( false == isSpaceOrTabulation( iter ) ); ++iter;
   CHECK( false == isSpaceOrTabulation( iter ) ); ++iter;
   CHECK( false == isSpaceOrTabulation( iter ) ); ++iter;
@@ -46,7 +43,6 @@ SCENARIO( "functions" ) {
   CHECK( true == isWhiteSpace( iter ) ); ++iter;
   CHECK( true == isWhiteSpace( iter ) ); ++iter;
   CHECK( true == isWhiteSpace( iter ) ); ++iter;
-  CHECK( false == isWhiteSpace( iter ) ); ++iter;
   CHECK( iter == string.end() );
 
   iter = string.begin();
@@ -61,17 +57,5 @@ SCENARIO( "functions" ) {
   CHECK( iter == string.begin() + 5 ); ++iter;
   // \f is a newline
   CHECK( true == isNewLine( iter ) ); ++iter;
-  CHECK( false == isNewLine( iter ) ); ++iter;
-  CHECK( iter == string.end() );
-
-  iter = string.begin();
-  CHECK( false == isEndOfFile( iter ) ); ++iter;
-  CHECK( false == isEndOfFile( iter ) ); ++iter;
-  CHECK( false == isEndOfFile( iter ) ); ++iter;
-  CHECK( false == isEndOfFile( iter ) ); ++iter;
-  CHECK( false == isEndOfFile( iter ) ); ++iter;
-  CHECK( false == isEndOfFile( iter ) ); ++iter;
-  CHECK( false == isEndOfFile( iter ) ); ++iter;
-  CHECK( true == isEndOfFile( iter ) ); ++iter;
   CHECK( iter == string.end() );
 } // SCENARIO

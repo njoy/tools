@@ -105,7 +105,6 @@ SCENARIO( "Integer" ) {
       CHECK( iter == end - 1 );
 
       string = "    +123";
-      string += std::char_traits<char>::eof();
       iter = string.begin();
       end = string.end();
       CHECK( 123 == FreeFormatInteger::read< int >( iter, end ) );
