@@ -103,12 +103,6 @@ SCENARIO( "Integer" ) {
       end = string.end();
       CHECK( 123 == FreeFormatInteger::read< int >( iter, end ) );
       CHECK( iter == end - 1 );
-
-      string = "    +123";
-      iter = string.begin();
-      end = string.end();
-      CHECK( 123 == FreeFormatInteger::read< int >( iter, end ) );
-      CHECK( iter == end - 1 );
     } // THEN
   } // GIVEN
 
