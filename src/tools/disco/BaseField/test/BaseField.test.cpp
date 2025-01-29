@@ -17,6 +17,7 @@ public:
 };
 
 SCENARIO( "BaseField" ) {
+
   std::string string = "+abc";
   auto iter = string.begin();
   unsigned int position = 0;

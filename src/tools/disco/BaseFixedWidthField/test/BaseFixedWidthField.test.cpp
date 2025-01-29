@@ -19,6 +19,7 @@ public:
 };
 
 SCENARIO( "BaseFixedWidthField" ) {
+
   std::string string = "+abc";
   auto iter = string.begin();
   unsigned int position = 0;
