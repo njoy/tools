@@ -81,6 +81,7 @@ SCENARIO( "take_view" ) {
         CHECK( std20::ranges::equal( values, original_modified ) );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );
@@ -148,6 +149,7 @@ SCENARIO( "take_view" ) {
         CHECK( std20::ranges::equal( values, original_modified ) );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );
@@ -223,6 +225,7 @@ SCENARIO( "take_view" ) {
         CHECK(  2 == chunk[2] );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );
