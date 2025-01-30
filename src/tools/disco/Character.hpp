@@ -48,7 +48,7 @@ public:
     value.reserve( Width );
 
     unsigned int position = 0;
-    while( position < Width && ! ( isNewLine( iter ) || isEndOfFile( iter ) ) ) {
+    while( position < Width && ! isNewLine( iter ) ) {
 
       ++position;
       value.push_back( *iter++ );

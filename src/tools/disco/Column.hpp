@@ -40,7 +40,7 @@ public:
   static void read( Iterator& iter, const Iterator& end ) {
 
     unsigned int position = 0;
-    while( position < Width && ! ( isNewLine( iter ) || isEndOfFile( iter ) || iter >= end ) ) {
+    while( position < Width && ! ( isNewLine( iter ) || iter >= end ) ) {
 
       ++position;
       ++iter;
