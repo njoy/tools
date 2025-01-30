@@ -69,6 +69,16 @@ SCENARIO( "join_view" ) {
 
         CHECK( std20::ranges::equal( chunk, modified ) );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 
@@ -123,6 +133,16 @@ SCENARIO( "join_view" ) {
 
         CHECK( std20::ranges::equal( chunk, modified ) );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 
@@ -177,6 +197,16 @@ SCENARIO( "join_view" ) {
 
         CHECK( std20::ranges::equal( chunk, modified ) );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 } // SCENARIO

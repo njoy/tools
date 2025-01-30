@@ -41,6 +41,17 @@ SCENARIO( "stride_view" ) {
         CHECK( std20::ranges::common_range< Range > );
       }
 
+      THEN( "the stride_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
+      }
+
       THEN( "a stride_view can be constructed and members can be tested" ) {
 
         CHECK( false == chunk.empty() );
@@ -63,6 +74,16 @@ SCENARIO( "stride_view" ) {
 
         CHECK( equal[0] == chunk.front() );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 
@@ -88,6 +109,17 @@ SCENARIO( "stride_view" ) {
         CHECK( ! std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
         CHECK( std20::ranges::common_range< Range > );
+      }
+
+      THEN( "the stride_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
@@ -127,6 +159,16 @@ SCENARIO( "stride_view" ) {
         CHECK( equal[0] == chunk.front() );
         CHECK( equal[4] == chunk.back() );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 
@@ -152,6 +194,17 @@ SCENARIO( "stride_view" ) {
         CHECK( std20::ranges::random_access_range< Range > );
         CHECK( ! std20::ranges::contiguous_range< Range > );
         CHECK( std20::ranges::common_range< Range > );
+      }
+
+      THEN( "the stride_view range and iterator associated types are correct" ) {
+
+        CHECK( std20::same_as< std20::ranges::range_value_t< Range >, int > );
+        CHECK( std20::same_as< std20::ranges::range_reference_t< Range >, int& > );
+        CHECK( std20::same_as< std20::ranges::range_difference_t< Range >, std::ptrdiff_t > );
+
+        CHECK( std20::same_as< std20::ranges::iter_value_t< Iterator >, int > );
+        CHECK( std20::same_as< std20::ranges::iter_reference_t< Iterator >, int& > );
+        CHECK( std20::same_as< std20::ranges::iter_difference_t< Iterator >, std::ptrdiff_t > );
       }
 
       THEN( "a stride_view can be constructed and members can be tested" ) {
@@ -199,6 +252,16 @@ SCENARIO( "stride_view" ) {
         CHECK( 7 == chunk[3] );
         CHECK( 9 == chunk[4] );
       } // THEN
+
+      THEN( "it can be transformed into a vector using iterators" ) {
+
+        std::vector< int > constructed( chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( constructed, chunk ) );
+
+        std::vector< int > inserted;
+        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+        CHECK( std20::ranges::equal( inserted, chunk ) );
+      }
     } // WHEN
   } // GIVEN
 } // SCENARIO

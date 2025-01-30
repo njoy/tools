@@ -84,13 +84,6 @@ SCENARIO( "Integer" ) {
       end = string.end();
       CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
-
-      string = "    +123";
-      string += char{ std::char_traits<char>::eof() };
-      begin = string.begin();
-      end = string.end();
-      CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
-      CHECK( begin == end - 1 );
     } // THEN
   } // GIVEN
 

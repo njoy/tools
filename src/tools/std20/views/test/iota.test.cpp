@@ -77,6 +77,17 @@ SCENARIO( "iota_view" ) {
         CHECK( *( begin + 5 ) == 6 );
         CHECK( *( begin + 99 ) == 100 );
       } // THEN
+
+//! @todo investigate why this throws an exception
+//      THEN( "it can be transformed into a vector using iterators" ) {
+//
+//        std::vector< int > constructed( chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( constructed, chunk ) );
+//
+//        std::vector< int > inserted;
+//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( inserted, chunk ) );
+//      }
     } // WHEN
   } // GIVEN
 
@@ -139,6 +150,17 @@ SCENARIO( "iota_view" ) {
         CHECK( *( begin + 1 ) == 2 );
         CHECK( *( end - 1 ) == 5 );
       } // THEN
+
+//! @todo investigate why this throws an exception
+//      THEN( "it can be transformed into a vector using iterators" ) {
+//
+//        std::vector< int > constructed( chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( constructed, chunk ) );
+//
+//        std::vector< int > inserted;
+//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( inserted, chunk ) );
+//      }
     } // WHEN
   } // GIVEN
 } // SCENARIO

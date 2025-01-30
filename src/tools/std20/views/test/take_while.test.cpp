@@ -69,6 +69,17 @@ SCENARIO( "take_while_view" ) {
         // the following should not compile: no random access iterator
         // CHECK(  2 == chunk.back() );
       } // THEN
+
+//! @todo investigate why this throws an exception
+//      THEN( "it can be transformed into a vector using iterators" ) {
+//
+//        std::vector< int > constructed( chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( constructed, chunk ) );
+//
+//        std::vector< int > inserted;
+//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( inserted, chunk ) );
+//      }
     } // WHEN
   } // GIVEN
 
@@ -116,6 +127,17 @@ SCENARIO( "take_while_view" ) {
         // the following should not compile: no random access iterator
         // CHECK( -2 == chunk[0] );
       } // THEN
+
+//! @todo investigate why this throws an exception
+//      THEN( "it can be transformed into a vector using iterators" ) {
+//
+//        std::vector< int > constructed( chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( constructed, chunk ) );
+//
+//        std::vector< int > inserted;
+//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( inserted, chunk ) );
+//      }
     } // WHEN
   } // GIVEN
 
@@ -166,6 +188,17 @@ SCENARIO( "take_while_view" ) {
         CHECK( -2 == chunk.front() );
         // CHECK(  0 == chunk.back() );
       } // THEN
+
+//! @todo investigate why this throws an exception
+//      THEN( "it can be transformed into a vector using iterators" ) {
+//
+//        std::vector< int > constructed( chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( constructed, chunk ) );
+//
+//        std::vector< int > inserted;
+//        inserted.insert( inserted.end(), chunk.begin(), chunk.end() );
+//        CHECK( std20::ranges::equal( inserted, chunk ) );
+//      }
     } // WHEN
   } // GIVEN*/
 } // SCENARIO

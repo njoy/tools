@@ -41,14 +41,14 @@ public:
    *  @param[in,out] iter       an iterator to a character in a range
    */
   template < typename Representation, typename Iterator >
-  static Representation read( Iterator& iter, const Iterator& ) {
+  static Representation read( Iterator& iter, const Iterator& end ) {
 
     unsigned int position = 0;
-    const auto end = iter + Width;
+    const auto final = iter + Width;
     Representation value = 0;
 
     skipSpaces( iter, position );
-    if ( isNewLine( iter ) || isEndOfFile( iter ) || Width == position ) {
+    if ( isNewLine( iter ) || Width == position || iter >= end ) {
 
       return value;
     }
@@ -62,7 +62,7 @@ public:
     // we are using fast_float::from_chars instead of std::from_chars since
     // not all standard c++ libraries implement the floating point version of
     // std::from_chars
-    auto result = fast_float::from_chars( &*iter, &*end, value );
+    auto result = fast_float::from_chars( &*iter, &*final, value );
     if ( result.ec == std::errc() ) {
 
       auto advance = result.ptr - &*iter;
@@ -77,7 +77,7 @@ public:
     skipSpaces( iter, position );
     if ( Width != position ) {
 
-      if ( ! isNewLine( iter ) && ! isEndOfFile( iter ) ) {
+      if ( ! isNewLine( iter ) ) {
 
         throw std::runtime_error( "cannot parse invalid integer number 3" );
       }

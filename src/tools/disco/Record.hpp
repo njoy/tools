@@ -22,7 +22,7 @@ struct Record<> {
   template< typename Iterator >
   static void read( Iterator& iter, const Iterator& end ) {
 
-    while ( iter != end && ! ( isNewLine( iter )|| isEndOfFile( iter ) ) ) {
+    while ( iter != end && ! ( isNewLine( iter ) ) ) {
 
       ++iter;
     }
