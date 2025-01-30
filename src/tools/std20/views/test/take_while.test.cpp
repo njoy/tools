@@ -70,6 +70,7 @@ SCENARIO( "take_while_view" ) {
         // CHECK(  2 == chunk.back() );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );
@@ -127,6 +128,7 @@ SCENARIO( "take_while_view" ) {
         // CHECK( -2 == chunk[0] );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );
@@ -187,6 +189,7 @@ SCENARIO( "take_while_view" ) {
         // CHECK(  0 == chunk.back() );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );

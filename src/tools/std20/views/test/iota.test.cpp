@@ -78,6 +78,7 @@ SCENARIO( "iota_view" ) {
         CHECK( *( begin + 99 ) == 100 );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );
@@ -150,6 +151,7 @@ SCENARIO( "iota_view" ) {
         CHECK( *( end - 1 ) == 5 );
       } // THEN
 
+//! @todo investigate why this throws an exception
 //      THEN( "it can be transformed into a vector using iterators" ) {
 //
 //        std::vector< int > constructed( chunk.begin(), chunk.end() );
