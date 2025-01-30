@@ -40,7 +40,7 @@ public:
     Representation value = 0.0;
 
     skipSpaces( iter, position );
-    if ( isNewLine( iter ) || isEndOfFile( iter ) || Width == position || iter >= end ) {
+    if ( isNewLine( iter ) || Width == position || iter >= end ) {
 
       return value;
     }
@@ -71,7 +71,7 @@ public:
     skipSpaces( iter, position );
     if ( Width != position ) {
 
-      if ( ! isNewLine( iter ) && ! isEndOfFile( iter ) ) {
+      if ( ! isNewLine( iter ) ) {
 
         throw std::runtime_error( "cannot parse invalid real number 3" );
       }

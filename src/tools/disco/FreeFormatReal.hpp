@@ -41,10 +41,6 @@ public:
     iter = std::find_if( iter, end,
                          [] ( auto&& value )
                             { return ! std::isspace( value ); }  );
-    if ( isEndOfFile( iter ) ) {
-
-      throw std::runtime_error( "Cannot read valid real value: end of file encountered" );
-    }
 
     // we are using fast_float::from_chars_advanced instead of std::from_chars
     // since not all standard c++ libraries implement the floating point version

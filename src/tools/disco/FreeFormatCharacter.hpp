@@ -35,10 +35,6 @@ public:
     iter = std::find_if( iter, end,
                          [] ( auto&& value )
                             { return ! std::isspace( value ); }  );
-    if ( isEndOfFile( iter ) ) {
-
-      throw std::runtime_error( "Cannot read valid string: end of file encountered" );
-    }
 
     auto temp = std::find_if( iter, end,
                               [] ( auto&& value )

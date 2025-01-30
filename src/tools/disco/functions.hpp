@@ -69,15 +69,6 @@ bool isWhiteSpace( const Iterator& iter ) {
   return std::isspace( *iter );
 }
 
-/**
- *  @brief Return whether or not a character is the end of file character
- */
-template < typename Iterator >
-constexpr bool isEndOfFile( const Iterator& iter ) {
-
-  return std::char_traits< char >::eof() == *iter;
-}
-
 } // disco namespace
 } // tools namespace
 } // njoy namespace
