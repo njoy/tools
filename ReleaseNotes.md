@@ -1,6 +1,9 @@
 # Release Notes&mdash;tools
 Given here are some release notes for tools.
 
+## tools v0.4.2
+This version updates the pybind11 version to 2.13.6 and makes an update to the GitHub CI file. There are no functional changes.
+
 ## tools v0.4.1
 Bug fixes:
   - iterator guards were added to the disco parser to avoid valgrind errors in ENDFtk.
