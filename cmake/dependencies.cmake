@@ -45,7 +45,7 @@ endif()
 if (tools.python)
   shacl_FetchContent_Declare( pybind11
       GIT_REPOSITORY  ../../pybind/pybind11
-      GIT_TAG         5b0a6fc2017fcc176545afe3e09c9f9885283242 # tag: v2.10.4
+      GIT_TAG         a2e59f0e7065404b44dfe92a28aca47ba1378dc4 # tag: v2.13.6
       )
   shacl_FetchContent_MakeAvailable(pybind11)
 endif()
