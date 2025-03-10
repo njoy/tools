@@ -36,10 +36,7 @@ private:
     template <typename T>
     static constexpr auto impl(T&& t, priority_tag<0>)
         noexcept(noexcept(ranges::subrange{std::forward<T>(t)}))
-#ifndef __INTEL_COMPILER
-        // intel-classic/2021 gets into an assertion error due to this line
         -> decltype(ranges::subrange{std::forward<T>(t)})
-#endif
     {
         return ranges::subrange{std::forward<T>(t)};
     }
