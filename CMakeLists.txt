@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( tools
-  VERSION 0.4.1
+  VERSION 0.4.3
   LANGUAGES CXX
 )
 
@@ -30,12 +30,14 @@ cmake_dependent_option(
   "Build the tools unit tests and integrate with ctest" ON
   "BUILD_TESTING AND NOT ${subproject}" OFF
 )
+
 cmake_dependent_option(
   tools.python
   "Build tools python bindings" ON
   "NOT ${subproject} OR DEFINED require.tools.python " OFF
 )
-option( tools.installation "Install njoy::tools" ON )
+
+option( tools.installation "Install tools" ON )
 
 ########################################################################
 # Dependencies
@@ -48,17 +50,17 @@ include( cmake/dependencies.cmake )
 # Project targets
 ########################################################################
 
+string( CONCAT prefix
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
+  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # tools : library
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 add_library( tools INTERFACE )
 add_library( njoy::tools ALIAS tools )
-
-string( CONCAT prefix
-  "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
-  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-)
 
 target_include_directories( tools INTERFACE ${prefix} )
 
