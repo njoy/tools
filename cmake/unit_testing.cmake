@@ -25,7 +25,8 @@ endfunction()
 #######################################################################
 
 add_subdirectory( src/tools/test )
-add_subdirectory( src/tools/Log/test )
+#Removing tests for logging as th feeature is not used
+#add_subdirectory( src/tools/Log/test )
 
 add_subdirectory( src/tools/disco/functions/test )
 add_subdirectory( src/tools/disco/BaseField/test )
