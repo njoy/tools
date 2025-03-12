@@ -30,11 +30,13 @@ cmake_dependent_option(
   "Build the tools unit tests and integrate with ctest" ON
   "BUILD_TESTING AND NOT ${subproject}" OFF
 )
+
 cmake_dependent_option(
   tools.python
   "Build tools python bindings" ON
   "NOT ${subproject} OR DEFINED require.tools.python " OFF
 )
+
 option( tools.installation "Install njoy::tools" ON )
 
 ########################################################################
@@ -48,17 +50,17 @@ include( cmake/dependencies.cmake )
 # Project targets
 ########################################################################
 
+string( CONCAT prefix
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
+  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+)
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # tools : library
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 add_library( tools INTERFACE )
 add_library( njoy::tools ALIAS tools )
-
-string( CONCAT prefix
-  "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
-  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-)
 
 target_include_directories( tools INTERFACE ${prefix} )
 
@@ -75,33 +77,11 @@ target_compile_definitions( tools INTERFACE -DNANORANGE_NO_STD_FORWARD_DECLARATI
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if( tools.python )
-
-  pybind11_add_module( tools.python
-      python/src/tools.python.cpp
-      )
-  add_library( njoy::tools.python ALIAS tools.python )
-
-  target_link_libraries( tools.python PRIVATE tools )
-  target_include_directories( tools.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
-  set_target_properties( tools.python PROPERTIES CXX_VISIBILITY_PRESET hidden)
-  set_target_properties( tools.python PROPERTIES OUTPUT_NAME tools )
-  set_target_properties( tools.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
-  set_target_properties( tools.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
-
-  message( STATUS "Building tools' python API" )
-
-  list( APPEND TOOLS_PYTHONPATH ${CMAKE_CURRENT_BINARY_DIR} )
-
-  if( tools.tests )
-    include( cmake/unit_testing_python.cmake )
-  endif()
-
+  add_subdirectory(python)
 endif()
 
-if( CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR )
-  if( tools.tests )
-    include( cmake/unit_testing.cmake )
-  endif()
+if( tools.tests )
+  include( cmake/unit_testing.cmake )
 endif()
 
 #######################################################################
@@ -150,15 +130,4 @@ if(tools.installation)
       set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
       include(CPack)
     endif()
-
-  if(tools.python)
-
-    install(TARGETS tools.python EXPORT tools-targets
-      ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-      LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-      RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-    )
-
-  endif()
-
 endif()
