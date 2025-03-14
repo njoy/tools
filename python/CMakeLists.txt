@@ -7,7 +7,7 @@ if(tools.python)
     add_library( njoy::tools.python ALIAS tools.python )
 
     target_link_libraries( tools.python PRIVATE tools )
-    target_include_directories( tools.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/python/src )
+    target_include_directories( tools.python PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src )
     set_target_properties( tools.python PROPERTIES CXX_VISIBILITY_PRESET hidden)
     set_target_properties( tools.python PROPERTIES OUTPUT_NAME tools )
     set_target_properties( tools.python PROPERTIES LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR})
