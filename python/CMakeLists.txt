@@ -13,7 +13,7 @@ if(tools.python)
     set_target_properties( tools.python PROPERTIES LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR})
     set_target_properties( tools.python PROPERTIES COMPILE_DEFINITIONS "PYBIND11" )
     set_target_properties( tools.python PROPERTIES POSITION_INDEPENDENT_CODE ON )
-    # add all .so's that are installed with mcatk to the installed library rpath
+    # add all .so's that are installed with njoy::tools to the installed library rpath
     set_target_properties( tools.python PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
     # add all .so's that are linked to at build time to the installed library rpath
     set_target_properties( tools.python PROPERTIES INSTALL_RPATH_USE_LINK_PATH ON)
