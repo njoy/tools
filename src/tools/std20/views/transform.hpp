@@ -207,7 +207,12 @@ private:
         }
 
         friend constexpr decltype(auto) iter_move(const iterator& i)
-            noexcept(iter_move_noexcept_helper)
+#ifndef __INTEL_COMPILER
+           constexpr noexcept(iter_move_noexcept_helper)
+#else
+           noexcept(iter_move_noexcept_helper)
+#endif
+
         {
             if constexpr (std::is_lvalue_reference_v<decltype(*i)>) {
                 return std::move(*i);
