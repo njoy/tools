@@ -206,8 +206,8 @@ private:
             return x.current_ - y.current_;
         }
 
-        friend constexpr decltype(auto) iter_move(const iterator& i)
-           noexcept(iter_move_noexcept_helper)
+        friend decltype(auto) iter_move(const iterator& i)
+           //noexcept(iter_move_noexcept_helper)
         {
             if constexpr (std::is_lvalue_reference_v<decltype(*i)>) {
                 return std::move(*i);
