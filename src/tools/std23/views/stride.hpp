@@ -257,7 +257,9 @@ private:
 
     template < typename B = Base >
     friend constexpr auto iter_swap( const iterator& left, const iterator& right )
+#ifndef __INTEL_COMPILER
         noexcept(noexcept(std20::ranges::iter_swap( left.current_, right.current_ )))
+#endif
     -> std::enable_if_t<std20::ranges::indirectly_swappable< B > > {
 
         std20::ranges::iter_swap( left.current_, right.current_ );
