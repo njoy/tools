@@ -50,7 +50,7 @@ public:
     // error here in that case:
     if ( iter == end ) {
 
-        std::string message( &*(iter - dist), &*std::prev( end ) + 1 );
+        std::string message( &*( iter - dist ), &*std::prev( end ) + 1 );
         message.insert( 0, "Could not read valid real value: " );
         message += '\"';
         throw std::runtime_error( message );
@@ -62,7 +62,7 @@ public:
     // floats
     if ( *iter == '+' ) { ++iter; }
     fast_float::parse_options options{ fast_float::chars_format::fortran };
-    auto result = fast_float::from_chars_advanced( &*iter, &*std::prev(end) + 1, value, options );
+    auto result = fast_float::from_chars_advanced( &*iter, &*std::prev( end ) + 1, value, options );
     if ( result.ec == std::errc() ) {
 
       auto advance = result.ptr - &*iter;

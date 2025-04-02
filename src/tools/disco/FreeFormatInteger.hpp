@@ -50,7 +50,7 @@ public:
     // error here in that case:
     if ( iter == end ) {
 
-        std::string message( &*(iter - dist), &*std::prev( end ) + 1 );
+        std::string message( &*( iter - dist ), &*std::prev( end ) + 1 );
         message.insert( 0, "Could not read valid integer: \"" );
         message += '\"';
         throw std::runtime_error( message );
