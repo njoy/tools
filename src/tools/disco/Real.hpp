@@ -36,11 +36,10 @@ public:
   static Representation read( Iterator& iter, const Iterator& end ) {
 
     unsigned int position = 0;
-    const auto final = iter + Width;
     Representation value = 0.0;
 
     skipSpaces( iter, position );
-    if ( isNewLine( iter ) || Width == position || iter >= end ) {
+    if ( iter >= end || isNewLine( iter ) || Width == position ) {
 
       return value;
     }
@@ -56,7 +55,7 @@ public:
     // of std::from_chars and because this allows us to read fortran formatted
     // floats
     fast_float::parse_options options{ fast_float::chars_format::fortran };
-    auto result = fast_float::from_chars_advanced( &*iter, &*final, value, options );
+    auto result = fast_float::from_chars_advanced( &*iter, &*std::prev( end ) + 1, value, options);
     if ( result.ec == std::errc() ) {
 
       auto advance = result.ptr - &*iter;
