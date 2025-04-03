@@ -38,8 +38,8 @@ public:
 
     Representation value = 0;
 
-    // get the size of the string in case find_if returns iter == end 
-    auto dist = std::distance( iter, end );
+    // copy the start before find_if modifies iter
+    auto start = iter;
 
     iter = std::find_if( iter, end,
                          [] ( auto&& value )
@@ -50,7 +50,7 @@ public:
     // error here in that case:
     if ( iter == end ) {
 
-        std::string message( &*( iter - dist ), &*std::prev( end ) + 1 );
+        std::string message( &*start, &*std::prev( end ) + 1 );
         message.insert( 0, "Could not read valid real value: " );
         message += '\"';
         throw std::runtime_error( message );
