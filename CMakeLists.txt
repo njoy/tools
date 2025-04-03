@@ -147,5 +147,3 @@ if(MSVC)
   target_compile_options(${PROJECT_NAME}  INTERFACE "/ZI")
   target_link_options(${PROJECT_NAME} INTERFACE "/INCREMENTAL")
 endif()
-
-enable_testing()

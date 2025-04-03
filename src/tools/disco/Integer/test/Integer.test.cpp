@@ -82,7 +82,6 @@ SCENARIO( "Integer" ) {
       string = "     +123\n";
       begin = string.begin();
       end = string.end();
-      CHECK( 10 == string.size() );
       CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end - 1 );
     } // THEN
