@@ -31,7 +31,6 @@ cmake_dependent_option(
   "BUILD_TESTING AND NOT ${subproject}" OFF
 )
 
-
 cmake_dependent_option(
   tools.python
   "Build tools python bindings" ON
@@ -50,11 +49,6 @@ include( cmake/dependencies.cmake )
 ########################################################################
 # Project targets
 ########################################################################
-
-string( CONCAT prefix
-  "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
-  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-)
 
 string( CONCAT prefix
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/src>"
