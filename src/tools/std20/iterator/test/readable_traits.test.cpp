@@ -25,7 +25,7 @@ SCENARIO( "readable_traits" ) {
   CHECK( std20::same_as< std20::readable_traits< const int[] >::value_type, int > );
 
   CHECK( std20::same_as< std20::readable_traits< std::array< int, 1 >::iterator >::value_type, int > );
-  CHECK( std20::same_as< std20::readable_traits< std::array< const int, 1 >::iterator >::value_type, int > );
+  CHECK( std20::same_as< std20::readable_traits< std::array< const int, 1 >::iterator >::value_type, const int > );
 
   CHECK( std20::same_as< std20::readable_traits< std::deque< int >::iterator >::value_type, std::deque< int >::iterator::value_type > );
 
