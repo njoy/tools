@@ -4,6 +4,7 @@ Given here are some release notes for tools.
 ## tools v0.4.3
 Bug fixes:
   - fix an issue using intel classic 2023.1.0 (compilation error on the all view)
+  - fix an issue using gcc 15 (compilation error on the iota view)
 
 There are no functional changes in this version.
 
