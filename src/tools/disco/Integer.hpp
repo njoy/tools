@@ -44,11 +44,16 @@ public:
   static Representation read( Iterator& iter, const Iterator& end ) {
 
     unsigned int position = 0;
+
+    // this will fail for msvc if the string length is 
+    // less than the stated width
     const auto final = iter + Width;
+
     Representation value = 0;
 
     skipSpaces( iter, position );
-    if ( isNewLine( iter ) || Width == position || iter >= end ) {
+
+    if ( iter >= end || isNewLine( iter ) || Width == position ) {
 
       return value;
     }
@@ -62,7 +67,7 @@ public:
     // we are using fast_float::from_chars instead of std::from_chars since
     // not all standard c++ libraries implement the floating point version of
     // std::from_chars
-    auto result = fast_float::from_chars( &*iter, &*final, value );
+    auto result = fast_float::from_chars( &*iter, &*std::prev( final ) + 1, value );
     if ( result.ec == std::errc() ) {
 
       auto advance = result.ptr - &*iter;

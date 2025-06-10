@@ -36,8 +36,11 @@ SCENARIO( "contiguous_iterator" ) {
   CHECK( ! std20::contiguous_iterator< void(Foo::*)() > );
   CHECK( ! std20::contiguous_iterator< int Foo::* > );
 
+  // MSVC array iterator does not conform to requriements needed for nano range
+#ifndef _MSC_VER
   CHECK( std20::contiguous_iterator< std::array< int, 1 >::iterator > );
   CHECK( std20::contiguous_iterator< std::array< Foo, 1 >::const_iterator > );
+#endif
 
   CHECK( ! std20::contiguous_iterator< std::deque< int >::iterator > );
   CHECK( ! std20::contiguous_iterator< std::deque< Foo >::const_iterator > );

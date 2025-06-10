@@ -79,7 +79,7 @@ SCENARIO( "Integer" ) {
       CHECK( -123 == Integer< 10 >::read< int >( begin, end ) );
       CHECK( begin == end );
 
-      string = "    +123\n";
+      string = "     +123\n";
       begin = string.begin();
       end = string.end();
       CHECK( 123 == Integer< 10 >::read< int >( begin, end ) );

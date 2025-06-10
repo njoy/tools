@@ -1,6 +1,15 @@
 # Release Notes&mdash;tools
 Given here are some release notes for tools.
 
+## tools v0.4.3
+Bug fixes:
+  - fix an issue using intel classic 2023.1.0 (compilation error on the all view)
+  - fix an issue using gcc 15 (compilation error on the iota view)
+
+There are no functional changes in this version.
+
+Note: this also contains some compile time accommodation in tests for MSVC. The tests are for unused features of nanorange
+
 ## tools v0.4.2
 This version updates the pybind11 version to 2.13.6 and makes an update to the GitHub CI file. There are no functional changes.
 

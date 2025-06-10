@@ -25,7 +25,9 @@ SCENARIO( "readable_traits" ) {
   CHECK( std20::same_as< std20::readable_traits< const int[] >::value_type, int > );
 
   CHECK( std20::same_as< std20::readable_traits< std::array< int, 1 >::iterator >::value_type, int > );
-  CHECK( std20::same_as< std20::readable_traits< std::array< const int, 1 >::iterator >::value_type, int > );
+
+  //MSVC array iterator maintains the const-ness of the int due to its iterator def. Clang/gcc/intel compilers will remove const 
+  CHECK( std20::same_as< std::remove_const_t<std20::readable_traits< std::array< const int, 1 >::iterator >::value_type>, int > );
 
   CHECK( std20::same_as< std20::readable_traits< std::deque< int >::iterator >::value_type, std::deque< int >::iterator::value_type > );
 

@@ -213,7 +213,7 @@ SCENARIO( "Real" ) {
       CHECK_THAT( 100, WithinRel( Real< 10 >::read< double >( begin, end ) ) );
       CHECK( begin == end );
 
-      string = "    +123\n";
+      string = "     +123\n";
       begin = string.begin();
       end = string.end();
       CHECK_THAT( 123, WithinRel( Real< 10 >::read< double >( begin, end ) ) );

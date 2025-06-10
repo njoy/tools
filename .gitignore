@@ -41,3 +41,7 @@ dependencies
 # python
 __pycache__
 *.pyc
+
+# visual studio
+.vs/
+.vscode/
