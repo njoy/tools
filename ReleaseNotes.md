@@ -8,7 +8,7 @@ Bug fixes:
 
 There are no functional changes in this version.
 
-Note: this also contains some compile time accommodation in tests for MSVC. The tests are for unused features of NANO range 
+Note: this also contains some compile time accommodation in tests for MSVC. The tests are for unused features of nanorange
 
 ## tools v0.4.2
 This version updates the pybind11 version to 2.13.6 and makes an update to the GitHub CI file. There are no functional changes.
