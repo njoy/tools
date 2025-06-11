@@ -1,6 +1,8 @@
 # Release Notes&mdash;tools
 Given here are some release notes for tools.
 
+## tools v0.4.4
+
 ## tools v0.4.3
 Bug fixes:
   - fix an issue using intel classic 2023.1.0 (compilation error on the all view)
