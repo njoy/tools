@@ -1,5 +1,6 @@
 if(tools.python)
 
+    find_package( Python3 )
     pybind11_add_module( tools.python
         ${CMAKE_CURRENT_SOURCE_DIR}/src/tools.python.cpp
     )
