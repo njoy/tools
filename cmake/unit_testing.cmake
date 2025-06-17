@@ -127,7 +127,7 @@ add_cpp_test( std20.ranges.concepts.sized_range std20/ranges/concepts/sized_rang
 add_cpp_test( std20.ranges.concepts.view std20/ranges/concepts/view.test.cpp )
 add_cpp_test( std20.ranges.concepts.viewable_range std20/ranges/concepts/viewable_range.test.cpp )
 add_cpp_test( std20.type_traits.common_reference std20/type_traits/common_reference.test.cpp )
-#add_cpp_test( std20.type_traits.remove_cvref std20/type_traits/remove_cvref.test.cpp )
+add_cpp_test( std20.type_traits.remove_cvref std20/type_traits/remove_cvref.test.cpp )
 add_cpp_test( std20.type_traits.type_identity std20/type_traits/type_identity.test.cpp )
 add_cpp_test( std20.views.all std20/views/all.test.cpp )
 add_cpp_test( std20.views.counted std20/views/counted.test.cpp )
