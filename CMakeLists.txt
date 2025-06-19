@@ -77,11 +77,11 @@ target_compile_definitions( tools INTERFACE -DNANORANGE_NO_STD_FORWARD_DECLARATI
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if( tools.python )
-  add_subdirectory(python)
+  add_subdirectory( python )
 endif()
 
 if( tools.tests )
-  include( cmake/unit_testing.cmake )
+  add_subdirectory( test )
 endif()
 
 #######################################################################
