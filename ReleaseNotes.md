@@ -2,6 +2,10 @@
 Given here are some release notes for tools.
 
 ## tools v0.4.4
+Bug fixes:
+  - fix an issue when using tools in a C++-20 project.
+
+Shacl-cmake was updated to the latest version.
 
 ## tools v0.4.3
 Bug fixes:
