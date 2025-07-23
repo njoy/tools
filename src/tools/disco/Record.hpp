@@ -26,7 +26,7 @@ struct Record<> {
 
       ++iter;
     }
-    std::advance( iter, isNewLine( iter ) && iter != end );
+    std::advance( iter, iter != end && isNewLine( iter ) );
   }
 
   template< typename Iterator, typename... Args >
