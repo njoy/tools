@@ -66,10 +66,13 @@ public:
    *  int value = 10;
    *  utility::Log::info( "Some message with a value {}", value );
    */
-  template< typename... Args >
-  static void info( Args... args ) {
+  template <typename... Args>
+  static void info(fmt::format_string<Args...> format_str, Args&&... args) {
+      logger()->info(format_str, std::forward<Args>(args)...);
+  }
 
-    logger()->info( std::forward< Args >( args )... );
+  static void info(std::string_view v) {
+      logger()->info(v);
   }
 
   /**
@@ -94,10 +97,9 @@ public:
    *  int value = 10;
    *  utility::Log::info( "Some message with a value {}", value );
    */
-  template< typename... Args >
-  static void error( Args... args ) {
-
-    logger()->error( std::forward< Args >( args )... );
+  template <typename... Args>
+  static void error(fmt::format_string<Args...> format_str, Args&&... args) {
+      logger()->error(format_str, std::forward<Args>(args)...);
   }
 
   /**

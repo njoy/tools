@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( tools
-  VERSION 0.4.3
+  VERSION 0.4.4
   LANGUAGES CXX
 )
 
@@ -77,11 +77,11 @@ target_compile_definitions( tools INTERFACE -DNANORANGE_NO_STD_FORWARD_DECLARATI
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 if( tools.python )
-  add_subdirectory(python)
+  add_subdirectory( python )
 endif()
 
 if( tools.tests )
-  include( cmake/unit_testing.cmake )
+  add_subdirectory( test )
 endif()
 
 #######################################################################
