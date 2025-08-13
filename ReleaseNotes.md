@@ -1,6 +1,8 @@
 # Release Notes&mdash;tools
 Given here are some release notes for tools.
 
+## tools v0.4.5
+
 ## tools v0.4.4
 Bug fixes:
   - fix an issue when using tools in a C++-20 project.
