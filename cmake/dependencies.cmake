@@ -12,7 +12,7 @@ shacl_FetchContent_Declare( FastFloat
 
 shacl_FetchContent_Declare( spdlog
     GIT_REPOSITORY  ../../gabime/spdlog
-    GIT_TAG         27cb4c76708608465c413f6d0e6b8d99a4d84302 # tag: v1.14.1
+    GIT_TAG         79524ddd08a4ec981b7fea76afd08ee05f83755d # tag: v1.17.0
     )
 set( SPDLOG_BUILD_PIC CACHE INTERNAL BOOL ON )
 # thenext line prevents spdlog from populating the .cmake/packages folder
@@ -36,10 +36,12 @@ shacl_FetchContent_MakeAvailable(
 if (tools.tests)
   shacl_FetchContent_Declare( Catch2
       GIT_REPOSITORY  ../../catchorg/Catch2
-      GIT_TAG         3f0283de7a9c43200033da996ff9093be3ac84dc # tag: v3.3.2
+      GIT_TAG         b670de4fe12ac7c5e858b7de3a14fb4bd18c760e # tag: v3.14.0
       )
 
+  set( BUILD_SHARED_LIBS ON )
   shacl_FetchContent_MakeAvailable(Catch2)
+  set( BUILD_SHARED_LIBS OFF )
 endif()
 
 if (tools.python)

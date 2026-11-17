@@ -17,7 +17,7 @@ using namespace njoy::tools;
 SCENARIO( "repeat_view" ) {
 
   // Use a single bound limit for all bound tests
-  int boundLimit = 4;
+  std::size_t boundLimit = 4;
 
   GIVEN( "repeating an integer" ) {
 
@@ -27,7 +27,6 @@ SCENARIO( "repeat_view" ) {
 
       auto chunk = std23::views::repeat( repeated, boundLimit );
       using Range = decltype(chunk);
-      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the repeat_view satisfies the required concepts" ) {
 
@@ -68,7 +67,6 @@ SCENARIO( "repeat_view" ) {
 
       auto chunk = std23::views::repeat( repeated );
       using Range = decltype(chunk);
-      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the repeat_view satisfies the required concepts" ) {
 
@@ -89,7 +87,7 @@ SCENARIO( "repeat_view" ) {
 
       THEN ( "a repeat_view can be constructed and members can be tested" ) {
 
-        int UnboundLimit = 0;
+        std::size_t UnboundLimit = 0;
         for ( int i : chunk ) {
 
           ++UnboundLimit;
@@ -121,7 +119,6 @@ SCENARIO( "repeat_view" ) {
 
       auto chunk = std23::views::repeat( repeated, boundLimit );
       using Range = decltype(chunk);
-      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the repeat_view satisfies the required concepts" ) {
 
@@ -162,7 +159,6 @@ SCENARIO( "repeat_view" ) {
 
       auto chunk = std23::views::repeat( repeated );
       using Range = decltype(chunk);
-      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the repeat_view satisfies the required concepts" ) {
 
@@ -183,7 +179,7 @@ SCENARIO( "repeat_view" ) {
 
       THEN ( "a repeat_view can be constructed and members can be tested" ) {
 
-        int UnboundLimit = 0;
+        std::size_t UnboundLimit = 0;
         for ( int i : chunk ) {
 
           ++UnboundLimit;

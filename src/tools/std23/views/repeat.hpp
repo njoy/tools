@@ -22,7 +22,7 @@ struct repeat_view_iterator_difference {
 };
 
 template <typename Type>
-struct repeat_view_iterator_difference<Type, typename std::enable_if<std20::detail::is_signed_integer_like<Type>>::type> 
+struct repeat_view_iterator_difference<Type, typename std::enable_if<std20::detail::is_signed_integer_like<Type>>::type>
 {
     using type = Type;
 };
@@ -43,7 +43,7 @@ struct repeat_view : public std20::ranges::view_interface< repeat_view< Type, Bo
     static_assert( std::is_object_v<Type> && std20::same_as< Type, std::remove_cv_t< Type > > );
 
     // The Bound has to be integer like of unbound
-    static_assert( ( std20::detail::is_signed_integer_like< Bound > || 
+    static_assert( ( std20::detail::is_signed_integer_like< Bound > ||
                  ( std20::detail::is_integer_like< Bound > && std20::weakly_incrementable< Bound > ) ) ||
                  ( std20::same_as< Bound, std20::unreachable_sentinel_t > ) );
 
@@ -53,14 +53,14 @@ private:
     Bound bound_ = Bound();
 
     struct iterator{
-    friend class repeat_view;
+    friend struct repeat_view;
     private:
         using IndexT = std::conditional_t<std20::same_as<Bound, std20::unreachable_sentinel_t>, ptrdiff_t, Bound>;
         const Type* ivalue_ = nullptr;
         IndexT current_  = IndexT();
 
     public:
-          
+
         constexpr explicit iterator(const Type* value, IndexT bound_sentinel = IndexT())
             : ivalue_(value), current_(bound_sentinel) {}
 
@@ -149,7 +149,7 @@ private:
               return static_cast<difference_type>(left.current_) - static_cast<difference_type>(right.current_);
           }
 
-          
+
     };
 
 public:
@@ -164,29 +164,29 @@ public:
         : value_(std::in_place, std::move(value)), bound_(bound_sentinel) {
     }
 
-    template <class... _TpArgs, class... _BoundArgs, 
+    template <class... _TpArgs, class... _BoundArgs,
           std::enable_if_t<std20::constructible_from<Type, _TpArgs...> && std20::constructible_from<Bound, _BoundArgs...>, bool> = true>
-    constexpr explicit repeat_view( std::piecewise_construct_t, std::tuple<_TpArgs...> __value_args, 
-                    std::tuple<_BoundArgs...> __bound_args = std::tuple<>{}) 
+    constexpr explicit repeat_view( std::piecewise_construct_t, std::tuple<_TpArgs...> __value_args,
+                    std::tuple<_BoundArgs...> __bound_args = std::tuple<>{})
         : value_(std::in_place, std::make_from_tuple<Type>(std::move(__value_args))),
         bound_(std::make_from_tuple<Bound>(std::move(__bound_args))) {
     }
 
     constexpr iterator begin() const { return iterator(std::addressof(*value_)); }
 
-    template<typename T=Bound, std::enable_if_t<!std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true> 
+    template<typename T=Bound, std::enable_if_t<!std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true>
     constexpr iterator end() const
     {
         return iterator(std::addressof(*value_), bound_);
     }
 
-    template<typename T=Bound, std::enable_if_t<std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true> 
-    constexpr std20::unreachable_sentinel_t end() const noexcept 
+    template<typename T=Bound, std::enable_if_t<std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true>
+    constexpr std20::unreachable_sentinel_t end() const noexcept
     {
-        return std20::unreachable_sentinel; 
+        return std20::unreachable_sentinel;
     }
 
-    template<typename T=Bound, std::enable_if_t<!std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true> 
+    template<typename T=Bound, std::enable_if_t<!std20::same_as<T, std20::unreachable_sentinel_t>, bool> = true>
     constexpr auto size() const
     {
 	return std::make_unsigned_t<decltype(bound_)>(bound_);

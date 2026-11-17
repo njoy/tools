@@ -25,7 +25,6 @@ SCENARIO( "chunk_by_view" ) {
 
       auto chunk = values | std23::views::chunk_by( std::less{} );
       using Range = decltype(chunk);
-      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
 
@@ -73,7 +72,6 @@ SCENARIO( "chunk_by_view" ) {
 
       auto chunk = values | std23::views::chunk_by( std::less{} );
       using Range = decltype(chunk);
-      using Iterator = std20::iterator_t< Range >;
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
 
@@ -136,8 +134,6 @@ SCENARIO( "chunk_by_view" ) {
 
       auto chunk = values | std23::views::chunk_by( std::less{} );
       using Range = decltype(chunk);
-      using Iterator = std20::iterator_t< Range >;
-      using Subrange = std20::ranges::subrange< Iterator >;
 
       THEN( "the chunk_by_view satisfies the required concepts" ) {
 

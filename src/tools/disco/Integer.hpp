@@ -28,7 +28,7 @@ protected:
   using BaseFixedWidthField< Width >::skipPlusSign;
 
   template< typename Representation >
-  static constexpr int minimumRequiredWidth( Representation i ) {
+  static constexpr unsigned int minimumRequiredWidth( Representation i ) {
 
     return ( i < 10 ) ? 1 : 1 + minimumRequiredWidth( i / 10 );
   }
@@ -45,7 +45,7 @@ public:
 
     unsigned int position = 0;
 
-    // this will fail for msvc if the string length is 
+    // this will fail for msvc if the string length is
     // less than the stated width
     const auto final = iter + Width;
 

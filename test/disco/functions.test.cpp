@@ -13,7 +13,6 @@ SCENARIO( "functions" ) {
 
   std::string string = " a\t\n\r\n\f";
   auto iter = string.begin();
-  unsigned int position = 0;
 
   iter = string.begin();
   CHECK( true == isSpace( iter ) ); ++iter;

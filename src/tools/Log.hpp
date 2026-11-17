@@ -131,4 +131,76 @@ using Log = tools::Log;
 
 } // njoy namespace
 
-#endif
+#include <string>
+#include <iostream>
+
+#include <cstdio>
+#include <cstdarg>
+
+#define MAX_LOG_STRING_LENGTH 4096
+inline std::string format_string(const char* fmt, ...)
+{
+    char buf[MAX_LOG_STRING_LENGTH];
+    va_list args;
+    va_start(args, fmt);
+    std::vsnprintf(buf, sizeof(buf), fmt, args);
+    va_end(args);
+
+       buf[MAX_LOG_STRING_LENGTH - 1] = '\0';
+    return std::string(buf);
+}
+
+#ifndef _WIN32
+#   define SET_RED "\x1b[31m"
+#   define SET_YELLOW "\x1b[33m"
+#   define SET_GREEN "\x1b[32m"
+#   define SET_CLEAR "\x1b[0m"
+#else
+#   define SET_RED
+#   define SET_YELLOW
+#   define SET_GREEN
+#   define SET_CLEAR
+#endif //_WIN32
+
+/*** Throwing errors ****************************************************/
+#define NJOY_THROW_EXCEPTION_MESSAGE(msg, ...) \
+    format_string(msg, ##__VA_ARGS__) + " (" + __FILE__ + ":" + std::to_string(__LINE__) + ")\n"
+
+#define NJOY_THROW_RUNTIME_ERROR(msg, ...) \
+    throw std::runtime_error( SET_RED "Runtime error: " SET_CLEAR  + NJOY_THROW_EXCEPTION_MESSAGE(msg, ##__VA_ARGS__ ));
+
+#define NJOY_THROW_OUT_OF_RANGE(msg, ...) \
+    throw std::out_of_range(  SET_RED "Out of range error: " SET_CLEAR + NJOY_THROW_EXCEPTION_MESSAGE(msg, ##__VA_ARGS__ ));
+
+#define NJOY_RETHROW_ERROR(e, msg, ...) \
+    throw std::runtime_error( e.what() + std::string( SET_RED "Runtime error: " SET_CLEAR ) + NJOY_THROW_EXCEPTION_MESSAGE(msg, ##__VA_ARGS__ ) );
+
+/*** Warning messages ***************************************************/
+#define NJOY_LOG_WARNING_MESSAGE(msg, ...) \
+    std::string( SET_YELLOW "WARNING: " SET_CLEAR) + format_string(msg, ##__VA_ARGS__) + \
+    " (" + __FILE__ + ":" + std::to_string(__LINE__) + ")"
+
+#define NJOY_LOG_WARNING(msg, ...) \
+    std::cout << NJOY_LOG_WARNING_MESSAGE(msg, ##__VA_ARGS__ ) << "\n";
+
+/*** Info messages ******************************************************/
+#define NJOY_LOG_INFO_MESSAGE(msg, ...) \
+    std::string("INFO: " SET_CLEAR) + format_string(msg, ##__VA_ARGS__) + " (" + __FILE__ + ":" + std::to_string(__LINE__) + ")"
+
+#define NJOY_LOG_INFO(msg, ...) \
+    std::cout << NJOY_LOG_INFO_MESSAGE(msg, ##__VA_ARGS__ ) << "\n";
+
+/*** Check that expected exception is thrown and print it if it is ******/
+#define NJOY_PRINT_CHECK_THROWS( MY_FUNCTION_TO_LOG ) \
+    do {\
+        try { \
+            ( MY_FUNCTION_TO_LOG ); \
+            FAIL("Expected exception but none was thrown");\
+        } \
+        catch ( const std::exception& e ) { \
+            std::cout << e.what(); \
+            SUCCEED();\
+        }\
+    } while (0)
+
+#endif //NJOY_TOOLS_LOG

@@ -1,6 +1,12 @@
 # Release Notes&mdash;tools
 Given here are some release notes for tools.
 
+## tools v0.4.5
+New features:
+  - added a Configuration class to handle configuration files
+  - added a number of string operation functions (split)
+  - added an apply_permutation function
+
 ## tools v0.4.4
 Bug fixes:
   - fix an issue when using tools in a C++-20 project.

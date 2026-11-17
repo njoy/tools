@@ -15,7 +15,6 @@ SCENARIO( "Character" ) {
 
     std::string string;
     auto iter = string.begin();
-    auto begin = string.begin();
     auto end = string.end();
 
     string = "abcd";

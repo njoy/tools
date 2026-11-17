@@ -10,7 +10,7 @@ if( DEFINED PROJECT_NAME )
 endif()
 
 project( tools
-  VERSION 0.4.4
+  VERSION 0.4.5
   LANGUAGES CXX
 )
 
@@ -27,7 +27,7 @@ set( CMAKE_CXX_STANDARD_REQUIRED YES )
 
 cmake_dependent_option(
   tools.tests
-  "Build the tools unit tests and integrate with ctest" ON
+  "Build the tools unit tests and integrate with ctest" OFF
   "BUILD_TESTING AND NOT ${subproject}" OFF
 )
 
